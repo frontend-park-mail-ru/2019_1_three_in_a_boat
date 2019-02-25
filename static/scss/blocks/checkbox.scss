@@ -1,0 +1,42 @@
+@import "../modules/mixins";
+
+.checkbox {
+  @include appearance-none();
+  position: relative;
+  top: -3px;
+  vertical-align: bottom;
+
+  height: 14px;
+  width: 14px;
+  margin: 0;
+
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: $main-color;
+
+  &:checked::before {
+    position: absolute;
+    left: -15%;
+    top: -20%;
+
+    @extend .icon;
+    height: 16px;
+    width: 16px;
+
+    content: "";
+    @extend .icon_color_white;
+    @include mask-image($checkmark-icon);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  // modifiers
+  &_size {
+    &_small {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}

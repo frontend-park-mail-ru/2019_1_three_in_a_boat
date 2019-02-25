@@ -1,0 +1,20 @@
+@import '../modules/variables';
+
+.sm-icons-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &__icon-bg {
+    @extend .icon-bg_size_tall;
+    @extend .icon-bg_btn;
+    @include shadow($shadow-outline);
+    margin: 0 2px;
+  }
+
+  &__icon {
+    @extend .icon_color_white;
+    @extend .icon_size_small;
+  }
+
+}

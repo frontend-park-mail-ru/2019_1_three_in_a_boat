@@ -1,0 +1,26 @@
+$popup-top-padding: 15px;
+$popup-right-padding: 15px;
+$popup-bottom-padding: 15px;
+$popup-left-padding: 15px;
+
+%popup {
+  position: relative;
+  z-index: $z-index-popup;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 50%;
+  min-width: fit-content;
+  min-width: -moz-max-content;
+  padding: $popup-top-padding $popup-right-padding $popup-bottom-padding $popup-left-padding;
+
+  border-radius: 3px;
+  background-color: white;
+
+  &__close-popup {
+      position: absolute;
+      top: $popup-top-padding - 5px;
+      right: $popup-right-padding - 5px;
+  }
+}

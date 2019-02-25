@@ -1,0 +1,150 @@
+// form-related invariant styles
+
+$input-height: 18px;
+$input-padding-top: 6px;
+$input-padding-bottom: 4px;
+$input-padding-sides: 10px;
+$input-border-radius: 3px;
+
+@if $input-height + $input-padding-top + $input-padding-bottom + 2px != $field-height {
+  @error("inputs are incorrectly sized!");
+}
+
+.input{
+  $block: &;
+  position: relative;
+  z-index: $z-index-input;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  min-width: fit-content;
+  padding: 0;
+
+  border: 1px solid $border-color;
+  border-radius: $input-border-radius;
+
+
+  @include transition(make-transition(box-shadow, 0.2s));
+
+  &:focus-within {
+    z-index: $z-index-shadow;
+
+    border-color: lightblue;
+    @include shadow($shadow-focus);
+  }
+
+  &_with-icon {
+    & #{$block}__field {
+      padding-right: 5px; // smaller padding
+    }
+  }
+
+  &_status {
+    &_error {
+      border-color: $error-color;
+      &:focus-within {
+        border-color: $error-color;
+      }
+    }
+  }
+  &__icon {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+
+  &__field {
+
+    &#{$block} {
+    }
+    display: inline-block;
+
+    height: $input-height;
+    min-width: 0;
+    flex-grow: 1;
+    margin: 0; // kinda !important but i feel bad putting it there
+    padding: $input-padding-top $input-padding-sides $input-padding-bottom $input-padding-sides;
+    @include firefox {
+      // 16 + 7 = 20 + 3 so size doesn't change, just the alignment
+      height: $input-height - 3px;
+      padding: $input-padding-top $input-padding-sides $input-padding-bottom + 3px $input-padding-sides;
+    }
+
+    line-height: 12px;
+
+    background-color: white;
+    color: black;
+    border-radius: $input-border-radius;
+    border-width: 0;
+    font-size: 12px;
+    outline: none;
+    &_prepended {
+      padding-left: 0;
+    }
+  }
+
+  &__field-appendix {
+    display: inline-block;
+    border-radius: $input-border-radius;
+    top: -2px;
+    margin: 0;
+    height: $input-height; // minus the border
+    font-size: 12px;
+    padding: 9px 2px 3px 2px;
+    pointer-events: none;
+    @include firefox {
+      // BECAUSE APPARENTLY THIS IS NOT IMPLIED
+      line-height: 12px;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__tooltip {
+    $width: 200px;
+    $height: 30px;
+    $arrow-length: 6px;
+    $arrow-width: 4px;
+    $padding: 10px;
+    position: absolute;
+    padding: $padding;
+    width: $width;
+    height: $height;
+    right: - $width - $arrow-length - $input-padding-sides - $padding - 1px;
+    top: $field-height - $height - $padding - 1px; //1 px for border
+    z-index: $z-index-tooltip;
+    background-color: white;
+    @include shadow($shadow-tiny);
+    border-radius: 3px;
+    pointer-events: none;
+    &::before {
+      position: absolute;
+      left: - $arrow-length;
+      top: ($height + $padding) / 2;
+      content: "";
+      border-style: solid;
+      border-width: $arrow-width $arrow-length $arrow-width 0;
+      border-color: transparent white transparent transparent;
+    }
+  }
+
+  &__tooltip-title {
+    font-size: $small-font-size;
+    color: black;
+    display: block;
+  }
+
+  &__tooltip-help {
+    font-size: $smaller-font-size;
+    color: $muted-color-dark;
+  }
+}
+
+.input {
+  // preference over input__field in case an input has both types
+  border-width: 1px;
+}

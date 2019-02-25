@@ -1,0 +1,50 @@
+@import "../modules/variables";
+
+.profile-popup {
+  @extend %popup;
+  align-items: center;
+
+  max-width: 400px;
+
+  border: 1px solid $border-color;
+
+  &__title {
+    margin-bottom: 8px;
+  }
+
+  &_main {
+    margin-top: 8px;
+  }
+
+  &__userpic-text {
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  &__profile-info {
+    max-width: fit-content;
+    margin: 20px 0 10px;
+  }
+
+  &__double-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  &__btn {
+    width: 140px;
+    margin: 0 4px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
