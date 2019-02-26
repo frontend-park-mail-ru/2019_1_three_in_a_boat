@@ -1,0 +1,28 @@
+// modules
+@import "modules/scss/variables";
+@import "modules/scss/generic";
+@import "modules/scss/popup";
+
+// generic blocks
+@import "blocks/icon/icon";
+@import "blocks/btn/btn";
+@import "blocks/checkbox/checkbox";
+@import "blocks/form-group/form-group";
+@import "blocks/input/input";
+@import "blocks/select/select";
+@import "blocks/field-group/field-group";
+@import "blocks/sm-icons-list/sm-icons-list";
+
+//page-specific blocks
+@import "blocks/authors/authors";
+@import "blocks/header/header";
+@import "blocks/login-form/login-form";
+@import "blocks/login-popup/login-popup";
+@import "blocks/menu/menu";
+@import "blocks/profile-info/profile-info";
+@import "blocks/profile-popup/profile-popup";
+@import "blocks/scoreboard/scoreboard";
+@import "blocks/signup-form/signup-form";
+@import "blocks/signup-popup/signup-popup";
+@import "blocks/update-profile-form/update-profile-form";
+@import "blocks/update-profile-popup/update-profile-popup";

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+    <link href="../static/public/css/style.css" rel="stylesheet">
+</head>
+<body class="body">
+<div id="application"></div>
+<script src="bundle.bemhtml.js"></script>
+<script>
+  document.getElementById("application").insertAdjacentHTML('beforeend',
+      bemhtml.apply({
+        'block': 'authors',
+        'content': [
+          {
+            'elem': 'header',
+            'content': 'Проект разработали'
+          },
+          {
+            'elem': 'items',
+            'content': [
+              {
+                'name': 'Никита',
+                'devInfo': 'фронт/бэк/фуллкек',
+                'img': '../static/public/images/nikita.jpg',
+                'description': '01234'
+              },
+              {
+                'name': 'Арсен',
+                'devInfo': 'фронт/бэк/фуллкек',
+                'img': '../static/public/images/pepe.jpg',
+                'description': '56789'
+              },
+              {
+                'name': 'Андрей',
+                'devInfo': 'фронт/бэк/фуллкек',
+                'img': '../static/public/images/andrey.jpg',
+                'description': 'Цифры закончились, Андрей, раньше надо было приходить'
+              }
+            ]
+          }
+        ]
+      })
+  )
+</script>
+</body>
+</html>

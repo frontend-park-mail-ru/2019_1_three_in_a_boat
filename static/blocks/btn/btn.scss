@@ -1,4 +1,4 @@
-@import "../modules/mixins";
+@import "../../modules/scss/mixins";
 
 @mixin btn-color($block, $bg, $color, $bg-hover: darker($bg), $color-hover: $color,
                  $bg-active: darker(darker($bg)), $color-active: $color) {
