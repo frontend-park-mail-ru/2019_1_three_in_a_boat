@@ -1,12 +1,15 @@
-block('authors')(elem('items')({
-  'content': (node, ctx) => {
-    return ctx.content.map(elt => {
-      return {
+block('authors').elem('img')({
+  'tag': 'img'
+});
+block('authors').elem('items').match((node, ctx) => ctx.authors !== undefined)({
+  'content': (node, ctx) => (
+      // if there's 'authors' then append item per author to the end
+    (ctx.content || []).concat(ctx.authors.map(elt => (
+      {
         'elem': 'item',
         'content': [
           {
             'elem': 'img',
-            'tag': 'img',
             'attrs': {
               'src': elt.img,
               'alt': elt.name
@@ -25,7 +28,7 @@ block('authors')(elem('items')({
             'content': elt.description
           }
         ]
-      };
-    })
-  }
-}));
+      }
+    )))
+  )
+});
