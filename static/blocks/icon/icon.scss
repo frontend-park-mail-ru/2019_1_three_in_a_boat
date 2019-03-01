@@ -1,7 +1,7 @@
 @import "../../modules/scss/mixins";
 @import "../../modules/scss/variables";
 
-$icons-path: "../../icons";
+$icons-path: "../icons";
 
 $checkmark-icon: $icons-path + "/done.svg";
 $cross-icon: $icons-path + "/close.svg";
