@@ -1,8 +1,8 @@
 'use strict';
 
 /** Saves blocks in a bundle that can be used for rendering in browser
- * @param {string} 2 - path where the bundle will be saved
- * @param {string} 1 - path to directory 'blocks' with the following structure:
+ * @param {string} 1 - path where the bundle will be saved
+ * @param {string} 2 - path to directory 'blocks' with the following structure:
  * blocks
  * ├── block1
  * │   ├── <some other files>
