@@ -24,33 +24,22 @@
     $elem: &;
     flex-grow: 1;
     height: $field-height - 2px; // 2px for the border
+    margin: 0;
+    border-radius: 0;
 
     &:focus-within {
       box-shadow: none;
     }
 
-    //modifiers
-    &_position {
-      &_prepend {
-        margin-right: 0;
-
-        border-right-width: 0;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-
-      &_append {
-        margin-left: 0;
-
-        border-left-width: 1px;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-
-      &_middle {
-        @extend #{$elem}_position_prepend;
-        @extend #{$elem}_position_append;
-      }
+    &:first-child {
+      border-right-width: 0;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    &:last-child {
+      border-left-width: 1px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
     }
 
     &_stretched {
