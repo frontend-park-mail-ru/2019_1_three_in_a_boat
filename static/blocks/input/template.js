@@ -3,14 +3,17 @@ block('input').elem('field').match((node, ctx) => !ctx.attrs || !ctx.attrs.type)
 ({addAttrs: {'type': 'text'}});
 
 block('input').match((node, ctx) => !ctx.content)({
-  content: [{
-    elem: 'field'
+  content: (node, ctx) => [{
+    elem: 'field',
+    attrs: ctx.fieldAttrs,
   }]
 });
 
-block('input').match((node) => node._inFieldGroup)({
-  addMix: {
-    elem: 'field',
-    block: 'field-group'
-  }
+// (form/field)-group related stuff
+block('input').match(
+    (node) => Array.isArray(node._fieldParents) && node._fieldParents.length)({
+  addMix: (node) => ({
+    block: node._fieldParents[node._fieldParents.length - 1],
+    elem: 'field'
+  })
 });

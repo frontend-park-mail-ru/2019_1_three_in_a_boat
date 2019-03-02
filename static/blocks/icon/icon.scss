@@ -46,6 +46,8 @@ $icon-sizes: (small: (12px, 12px),
     display: inline-block;
     -webkit-mask-size: contain;
     mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
     height: get-icon-span-height(nil);
     width: get-icon-span-width(nil);
 
