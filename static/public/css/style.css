@@ -1,4 +1,4 @@
-html, body {
+html, body, #application {
   margin: 0;
   height: 100%;
   width: 100%;
@@ -6,12 +6,12 @@ html, body {
   background-color: white;
 }
 
-.body {
+#application {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.body_color_dark {
+#application_color_dark {
   background-color: #858585;
 }
 
@@ -77,11 +77,11 @@ label {
   height: 14px;
   width: 14px;
 }
-.icon_size_small, .sm-icons-list__icon {
+.icon_size_small, .sm-icons-list__icon, .checkbox_size_small::before {
   height: 12px;
   width: 12px;
 }
-.icon_size_large {
+.icon_size_large, .checkbox_size_large::before {
   height: 20px;
   width: 20px;
 }
@@ -251,10 +251,6 @@ label {
 }
 
 .btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   height: 32px;
   padding: 5px 15px;
   font-size: 16px;
@@ -341,14 +337,24 @@ label {
   flex-direction: row;
   align-content: center;
   justify-content: center;
-  padding-top: 2px;
+}
+.btn__text {
+  margin: auto 0;
+  font-size: 16px;
+  line-height: 16px;
+  padding-top: 1px;
+}
+@-moz-document url-prefix() {
+  .btn__text {
+    padding-top: 0;
+  }
 }
 .btn__text_normal {
   color: black;
   font-weight: normal;
 }
 .btn__icon {
-  margin-right: 8px;
+  margin: auto 8px auto 0;
 }
 
 .checkbox {
@@ -358,6 +364,9 @@ label {
   position: relative;
   top: -3px;
   vertical-align: bottom;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 14px;
   width: 14px;
   margin: 0;
@@ -366,11 +375,7 @@ label {
   background-color: #CA9CF4;
 }
 .checkbox:checked::before {
-  position: absolute;
-  left: -15%;
-  top: -20%;
-  height: 16px;
-  width: 16px;
+  margin-bottom: 1px;
   content: "";
   -webkit-mask-image: url("../icons/done.svg");
   mask-image: url("../icons/done.svg");
@@ -382,11 +387,13 @@ label {
   width: 12px;
   height: 12px;
 }
+.checkbox_size_small::before {
+  margin-bottom: 0;
+}
 .checkbox_size_large {
   width: 16px;
   height: 16px;
 }
-
 .form-group {
   display: flex;
   flex-direction: column;
@@ -455,18 +462,20 @@ label {
   -moz-box-shadow: 0 0 50px -12px lightblue;
   box-shadow: 0 0 50px -12px lightblue;
 }
-.input_with-icon .input__field {
-  padding-right: 5px;
-}
 .input_status_error {
   border-color: #FF1100;
 }
-.input_status_error:focus-within {
-  border-color: #FF1100;
-}
 .input__icon {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.input__icon:last-child {
   margin-left: 0;
   margin-right: 10px;
+}
+.input__icon:first-child {
+  margin-left: 10px;
+  margin-right: 0;
 }
 .input__field {
   display: inline-block;
@@ -481,14 +490,21 @@ label {
   font-size: 12px;
   outline: none;
 }
+.input__field_appended_before {
+  padding-left: 5px;
+}
+.input__field_appended_after {
+  padding-right: 5px;
+}
+.input__field_appended_both {
+  padding-left: 5px;
+  padding-right: 5px;
+}
 @-moz-document url-prefix() {
   .input__field {
     height: 15px;
     padding: 6px 10px 7px 10px;
   }
-}
-.input__field_prepended {
-  padding-left: 0;
 }
 .input__field-appendix {
   display: inline-block;
@@ -633,13 +649,13 @@ label {
 .field-group__field:focus-within {
   box-shadow: none;
 }
-.field-group__field_position_prepend {
+.field-group__field_position_prepend, .field-group__field_position_middle {
   margin-right: 0;
   border-right-width: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.field-group__field_position_append {
+.field-group__field_position_append, .field-group__field_position_middle {
   margin-left: 0;
   border-left-width: 1px;
   border-top-left-radius: 0;

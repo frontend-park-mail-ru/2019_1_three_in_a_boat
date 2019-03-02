@@ -1,7 +1,7 @@
 'use strict';
 
 /** Saves blocks in a bundle that can be used for rendering in browser
- * @param {string} 1 - path where the bundle will be saved
+ * @param {string} 1 - path to the directory where the bundles will be saved
  * @param {string} 2 - path to directory 'blocks' with the following structure:
  * blocks
  * ├── block1
@@ -15,13 +15,16 @@
  * with each other (i.e. only affect their own block)
  */
 
+const fs = require('fs');
+const path = require('path');
+const bemxjst = require('bem-xjst');
+
+
+// checking the arguments
 if (process.argv.length !== 4) {
   console.log("Usage: node bundle-all path/to/bundle.bemhtml.js path/to/blocks-dir");
   process.exit(1);
 }
-
-const fs = require('fs');
-const path = require('path');
 
 const bundlePath = path.resolve(__dirname, process.argv[2]);
 const blocksPath = path.resolve(__dirname, process.argv[3]);
@@ -31,45 +34,75 @@ if (!fs.existsSync(blocksPath)) {
   process.exit(1);
 }
 
-if (!fs.existsSync(path.dirname(bundlePath))) {
-  console.log(`cannot write bundle: parent directory does not exist: ${bundlePath}`);
+if (!fs.statSync(blocksPath).isDirectory()) {
+  console.log(`blocks path is not a directory: ${blocksPath}`);
   process.exit(1);
 }
 
-// actual generating
-const bemxjst = require('bem-xjst');
+if (!fs.existsSync(bundlePath)) {
+  console.log(`cannot write bundle: directory does not exist: ${bundlePath}`);
+  process.exit(1);
+}
+
+if (!fs.statSync(bundlePath).isDirectory()) {
+  console.log(`cannot write bundle: bundle path is not a directory: ${bundlePath}`);
+  process.exit(1);
+}
+
+//options
+const BEMHTML_BUNDLE_NAME = 'bundle.bemhtml.js';
+const BEMHTML_OPTIONS = {'exportName': 'bemhtml'};
+const bemhtmlBundlePath = path.resolve(bundlePath, BEMHTML_BUNDLE_NAME);
+
+const BEMTREE_BUNDLE_NAME = 'bundle.bemtree.js';
+const BEMTREE_OPTIONS = {'exportName': 'bemtree', 'runtimeLinting': true};
+const bemtreeBundlePath = path.resolve(bundlePath, BEMTREE_BUNDLE_NAME);
+
 
 let templates = "";
-const BEM_OPTIONS = {
-  'exportName': 'bemhtml',
-
-};
-
 fs.readdir(blocksPath, (err, files) => {
+  // extracting templates
   files.forEach(file => {
     const blockDir = path.resolve(blocksPath, file);
+
     if (fs.statSync(blockDir).isDirectory()) {
       const templateFile = path.resolve(blockDir, 'template.js');
+
       if (fs.existsSync(templateFile)) {
         console.log(`adding ${path.basename(blockDir)}`);
-        templates += fs.readFileSync(templateFile, {'encoding': 'utf8'});
+        // \n is needed for the one line comments
+        templates += fs.readFileSync(templateFile, {'encoding': 'utf8'}) + '\n';
       } else {
-        console.log(`skipping ${path.basename(blockDir)}: template.js not found`)
+        console.log(`skipping ${path.basename(blockDir)}: template.js not found`);
       }
     }
   });
 
-  let bundle = eval(`bemxjst.bemhtml.generate(() => {
+  // creating & saving bundles
+  const htmlBundle = eval(`bemxjst.bemhtml.generate(() => {
     ${templates}
-  }, ${JSON.stringify(BEM_OPTIONS)});`);
+  }, ${JSON.stringify(BEMHTML_OPTIONS)});`);
 
-  fs.writeFileSync(bundlePath, bundle, (err) => {
+  const treeBundle = eval(`bemxjst.bemtree.generate(() => {
+    ${templates}
+  }, ${JSON.stringify(BEMTREE_OPTIONS)});`);
+
+  fs.writeFile(bemhtmlBundlePath, htmlBundle, (err) => {
     if (err) {
-      return console.log(err);
+      console.log(err);
     } else {
-      console.log(`bundle written to ${bundlePath}`)
+      console.log(`HTML bundle written to ${bemhtmlBundlePath}`);
     }
   });
+
+  fs.writeFile(bemtreeBundlePath, treeBundle, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(`Tree bundle written to ${bemtreeBundlePath}`);
+    }
+  });
+
 });
 
 

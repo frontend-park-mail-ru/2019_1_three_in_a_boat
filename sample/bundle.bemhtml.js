@@ -2300,41 +2300,135 @@ if (typeof Object.create === 'function') {
 });;
 return module.exports || exports.bemhtml;
 }({}, {});
-var api = new bemhtml({"exportName":"bemhtml","to":"/media/alfaix/Data/drive/bmstu/tp/frontend/project/static"});
+var api = new bemhtml({"exportName":"bemhtml","to":"/media/alfaix/Data/drive/bmstu/tp/frontend/project"});
 api.compile(function(match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
 /* BEM-XJST User code here: */
 
-    block('authors')(elem('items')({
-  'content': (node, ctx) => {
-    return ctx.content.map(elt => {
-      return {
-        'elem': 'item',
-        'content': [
-          {
-            'elem': 'img',
-            'tag': 'img',
-            'attrs': {
-              'src': elt.img,
-              'alt': elt.name
-            }
-          },
-          {
-            'elem': 'title',
-            'content': elt.name
-          },
-          {
-            'elem': 'subtitle',
-            'content': elt.devInfo
-          },
-          {
-            'elem': 'description',
-            'content': elt.description
-          }
-        ]
-      };
+    block('authors').elem('img')({
+  'tag': 'img'
+});
+
+block('authors').elem('items').match((node, ctx) => ctx.authors !== undefined)({
+  appendContent: (node, ctx) => ctx.authors.map((elt) => ({
+    elem: 'item',
+    content: [
+      {
+        elem: 'img',
+        attrs: {
+          src: elt.img,
+          alt: elt.name
+        }
+      },
+      {
+        elem: 'title',
+        content: elt.name
+      },
+      {
+        elem: 'subtitle',
+        content: elt.devInfo
+      },
+      {
+        elem: 'description',
+        content: elt.description
+      }
+    ]
+  }))
+});
+
+block('btn')({'tag': 'button'});
+block('btn').elem('text')({'tag': 'span'});
+block('btn').elem('inner')({'tag': 'span'});
+
+// if inner isn't explicitly wrapping the content - do that implicitly
+block('btn').match((node, ctx) => (ctx.content && ctx.content.find(
+    (elt) => elt['elem'] === 'inner') === undefined))
+({
+  content: () => [{
+    elem: 'inner',
+    content: applyNext()
+  }]
+});
+
+block('checkbox')({
+  tag:'input',
+  addAttrs: {
+    type: 'checkbox'
+  }
+});
+
+block('field-group')({
+  content: (node, ctx) => {
+
+    let i = 0;
+    ctx.content = applyNext();
+    return ctx.content.map((elt) => {
+      let fieldMix = {block: 'field-group', elem: 'field', mods: {}};
+
+      if (i === 0) {
+        fieldMix.mods.position = 'prepend';
+      } else if (i === ctx.content.length - 1) {
+        fieldMix.mods.position = 'append';
+      } else {
+        fieldMix.mods.position = 'middle';
+      }
+
+      elt.mix = fieldMix;
+      i++;
+      return elt;
     })
   }
-}));
+});
+
+block('field-group')({
+  grouped: true
+});
+
+// shortcut for a mix: useful for reusable blocks that are *usually*
+// something else's elements: e.g. form elements, icons, buttons etc.
+block('*').match((node, ctx) => ctx.wrappedInside)({
+  'addMix': (node, ctx) => ({
+    block: ctx.wrappedInside,
+    elem: ctx.wrappedAs || ctx.block,
+    elemMods: ctx.elemMods
+  }),
+});
+
+
+// not needed
+
+block('icon')({extend: {'ctx.tag': 'i'}});
+
+// not needed
+
+block('input')({
+  def: (node, ctx) => {
+    if (!ctx.content) return ctx;
+
+    const appendixIndex = ctx.content.findIndex(
+        (elt) => elt.block === 'icon' || elt.elem === 'appendix');
+    const inputIndex = ctx.content.findIndex((elt) => elt.elem === 'field');
+    if (appendixIndex === -1) return ctx;
+
+    if (inputIndex === 0)
+      node.extend(ctx.content[inputIndex].mods, {'appended': 'before'});
+    else if (inputIndex === ctx.content.length - 1)
+      node.extend(ctx.content[inputIndex].mods, {'appended': 'after'});
+    else
+      node.extend(ctx.content[inputIndex].mods, {'appended': 'both'});
+
+    console.log(ctx);
+    return ctx;
+  }
+});
+
+block('input').elem('field')({extend: {tag: 'input'}});
+
+block('input').match((node, ctx) => !ctx.content)({
+  content: [{
+    elem: 'field'
+  }]
+});
+
   ;
 ;oninit(function(exports, context) {
 var BEMContext = exports.BEMContext || context.BEMContext;

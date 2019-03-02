@@ -6,6 +6,10 @@
   top: -3px;
   vertical-align: bottom;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   height: 14px;
   width: 14px;
   margin: 0;
@@ -15,13 +19,9 @@
   background-color: $main-color;
 
   &:checked::before {
-    position: absolute;
-    left: -15%;
-    top: -20%;
 
     @extend .icon;
-    height: 16px;
-    width: 16px;
+    margin-bottom: 1px;
 
     content: "";
     @extend .icon_color_white;
@@ -35,10 +35,17 @@
   // modifiers
   &_size {
     &_small {
+      &::before {
+        @extend .icon_size_small;
+        margin-bottom: 0;
+      }
       width: 12px;
       height: 12px;
     }
     &_large {
+      &::before {
+        @extend .icon_size_large;
+      }
       width: 16px;
       height: 16px;
     }

@@ -49,11 +49,6 @@
   $height-large: 40px;
   $font-size: 16px;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
   height: 32px;
   padding: 5px 15px;
   font-size: $font-size;
@@ -104,10 +99,16 @@
     flex-direction: row;
     align-content: center;
     justify-content: center;
-    padding-top: 2px;
   }
 
   &__text {
+    margin: auto 0;
+    font-size: $font-size;
+    line-height: $font-size;
+    padding-top: 1px;
+    @include firefox() {
+      padding-top: 0;
+    }
     &_normal {
       color: black;
       font-weight: normal;
@@ -115,7 +116,7 @@
   }
 
   &__icon {
-    margin-right: 8px;
+    margin: auto 8px auto 0;
   }
 
 }

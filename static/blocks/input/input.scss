@@ -7,10 +7,10 @@ $input-padding-sides: 10px;
 $input-border-radius: 3px;
 
 @if $input-height + $input-padding-top + $input-padding-bottom + 2px != $field-height {
-  @error("inputs are incorrectly sized!");
+  @error ("inputs are incorrectly sized!");
 }
 
-.input{
+.input {
   $block: &;
   position: relative;
   z-index: $z-index-input;
@@ -35,29 +35,44 @@ $input-border-radius: 3px;
     @include shadow($shadow-focus);
   }
 
-  &_with-icon {
-    & #{$block}__field {
-      padding-right: 5px; // smaller padding
-    }
-  }
-
   &_status {
     &_error {
       border-color: $error-color;
-      &:focus-within {
-        border-color: $error-color;
-      }
     }
   }
+
   &__icon {
-    margin-left: 0;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &:last-child {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+
+    &:first-child {
+      margin-left: 10px;
+      margin-right: 0;
+    }
   }
 
   &__field {
 
-    &#{$block} {
+    &_appended {
+      &_before {
+        padding-left: $input-padding-sides / 2;
+      }
+
+      &_after {
+        padding-right: $input-padding-sides / 2;
+      }
+
+      &_both {
+        padding-left: $input-padding-sides / 2;
+        padding-right: $input-padding-sides / 2;
+      }
     }
+
     display: inline-block;
 
     height: $input-height;
@@ -77,9 +92,7 @@ $input-border-radius: 3px;
     border-width: 0;
     font-size: 12px;
     outline: none;
-    &_prepended {
-      padding-left: 0;
-    }
+
   }
 
   &__field-appendix {

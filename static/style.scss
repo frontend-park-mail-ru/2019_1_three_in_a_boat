@@ -1,10 +1,11 @@
 // modules
 @import "modules/scss/variables";
-@import "modules/scss/generic";
+@import "blocks/generic/generic";
 @import "modules/scss/popup";
 
 // generic blocks
 @import "blocks/icon/icon";
+@import "blocks/icon-bg/icon-bg";
 @import "blocks/btn/btn";
 @import "blocks/checkbox/checkbox";
 @import "blocks/form-group/form-group";

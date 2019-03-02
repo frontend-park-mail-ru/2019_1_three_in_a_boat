@@ -21,6 +21,7 @@
 
   //elements
   &__field {
+    $elem: &;
     flex-grow: 1;
     height: $field-height - 2px; // 2px for the border
 
@@ -44,6 +45,11 @@
         border-left-width: 1px;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+      }
+
+      &_middle {
+        @extend #{$elem}_position_prepend;
+        @extend #{$elem}_position_append;
       }
     }
 
