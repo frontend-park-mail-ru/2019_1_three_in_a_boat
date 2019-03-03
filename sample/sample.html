@@ -57,21 +57,37 @@
               attrs: {foo: 'bar'}
             },
             {
-              block: 'field-group',
-              content: [
-                {
-                  block: 'input',
-                  content: [
-                    {
-                      block: 'icon',
-                      wrappedInside: 'input',
-                      mods: {type: 'eye', size: 'large', color: 'black', btn: true}
-                    },
-                    {elem: 'field'}
-                  ]
-                },
-                {block: 'input'},
-              ]
+              block: 'form-group',
+              mods: {'size': 'inline'},
+              content: {
+                block: 'field-group',
+                content: [
+                  {
+                    block: 'input',
+                    content: [
+                      {
+                        block: 'icon',
+                        wrappedInside: 'input',
+                        mods: {type: 'eye', color: 'black', btn: true}
+                      },
+                      {
+                        elem: 'field',
+                        attrs: {'style': 'font-family: "Comic Sans MS"', 'ayyyyy': 'lmao'},
+                      },
+                      {
+                        elem: 'field-appendix',
+                        content: '🅱️'
+                      }
+                    ]
+                  },
+                  {block: 'input'},
+                  {
+                    block: 'select',
+                    options: ['🅱🅱🅱🅱🅱🅱🅱', '😂😂😂😂😂😂😂', '😊😊😊😊😊😊😊', '👌👌👌👌👌'],
+                    selectedOption: 3
+                  },
+                ]
+              }
             }
           ],
           authors: [
