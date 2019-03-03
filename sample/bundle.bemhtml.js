@@ -2300,11 +2300,11 @@ if (typeof Object.create === 'function') {
 });;
 return module.exports || exports.bemhtml;
 }({}, {});
-var api = new bemhtml({"exportName":"bemhtml","to":"/media/alfaix/Data/drive/bmstu/tp/frontend/project"});
+var api = new bemhtml({"exportName":"bemhtml","to":"/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat"});
 api.compile(function(match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
 /* BEM-XJST User code here: */
 
-    block('authors').elem('img')({
+      block('authors').elem('img')({
   'tag': 'img'
 });
 
@@ -2428,6 +2428,17 @@ block('input').match((node, ctx) => !ctx.content)({
     elem: 'field'
   }]
 });
+block('signup-form')({'tag': 'form'});
+
+
+block('sm-icons-list').elem('icon-bg')({'tag': 'a'});
+block('sm-icons-list').elem('icon')({'tag': 'i'});
+
+block('sm-icons-list').elem('icon-bg').match((node, ctx) => ctx.target)({
+    addAttrs: (node, ctx) => ({href: ctx.url}),
+});
+
+
 
   ;
 ;oninit(function(exports, context) {
