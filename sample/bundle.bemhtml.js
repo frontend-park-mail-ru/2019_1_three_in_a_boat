@@ -2357,76 +2357,188 @@ block('checkbox')({
 });
 
 block('field-group')({
-  content: (node, ctx) => {
-
-    let i = 0;
-    ctx.content = applyNext();
-    return ctx.content.map((elt) => {
-      let fieldMix = {block: 'field-group', elem: 'field', mods: {}};
-
-      if (i === 0) {
-        fieldMix.mods.position = 'prepend';
-      } else if (i === ctx.content.length - 1) {
-        fieldMix.mods.position = 'append';
-      } else {
-        fieldMix.mods.position = 'middle';
-      }
-
-      elt.mix = fieldMix;
-      i++;
-      return elt;
-    })
-  }
+  extend: (node) => ({
+    _fieldParents: (node._fieldParents || []).concat(['field-group'])
+  })
 });
 
-block('field-group')({
-  grouped: true
+block('field-group').match(
+    (node) => Array.isArray(node._fieldParents) &&
+        ((node._fieldParents.length > 0
+          && node._fieldParents[node._fieldParents.length - 1] !== 'field-group')
+          || node._fieldParents.length > 1))
+({
+  addMix: (node) => ({
+    block: (node._fieldParents[node._fieldParents.length - 1] === 'field-group' ?
+            node._fieldParents[node._fieldParents.length - 2] :
+            node._fieldParents[node._fieldParents.length - 1]),
+    elem:  'field'
+  })
 });
-
-// shortcut for a mix: useful for reusable blocks that are *usually*
-// something else's elements: e.g. form elements, icons, buttons etc.
+block('form-group')({
+  extend: (node) => ({
+    _fieldParents: (node._fieldParents || []).concat(['form-group'])
+  })
+});
 block('*').match((node, ctx) => ctx.wrappedInside)({
-  'addMix': (node, ctx) => ({
+  addMix: (node, ctx) => ({
     block: ctx.wrappedInside,
     elem: ctx.wrappedAs || ctx.block,
     elemMods: ctx.elemMods
   }),
 });
+// not needed
+
+block('icon')({'tag': 'i'});
 
 
 // not needed
-
-block('icon')({extend: {'ctx.tag': 'i'}});
-
-// not needed
-
-block('input')({
-  def: (node, ctx) => {
-    if (!ctx.content) return ctx;
-
-    const appendixIndex = ctx.content.findIndex(
-        (elt) => elt.block === 'icon' || elt.elem === 'appendix');
-    const inputIndex = ctx.content.findIndex((elt) => elt.elem === 'field');
-    if (appendixIndex === -1) return ctx;
-
-    if (inputIndex === 0)
-      node.extend(ctx.content[inputIndex].mods, {'appended': 'before'});
-    else if (inputIndex === ctx.content.length - 1)
-      node.extend(ctx.content[inputIndex].mods, {'appended': 'after'});
-    else
-      node.extend(ctx.content[inputIndex].mods, {'appended': 'both'});
-
-    console.log(ctx);
-    return ctx;
-  }
-});
-
-block('input').elem('field')({extend: {tag: 'input'}});
+block('input').elem('field')({tag: 'input'});
+block('input').elem('field').match((node, ctx) => !ctx.attrs || !ctx.attrs.type)
+({addAttrs: {'type': 'text'}});
 
 block('input').match((node, ctx) => !ctx.content)({
-  content: [{
-    elem: 'field'
+  content: (node, ctx) => [{
+    elem: 'field',
+    attrs: ctx.fieldAttrs,
   }]
+});
+
+// (form/field)-group related stuff
+block('input').match(
+    (node) => Array.isArray(node._fieldParents) && node._fieldParents.length)({
+  addMix: (node) => ({
+    block: node._fieldParents[node._fieldParents.length - 1],
+    elem: 'field'
+  })
+});
+block('login-form')({'tag': 'form'});
+block('menu').elem('link')({tag: 'a'});
+block('menu').elem('avatar')({tag: 'img'});
+block('menu').elem('items')({elemMods: {color: 'white-whitesmoke-chain'}});
+block('menu').elem('title')({
+  block: 'title',
+  mods: {large: true}
+});
+
+block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
+  appendContent: (node, ctx) => ctx.points.map((elt) => ({
+    elem: 'item',
+    content: [
+      {
+        elem: 'link',
+        attrs: {href: elt.href, type: elt.href},
+        content: [
+          {
+            tag: 'span',
+            block: 'icon-bg',
+            mods: {
+              borderless: true,
+              size: 'xlarge',
+              shape: 'round',
+              color: 'green'
+            },
+            content: {
+              block: 'icon',
+              mods: {color: 'white', type: elt.type}
+            },
+            wrappedInside: 'menu',
+            wrappedAs: 'icon-bg'
+          },
+          elt.text
+        ]
+      },
+      {
+        block: 'icon',
+        mods: {
+          btn: true,
+          color: 'black',
+          type: 'dropdown'
+        },
+        wrappedInside: 'menu',
+        wrappedAs: 'dropdown-btn'
+      }
+    ]
+  }))
+});
+block('profile-info').elem('item')({   
+    content: (node, ctx) => ([
+        {                    
+            elem: 'item-name',
+            content: ctx.name
+        },
+        {
+            elem: 'item-value',
+            content: ctx.value
+        }
+    ])                                  
+});
+block('scoreboard').elem('username')({tag: 'span'});
+block('scoreboard').elem('avatar')({tag: 'img'});
+
+block('scoreboard').elem('items').match((node, ctx) => ctx.scores !== undefined)({
+  appendContent: (node, ctx) => ctx.scores.map((elt, index) => ({
+    elem: 'item',
+    content: [
+      {
+        elem: 'user-data',
+        content: [
+          {
+            elem: 'place',
+            content: '#' + (index + 1)
+          },
+          {
+            elem: 'link',
+            tag: 'a',
+            attrs: {'href': '/profile?u=' + elt.userId}, // to be changed once api's here
+            content: [
+              {
+                elem: 'avatar',
+                attrs: {
+                  src: elt.img,
+                  alt: elt.name
+                }
+              },
+              {
+                elem: 'username',
+                content: elt.username
+              }
+            ]
+          }
+        ]
+      },
+      {
+        elem: 'score',
+        content: elt.score
+      }
+    ],
+    elemMods: index < 3 ? {place: ['first', 'second', 'third'][index]} : {}
+  }))
+});
+block('select').elem('field')({
+  tag: 'select'
+});
+
+block('select').match(
+    (node, ctx) => !ctx.content && ctx.options)({
+  content: (node, ctx) => [{
+    elem: 'field',
+    attrs: ctx.fieldAttrs,
+    content: ctx.options.map((option, idx) => [{
+      tag: 'option',
+      content: option,
+      attrs: idx === ctx.selectedOption ? {selected: true} : undefined
+    }])
+  }]
+});
+
+// (form/field)-group related stuff
+block('select').match(
+    (node) => Array.isArray(node._fieldParents) && node._fieldParents.length)({
+  addMix: (node) => ({
+    block: node._fieldParents[node._fieldParents.length - 1],
+    elem: 'field'
+  })
 });
 block('signup-form')({'tag': 'form'});
 
@@ -2434,12 +2546,23 @@ block('signup-form')({'tag': 'form'});
 block('sm-icons-list').elem('icon-bg')({'tag': 'a'});
 block('sm-icons-list').elem('icon')({'tag': 'i'});
 
-block('sm-icons-list').elem('icon-bg').match((node, ctx) => ctx.target)({
-    addAttrs: (node, ctx) => ({href: ctx.url}),
+block('sm-icons-list').elem('icon-bg').match((node, ctx) => ctx.href)({
+    addAttrs: (node, ctx) => ({href: ctx.href}),
 });
 
 
-block('update-profile-popup')
+block('update-profile-popup').match((node, ctx) => ctx.addCloseButton)({
+  prependContent: {
+    block: 'icon',
+    mix: {
+      elem: 'close-popup',
+      block: 'update-profile-popup',
+      mods:  {type: 'cross', color: 'black', size: 'large'}
+    }
+  }
+});
+
+block('update-profile-popup').elem('hr')({'tag' : 'hr'});
 
   ;
 ;oninit(function(exports, context) {
