@@ -17,9 +17,11 @@ for (let inputBlock of fileInputs) {
     const elt = e.target || e.srcElement;
     if (elt.files && elt.files.length > 0) {
       if (elt.files.length === 1) {
-        info.textContent = elt.files[0].name;
+        let fileName = elt.files[0].name;
+        fileName = fileName.length > 20 ?
+            fileName.substr(0, 17) + '...' : fileName;
+        info.textContent = fileName;
       } else {
-        console.log(elt.files, elt.getAttribute('multiple'));
         if (elt.getAttribute('multiple') !== null) {
           console.log(elt.files);
           const filesInfoText = elt.files.length % 100 >= 5 && elt.files.length <= 20 ?
