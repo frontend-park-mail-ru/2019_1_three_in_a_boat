@@ -58,40 +58,34 @@ $input-border-radius: 3px;
 
   &__field {
 
-    &_appended {
-      &_before {
-        padding-left: $input-padding-sides / 2;
-      }
-
-      &_after {
-        padding-right: $input-padding-sides / 2;
-      }
-
-      &_both {
-        padding-left: $input-padding-sides / 2;
-        padding-right: $input-padding-sides / 2;
-      }
-    }
-
     display: inline-block;
 
     height: $input-height;
     min-width: 0;
     flex-grow: 1;
     margin: 0; // kinda !important but i feel bad putting it there
-    padding: $input-padding-top $input-padding-sides $input-padding-bottom $input-padding-sides;
+    padding: $input-padding-top $input-padding-sides / 2 $input-padding-bottom $input-padding-sides / 2;
+
     @include firefox {
       // 16 + 7 = 20 + 3 so size doesn't change, just the alignment
       height: $input-height - 3px;
-      padding: $input-padding-top $input-padding-sides $input-padding-bottom + 3px $input-padding-sides;
+      padding-bottom: $input-padding-bottom + 3px;
     }
 
     line-height: 12px;
 
+    background-color: white;
     border-radius: $input-border-radius;
     border-width: 0;
     font-size: 12px;
     outline: none;
+
+    &:first-child {
+      padding-left: $input-padding-sides;
+    }
+    &:last-child {
+      padding-right: $input-padding-sides;
+    }
 
   }
 
@@ -99,7 +93,7 @@ $input-border-radius: 3px;
     display: inline-block;
     margin: 0;
     height: $input-height; // minus the border
-    padding: 9px 2px 3px 2px;
+    padding: 8px 2px 3px 2px;
 
     border-radius: $input-border-radius;
     font-size: 12px;

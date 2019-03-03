@@ -5,6 +5,7 @@
   position: relative;
   top: -3px;
   vertical-align: bottom;
+  z-index: $z-index-input;
 
   display: flex;
   justify-content: center;

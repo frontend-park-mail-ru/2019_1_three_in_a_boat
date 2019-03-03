@@ -1,3 +1,6 @@
 .idea
 node_modules
 package-lock.json
+bundle.*.js
+static/public/css/*.css
+static/public/css/*.css.map

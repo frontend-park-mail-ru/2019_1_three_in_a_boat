@@ -1,1 +1,2 @@
-block('icon')({extend: {'ctx.tag': 'i'}});
+block('icon')({'tag': 'i'});
+

@@ -14,11 +14,8 @@
             {
                 block: 'update-profile-popup',
                 mods: {'main': true},
+                addCloseButton: true,
                 content: [
-                    {
-                        elem: 'close-popup',
-                        mix: { 'block' :'icon' },
-                    },
                     {
                         mix: {'block': 'title'},
                         elem: 'title',
@@ -48,7 +45,7 @@
                                         content: [
                                             {
                                                 elem: 'field',
-                                                mix: {'id': 'update-profile__login'},
+                                                mods: {'login' : true},
                                                 content: {
                                                     elem: 'tooltip',
                                                     content: [
