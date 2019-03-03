@@ -12,7 +12,7 @@ block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
     content: [
       {
         elem: 'link',
-        attrs: {href: elt.href},
+        attrs: {href: elt.href, type: elt.href},
         content: [
           {
             tag: 'span',
