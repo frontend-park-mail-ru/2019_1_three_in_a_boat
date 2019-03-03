@@ -16,39 +16,94 @@
                 mods: {'main': true},
                 content: [
                     {
-                        elem: 'title',
-                        content: 'Изменение настроек'
+                        elem: 'close-popup',
+                        mix: { 'block' :'icon' },
                     },
                     {
-                        elem: 'update-profile-form',
+                        mix: {'block': 'title'},
+                        elem: 'title',
+                        content: 'Изменение настроек',
+                    },
+                    {
+                        block: 'update-profile-form',
                         content: [
                             {
                                 elem: 'form-group',
-                                mods: 'size, large',
+                                mix: { 'block' : 'form-group'},
+                                block: 'form-group',
                                 content: [
                                     {
-                                        addAtr: 'login',
-                                        content: 'Логин',
+                                        elem: 'title',
+                                        content: {
+                                            block: 'update-profile',
+                                            elem: 'login',
+                                            content: 'Логин',
+                                        },
                                     },
+
                                     {
-                                        elem: 'size',
-                                        mods: 'inline',
+                                        mix: {'block' : 'input'},
+                                        elem: 'size-inline',
+                                        block: 'input',
                                         content: [
                                             {
-                                                elem: 'input',
-                                                extend: 'tooltip',
-                                                mods: 'title',
-                                                content: 'Укажите новый логин'
+                                                elem: 'field',
+                                                mix: {'id': 'update-profile__login'},
+                                                content: {
+                                                    elem: 'tooltip',
+                                                    content: [
+                                                        {
+                                                            mods: {'title' : true },
+                                                            content: 'Укажите новый логин',
+                                                        },
+                                                        {
+                                                            mods: {'help': true},
+                                                            content: 'Вы можете изменить свой логин',
+                                                        }
+                                                    ]
+                                                }
                                             },
-                                            {
-                                                elem: 'input',
-                                                extend: 'tooltip',
-                                                mods: 'help',
-                                                content: 'Вы можете изменить свой логин',
-                                            }
                                         ]
                                     },
+                                    {
+                                        elem: 'title',
+                                        content: {
+                                            block: 'update-profile',
+                                            elem: 'phone-number',
+                                            content: 'Телефон',
+                                        },
+                                    },
+                                    {
+                                        mix: {'block' : 'input'},
+                                        elem: 'size-inline',
+                                        block: 'filed-group',
+                                        content: [
+                                            {
+                                                elem: 'field',
+                                                mix: {'block': 'select'},
+                                                block: 'select',
+                                                content: [
+                                                    {
+                                                        elem: 'chosen-icon',
+                                                        mix: {'block' : 'icon'}
+                                                    },
+                                                    {
+                                                        elem: 'filed',
+                                                        content: [
+                                                            {
+                                                                elem: 'option-with-icon',
+                                                                'data-code': '+7',
+                                                                content: 'Россия',
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                        ]
+                                    },
+
                                 ]
+
                             }
                         ]
                     }

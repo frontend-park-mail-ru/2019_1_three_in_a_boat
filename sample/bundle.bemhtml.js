@@ -2304,7 +2304,7 @@ var api = new bemhtml({"exportName":"bemhtml","to":"/home/astronaut/gitHub/rowbo
 api.compile(function(match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
 /* BEM-XJST User code here: */
 
-      block('authors').elem('img')({
+    block('authors').elem('img')({
   'tag': 'img'
 });
 
@@ -2439,6 +2439,7 @@ block('sm-icons-list').elem('icon-bg').match((node, ctx) => ctx.target)({
 });
 
 
+block('update-profile-popup')
 
   ;
 ;oninit(function(exports, context) {
