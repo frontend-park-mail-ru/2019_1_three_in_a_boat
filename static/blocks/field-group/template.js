@@ -1,26 +1,19 @@
 block('field-group')({
-  content: (node, ctx) => {
-
-    let i = 0;
-    ctx.content = applyNext();
-    return ctx.content.map((elt) => {
-      let fieldMix = {block: 'field-group', elem: 'field', mods: {}};
-
-      if (i === 0) {
-        fieldMix.mods.position = 'prepend';
-      } else if (i === ctx.content.length - 1) {
-        fieldMix.mods.position = 'append';
-      } else {
-        fieldMix.mods.position = 'middle';
-      }
-
-      elt.mix = fieldMix;
-      i++;
-      return elt;
-    })
-  }
+  extend: (node) => ({
+    _fieldParents: (node._fieldParents || []).concat(['field-group'])
+  })
 });
 
-block('field-group')({
-  grouped: true
+block('field-group').match(
+    (node) => Array.isArray(node._fieldParents) &&
+        ((node._fieldParents.length > 0
+          && node._fieldParents[node._fieldParents.length - 1] !== 'field-group')
+          || node._fieldParents.length > 1))
+({
+  addMix: (node) => ({
+    block: (node._fieldParents[node._fieldParents.length - 1] === 'field-group' ?
+            node._fieldParents[node._fieldParents.length - 2] :
+            node._fieldParents[node._fieldParents.length - 1]),
+    elem:  'field'
+  })
 });

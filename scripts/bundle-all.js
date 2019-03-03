@@ -26,8 +26,8 @@ if (process.argv.length !== 4) {
   process.exit(1);
 }
 
-const bundlePath = path.resolve(__dirname, process.argv[2]);
-const blocksPath = path.resolve(__dirname, process.argv[3]);
+const bundlePath = path.resolve(process.cwd(), process.argv[2]);
+const blocksPath = path.resolve(process.cwd(), process.argv[3]);
 
 if (!fs.existsSync(blocksPath)) {
   console.log(`blocks path does not exist: ${blocksPath}`);
