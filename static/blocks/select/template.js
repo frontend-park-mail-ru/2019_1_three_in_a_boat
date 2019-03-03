@@ -1,5 +1,9 @@
 block('select').elem('field')({
-  tag: 'select'
+  tag: 'select',
+  addAttrs: (node) => ({
+    'id': node.formId + '_' + node.fieldName,
+    'name': node.fieldName
+  })
 });
 
 block('select').match(
@@ -13,6 +17,10 @@ block('select').match(
       attrs: idx === ctx.selectedOption ? {selected: true} : undefined
     }])
   }]
+});
+
+block('select')({
+  extend: (node, ctx) => ({fieldName: ctx.fieldName || node.generateId()})
 });
 
 // (form/field)-group related stuff
