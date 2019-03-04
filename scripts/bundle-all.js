@@ -51,11 +51,11 @@ if (!fs.statSync(bundlePath).isDirectory()) {
 
 //options
 const BEMHTML_BUNDLE_NAME = 'bundle.bemhtml.js';
-const BEMHTML_OPTIONS = {'exportName': 'bemhtml'};
+const BEMHTML_OPTIONS = {exportName: 'bemhtml', escapeContent: true};
 const bemhtmlBundlePath = path.resolve(bundlePath, BEMHTML_BUNDLE_NAME);
 
 const BEMTREE_BUNDLE_NAME = 'bundle.bemtree.js';
-const BEMTREE_OPTIONS = {'exportName': 'bemtree', 'runtimeLinting': true};
+const BEMTREE_OPTIONS = {exportName: 'bemtree', runtimeLinting: true};
 const bemtreeBundlePath = path.resolve(bundlePath, BEMTREE_BUNDLE_NAME);
 
 

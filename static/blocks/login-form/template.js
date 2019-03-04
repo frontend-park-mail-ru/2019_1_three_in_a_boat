@@ -1,1 +1,1 @@
-block('login-form')({'tag': 'form'});
+// emptied out in favor of form

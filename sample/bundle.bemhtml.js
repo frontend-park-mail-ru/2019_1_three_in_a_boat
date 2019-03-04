@@ -2300,7 +2300,7 @@ if (typeof Object.create === 'function') {
 });;
 return module.exports || exports.bemhtml;
 }({}, {});
-var api = new bemhtml({"exportName":"bemhtml","to":"/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat"});
+var api = new bemhtml({"exportName":"bemhtml","escapeContent":true,"to":"/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat"});
 api.compile(function(match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
 /* BEM-XJST User code here: */
 
@@ -2375,9 +2375,59 @@ block('field-group').match(
     elem:  'field'
   })
 });
+block('file-input').elem('field')({
+  tag: 'input',
+  addAttrs: (node) => ({
+    id: node.formId + '_' + node.fieldName,
+    name: node.fieldName,
+    type: 'file'
+  }),
+});
+
+block('file-input').elem('label')({
+  tag: 'label',
+  addAttrs: (node) => ({'for': node.formId + '_' + node.fieldName})
+});
+
+block('file-input').elem('info')({
+  tag: 'span',
+});
+
+block('file-input').match((node, ctx) => !ctx.content)({
+  content: (node, ctx) => [
+    {
+      elem: 'label',
+      content: [ctx.labelText || 'Выберите файл'],
+    },
+    {
+      elem: 'info',
+      content: [ctx.emptyText || '(файл не выбран)']
+    },
+    {
+      elem: 'field'
+    }
+  ]
+});
+
+block('file-input')({
+  extend: (node, ctx) => ({fieldName: ctx.fieldName || node.generateId()})
+});
+block('form')({tag: 'form'});
+
+block('form')({
+  extend: (node) => ({
+    formId: node.generateId()
+  })
+});
 block('form-group')({
   extend: (node) => ({
     _fieldParents: (node._fieldParents || []).concat(['form-group'])
+  })
+});
+
+block('form-group').elem('help-text')({
+  addAttrs: (node, ctx) => ({
+    'data-for': node.formId + ctx['data-for']
   })
 });
 block('*').match((node, ctx) => ctx.wrappedInside)({
@@ -2393,15 +2443,32 @@ block('icon')({'tag': 'i'});
 
 
 // not needed
-block('input').elem('field')({tag: 'input'});
+block('input').elem('field')({
+  tag: 'input',
+  addAttrs: (node) => ({
+    'id': node.formId + '_' + node.fieldName,
+    'name': node.fieldName
+  })
+});
+
 block('input').elem('field').match((node, ctx) => !ctx.attrs || !ctx.attrs.type)
 ({addAttrs: {'type': 'text'}});
 
 block('input').match((node, ctx) => !ctx.content)({
   content: (node, ctx) => [{
     elem: 'field',
-    attrs: ctx.fieldAttrs,
+    addAttrs: ctx.fieldAttrs,
   }]
+});
+
+block('input')({
+  extend: (node, ctx) => ({fieldName: ctx.fieldName || node.generateId()})
+});
+
+block('input').elem('tooltip')({
+  addAttrs: (node, ctx) => ({
+    'data-for': node.formId + (ctx['data-for'] || node.fieldName)
+  })
 });
 
 // (form/field)-group related stuff
@@ -2412,7 +2479,7 @@ block('input').match(
     elem: 'field'
   })
 });
-block('login-form')({'tag': 'form'});
+// emptied out in favor of form
 block('menu').elem('link')({tag: 'a'});
 block('menu').elem('avatar')({tag: 'img'});
 block('menu').elem('items')({elemMods: {color: 'white-whitesmoke-chain'}});
@@ -2462,7 +2529,7 @@ block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
   }))
 });
 block('profile-info').elem('item')({   
-    content: (node, ctx) => ([
+    content: (node, ctx) => [
         {                    
             elem: 'item-name',
             content: ctx.name
@@ -2471,7 +2538,7 @@ block('profile-info').elem('item')({
             elem: 'item-value',
             content: ctx.value
         }
-    ])                                  
+    ]
 });
 block('scoreboard').elem('username')({tag: 'span'});
 block('scoreboard').elem('avatar')({tag: 'img'});
@@ -2516,7 +2583,11 @@ block('scoreboard').elem('items').match((node, ctx) => ctx.scores !== undefined)
   }))
 });
 block('select').elem('field')({
-  tag: 'select'
+  tag: 'select',
+  addAttrs: (node) => ({
+    'id': node.formId + '_' + node.fieldName,
+    'name': node.fieldName
+  })
 });
 
 block('select').match(
@@ -2532,6 +2603,10 @@ block('select').match(
   }]
 });
 
+block('select')({
+  extend: (node, ctx) => ({fieldName: ctx.fieldName || node.generateId()})
+});
+
 // (form/field)-group related stuff
 block('select').match(
     (node) => Array.isArray(node._fieldParents) && node._fieldParents.length)({
@@ -2540,8 +2615,13 @@ block('select').match(
     elem: 'field'
   })
 });
-block('signup-form')({'tag': 'form'});
+// removed in favor of generic form
+block('signup-popup').elem('hr')({'tag' : 'hr'});
+block('signup-popup').elem('explanation-text')({'tag' : 'span'});
 
+// block('signup-popup').elem('explanation-text').match((node, ctx) => ctx.content)(){
+//
+// }
 
 block('sm-icons-list').elem('icon-bg')({'tag': 'a'});
 block('sm-icons-list').elem('icon')({'tag': 'i'});

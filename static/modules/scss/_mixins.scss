@@ -4,6 +4,15 @@
   appearance: none;
 }
 
+@mixin hide {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
 @mixin mask-image($path) {
   -webkit-mask-image: url($path);
   mask-image: url($path);

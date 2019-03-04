@@ -59,35 +59,49 @@
             {
               block: 'form-group',
               mods: {'size': 'inline'},
-              content: {
-                block: 'field-group',
-                content: [
-                  {
-                    block: 'input',
-                    content: [
-                      {
-                        block: 'icon',
-                        wrappedInside: 'input',
-                        mods: {type: 'eye', color: 'black', btn: true}
-                      },
-                      {
-                        elem: 'field',
-                        attrs: {'style': 'font-family: "Comic Sans MS"', 'ayyyyy': 'lmao'},
-                      },
-                      {
-                        elem: 'field-appendix',
-                        content: '🅱️'
-                      }
-                    ]
-                  },
-                  {block: 'input'},
-                  {
-                    block: 'select',
-                    options: ['🅱🅱🅱🅱🅱🅱🅱', '😂😂😂😂😂😂😂', '😊😊😊😊😊😊😊', '👌👌👌👌👌'],
-                    selectedOption: 3
-                  },
-                ]
-              }
+              content: [
+                {
+                  block: 'file-input',
+                  content: [
+                    {
+                      elem: 'label',
+                      content: ['Выберите файл'],
+                      attrs: {'for': 'my-shitty-input'}
+                    },
+                    {elem: 'info', content: ['[файл не выбран]']},
+                    {elem: 'field', attrs: {'id': 'my-shitty-input', 'multiple': true}}
+                  ]
+                },
+                // {
+                //   block: 'field-group',
+                //   content: [
+                //     {
+                //       block: 'input',
+                //       content: [
+                //         {
+                //           block: 'icon',
+                //           wrappedInside: 'input',
+                //           mods: {type: 'eye', color: 'black', btn: true}
+                //         },
+                //         {
+                //           elem: 'field',
+                //           attrs: {'style': 'font-family: "Comic Sans MS"', 'ayyyyy': 'lmao'},
+                //         },
+                //         {
+                //           elem: 'field-appendix',
+                //           content: '🅱️'
+                //         }
+                //       ]
+                //     },
+                //     {block: 'input'},
+                //     {
+                //       block: 'select',
+                //       options: ['🅱🅱🅱🅱🅱🅱🅱', '😂😂😂😂😂😂😂', '😊😊😊😊😊😊😊', '👌👌👌👌👌'],
+                //       selectedOption: 3
+                //     },
+                //   ]
+                // }
+              ]
             }
           ],
           authors: [
@@ -121,5 +135,6 @@
   );
   console.log(bemtree.apply(template)); // for debugging
 </script>
+<script src="../static/blocks/file-input/file-input.js"></script>
 </body>
 </html>

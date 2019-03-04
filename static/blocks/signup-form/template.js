@@ -1,1 +1,1 @@
-block('signup-form')({'tag': 'form'});
+// removed in favor of generic form

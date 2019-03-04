@@ -459,23 +459,295 @@ function createLoginPage() {
     createMenuLink();
 }
 
-const createRegistration = () => {
+const createSignUp = () => {
+  createHeader();
   const template = [
     {
-
+      block: 'signup-popup',
+      mods: {'main': true},
+      content: [
+        {
+          elem: 'title',
+          mix: {'block': 'title'},
+          content: 'Регистрация',
+        },
+        {
+          elem: 'hr',
+          mix: {'block': 'hr'},
+        },
+        {
+          elem: 'explanation-text',
+          content: 'Для регистрации на ресурсе укажите информацию о себе',
+        },
+        {
+          block: 'signup-form',
+          content: [
+            {
+              block: 'form-group',
+              content: [
+                {
+                  block: 'input',
+                  wrappedAs: 'input',
+                  content: {
+                    elem: 'field',
+                    attrs: {type: 'text', placeholder: 'Имя'}
+                  }
+                },
+                {
+                  elem: 'help-text',
+                  mix: {'block': 'form-group__help-text_hidden'},
+                  mods: {type_error: true},
+                  content: 'Заполните обязательное поле',
+                }
+              ]
+            },
+            {
+              block: 'form-group',
+              content: [
+                {
+                  block: 'input',
+                  wrappedAs: 'input',
+                  content: {
+                    elem: 'field',
+                    attrs: {type: 'text', placeholder: 'Фамилия', required : true}
+                  }
+                },
+                {
+                  elem: 'help-text',
+                  mix: {'block' : 'form-group__help-text_hidden'},
+                  mods: {type_error: true},
+                  content: 'Заполните обязательное поле',
+                }
+              ]
+            },
+            {
+              block: 'form-group',
+              elem: 'size_inline',
+              // mods: {size_inline: true},
+              content: [
+                {
+                  elem: 'title',
+                  mix: {elem: 'title_align_left'},
+                  content: {
+                    block: 'signup',
+                    elem: 'day-select',
+                    content: 'Дата рождения',
+                  }
+                },
+                {
+                  block: 'form-group',
+                  cls: 'form-group__size_inline, form-group_align_stretch',
+                  content: [
+                    {
+                      elem: 'filed',
+                      content: {
+                        block: 'signup-form',
+                        elem: 'date-select',
+                        content: {
+                          block: 'select',
+                          wrappedInside: 'signup-form',
+                          attrs: {id: 'signup__day-select'},
+                          options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+                        }
+                      }
+                    },
+                    {
+                      elem: 'filed',
+                      content: {
+                        block: 'signup-form',
+                        elem: 'date-select',
+                        content: {
+                          block: 'select',
+                          wrappedInside: 'signup-form',
+                          attrs: {id: 'signup__date-select'},
+                          options: ['Месяц', 'Янаварь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь'],
+                        }
+                      }
+                    },
+                    {
+                      elem: 'filed',
+                      // mix: {'block': 'form-group__field'},
+                      content: {
+                        block: 'signup-form',
+                        elem: 'date-select',
+                        content: {
+                          block: 'select',
+                          wrappedInside: 'signup-form',
+                          attrs: {id: 'signup__date-select'},
+                          options: [2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992],
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  block: 'form-group',
+                  // cls: 'form-group__size_inline, form-group_align_stretch',
+                  content: [
+                    {
+                      elem: 'title',
+                      cls: 'form-group__title_align_left',
+                      content: {
+                        attr: {for: 'signup__phone-number'},
+                        content: 'Телефон',
+                      }
+                    },
+                    {
+                      elem: 'size_inline',
+                      mix: 'form-group',
+                      content: [
+                        {
+                          block: 'filed-group',
+                          content: {
+                            mods: {'field_position_prepend' : true},
+                            elem: 'field_stretched_1',
+                            content: {
+                              elem: 'filed',
+                              content: {
+                                block: 'select',
+                                mods: {'with-icon': true},
+                                content: [
+                                  {
+                                    elem: 'chosen-icon',
+                                    content: {
+                                      block: 'icon',
+                                      mods: {'type_ru': true},
+                                    }
+                                  },
+                                  {
+                                    block: 'select',
+                                    // elem: 'field',
+                                    attrs: {id: 'signup_choose-country'},
+                                    wrappedInside: 'form-group',
+                                    options: ['Россия', 'Украина', 'Беларусь'],
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          block: 'input',
+                          cls: 'field-group__field, field-group__field_position_append, field-group__field_stretched_8',
+                          content: {
+                            elem: 'field-appendix',
+                            content: [
+                              {
+                                elem: 'field-appendix',
+                                mods: {'position_prepend': true},
+                                attrs: {id: 'signup__country-code-span'}
+                              },
+                              {
+                                elem: 'filed',
+                                content: {
+                                  elem: 'filed',
+                                  mods: {'prepended': true},
+                                  attrs: {type: 'text', id: 'signup__phone-number'}
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  block: 'form-group',
+                  mix: {'block': 'signup-form__form-group'},
+                  content: [
+                    {
+                      block: 'input',
+                      content: {
+                        elem: 'filed',
+                        attrs: {type: 'password', placeholder: 'Пароль' },
+                      }
+                    },
+                    {
+                      elem: 'help-text',
+                      mods: {'type_error' : true},
+                      cls: 'form-group__help-text_hidden',
+                      content: 'Заполните обязательное поле'
+                    },
+                  ]
+                },
+                {
+                  block: 'form-group',
+                  mix: {'block': 'signup-form__form-group'},
+                  content: [
+                    {
+                      block: 'input',
+                      content: {
+                        elem: 'filed',
+                        attrs: {type: 'password', placeholder: 'Повторите пароль' },
+                      }
+                    },
+                    {
+                      elem: 'help-text',
+                      mods: {'type_error' : true},
+                      cls: 'form-group__help-text_hidden',
+                      content: 'Пароли не совпадают'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        // {
+        //   block: 'signup-popup',
+        //   elem: 'hr',
+        //   mix: {'block' : 'hr'},
+        // },
+        // {
+        //   block: 'signup-popup',
+        //   elem: 'double-btn',
+        //   content: [
+            // {
+            //   elem: 'signup-btn',
+            //   content: {
+            //     block: 'btn',
+            //     mods: {'size_large' : true},
+            //     content: {
+            //       elem: 'text',
+            //       content: 'Зарегестрироваться',
+            //     }
+            //   }
+            // },
+            // {
+            //   elem: 'cancel-btn',
+            //   content: {
+            //     block: 'btn',
+            //     cls: 'btn_color_muted',
+            //     mods: {'size_large' : true},
+            //     content: {
+            //       elem: 'text',
+            //       mods: {'normal': true},
+            //       content: 'Отменить',
+            //     }
+            //   }
+            // }
+          // ]
+        // }
+      ]
     }
-
   ];
+  document.getElementById('application').insertAdjacentHTML('beforeend',
+      bemhtml.apply(template)
+  );
+
+  createMenuLink();
 };
 
 createMenu();
 
 const pages = {
-    menu: createMenu,
-    signIn: createLoginPage,
-    authors: createAuthors,
-	leaders: createScoreBoard,
-    updateProfile: createUpdateProfile,
+  menu: createMenu,
+  signIn: createLoginPage,
+  signUp: createSignUp,
+  authors: createAuthors,
+  leaders: createScoreBoard,
+  updateProfile: createUpdateProfile,
 };
 
 application.addEventListener('click', function (event) {
