@@ -1,0 +1,137 @@
+@import "../../modules/scss/mixins";
+@import "../../modules/scss/variables";
+
+$icons-path: "../icons";
+
+$checkmark-icon: $icons-path + "/done.svg";
+$cross-icon: $icons-path + "/close.svg";
+$delete-icon: $icons-path + "/delete.svg";
+$dropdown-icon: $icons-path + "/drop_down.svg";
+$eye-icon: $icons-path + "/show.svg";
+$fb-icon: $icons-path + "/fb.svg";
+$gamepad-icon: $icons-path + "/game1.svg";
+$key-icon: $icons-path + "/access.svg";
+$mailru-icon: $icons-path + "/mailru.svg";
+$ok-icon: $icons-path + "/ok.svg";
+$ru-png: $icons-path + "/ru.png";
+$signin-icon: $icons-path + "/sign_in.svg";
+$useredit-icon: $icons-path + "/user_edit.svg";
+$users-icon: $icons-path + "/users.svg";
+$vk-icon: $icons-path + "/vk.svg";
+$crown-icon: $icons-path + "/crown.svg";
+
+$icon-size: 14px, 14px;
+$icon-sizes: (small: (12px, 12px),
+                   large: (20px, 20px),
+                   xlarge: (24px, 24px),
+                   xxlarge: (32px, 32px),
+                   xxxlarge: (40px, 40px));
+
+
+@function get-icon-span-height($size) {
+    @if $size == nil {
+        @return nth($icon-size, 1);
+    }
+    @return nth(map-get($icon-sizes, $size), 1);
+}
+@function get-icon-span-width($size) {
+    @if $size == nil {
+        @return nth($icon-size, 2);
+    }
+    @return nth(map-get($icon-sizes, $size), 2);
+}
+
+// icons
+.icon {
+    display: inline-block;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    height: get-icon-span-height(nil);
+    width: get-icon-span-width(nil);
+
+    &_size{
+        @each $size, $x in $icon-sizes {
+           &_#{$size} {
+                height: get-icon-span-height($size);
+                width: get-icon-span-width($size);
+           }
+        }
+    }
+
+    &_color {
+        &_green {
+            background-color: $green;
+        }
+        &_orange {
+            background-color: $orange;
+        }
+        &_white {
+            background-color: white;
+        }
+        &_black {
+            background-color: black;
+        }
+        &_muted {
+            background-color: $muted-color-dark;
+        }
+        &_muted-light {
+            background-color: $muted-color-light;
+        }
+    }
+    &_type {
+        &_cross {
+            @include mask-image($cross-icon);
+        }
+        &_eye {
+            @include mask-image($eye-icon);
+        }
+        &_vk {
+            @include mask-image($vk-icon);
+        }
+        &_fb {
+            @include mask-image($fb-icon);
+        }
+        &_ok {
+            @include mask-image($ok-icon);
+        }
+        &_mailru {
+            @include mask-image($mailru-icon);
+        }
+        &_users {
+            @include mask-image($users-icon);
+        }
+        &_key {
+            @include mask-image($key-icon);
+        }
+        &_gamepad {
+            @include mask-image($gamepad-icon);
+        }
+        &_signin {
+            @include mask-image($signin-icon);
+        }
+        &_dropdown {
+            @include mask-image($dropdown-icon);
+        }
+        &_useredit {
+            @include mask-image($useredit-icon);
+        }
+        &_delete {
+            @include mask-image($delete-icon);
+        }
+        &_crown{
+            @include mask-image($crown-icon);
+        }
+        &_ru {
+            background-image: url($ru-png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: 0 25%;
+        }
+    }
+    //flags
+    &_btn {
+        cursor: pointer;
+    }
+}

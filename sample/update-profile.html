@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Profile</title>
+    <link href="../static/public/css/style.css" rel="stylesheet">
+</head>
+<body class="body">
+    <div id="application"></div>
+    <script src="bundle.bemhtml.js"></script>
+    <script src="bundle.bemtree.js"></script>
+    <script>
+        const template = [
+            {
+                block: 'update-profile-popup',
+                mods: {'main': true},
+                addCloseButton: true,
+                content: [
+                    {
+                        mix: {'block': 'title'},
+                        elem: 'title',
+                        content: 'Изменение настроек',
+                    },
+                    {
+                        block: 'update-profile-form',
+                        content: [
+                            {
+                                elem: 'form-group',
+                                mix: { 'block' : 'form-group'},
+                                block: 'form-group',
+                                content: [
+                                    {
+                                        elem: 'title',
+                                        content: {
+                                            block: 'update-profile',
+                                            elem: 'login',
+                                            content: 'Логин',
+                                        },
+                                    },
+
+                                    {
+                                        mix: {'block' : 'input'},
+                                        elem: 'size-inline',
+                                        block: 'input',
+                                        content: [
+                                            {
+                                                elem: 'field',
+                                                mods: {'login' : true},
+                                                content: {
+                                                    elem: 'tooltip',
+                                                    content: [
+                                                        {
+                                                            mods: {'title' : true },
+                                                            content: 'Укажите новый логин',
+                                                        },
+                                                        {
+                                                            mods: {'help': true},
+                                                            content: 'Вы можете изменить свой логин',
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                        ]
+                                    },
+                                    {
+                                        elem: 'title',
+                                        content: {
+                                            block: 'update-profile',
+                                            elem: 'phone-number',
+                                            content: 'Телефон',
+                                        },
+                                    },
+                                    {
+                                        mix: {'block' : 'input'},
+                                        elem: 'size-inline',
+                                        block: 'filed-group',
+                                        content: [
+                                            {
+                                                elem: 'field',
+                                                mix: {'block': 'select'},
+                                                block: 'select',
+                                                content: [
+                                                    {
+                                                        elem: 'chosen-icon',
+                                                        mix: {'block' : 'icon'}
+                                                    },
+                                                    {
+                                                        elem: 'filed',
+                                                        content: [
+                                                            {
+                                                                elem: 'option-with-icon',
+                                                                'data-code': '+7',
+                                                                content: 'Россия',
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                        ]
+                                    },
+
+                                ]
+
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        ];
+        document.getElementById('application').insertAdjacentHTML('beforeend',
+            bemhtml.apply(template)
+        );
+        console.log(bemtree.apply(template)); // for debugging
+    </script>
+
+</body>
+</html>
