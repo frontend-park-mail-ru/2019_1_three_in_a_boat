@@ -5,9 +5,8 @@ import createAuthors from './authors.js';
 import createLoginPage from './login.js';
 import createSignUp from './signup.js';
 // import createUpdateProfile from './update.js'
+import createProfile from './profile.js';
 import {validate, removeHelpText} from './validation.js';
-
-'./validation.js';
 
 
 const application = document.getElementById('application');
@@ -20,6 +19,7 @@ const pages = {
   signUp: createSignUp,
   authors: createAuthors,
   leaders: createScoreBoard,
+  profile: createProfile,
 };
 
 application.addEventListener('submit', function(event) {

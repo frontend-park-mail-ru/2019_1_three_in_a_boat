@@ -49,6 +49,11 @@ export default function createMenu() {
               text: 'Играть',
               type: 'gamepad',
             },
+            {
+              href: 'profile',
+              text: 'Профиль',
+              type: 'user',
+            },
           ],
         },
       ],
