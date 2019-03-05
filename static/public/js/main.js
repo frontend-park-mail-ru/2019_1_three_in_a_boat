@@ -443,6 +443,14 @@ function createLoginPage() {
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
   );
+
+  document.getElementsByClassName('icon_type_cross')[0].addEventListener('click', 
+    function(event) {
+      event.preventDefault();
+        application.innerHTML = '';
+        createMenu();
+      }
+  ); 
 }
 
 const createSignUp = () => {
@@ -665,8 +673,17 @@ const createSignUp = () => {
         }
       ]
     }];
+
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
+  );
+
+  document.getElementsByClassName('signup-form__cancel-btn')[0].addEventListener('click',
+      function(event) {
+        event.preventDefault();
+        application.innerHTML = '';
+        createMenu();
+      }
   );
 };
 
@@ -675,6 +692,7 @@ createMenu();
 const pages = {
   menu: createMenu,
   signIn: createLoginPage,
+  signUp: createSignUp,
   authors: createAuthors,
   leaders: createScoreBoard,
 };
