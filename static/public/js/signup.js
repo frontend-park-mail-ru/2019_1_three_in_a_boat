@@ -1,4 +1,3 @@
-/* eslint-disable prefer-spread */
 import createHeader from './header.js';
 import createMenu from './menu.js';
 
@@ -99,9 +98,9 @@ export default function createSignUp() {
                               block: 'select',
                               wrappedInside: 'signup-form',
                               attrs: {id: 'signup__day-select'},
-                              options: Array.apply(
-                                  null,
-                                  {length: 31}).map(Number.call, Number),
+                              options: [...Array(30).keys()].map(
+                                  (num) => num + 1
+                              ),
                             },
                           },
                         },
@@ -130,11 +129,9 @@ export default function createSignUp() {
                               block: 'select',
                               wrappedInside: 'signup-form',
                               attrs: {id: 'signup__date-select'},
-                              options: Array.apply(
-                                  null,
-                                  {length: 119}).map(
-                                  Number.call,
-                                  Number + 1900),
+                              options: [...Array(119).keys()].map(
+                                  (num) => num + 1900
+                              ).reverse(),
                             },
                           },
                         },

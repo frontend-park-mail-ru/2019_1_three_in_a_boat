@@ -32,7 +32,9 @@ export default function createLoginPage() {
         },
       },
       {
-        block: 'login-form',
+        block: 'form',
+        attrs: {novalidate: true},
+        mix: {'block': 'login-form'},
         content: [
           {
             block: 'form-group',
@@ -44,7 +46,8 @@ export default function createLoginPage() {
                 content: {
                   block: 'input',
                   wrappedInside: 'login-form',
-                  fieldAttrs: {placeholder: 'Телефон или электронная почта'},
+                  fieldName: 'loginEmail',
+                  fieldAttrs: {type: 'email', placeholder: 'Электронная почта'},
                 },
               },
               {
@@ -54,11 +57,13 @@ export default function createLoginPage() {
                 content: [
                   {
                     elem: 'field',
+                    fieldName: 'loginPassword',
                     attrs: {type: 'password', placeholder: 'Пароль'},
                   },
                   {
                     block: 'icon',
                     wrappedInside: 'input',
+                    fieldName: 'rememberMeCheck',
                     mods: {
                       color: 'black',
                       btn: true,
