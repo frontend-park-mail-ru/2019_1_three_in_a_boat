@@ -2,9 +2,9 @@
 import createMenu from './menu.js';
 import createScoreBoard from './scoreboard.js';
 import createAuthors from './authors.js';
-import createLoginPage from './login.js'
-import createSignUp from './signup.js'
-import createUpdateProfile from './update.js'
+import createLoginPage from './login.js';
+import createSignUp from './signup.js';
+// import createUpdateProfile from './update.js'
 
 
 const application = document.getElementById('application');
@@ -19,7 +19,7 @@ const pages = {
   leaders: createScoreBoard,
 };
 
-application.addEventListener('click', function (event) {
+application.addEventListener('click', function(event) {
   if (!(event.target instanceof HTMLAnchorElement)) {
     return;
   }

@@ -1,6 +1,9 @@
-import createHeader from "./header.js";
-import createMenu from "./menu.js";
+import createHeader from './header.js';
+import createMenu from './menu.js';
 
+/**
+ *
+ */
 export default function createLoginPage() {
   createHeader();
 
@@ -11,22 +14,22 @@ export default function createLoginPage() {
         block: 'title',
         wrappedInside: 'login-popup',
         wrappedAs: 'title',
-        content: 'Войти'
+        content: 'Войти',
       },
       {
         block: 'icon',
-        tag:'a',
+        tag: 'a',
         wrappedInside: 'login-popup',
         wrappedAs: 'close-popup',
         mods: {
           size: 'large',
           color: 'black',
           btn: true,
-          type: 'cross'
+          type: 'cross',
         },
         attrs: {
-          type: 'menu'
-        }
+          type: 'menu',
+        },
       },
       {
         block: 'login-form',
@@ -41,8 +44,8 @@ export default function createLoginPage() {
                 content: {
                   block: 'input',
                   wrappedInside: 'login-form',
-                  fieldAttrs: {placeholder: 'Телефон или электронная почта'}
-                }
+                  fieldAttrs: {placeholder: 'Телефон или электронная почта'},
+                },
               },
               {
                 block: 'input',
@@ -51,7 +54,7 @@ export default function createLoginPage() {
                 content: [
                   {
                     elem: 'field',
-                    attrs: {type: 'password', placeholder: 'Пароль'}
+                    attrs: {type: 'password', placeholder: 'Пароль'},
                   },
                   {
                     block: 'icon',
@@ -59,12 +62,12 @@ export default function createLoginPage() {
                     mods: {
                       color: 'black',
                       btn: true,
-                      type: 'eye'
-                    }
-                  }
-                ]
-              }
-            ]
+                      type: 'eye',
+                    },
+                  },
+                ],
+              },
+            ],
           },
           {
             block: 'form-group',
@@ -79,17 +82,17 @@ export default function createLoginPage() {
                     mods: {size: 'small'},
                     attrs: {
                       type: 'checkbox',
-                      id: 'login-form__remember-me-checkbox'
-                    }
+                      id: 'login-form__remember-me-checkbox',
+                    },
                   },
                   {
                     tag: 'label',
                     block: 'login-form',
                     elem: 'remember-me-label',
                     attrs: {for: 'login-form__remember-me-checkbox'},
-                    content: 'Запомнить пароль'
-                  }
-                ]
+                    content: 'Запомнить пароль',
+                  },
+                ],
               },
               {
                 content: {
@@ -97,10 +100,10 @@ export default function createLoginPage() {
                   block: 'login-form',
                   elem: 'forgot-password-link',
                   href: '#',
-                  content: 'Забыли пароль?'
-                }
-              }
-            ]
+                  content: 'Забыли пароль?',
+                },
+              },
+            ],
           },
           {
             block: 'form-group',
@@ -117,13 +120,13 @@ export default function createLoginPage() {
                   elem: 'inner',
                   content: {
                     elem: 'text',
-                    content: 'Войти'
-                  }
-                }]
-              }
-            ]
-          }
-        ]
+                    content: 'Войти',
+                  },
+                }],
+              },
+            ],
+          },
+        ],
       },
       {
         block: 'hr',
@@ -134,21 +137,22 @@ export default function createLoginPage() {
         content: {
           tag: 'a',
           href: '#',
-          content: 'Зарегистрироваться'
-        }
-      }
-    ]
+          content: 'Зарегистрироваться',
+        },
+      },
+    ],
   }];
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
-    bemhtml.apply(template)
+      bemhtml.apply(template)
   );
 
-  document.getElementsByClassName('icon_type_cross')[0].addEventListener('click',
-    function(event) {
-      event.preventDefault();
-      application.innerHTML = '';
-      createMenu();
-    }
+  document.getElementsByClassName('icon_type_cross')[0].addEventListener(
+      'click',
+      function(event) {
+        event.preventDefault();
+        application.innerHTML = '';
+        createMenu();
+      }
   );
 }

@@ -1,7 +1,11 @@
-import createHeader from "./header.js";
-import createMenu from "./menu.js";
+/* eslint-disable prefer-spread */
+import createHeader from './header.js';
+import createMenu from './menu.js';
 
-export default  function createSignUp() {
+/**
+ *
+ */
+export default function createSignUp() {
   createHeader();
   const template = [
     {
@@ -32,16 +36,16 @@ export default  function createSignUp() {
                   wrappedAs: 'input',
                   content: {
                     elem: 'field',
-                    attrs: {type: 'text', placeholder: 'Имя'}
-                  }
+                    attrs: {type: 'text', placeholder: 'Имя'},
+                  },
                 },
                 {
                   elem: 'help-text',
                   mix: {'block': 'form-group__help-text_hidden'},
                   mods: {type_error: true},
                   content: 'Заполните обязательное поле',
-                }
-              ]
+                },
+              ],
             },
             {
               block: 'form-group',
@@ -52,16 +56,16 @@ export default  function createSignUp() {
                   mods: {'required': true},
                   content: {
                     elem: 'field',
-                    attrs: {type: 'text', placeholder: 'Фамилия'}
-                  }
+                    attrs: {type: 'text', placeholder: 'Фамилия'},
+                  },
                 },
                 {
                   elem: 'help-text',
                   mix: {'block': 'form-group__help-text_hidden'},
                   mods: {type_error: true},
                   content: 'Заполните обязательное поле',
-                }
-              ]
+                },
+              ],
             },
             {
               block: 'form-group',
@@ -77,7 +81,7 @@ export default  function createSignUp() {
                       block: 'signup',
                       elem: 'day-select',
                       content: 'Дата рождения',
-                    }
+                    },
                   },
                   {
                     block: 'form-group',
@@ -95,9 +99,11 @@ export default  function createSignUp() {
                               block: 'select',
                               wrappedInside: 'signup-form',
                               attrs: {id: 'signup__day-select'},
-                              options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-                            }
-                          }
+                              options: Array.apply(
+                                  null,
+                                  {length: 31}).map(Number.call, Number),
+                            },
+                          },
                         },
                         {
                           elem: 'filed',
@@ -109,9 +115,10 @@ export default  function createSignUp() {
                               block: 'select',
                               wrappedInside: 'signup-form',
                               attrs: {id: 'signup__date-select'},
-                              options: ['Месяц', 'Янаварь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь'],
-                            }
-                          }
+                              options: ['Месяц', 'Янаварь', 'Февраль',
+                                'Март', 'Апрель', 'Май', 'Июнь'],
+                            },
+                          },
                         },
                         {
                           elem: 'filed',
@@ -123,16 +130,20 @@ export default  function createSignUp() {
                               block: 'select',
                               wrappedInside: 'signup-form',
                               attrs: {id: 'signup__date-select'},
-                              options: [2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992],
-                            }
-                          }
-                        }
-                      ]
-                    }
+                              options: Array.apply(
+                                  null,
+                                  {length: 119}).map(
+                                  Number.call,
+                                  Number + 1900),
+                            },
+                          },
+                        },
+                      ],
+                    },
 
-                  }
-                ]
-              }
+                  },
+                ],
+              },
             },
             {
               block: 'form-group',
@@ -144,16 +155,16 @@ export default  function createSignUp() {
                   content: {
                     elem: 'field',
                     required: true,
-                    attrs: {type: 'password', placeholder: 'Пароль'}
-                  }
+                    attrs: {type: 'password', placeholder: 'Пароль'},
+                  },
                 },
                 {
                   elem: 'help-text',
                   mods: {'type_error': true},
                   cls: 'form-group__help-text_hidden',
-                  content: 'Заполните обязательное поле'
+                  content: 'Заполните обязательное поле',
                 },
-              ]
+              ],
             },
             {
               block: 'form-group',
@@ -166,17 +177,17 @@ export default  function createSignUp() {
                     elem: 'field',
                     required: true,
                     attrs: {type: 'password', placeholder: 'Повторите пароль'},
-                  }
+                  },
                 },
                 {
                   elem: 'help-text',
                   mods: {'type_error': true},
                   cls: 'form-group__help-text_hidden',
-                  content: 'Пароли не совпадают'
-                }
-              ]
-            }
-          ]
+                  content: 'Пароли не совпадают',
+                },
+              ],
+            },
+          ],
         },
         {
           block: 'signup-popup',
@@ -198,9 +209,9 @@ export default  function createSignUp() {
                 elem: 'inner',
                 content: {
                   elem: 'text',
-                  content: 'Зарегестиророваться'
-                }
-              }]
+                  content: 'Зарегестиророваться',
+                },
+              }],
             },
             {
               block: 'btn',
@@ -212,26 +223,26 @@ export default  function createSignUp() {
                 content: {
                   elem: 'text',
                   cls: 'btn__text_normal',
-                  content: 'Отменить'
-                }
-              }
-              ]
-            }
-          ]
-        }
-      ]
+                  content: 'Отменить',
+                },
+              },
+              ],
+            },
+          ],
+        },
+      ],
     }];
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
-    bemhtml.apply(template)
+      bemhtml.apply(template)
   );
 
-  document.getElementsByClassName('signup-form__cancel-btn')[0].addEventListener('click',
-    function(event) {
-      event.preventDefault();
-      application.innerHTML = '';
-      createMenu();
-    }
+  const cnslBtn = document.getElementsByClassName('signup-form__cancel-btn')[0];
+  cnslBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    application.innerHTML = '';
+    createMenu();
+  }
   );
 };
 
