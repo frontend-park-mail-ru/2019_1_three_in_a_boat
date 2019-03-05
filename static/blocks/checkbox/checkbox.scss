@@ -7,7 +7,7 @@
   vertical-align: bottom;
   z-index: $z-index-input;
 
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
 
@@ -22,7 +22,6 @@
   &:checked::before {
 
     @extend .icon;
-    margin-bottom: 1px;
 
     content: "";
     @extend .icon_color_white;

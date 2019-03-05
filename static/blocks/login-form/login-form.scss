@@ -1,11 +1,16 @@
 .login-form {
 
   &__remember-me-label,
-  &__forgot-password-link{
+  &__forgot-password-link {
     font-size: $small-font-size;
   }
 
-  &__submit-btn {
+  &__remember-me-label {
+    margin-left: 4px;
+  }
+
+
+  &__sumbit-btn {
     width: 50%;
     max-width: 160px;
 
