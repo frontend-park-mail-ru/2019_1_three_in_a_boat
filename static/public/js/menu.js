@@ -12,11 +12,11 @@ export default function createMenu() {
           mods: {large: true},
           content: 'Меню',
           wrappedInside: 'menu',
-          wrappedAs: 'title'
+          wrappedAs: 'title',
         },
         {
           block: 'hr',
-          mods: {inline: true}
+          mods: {inline: true},
         },
         {
           elem: 'items',
@@ -24,34 +24,34 @@ export default function createMenu() {
             {
               href: 'signIn',
               text: 'Авторизация',
-              type: 'signin'
+              type: 'signin',
             },
             {
               href: 'signUp',
               text: 'Регистрация',
-              type: 'key'
+              type: 'key',
             },
             {
               href: 'authors',
               text: 'Авторы',
-              type: 'users'
+              type: 'users',
             },
             {
               href: 'leaders',
               text: 'Лидеры',
-              type: 'crown'
+              type: 'crown',
             },
             {
               href: 'play',
               text: 'Играть',
-              type: 'gamepad'
-            }
-          ]
-        }
-      ]
+              type: 'gamepad',
+            },
+          ],
+        },
+      ],
     }];
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
-    bemhtml.apply(template)
+      bemhtml.apply(template)
   );
 }

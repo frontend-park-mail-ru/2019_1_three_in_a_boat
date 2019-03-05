@@ -1,4 +1,7 @@
-import createHeader from "./header.js";
+import createHeader from './header.js';
+import AjaxModule from './ajax.js';
+
+const ajax = new AjaxModule();
 
 export default function createAuthors() {
   createHeader();
@@ -9,7 +12,7 @@ export default function createAuthors() {
       content: [
         {
           elem: 'header',
-          content: 'Проект разработали'
+          content: 'Проект разработали',
         },
         {
           elem: 'items',
@@ -18,26 +21,26 @@ export default function createAuthors() {
               name: 'Никита',
               devInfo: 'фронт/бэк/фуллкек',
               img: 'images/nikita.jpg',
-              description: '01234'
+              description: '01234',
             },
             {
               name: 'Арсен',
               devInfo: 'фронт/бэк/фуллкек',
               img: 'images/pepe.jpg',
-              description: '56789'
+              description: '56789',
             },
             {
               name: 'Андрей',
               devInfo: 'фронт/бэк/фуллкек',
               img: 'images/andrey.jpg',
-              description: 'Цифры закончились, Андрей, раньше надо было приходить'
-            }
-          ]
-        }
-      ]
+              description: 'Цифры закончились, Андрей, раньше надо было приходить',
+            },
+          ],
+        },
+      ],
     }];
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
-    bemhtml.apply(template)
+      bemhtml.apply(template)
   );
 }

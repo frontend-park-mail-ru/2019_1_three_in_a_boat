@@ -2300,7 +2300,7 @@ if (typeof Object.create === 'function') {
 });;
 return module.exports || exports.bemhtml;
 }({}, {});
-var api = new bemhtml({"exportName":"bemhtml","escapeContent":true,"to":"/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat"});
+var api = new bemhtml({"exportName":"bemhtml","escapeContent":true,"to":"/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat/static/public"});
 api.compile(function(match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
 /* BEM-XJST User code here: */
 
@@ -2427,9 +2427,10 @@ block('form-group')({
 
 block('form-group').elem('help-text')({
   addAttrs: (node, ctx) => ({
-    'data-for': node.formId + ctx['data-for']
+    'id': `help_ + ${node.formId} + _ + ${ctx['for']}`
   })
 });
+
 block('*').match((node, ctx) => ctx.wrappedInside)({
   addMix: (node, ctx) => ({
     block: ctx.wrappedInside,
@@ -2439,7 +2440,7 @@ block('*').match((node, ctx) => ctx.wrappedInside)({
 });
 // not needed
 
-block('icon')({'tag': 'i'});
+block('icon')({tag: (node, ctx) => ctx.tag || 'i'});
 
 
 // not needed
@@ -2480,6 +2481,8 @@ block('input').match(
   })
 });
 // emptied out in favor of form
+block('login-form')({tag: 'form'});
+
 block('menu').elem('link')({tag: 'a'});
 block('menu').elem('avatar')({tag: 'img'});
 block('menu').elem('items')({elemMods: {color: 'white-whitesmoke-chain'}});
@@ -2528,18 +2531,19 @@ block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
     ]
   }))
 });
-block('profile-info').elem('item')({   
-    content: (node, ctx) => [
-        {                    
-            elem: 'item-name',
-            content: ctx.name
-        },
-        {
-            elem: 'item-value',
-            content: ctx.value
-        }
-    ]
+block('profile-info').elem('item')({
+  content: (node, ctx) => [
+    {
+      elem: 'item-name',
+      content: ctx.name,
+    },
+    {
+      elem: 'item-value',
+      content: ctx.value,
+    },
+  ],
 });
+
 block('scoreboard').elem('username')({tag: 'span'});
 block('scoreboard').elem('avatar')({tag: 'img'});
 
@@ -2615,9 +2619,10 @@ block('select').match(
     elem: 'field'
   })
 });
-// removed in favor of generic form
-block('signup-popup').elem('hr')({'tag' : 'hr'});
-block('signup-popup').elem('explanation-text')({'tag' : 'span'});
+
+block('signup-popup')({tag: 'form'});
+block('signup-popup').elem('hr')({tag: 'hr'});
+block('signup-popup').elem('explanation-text')({tag: 'span'});
 
 // block('signup-popup').elem('explanation-text').match((node, ctx) => ctx.content)(){
 //
@@ -2634,15 +2639,16 @@ block('sm-icons-list').elem('icon-bg').match((node, ctx) => ctx.href)({
 block('update-profile-popup').match((node, ctx) => ctx.addCloseButton)({
   prependContent: {
     block: 'icon',
+    mods: {type: 'cross', color: 'black', size: 'large', btn: true},
     mix: {
       elem: 'close-popup',
       block: 'update-profile-popup',
-      mods:  {type: 'cross', color: 'black', size: 'large'}
-    }
-  }
+    },
+  },
 });
 
-block('update-profile-popup').elem('hr')({'tag' : 'hr'});
+block('update-profile-popup').elem('hr')({'tag': 'hr'});
+
 
   ;
 ;oninit(function(exports, context) {

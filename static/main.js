@@ -6,8 +6,8 @@ function createMenuLink() {
   const menuLink = {
     block: 'link',
     tag: 'a',
-    attrs: { type: 'menu' },
-    content: 'Назад в главное меню'
+    attrs: {type: 'menu'},
+    content: 'Назад в главное меню',
   };
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
@@ -63,11 +63,11 @@ const createUpdateProfile = () => {
                           {
                             mods: {'help': true},
                             content: 'Вы можете изменить свой логин',
-                          }
-                        ]
-                      }
+                          },
+                        ],
+                      },
                     },
-                  ]
+                  ],
                 },
                 {
                   elem: 'title',
@@ -90,17 +90,17 @@ const createUpdateProfile = () => {
                       content: [
                         {
                           elem: 'chosen-icon',
-                          mix: {'block': 'icon'}
+                          mix: {'block': 'icon'},
                         },
 
-                      ]
+                      ],
                     },
 
-                  ]
+                  ],
                 },
-              ]
-            }
-          ]
+              ],
+            },
+          ],
         },
         {
           elem: 'hr',
@@ -120,11 +120,11 @@ const createUpdateProfile = () => {
                       elem: 'inner',
                       content: {
                         elem: 'text',
-                        content:'Обновить'
-                      }
+                        content: 'Обновить',
+                      },
 
-                    }
-                  ]
+                    },
+                  ],
                 },
                 {
                   block: 'btn',
@@ -135,16 +135,16 @@ const createUpdateProfile = () => {
                       content: {
                         elem: 'text',
                         mods: {font: 'normal'},
-                        content:'Отменить'
-                      }
-                    }
-                  ]
-                }
+                        content: 'Отменить',
+                      },
+                    },
+                  ],
+                },
               ],
             },
-          ]
-        }
-      ]
+          ],
+        },
+      ],
     }];
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
@@ -153,310 +153,310 @@ const createUpdateProfile = () => {
 };
 
 function createHeader() {
-    const header = {
-        block: 'header',
-        mods: {'main': true},
-        content: [
-            {
-                block: 'icon',
-                mods: {color: 'orange', size: 'xlarge', type: 'mailru'}
-            },
-            {
-                elem: 'title',
-                content: ['hexagon']
-              }
-        ]
-    };
+  const header = {
+    block: 'header',
+    mods: {'main': true},
+    content: [
+      {
+        block: 'icon',
+        mods: {color: 'orange', size: 'xlarge', type: 'mailru'},
+      },
+      {
+        elem: 'title',
+        content: ['hexagon'],
+      },
+    ],
+  };
 
-    document.getElementById('application').insertAdjacentHTML('beforeend',
-        bemhtml.apply(header)
-    );
+  document.getElementById('application').insertAdjacentHTML('beforeend',
+      bemhtml.apply(header)
+  );
 }
 
 function createMenu() {
-    createHeader();
+  createHeader();
 
-    const template = [
+  const template = [
     {
-        block: 'menu',
-        content: [
+      block: 'menu',
+      content: [
+        {
+          block: 'title',
+          mods: {large: true},
+          content: 'Меню',
+          wrappedInside: 'menu',
+          wrappedAs: 'title',
+        },
+        {
+          block: 'hr',
+          mods: {inline: true},
+        },
+        {
+          elem: 'items',
+          points: [
             {
-                block: 'title',
-                mods: { large: true },
-                content: 'Меню',
-                wrappedInside: 'menu',
-                wrappedAs: 'title'
+              href: 'signIn',
+              text: 'Авторизация',
+              type: 'signin',
             },
             {
-                block: 'hr',
-                mods: { inline: true }
+              href: 'signUp',
+              text: 'Регистрация',
+              type: 'key',
             },
             {
-                elem: 'items',
-                points: [
-                    {
-                        href: 'signIn',
-                        text: 'Авторизация',
-                        type: 'signin'
-                    },
-                    {
-                        href: 'signUp',
-                        text: 'Регистрация',
-                        type: 'key'
-                    },
-                    {
-                        href: 'authors',
-                        text: 'Авторы',
-                        type: 'users'
-                    },
-                    {
-                        href: 'leaders',
-                        text: 'Лидеры',
-                        type: 'crown'
-                    },
-                    {
-                        href: 'play',
-                        text: 'Играть',
-                        type: 'gamepad'
-                    }
-                ]
-            }
-        ]
+              href: 'authors',
+              text: 'Авторы',
+              type: 'users',
+            },
+            {
+              href: 'leaders',
+              text: 'Лидеры',
+              type: 'crown',
+            },
+            {
+              href: 'play',
+              text: 'Играть',
+              type: 'gamepad',
+            },
+          ],
+        },
+      ],
     }];
 
-    document.getElementById('application').insertAdjacentHTML('beforeend',
-        bemhtml.apply(template)
-    );
+  document.getElementById('application').insertAdjacentHTML('beforeend',
+      bemhtml.apply(template)
+  );
 }
 
 function createScoreBoard() {
-    createHeader();
+  createHeader();
 
-    const template = [
+  const template = [
+    {
+      block: 'scoreboard',
+      content: [
         {
-          block: 'scoreboard',
-          content: [
-                {
-                elem: 'items',
-                scores: [
-                    {
-                      name: 'Никита',
-                      img: '../static/public/images/nikita.jpg',
-                      username: 'Kotyarich',
-                      score: '9999',
-                      userId: 1
-                    },
-                    {
-                      name: 'Арсен',
-                      img: '../static/public/images/pepe.jpg',
-                      username: 'Arsen',
-                      score: '9998',
-                      userId: 2
-                    },
-                    {
-                      name: 'Андрей',
-                      img: '../static/public/images/andrey.jpg',
-                      username: 'Andrew',
-                      score: '9997',
-                      userId: 3
-                    }
-                ]
-                }
-            ]
-        }];
+          elem: 'items',
+          scores: [
+            {
+              name: 'Никита',
+              img: '../static/public/images/nikita.jpg',
+              username: 'Kotyarich',
+              score: '9999',
+              userId: 1,
+            },
+            {
+              name: 'Арсен',
+              img: '../static/public/images/pepe.jpg',
+              username: 'Arsen',
+              score: '9998',
+              userId: 2,
+            },
+            {
+              name: 'Андрей',
+              img: '../static/public/images/andrey.jpg',
+              username: 'Andrew',
+              score: '9997',
+              userId: 3,
+            },
+          ],
+        },
+      ],
+    }];
 
-      document.getElementById('application').insertAdjacentHTML('beforeend',
-          bemhtml.apply(template)
-      );
+  document.getElementById('application').insertAdjacentHTML('beforeend',
+      bemhtml.apply(template)
+  );
 
-      createMenuLink();
+  createMenuLink();
 }
 
 function createAuthors() {
-    createHeader();
+  createHeader();
 
-    const template = [
+  const template = [
+    {
+      block: 'authors',
+      content: [
         {
-          block: 'authors',
-          content: [
+          elem: 'header',
+          content: 'Проект разработали',
+        },
+        {
+          elem: 'items',
+          authors: [
             {
-              elem: 'header',
-              content: 'Проект разработали'
+              name: 'Никита',
+              devInfo: 'фронт/бэк/фуллкек',
+              img: '../static/public/images/nikita.jpg',
+              description: '01234',
             },
             {
-              elem: 'items',
-              authors: [
-                {
-                  name: 'Никита',
-                  devInfo: 'фронт/бэк/фуллкек',
-                  img: '../static/public/images/nikita.jpg',
-                  description: '01234'
-                },
-                {
-                  name: 'Арсен',
-                  devInfo: 'фронт/бэк/фуллкек',
-                  img: '../static/public/images/pepe.jpg',
-                  description: '56789'
-                },
-                {
-                  name: 'Андрей',
-                  devInfo: 'фронт/бэк/фуллкек',
-                  img: '../static/public/images/andrey.jpg',
-                  description: 'Цифры закончились, Андрей, раньше надо было приходить'
-                }
-              ]
-            }
-          ]
-        }];
+              name: 'Арсен',
+              devInfo: 'фронт/бэк/фуллкек',
+              img: '../static/public/images/pepe.jpg',
+              description: '56789',
+            },
+            {
+              name: 'Андрей',
+              devInfo: 'фронт/бэк/фуллкек',
+              img: '../static/public/images/andrey.jpg',
+              description: 'Цифры закончились, Андрей, раньше надо было приходить',
+            },
+          ],
+        },
+      ],
+    }];
 
-      document.getElementById('application').insertAdjacentHTML('beforeend',
-          bemhtml.apply(template)
-      );
+  document.getElementById('application').insertAdjacentHTML('beforeend',
+      bemhtml.apply(template)
+  );
 
-      createMenuLink();
+  createMenuLink();
 }
 
 function createLoginPage() {
-    createHeader();
+  createHeader();
 
-    const template = [{
-        block: 'login-popup',
+  const template = [{
+    block: 'login-popup',
+    content: [
+      {
+        block: 'title',
+        wrappedInside: 'login-popup',
+        wrappedAs: 'title',
+        content: 'Войти',
+      },
+      {
+        block: 'icon',
+        wrappedInside: 'login-popup',
+        wrappedAs: 'close-popup',
+        mods: {
+          size: 'large',
+          color: 'black',
+          btn: true,
+          type: 'cross',
+        },
+      },
+      {
+        block: 'login-form',
         content: [
-            {
-                block: 'title',
-                wrappedInside: 'login-popup',
-                wrappedAs: 'title',
-                content: 'Войти'
-            },
-            {
-                block: 'icon',
-                wrappedInside: 'login-popup',
-                wrappedAs: 'close-popup',
-                mods: {
-                    size: 'large',
-                    color: 'black',
-                    btn: true,
-                    type: 'cross'
-                }
-            },
-            {
-                block: 'login-form',
-                content: [
-                    {
-                        block: 'form-group',
-                        mods: {size: 'inline'},
-                        content: [
-                            {
-                                block: 'form-group',
-                                mods: {size: 'large'},
-                                content: {
-                                    block: 'input',
-                                    wrappedInside: 'login-form',
-                                    wrappedAs: 'input',
-                                    attrs: {placeholder: 'Телефон или электронная почта'}
-                                }
-                            },
-                            {
-                                block: 'input',
-                                mods: {with: 'icon'},
-                                wrappedInside: 'login-form',
-                                wrappedAs: 'input',
-                                content: [
-                                    {
-                                        elem: 'field',
-                                        attrs: {type: 'password', placeholder: 'Пароль'}
-                                    },
-                                    {
-                                        block: 'icon',
-                                        wrappedInside: 'input',
-                                        wrappedAs: 'icon',
-                                        mods: {
-                                            color: 'black',
-                                            btn: true,
-                                            type: 'eye'
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        block: 'form-group',
-                        mods: {align: 'space-between', size: 'large'},
-                        content: [
-                            {
-                                content: [
-                                    {
-                                        block: 'checkbox',
-                                        wrappedInside: 'login-form',
-                                        wrappedAs: 'remember-me-checkbox',
-                                        mods: {size: 'small'},
-                                        attrs: {type: 'checkbox', id: 'login-form__remember-me-checkbox'}
-                                    },
-                                    {
-                                        tag: 'label',
-                                        block: 'login-form',
-                                        elem: 'remember-me-label',
-                                        attrs: {for: 'login-form__remember-me-checkbox'},
-                                        content: 'Запомнить пароль'
-                                    }
-                                ]
-                            },
-                            {
-                                content: {
-                                    tag: 'a',
-                                    block: 'login-form',
-                                    elem: 'forgot-password-link',
-                                    href: '#',
-                                    content: 'Забыли пароль?'
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        block: 'form-group',
-                        mods: {align: 'center'},
-                        wrappedInside: 'login-form',
-                        wrappedAs: 'form-group',
-                        content: [
-                            {
-                                block: 'btn',
-                                wrappedInside: 'login-form',
-                                wrappedAs: 'sumbit-btn',
-                                attrs: {type: 'submit'},
-                                content: [{
-                                    elem: 'inner',
-                                    content: {
-                                        elem: 'text',
-                                        content: 'Войти'
-                                    }
-                                }]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                block: 'hr',
-                wrappedInside: 'login-popup',
-                wrappedAs: 'hr',
-            },
-            {
-                elem: 'signup-link',
+          {
+            block: 'form-group',
+            mods: {size: 'inline'},
+            content: [
+              {
+                block: 'form-group',
+                mods: {size: 'large'},
                 content: {
-                    tag: 'a',
-                    href: '#',
-                    content: 'Зарегистрироваться'
-                }
-            }
-        ]
-    }];
+                  block: 'input',
+                  wrappedInside: 'login-form',
+                  wrappedAs: 'input',
+                  attrs: {placeholder: 'Телефон или электронная почта'},
+                },
+              },
+              {
+                block: 'input',
+                mods: {with: 'icon'},
+                wrappedInside: 'login-form',
+                wrappedAs: 'input',
+                content: [
+                  {
+                    elem: 'field',
+                    attrs: {type: 'password', placeholder: 'Пароль'},
+                  },
+                  {
+                    block: 'icon',
+                    wrappedInside: 'input',
+                    wrappedAs: 'icon',
+                    mods: {
+                      color: 'black',
+                      btn: true,
+                      type: 'eye',
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            block: 'form-group',
+            mods: {align: 'space-between', size: 'large'},
+            content: [
+              {
+                content: [
+                  {
+                    block: 'checkbox',
+                    wrappedInside: 'login-form',
+                    wrappedAs: 'remember-me-checkbox',
+                    mods: {size: 'small'},
+                    attrs: {type: 'checkbox', id: 'login-form__remember-me-checkbox'},
+                  },
+                  {
+                    tag: 'label',
+                    block: 'login-form',
+                    elem: 'remember-me-label',
+                    attrs: {for: 'login-form__remember-me-checkbox'},
+                    content: 'Запомнить пароль',
+                  },
+                ],
+              },
+              {
+                content: {
+                  tag: 'a',
+                  block: 'login-form',
+                  elem: 'forgot-password-link',
+                  href: '#',
+                  content: 'Забыли пароль?',
+                },
+              },
+            ],
+          },
+          {
+            block: 'form-group',
+            mods: {align: 'center'},
+            wrappedInside: 'login-form',
+            wrappedAs: 'form-group',
+            content: [
+              {
+                block: 'btn',
+                wrappedInside: 'login-form',
+                wrappedAs: 'sumbit-btn',
+                attrs: {type: 'submit'},
+                content: [{
+                  elem: 'inner',
+                  content: {
+                    elem: 'text',
+                    content: 'Войти',
+                  },
+                }],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        block: 'hr',
+        wrappedInside: 'login-popup',
+        wrappedAs: 'hr',
+      },
+      {
+        elem: 'signup-link',
+        content: {
+          tag: 'a',
+          href: '#',
+          content: 'Зарегистрироваться',
+        },
+      },
+    ],
+  }];
 
-    document.getElementById('application').insertAdjacentHTML('beforeend',
-        bemhtml.apply(template)
-    );
+  document.getElementById('application').insertAdjacentHTML('beforeend',
+      bemhtml.apply(template)
+  );
 
-    createMenuLink();
+  createMenuLink();
 }
 
 const createSignUp = () => {
@@ -481,6 +481,7 @@ const createSignUp = () => {
         },
         {
           block: 'signup-form',
+          attrs: {id: 'signup-form', enctype: 'multipart/form-data', method: 'POST'},
           content: [
             {
               block: 'form-group',
@@ -490,16 +491,16 @@ const createSignUp = () => {
                   wrappedAs: 'input',
                   content: {
                     elem: 'field',
-                    attrs: {type: 'text', placeholder: 'Имя'}
-                  }
+                    attrs: {type: 'text', placeholder: 'Имя'},
+                  },
                 },
                 {
                   elem: 'help-text',
                   mix: {'block': 'form-group__help-text_hidden'},
                   mods: {type_error: true},
                   content: 'Заполните обязательное поле',
-                }
-              ]
+                },
+              ],
             },
             {
               block: 'form-group',
@@ -510,16 +511,16 @@ const createSignUp = () => {
                   mods: {'required': true},
                   content: {
                     elem: 'field',
-                    attrs: {type: 'text', placeholder: 'Фамилия'}
-                  }
+                    attrs: {type: 'text', placeholder: 'Фамилия'},
+                  },
                 },
                 {
                   elem: 'help-text',
                   mix: {'block': 'form-group__help-text_hidden'},
                   mods: {type_error: true},
                   content: 'Заполните обязательное поле',
-                }
-              ]
+                },
+              ],
             },
             {
               block: 'form-group',
@@ -535,7 +536,7 @@ const createSignUp = () => {
                       block: 'signup',
                       elem: 'day-select',
                       content: 'Дата рождения',
-                    }
+                    },
                   },
                   {
                     block: 'form-group',
@@ -554,8 +555,8 @@ const createSignUp = () => {
                               wrappedInside: 'signup-form',
                               attrs: {id: 'signup__day-select'},
                               options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-                            }
-                          }
+                            },
+                          },
                         },
                         {
                           elem: 'filed',
@@ -568,8 +569,8 @@ const createSignUp = () => {
                               wrappedInside: 'signup-form',
                               attrs: {id: 'signup__date-select'},
                               options: ['Месяц', 'Янаварь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь'],
-                            }
-                          }
+                            },
+                          },
                         },
                         {
                           elem: 'filed',
@@ -582,15 +583,15 @@ const createSignUp = () => {
                               wrappedInside: 'signup-form',
                               attrs: {id: 'signup__date-select'},
                               options: [2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992],
-                            }
-                          }
-                        }
-                      ]
-                    }
+                            },
+                          },
+                        },
+                      ],
+                    },
 
-                  }
-                ]
-              }
+                  },
+                ],
+              },
             },
             {
               block: 'form-group',
@@ -602,16 +603,16 @@ const createSignUp = () => {
                   content: {
                     elem: 'field',
                     required: true,
-                    attrs: {type: 'password', placeholder: 'Пароль'}
-                  }
+                    attrs: {type: 'password', placeholder: 'Пароль'},
+                  },
                 },
                 {
                   elem: 'help-text',
                   mods: {'type_error': true},
                   cls: 'form-group__help-text_hidden',
-                  content: 'Заполните обязательное поле'
+                  content: 'Заполните обязательное поле',
                 },
-              ]
+              ],
             },
             {
               block: 'form-group',
@@ -624,17 +625,17 @@ const createSignUp = () => {
                     elem: 'field',
                     required: true,
                     attrs: {type: 'password', placeholder: 'Повторите пароль'},
-                  }
+                  },
                 },
                 {
                   elem: 'help-text',
                   mods: {'type_error': true},
                   cls: 'form-group__help-text_hidden',
-                  content: 'Пароли не совпадают'
-                }
-              ]
-            }
-          ]
+                  content: 'Пароли не совпадают',
+                },
+              ],
+            },
+          ],
         },
         {
           block: 'signup-popup',
@@ -656,9 +657,9 @@ const createSignUp = () => {
                 elem: 'inner',
                 content: {
                   elem: 'text',
-                  content: 'Зарегестиророваться'
-                }
-              }]
+                  content: 'Зарегестиророваться',
+                },
+              }],
             },
             {
               block: 'btn',
@@ -670,14 +671,14 @@ const createSignUp = () => {
                 content: {
                   elem: 'text',
                   cls: 'btn__text_normal',
-                  content: 'Отменить'
-                }
-              }
-              ]
-            }
-          ]
-        }
-      ]
+                  content: 'Отменить',
+                },
+              },
+              ],
+            },
+          ],
+        },
+      ],
     }];
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
@@ -695,19 +696,19 @@ const pages = {
   updateProfile: createUpdateProfile,
 };
 
-application.addEventListener('click', function (event) {
-	if (!(event.target instanceof HTMLAnchorElement)) {
-		return;
-	}
+application.addEventListener('click', function(event) {
+  if (!(event.target instanceof HTMLAnchorElement)) {
+    return;
+  }
 
-	event.preventDefault();
-	const link = event.target;
+  event.preventDefault();
+  const link = event.target;
 
-	console.log({
-        href: link.type,
-    });
+  console.log({
+    href: link.type,
+  });
 
-	application.innerHTML = '';
+  application.innerHTML = '';
 
-	pages[ link.type ]();
+  pages[link.type]();
 });
