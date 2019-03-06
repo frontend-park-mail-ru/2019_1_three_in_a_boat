@@ -55,19 +55,26 @@ export default function createLoginPage() {
                   //                    attrs: {type: 'email', placeholder: 'Телефон или электронная почта'},
                   //                  },
                   fieldName: 'loginEmail',
-                  fieldAttrs: {type: 'email', placeholder: 'Электронная почта'},
+                  fieldAttrs: {
+                    type: 'email',
+                    placeholder: 'Электронная почта',
+                    required: true,
+                  },
                 },
               },
               {
                 block: 'input',
                 mods: {with: 'icon'},
-                fieldName: 'password',
+                fieldName: 'loginPassword',
                 wrappedInside: 'login-form',
                 content: [
                   {
                     elem: 'field',
-                    fieldName: 'loginPassword',
-                    attrs: {type: 'password', placeholder: 'Пароль'},
+                    attrs: {
+                      type: 'password',
+                      placeholder: 'Пароль',
+                      required: true,
+                    },
                   },
                   {
                     block: 'icon',
@@ -175,7 +182,7 @@ export default function createLoginPage() {
     event.preventDefault();
 
     const email = form.elements['email'].value;
-    const password = form.elements['password'].value;
+    const password = form.elements['loginPassword'].value;
     ajax.doPost({
       callback() {
         application.innerHTML = '';
