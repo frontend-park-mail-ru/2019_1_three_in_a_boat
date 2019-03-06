@@ -3,6 +3,9 @@ import AjaxModule from './ajax.js';
 
 const ajax = new AjaxModule();
 
+/**
+ *
+ */
 export default function createAuthors() {
   createHeader();
 
@@ -33,14 +36,16 @@ export default function createAuthors() {
               name: 'Андрей',
               devInfo: 'фронт/бэк/фуллкек',
               img: 'images/andrey.jpg',
-              description: 'Цифры закончились, Андрей, раньше надо было приходить',
+              description: 'Цифры закончились, Андрей, ' +
+                'раньше надо было приходить',
             },
           ],
         },
       ],
     }];
 
-  document.getElementById('application').insertAdjacentHTML('beforeend',
+  document.getElementById('application').insertAdjacentHTML(
+      'beforeend',
       bemhtml.apply(template)
   );
 }

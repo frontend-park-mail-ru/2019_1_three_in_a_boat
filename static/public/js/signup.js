@@ -19,13 +19,19 @@ const months = {
   'Декабрь': '12',
 };
 
-
+/**
+ * Create SignUp page
+ */
 export default function createSignUp() {
   createHeader();
   const template = [
     {
       block: 'signup-popup',
-      attrs: {id: 'signup-popup', enctype: 'multipart/form-data', method: 'POST'},
+      attrs: {
+        id: 'signup-popup',
+        enctype: 'multipart/form-data',
+        method: 'POST',
+      },
       mods: {'main': true},
       content: [
         {
@@ -74,7 +80,11 @@ export default function createSignUp() {
                   mods: {'required': true},
                   content: {
                     elem: 'field',
-                    attrs: {type: 'text', name: 'surname', placeholder: 'Фамилия'},
+                    attrs: {
+                      type: 'text',
+                      name: 'surname',
+                      placeholder: 'Фамилия',
+                    },
                   },
                 },
                 {
@@ -95,7 +105,11 @@ export default function createSignUp() {
                   mods: {'required': true},
                   content: {
                     elem: 'field',
-                    attrs: {type: 'email', name: 'email', placeholder: 'your.name@site.com'},
+                    attrs: {
+                      type: 'email',
+                      name: 'email',
+                      placeholder: 'your.name@site.com',
+                    },
                   },
                 },
                 {
@@ -138,8 +152,13 @@ export default function createSignUp() {
                               block: 'select',
                               wrappedInside: 'signup-form',
                               fieldName: 'day-select',
-                              attrs: {id: 'signup__day-select', name: 'day-select'},
-                              options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+                              attrs: {
+                                id: 'signup__day-select',
+                                name: 'day-select',
+                              },
+                              options: [...Array(31).keys()].map(
+                                  (num) => num + 1
+                              ),
                             },
                           },
                         },
@@ -153,8 +172,9 @@ export default function createSignUp() {
                               block: 'select',
                               wrappedInside: 'signup-form',
                               fieldName: 'month-select',
-                              attrs: {id: 'signup__date-select', name: 'month-select'},
-                              options: ['Месяц', 'Янаварь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь'],
+                              attrs: {id: 'signup__date-select'},
+                              options: ['Месяц', 'Янаварь', 'Февраль',
+                                'Март', 'Апрель', 'Май', 'Июнь'],
                             },
                           },
                         },
@@ -169,8 +189,10 @@ export default function createSignUp() {
                               block: 'select',
                               fieldName: 'year-select',
                               wrappedInside: 'signup-form',
-                              attrs: {id: 'signup__date-select', name: 'year-select'},
-                              options: [2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992],
+                              attrs: {id: 'signup__date-select'},
+                              options: [...Array(119).keys()].map(
+                                  (num) => num + 1900
+                              ).reverse(),
                             },
                           },
                         },
@@ -191,15 +213,19 @@ export default function createSignUp() {
                   content: {
                     elem: 'field',
                     required: true,
-                    attrs: {type: 'password', name: 'password', placeholder: 'Пароль'},
+                    attrs: {
+                      type: 'password',
+                      name: 'password',
+                      placeholder: 'Пароль',
+                    },
                   },
                 },
-                {
-                  elem: 'help-text',
-                  mods: {'type_error': true},
-                  cls: 'form-group__help-text_hidden',
-                  content: 'Заполните обязательное поле',
-                },
+                // {
+                //   elem: 'help-text',
+                //   mods: {'type_error': true},
+                //   cls: 'form-group__help-text_hidden',
+                //   content: 'Заполните обязательное поле',
+                // },
               ],
             },
             {
@@ -213,15 +239,19 @@ export default function createSignUp() {
                   content: {
                     elem: 'field',
                     required: true,
-                    attrs: {type: 'password', name: 'password_repeat', placeholder: 'Повторите пароль'},
+                    attrs: {
+                      type: 'password',
+                      name: 'password_repeat',
+                      placeholder: 'Повторите пароль',
+                    },
                   },
                 },
-                {
-                  elem: 'help-text',
-                  mods: {'type_error': true},
-                  cls: 'form-group__help-text_hidden',
-                  content: 'Пароли не совпадают',
-                },
+                // {
+                //   elem: 'help-text',
+                //   mods: {'type_error': true},
+                //   cls: 'form-group__help-text_hidden',
+                //   content: 'Пароли не совпадают',
+                // },
               ],
             },
           ],
@@ -231,7 +261,6 @@ export default function createSignUp() {
           elem: 'hr',
           mix: {'block': 'hr'},
         },
-
         {
           block: 'signup-popup',
           elem: 'double-btn',
@@ -269,16 +298,16 @@ export default function createSignUp() {
         },
       ],
     }];
-  document.getElementById('application').insertAdjacentHTML('beforeend',
+  document.getElementById('application').insertAdjacentHTML(
+      'beforeend',
       bemhtml.apply(template));
-  document.getElementsByClassName(
-      'signup-form__cancel-btn')[0].addEventListener(
-      'click',
-      function(event) {
-        event.preventDefault();
-        application.innerHTML = '';
-        createMenu();
-      });
+  const cnslBtn = document.getElementsByClassName('signup-form__cancel-btn')[0];
+  cnslBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    application.innerHTML = '';
+    createMenu();
+  });
+
   const form = document.getElementById('signup-popup');
   form.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -293,6 +322,10 @@ export default function createSignUp() {
     const password = form.elements['password'].value;
     const passwordRepeat = form.elements['password_repeat'].value;
 
+    const errors = document.getElementsByClassName('form-group__help-text');
+    if (errors !== null) {
+      return;
+    }
     if (password !== passwordRepeat) {
       alert('Passwords is not equals');
       return;

@@ -1,5 +1,8 @@
-import createHeader from "./header.js";
+import createHeader from './header.js';
 
+/**
+ *
+ */
 export default function createUpdateProfile() {
   createHeader();
   const template = [
@@ -48,11 +51,11 @@ export default function createUpdateProfile() {
                           {
                             mods: {'help': true},
                             content: 'Вы можете изменить свой логин',
-                          }
-                        ]
-                      }
+                          },
+                        ],
+                      },
                     },
-                  ]
+                  ],
                 },
                 {
                   elem: 'title',
@@ -75,17 +78,17 @@ export default function createUpdateProfile() {
                       content: [
                         {
                           elem: 'chosen-icon',
-                          mix: {'block': 'icon'}
+                          mix: {'block': 'icon'},
                         },
 
-                      ]
+                      ],
                     },
 
-                  ]
+                  ],
                 },
-              ]
-            }
-          ]
+              ],
+            },
+          ],
         },
         {
           elem: 'hr',
@@ -105,11 +108,11 @@ export default function createUpdateProfile() {
                       elem: 'inner',
                       content: {
                         elem: 'text',
-                        content:'Обновить'
-                      }
+                        content: 'Обновить',
+                      },
 
-                    }
-                  ]
+                    },
+                  ],
                 },
                 {
                   block: 'btn',
@@ -120,21 +123,20 @@ export default function createUpdateProfile() {
                       content: {
                         elem: 'text',
                         mods: {font: 'normal'},
-                        content:'Отменить'
-                      }
-                    }
-                  ]
-                }
+                        content: 'Отменить',
+                      },
+                    },
+                  ],
+                },
               ],
             },
-          ]
-        }
-      ]
-    }
+          ],
+        },
+      ],
+    },
   ];
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
-    bemhtml.apply(template)
+      bemhtml.apply(template)
   );
-  createMenuLink();
 };

@@ -17,6 +17,7 @@ $ru-png: $icons-path + "/ru.png";
 $signin-icon: $icons-path + "/sign_in.svg";
 $useredit-icon: $icons-path + "/user_edit.svg";
 $users-icon: $icons-path + "/users.svg";
+$user-icon: $icons-path + "/user.svg";
 $vk-icon: $icons-path + "/vk.svg";
 $crown-icon: $icons-path + "/crown.svg";
 
@@ -101,6 +102,9 @@ $icon-sizes: (small: (12px, 12px),
         }
         &_users {
             @include mask-image($users-icon);
+        }
+        &_user {
+            @include mask-image($user-icon);
         }
         &_key {
             @include mask-image($key-icon);

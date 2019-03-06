@@ -4,6 +4,9 @@ import AjaxModule from './ajax.js';
 
 const ajax = new AjaxModule();
 
+/**
+ * create Login Page
+ */
 export default function createLoginPage() {
   createHeader();
 
@@ -32,9 +35,10 @@ export default function createLoginPage() {
         },
       },
       {
-        block: 'login-form',
         fieldName: 'login-form',
-        attrs: {id: 'login-form', enctype: 'multipart/form-data', method: 'POST'},
+        block: 'form', // login-form
+        attrs: {novalidate: true},
+        mix: {'block': 'login-form'}, // id: 'login-form', enctype: 'multipart/form-data', method: 'POST'
         content: [
           {
             block: 'form-group',
@@ -45,12 +49,13 @@ export default function createLoginPage() {
                 mods: {size: 'large'},
                 content: {
                   block: 'input',
-                  fieldName: 'email',
                   wrappedInside: 'login-form',
-                  content: {
-                    elem: 'field',
-                    attrs: {type: 'email', placeholder: 'Телефон или электронная почта'},
-                  },
+                  //                  content: {
+                  //                    elem: 'field',
+                  //                    attrs: {type: 'email', placeholder: 'Телефон или электронная почта'},
+                  //                  },
+                  fieldName: 'loginEmail',
+                  fieldAttrs: {type: 'email', placeholder: 'Электронная почта'},
                 },
               },
               {
@@ -61,11 +66,13 @@ export default function createLoginPage() {
                 content: [
                   {
                     elem: 'field',
+                    fieldName: 'loginPassword',
                     attrs: {type: 'password', placeholder: 'Пароль'},
                   },
                   {
                     block: 'icon',
                     wrappedInside: 'input',
+                    fieldName: 'rememberMeCheck',
                     mods: {
                       color: 'black',
                       btn: true,
@@ -155,7 +162,8 @@ export default function createLoginPage() {
       bemhtml.apply(template)
   );
 
-  document.getElementsByClassName('icon_type_cross')[0].addEventListener('click',
+  document.getElementsByClassName('icon_type_cross')[0].addEventListener(
+      'click',
       function(event) {
         event.preventDefault();
         application.innerHTML = '';

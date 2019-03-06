@@ -1,5 +1,8 @@
 import createHeader from './header.js';
 
+/**
+ * create Menu page
+ */
 export default function createMenu() {
   createHeader();
 
@@ -45,6 +48,11 @@ export default function createMenu() {
               href: 'play',
               text: 'Играть',
               type: 'gamepad',
+            },
+            {
+              href: 'profile',
+              text: 'Профиль',
+              type: 'user',
             },
           ],
         },

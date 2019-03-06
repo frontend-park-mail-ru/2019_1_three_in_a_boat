@@ -3,6 +3,10 @@ import AjaxModule from './ajax.js';
 
 const ajax = new AjaxModule();
 
+/**
+ * Create Score Board page
+ * @param {Array}users An Array of personal users data
+ */
 export default function createScoreBoard(users) {
   createHeader();
 

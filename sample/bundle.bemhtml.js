@@ -2300,7 +2300,7 @@ if (typeof Object.create === 'function') {
 });;
 return module.exports || exports.bemhtml;
 }({}, {});
-var api = new bemhtml({"exportName":"bemhtml","escapeContent":true,"to":"/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat/static/public"});
+var api = new bemhtml({"exportName":"bemhtml","escapeContent":true,"to":"/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat"});
 api.compile(function(match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
 /* BEM-XJST User code here: */
 
@@ -2416,19 +2416,20 @@ block('form')({tag: 'form'});
 
 block('form')({
   extend: (node) => ({
-    formId: node.generateId()
-  })
+    formId: node.generateId(),
+  }),
 });
+
 block('form-group')({
   extend: (node) => ({
-    _fieldParents: (node._fieldParents || []).concat(['form-group'])
-  })
+    _fieldParents: (node._fieldParents || []).concat(['form-group']),
+  }),
 });
 
 block('form-group').elem('help-text')({
   addAttrs: (node, ctx) => ({
-    'id': `help_ + ${node.formId} + _ + ${ctx['for']}`
-  })
+    'id': `help_ + ${node.formId} + _ + ${ctx['for']}`,
+  }),
 });
 
 block('*').match((node, ctx) => ctx.wrappedInside)({
@@ -2448,8 +2449,8 @@ block('input').elem('field')({
   tag: 'input',
   addAttrs: (node) => ({
     'id': node.formId + '_' + node.fieldName,
-    'name': node.fieldName
-  })
+    'name': node.fieldName,
+  }),
 });
 
 block('input').elem('field').match((node, ctx) => !ctx.attrs || !ctx.attrs.type)
@@ -2458,18 +2459,18 @@ block('input').elem('field').match((node, ctx) => !ctx.attrs || !ctx.attrs.type)
 block('input').match((node, ctx) => !ctx.content)({
   content: (node, ctx) => [{
     elem: 'field',
-    addAttrs: ctx.fieldAttrs,
-  }]
+    attrs: ctx.fieldAttrs,
+  }],
 });
 
 block('input')({
-  extend: (node, ctx) => ({fieldName: ctx.fieldName || node.generateId()})
+  extend: (node, ctx) => ({fieldName: ctx.fieldName || node.generateId()}),
 });
 
 block('input').elem('tooltip')({
   addAttrs: (node, ctx) => ({
-    'data-for': node.formId + (ctx['data-for'] || node.fieldName)
-  })
+    'data-for': node.formId + (ctx['data-for'] || node.fieldName),
+  }),
 });
 
 // (form/field)-group related stuff
@@ -2477,11 +2478,13 @@ block('input').match(
     (node) => Array.isArray(node._fieldParents) && node._fieldParents.length)({
   addMix: (node) => ({
     block: node._fieldParents[node._fieldParents.length - 1],
-    elem: 'field'
-  })
+    elem: 'field',
+  }),
 });
+
 // emptied out in favor of form
 block('login-form')({tag: 'form'});
+
 
 block('menu').elem('link')({tag: 'a'});
 block('menu').elem('avatar')({tag: 'img'});
