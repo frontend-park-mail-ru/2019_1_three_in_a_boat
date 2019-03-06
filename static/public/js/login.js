@@ -47,7 +47,11 @@ export default function createLoginPage() {
                   block: 'input',
                   wrappedInside: 'login-form',
                   fieldName: 'loginEmail',
-                  fieldAttrs: {type: 'email', placeholder: 'Электронная почта'},
+                  fieldAttrs: {
+                    type: 'email',
+                    placeholder: 'Электронная почта',
+                    required: true,
+                  },
                 },
               },
               {
@@ -58,7 +62,11 @@ export default function createLoginPage() {
                   {
                     elem: 'field',
                     fieldName: 'loginPassword',
-                    attrs: {type: 'password', placeholder: 'Пароль'},
+                    attrs: {
+                      type: 'password',
+                      placeholder: 'Пароль',
+                      required: true,
+                    },
                   },
                   {
                     block: 'icon',

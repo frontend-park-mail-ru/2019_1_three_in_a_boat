@@ -14,6 +14,10 @@ export function validate(input) {
       errors = validateEmail(input);
   }
 
+  if (input.required && input.value === '') {
+    errors.push('Заполните это поле');
+  }
+
   return errors;
 }
 
@@ -61,8 +65,9 @@ function validatePassword(input) {
  */
 function validateEmail(input) {
   const errors = [];
-  const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+  const emailReg = RegExp('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\' +
+    '[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}' +
+    '\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$');
   if (!emailReg.test(input.value)) {
     errors.push('Введите корректный email-адрес');
   }
