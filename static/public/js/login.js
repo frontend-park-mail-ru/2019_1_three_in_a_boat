@@ -1,8 +1,11 @@
 import createHeader from './header.js';
 import createMenu from './menu.js';
+import AjaxModule from './ajax.js';
+
+const ajax = new AjaxModule();
 
 /**
- *
+ * create Login Page
  */
 export default function createLoginPage() {
   createHeader();
@@ -34,7 +37,7 @@ export default function createLoginPage() {
       {
         block: 'form',
         attrs: {novalidate: true},
-        mix: {'block': 'login-form'},
+        mix: {'block': 'login-form'}, // id: 'login-form', enctype: 'multipart/form-data', method: 'POST'
         content: [
           {
             block: 'form-group',
@@ -46,6 +49,10 @@ export default function createLoginPage() {
                 content: {
                   block: 'input',
                   wrappedInside: 'login-form',
+                  //                  content: {
+                  //                    elem: 'field',
+                  //                    attrs: {type: 'email', placeholder: 'Телефон или электронная почта'},
+                  //                  },
                   fieldName: 'loginEmail',
                   fieldAttrs: {
                     type: 'email',
@@ -128,6 +135,7 @@ export default function createLoginPage() {
                 block: 'btn',
                 wrappedInside: 'login-form',
                 wrappedAs: 'sumbit-btn',
+                fieldName: 'submit',
                 attrs: {type: 'submit'},
                 content: [{
                   elem: 'inner',
@@ -168,4 +176,22 @@ export default function createLoginPage() {
         createMenu();
       }
   );
+  const form = document.getElementsByClassName('login-form')[0];
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const email = form.elements['email'].value;
+    const password = form.elements['loginPassword'].value;
+    ajax.doPost({
+      callback() {
+        application.innerHTML = '';
+        createMenu(); // TODO: add setCookies
+      },
+      path: '/login',
+      body: {
+        login: email,
+        password: password,
+      },
+    });
+  });
 }

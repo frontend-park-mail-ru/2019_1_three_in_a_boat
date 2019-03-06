@@ -2416,20 +2416,22 @@ block('form')({tag: 'form'});
 
 block('form')({
   extend: (node) => ({
-    formId: node.generateId()
-  })
+    formId: node.generateId(),
+  }),
 });
+
 block('form-group')({
   extend: (node) => ({
-    _fieldParents: (node._fieldParents || []).concat(['form-group'])
-  })
+    _fieldParents: (node._fieldParents || []).concat(['form-group']),
+  }),
 });
 
 block('form-group').elem('help-text')({
   addAttrs: (node, ctx) => ({
-    'data-for': node.formId + ctx['data-for']
-  })
+    'id': `help_ + ${node.formId} + _ + ${ctx['for']}`,
+  }),
 });
+
 block('*').match((node, ctx) => ctx.wrappedInside)({
   addMix: (node, ctx) => ({
     block: ctx.wrappedInside,
@@ -2439,7 +2441,7 @@ block('*').match((node, ctx) => ctx.wrappedInside)({
 });
 // not needed
 
-block('icon')({'tag': 'i'});
+block('icon')({tag: (node, ctx) => ctx.tag || 'i'});
 
 
 // not needed
@@ -2447,8 +2449,8 @@ block('input').elem('field')({
   tag: 'input',
   addAttrs: (node) => ({
     'id': node.formId + '_' + node.fieldName,
-    'name': node.fieldName
-  })
+    'name': node.fieldName,
+  }),
 });
 
 block('input').elem('field').match((node, ctx) => !ctx.attrs || !ctx.attrs.type)
@@ -2457,18 +2459,18 @@ block('input').elem('field').match((node, ctx) => !ctx.attrs || !ctx.attrs.type)
 block('input').match((node, ctx) => !ctx.content)({
   content: (node, ctx) => [{
     elem: 'field',
-    addAttrs: ctx.fieldAttrs,
-  }]
+    attrs: ctx.fieldAttrs,
+  }],
 });
 
 block('input')({
-  extend: (node, ctx) => ({fieldName: ctx.fieldName || node.generateId()})
+  extend: (node, ctx) => ({fieldName: ctx.fieldName || node.generateId()}),
 });
 
 block('input').elem('tooltip')({
   addAttrs: (node, ctx) => ({
-    'data-for': node.formId + (ctx['data-for'] || node.fieldName)
-  })
+    'data-for': node.formId + (ctx['data-for'] || node.fieldName),
+  }),
 });
 
 // (form/field)-group related stuff
@@ -2476,10 +2478,14 @@ block('input').match(
     (node) => Array.isArray(node._fieldParents) && node._fieldParents.length)({
   addMix: (node) => ({
     block: node._fieldParents[node._fieldParents.length - 1],
-    elem: 'field'
-  })
+    elem: 'field',
+  }),
 });
+
 // emptied out in favor of form
+block('login-form')({tag: 'form'});
+
+
 block('menu').elem('link')({tag: 'a'});
 block('menu').elem('avatar')({tag: 'img'});
 block('menu').elem('items')({elemMods: {color: 'white-whitesmoke-chain'}});
@@ -2528,18 +2534,19 @@ block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
     ]
   }))
 });
-block('profile-info').elem('item')({   
-    content: (node, ctx) => [
-        {                    
-            elem: 'item-name',
-            content: ctx.name
-        },
-        {
-            elem: 'item-value',
-            content: ctx.value
-        }
-    ]
+block('profile-info').elem('item')({
+  content: (node, ctx) => [
+    {
+      elem: 'item-name',
+      content: ctx.name,
+    },
+    {
+      elem: 'item-value',
+      content: ctx.value,
+    },
+  ],
 });
+
 block('scoreboard').elem('username')({tag: 'span'});
 block('scoreboard').elem('avatar')({tag: 'img'});
 
@@ -2615,9 +2622,10 @@ block('select').match(
     elem: 'field'
   })
 });
-// removed in favor of generic form
-block('signup-popup').elem('hr')({'tag' : 'hr'});
-block('signup-popup').elem('explanation-text')({'tag' : 'span'});
+
+block('signup-popup')({tag: 'form'});
+block('signup-popup').elem('hr')({tag: 'hr'});
+block('signup-popup').elem('explanation-text')({tag: 'span'});
 
 // block('signup-popup').elem('explanation-text').match((node, ctx) => ctx.content)(){
 //
@@ -2634,15 +2642,16 @@ block('sm-icons-list').elem('icon-bg').match((node, ctx) => ctx.href)({
 block('update-profile-popup').match((node, ctx) => ctx.addCloseButton)({
   prependContent: {
     block: 'icon',
+    mods: {type: 'cross', color: 'black', size: 'large', btn: true},
     mix: {
       elem: 'close-popup',
       block: 'update-profile-popup',
-      mods:  {type: 'cross', color: 'black', size: 'large'}
-    }
-  }
+    },
+  },
 });
 
-block('update-profile-popup').elem('hr')({'tag' : 'hr'});
+block('update-profile-popup').elem('hr')({'tag': 'hr'});
+
 
   ;
 ;oninit(function(exports, context) {

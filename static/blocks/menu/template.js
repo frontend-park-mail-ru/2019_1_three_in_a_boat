@@ -3,7 +3,7 @@ block('menu').elem('avatar')({tag: 'img'});
 block('menu').elem('items')({elemMods: {color: 'white-whitesmoke-chain'}});
 block('menu').elem('title')({
   block: 'title',
-  mods: {large: true}
+  mods: {large: true},
 });
 
 block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
@@ -21,28 +21,28 @@ block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
               borderless: true,
               size: 'xlarge',
               shape: 'round',
-              color: 'green'
+              color: 'green',
             },
             content: {
               block: 'icon',
-              mods: {color: 'white', type: elt.type}
+              mods: {color: 'white', type: elt.type},
             },
             wrappedInside: 'menu',
-            wrappedAs: 'icon-bg'
+            wrappedAs: 'icon-bg',
           },
-          elt.text
-        ]
+          elt.text,
+        ],
       },
       {
         block: 'icon',
         mods: {
           btn: true,
           color: 'black',
-          type: 'dropdown'
+          type: 'dropdown',
         },
         wrappedInside: 'menu',
-        wrappedAs: 'dropdown-btn'
-      }
-    ]
-  }))
+        wrappedAs: 'dropdown-btn',
+      },
+    ],
+  })),
 });

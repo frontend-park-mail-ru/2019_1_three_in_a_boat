@@ -8,7 +8,6 @@ import createSignUp from './signup.js';
 import createProfile from './profile.js';
 import {validate, removeHelpText, addErrors} from './validation.js';
 
-
 const application = document.getElementById('application');
 
 createMenu();

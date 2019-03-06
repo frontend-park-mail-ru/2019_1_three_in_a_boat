@@ -1,7 +1,7 @@
 import createHeader from './header.js';
 
 /**
- *
+ * create Menu page
  */
 export default function createMenu() {
   createHeader();

@@ -1,4 +1,7 @@
 import createHeader from './header.js';
+import AjaxModule from './ajax.js';
+
+const ajax = new AjaxModule();
 
 /**
  *
