@@ -4,6 +4,9 @@
  * @return {Array} array of errors
  */
 export function validate(input) {
+  if (input.required && input.value === '') {
+    return ['Заполните это поле'];
+  }
   let errors = [];
 
   switch (input.type) {
@@ -13,12 +16,32 @@ export function validate(input) {
     case 'email':
       errors = validateEmail(input);
   }
-
-  if (input.required && input.value === '') {
-    errors.push('Заполните это поле');
-  }
+  console.log(input.type);
 
   return errors;
+}
+
+/**
+ * Add help-text with error after input
+ * @param {HTMLInputElement}input
+ * @param {Array}errMsgs
+ */
+export function addErrors(input, errMsgs) {
+  errMsgs.forEach((msg) => {
+    if (msg.trim() !== '') {
+      const errTemplate = {
+        block: 'form-group',
+        elem: 'help-text',
+        elemMods: {type: 'error'},
+        content: [msg],
+        for: input.name,
+      };
+
+      input.parentElement.insertAdjacentHTML(
+          'afterend', bemhtml.apply(errTemplate)
+      );
+    }
+  });
 }
 
 /**

@@ -57,11 +57,11 @@ export default function createLoginPage() {
               {
                 block: 'input',
                 mods: {with: 'icon'},
+                fieldName: 'loginPassword',
                 wrappedInside: 'login-form',
                 content: [
                   {
                     elem: 'field',
-                    fieldName: 'loginPassword',
                     attrs: {
                       type: 'password',
                       placeholder: 'Пароль',
