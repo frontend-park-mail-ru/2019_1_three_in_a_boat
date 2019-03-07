@@ -1,4 +1,5 @@
 import createHeader from './header.js';
+import createUpdateProfile from './update.js';
 
 /**
  * Create page with user profile
@@ -66,7 +67,7 @@ export default function createProfile() {
         content: [
           {
             block: 'btn',
-            mods: {'size': 'large', 'with-icon': true},
+            mods: {'size': 'large', 'with-icon': true, 'cancel': true},
             wrappedInside: 'profile-popup',
             content: [
               {
@@ -104,4 +105,13 @@ export default function createProfile() {
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
   );
+
+
+  document.getElementsByClassName('btn_cancel')[0].addEventListener(
+      'click',
+      (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        createUpdateProfile();
+      });
 }

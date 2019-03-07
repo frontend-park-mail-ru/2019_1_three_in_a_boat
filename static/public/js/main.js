@@ -4,7 +4,7 @@ import createScoreBoard from './scoreboard.js';
 import createAuthors from './authors.js';
 import createLoginPage from './login.js';
 import createSignUp from './signup.js';
-// import createUpdateProfile from './update.js'
+import createUpdateProfile from './update.js';
 import createProfile from './profile.js';
 import {validate, addErrors, clearErrors} from './validation.js';
 
@@ -19,6 +19,7 @@ const pages = {
   authors: createAuthors,
   leaders: createScoreBoard,
   profile: createProfile,
+  profileUpdate: createUpdateProfile,
 };
 
 application.addEventListener('submit', (event) => {

@@ -56,6 +56,29 @@ export default function createSignUp() {
                     {
                       block: 'input',
                       wrappedAs: 'input',
+                      fieldName: 'username',
+                      fieldAttrs: {
+                        type: 'text',
+                        placeholder: 'Username',
+                        required: true,
+                        checkable: true,
+                        checkType: 'username',
+                      },
+                    },
+                    {
+                      block: 'form-group',
+                      elem: 'help-text',
+                      elemMods: {type: 'hidden'},
+                      for: 'username',
+                    },
+                  ],
+                },
+                {
+                  block: 'form-group',
+                  content: [
+                    {
+                      block: 'input',
+                      wrappedAs: 'input',
                       fieldName: 'firstName',
                       fieldAttrs: {
                         type: 'text',

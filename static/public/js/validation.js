@@ -24,6 +24,9 @@ export function validate(input) {
       break;
     case 'lastName':
       errors = validateLastName(input);
+      break;
+    case 'username':
+      errors = validateUserName(input);
   }
 
   return errors;
@@ -104,6 +107,9 @@ function validateEmail(input) {
   if (!emailReg.test(input.value)) {
     errors.push('Введите корректный email-адрес');
   }
+  if (input.value.length > 256) {
+    errors.push('Длина не должна превышать 256 символов');
+  }
 
   return errors;
 }
@@ -114,11 +120,16 @@ function validateEmail(input) {
  * @return {Array} array of error messages
  */
 function validateName(input) {
+  const errors = [];
+
   if (!/^[A-ZА-ЯЁ]/.test(input.value)) {
-    return ['Имя должно начинаться с заглавной буквы'];
+    errors.push('Имя должно начинаться с заглавной буквы');
+  }
+  if (input.value.length > 32) {
+    errors.push('Длина не должна превышать 32 символа');
   }
 
-  return [];
+  return errors;
 }
 
 /**
@@ -127,10 +138,32 @@ function validateName(input) {
  * @return {Array} array of error messages
  */
 function validateLastName(input) {
+  const errors = [];
+
   if (!/^[A-ZА-ЯЁ]/.test(input.value)) {
-    return ['Фамилия должна начинаться с заглавной буквы'];
+    errors.push('Фамилия должна начинаться с заглавной буквы');
+  }
+  if (input.value.length > 32) {
+    errors.push('Длина не должна превышать 32 символа');
   }
 
-  return [];
+  return errors;
 }
 
+/**
+ * Validate last name
+ * @param {HTMLInputElement}input input block
+ * @return {Array} array of error messages
+ */
+function validateUserName(input) {
+  const errors = [];
+
+  if (!/^[A-Za-z0-9]+$/.test(input.value)) {
+    errors.push('Username может содержать только цифры и латинские буквы');
+  }
+  if (input.value.length > 32) {
+    errors.push('Длина не должна превышать 32 символа');
+  }
+
+  return errors;
+}
