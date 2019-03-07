@@ -74,9 +74,10 @@ $input-border-radius: 3px;
 
     line-height: 12px;
 
-    background-color: white;
     border-radius: $input-border-radius;
     border-width: 0;
+    background-color: white;
+    color: black;
     font-size: 12px;
     outline: none;
 

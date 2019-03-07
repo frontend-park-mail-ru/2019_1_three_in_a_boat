@@ -9,7 +9,7 @@ export function validate(input) {
   }
   let errors = [];
 
-  switch (input.type) {
+  switch (input.attributes['checkType']) {
     case 'password':
       errors = validatePassword(input);
       break;
@@ -27,34 +27,22 @@ export function validate(input) {
  * @param {Array}errMsgs
  */
 export function addErrors(input, errMsgs) {
-  errMsgs.forEach((msg) => {
-    if (msg.trim() !== '') {
-      const errTemplate = {
-        block: 'form-group',
-        elem: 'help-text',
-        elemMods: {type: 'error'},
-        content: [msg],
-        for: input.name,
-      };
-
-      input.parentElement.insertAdjacentHTML(
-          'afterend', bemhtml.apply(errTemplate)
-      );
-    }
-  });
+  const msg = errMsgs.join('<br>');
+  const helpText = document.getElementById('help_' + input.name);
+  helpText.innerHTML = msg;
+  helpText.classList.remove('form-group__help-text_type_hidden');
+  helpText.classList.add('form-group__help-text_type_error');
 }
 
 /**
- * Remove all help-text_type_error on the page
+ * Hide error under the input
+ * @param {HTMLInputElement}input
  */
-export function removeHelpText() {
-  const helpTexts = document.getElementsByClassName(
-      'form-group__help-text form-group__help-text_type_error'
-  );
-
-  while (helpTexts.length) {
-    helpTexts[0].parentElement.removeChild(helpTexts[0]);
-  }
+export function clearErrors(input) {
+  const helpText = document.getElementById('help_' + input.name);
+  helpText.classList.remove('form-group__help-text_type_error');
+  helpText.classList.add('form-group__help-text_type_hidden');
+  helpText.innerHTML = '';
 }
 
 /**
@@ -81,8 +69,12 @@ function validatePassword(input) {
   return errors;
 }
 
+function validateRepeatPassword(input) {
+  // cont formId = input.attributes['']
+}
+
 /**
- * Validate password
+ * Validate email
  * @param {HTMLInputElement}input input block
  * @return {Array} array of error messages
  */
