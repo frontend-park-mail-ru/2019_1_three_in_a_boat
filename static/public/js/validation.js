@@ -9,14 +9,22 @@ export function validate(input) {
   }
   let errors = [];
 
-  switch (input.attributes['checkType']) {
+  switch (input.attributes['checktype'].value) {
     case 'password':
       errors = validatePassword(input);
       break;
+    case 'repeatPassword':
+      errors = validateRepeatPassword(input);
+      break;
     case 'email':
       errors = validateEmail(input);
+      break;
+    case 'name':
+      errors = validateName(input);
+      break;
+    case 'lastName':
+      errors = validateLastName(input);
   }
-  console.log(input.type);
 
   return errors;
 }
@@ -69,8 +77,18 @@ function validatePassword(input) {
   return errors;
 }
 
+/**
+ * Validate passport repeat field
+ * @param {HTMLInputElement}input
+ * @return {Array} array of errors
+ */
 function validateRepeatPassword(input) {
-  // cont formId = input.attributes['']
+  const formId = input.id.split('_')[0];
+  const password = document.getElementById(formId + '_password');
+  if (input.value !== password.value) {
+    return ['Введенное значение не совпадает с паролем'];
+  }
+  return [];
 }
 
 /**
@@ -89,3 +107,30 @@ function validateEmail(input) {
 
   return errors;
 }
+
+/**
+ * Validate name
+ * @param {HTMLInputElement}input input block
+ * @return {Array} array of error messages
+ */
+function validateName(input) {
+  if (!/^[A-ZА-ЯЁ]/.test(input.value)) {
+    return ['Имя должно начинаться с заглавной буквы'];
+  }
+
+  return [];
+}
+
+/**
+ * Validate last name
+ * @param {HTMLInputElement}input input block
+ * @return {Array} array of error messages
+ */
+function validateLastName(input) {
+  if (!/^[A-ZА-ЯЁ]/.test(input.value)) {
+    return ['Фамилия должна начинаться с заглавной буквы'];
+  }
+
+  return [];
+}
+
