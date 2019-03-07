@@ -86,6 +86,26 @@ export default function createSignUp() {
                 },
                 {
                   block: 'form-group',
+                  content: [
+                    {
+                      block: 'input',
+                      mods: {'required': true},
+                      fieldName: 'email',
+                      fieldAttrs: {
+                        type: 'email',
+                        placeholder: 'your.name@site.com',
+                      },
+                    },
+                    {
+                      elem: 'help-text',
+                      mix: {'block': 'form-group__help-text_hidden'},
+                      mods: {type_error: true},
+                      content: 'Заполните обязательное поле',
+                    },
+                  ],
+                },
+                {
+                  block: 'form-group',
                   content: {
                     elem: 'size_inline',
 
@@ -194,7 +214,7 @@ export default function createSignUp() {
                       fieldName: 'passwordRepeat',
                       fieldAttrs: {
                         type: 'password',
-                        placeholder: 'Повторите пароль'
+                        placeholder: 'Повторите пароль',
                       },
                       required: true,
                     },
