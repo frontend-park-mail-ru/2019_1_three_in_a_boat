@@ -6,6 +6,6 @@ block('form-group')({
 
 block('form-group').elem('help-text')({
   addAttrs: (node, ctx) => ({
-    'id': `help_ + ${node.formId} + _ + ${ctx['for']}`,
+    'id': `help_${ctx['for']}`,
   }),
 });

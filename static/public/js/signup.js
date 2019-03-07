@@ -56,14 +56,43 @@ export default function createSignUp() {
                     {
                       block: 'input',
                       wrappedAs: 'input',
-                      fieldName: 'firstName',
-                      fieldAttrs: {type: 'text', placeholder: 'Имя'},
+                      fieldName: 'username',
+                      fieldAttrs: {
+                        type: 'text',
+                        placeholder: 'Username',
+                        required: true,
+                        checkable: true,
+                        checkType: 'username',
+                      },
                     },
                     {
+                      block: 'form-group',
                       elem: 'help-text',
-                      mix: {'block': 'form-group__help-text_hidden'},
-                      mods: {type_error: true},
-                      content: 'Заполните обязательное поле',
+                      elemMods: {type: 'hidden'},
+                      for: 'username',
+                    },
+                  ],
+                },
+                {
+                  block: 'form-group',
+                  content: [
+                    {
+                      block: 'input',
+                      wrappedAs: 'input',
+                      fieldName: 'firstName',
+                      fieldAttrs: {
+                        type: 'text',
+                        placeholder: 'Имя',
+                        required: true,
+                        checkable: true,
+                        checkType: 'name',
+                      },
+                    },
+                    {
+                      block: 'form-group',
+                      elem: 'help-text',
+                      elemMods: {type: 'hidden'},
+                      for: 'firstName',
                     },
                   ],
                 },
@@ -74,13 +103,42 @@ export default function createSignUp() {
                       block: 'input',
                       mods: {'required': true},
                       fieldName: 'lastName',
-                      fieldAttrs: {type: 'text', placeholder: 'Фамилия'},
+                      fieldAttrs: {
+                        type: 'text',
+                        placeholder: 'Фамилия',
+                        required: true,
+                        checkable: true,
+                        checkType: 'lastName',
+                      },
                     },
                     {
+                      block: 'form-group',
                       elem: 'help-text',
-                      mix: {'block': 'form-group__help-text_hidden'},
-                      mods: {type_error: true},
-                      content: 'Заполните обязательное поле',
+                      elemMods: {type: 'hidden'},
+                      for: 'lastName',
+                    },
+                  ],
+                },
+                {
+                  block: 'form-group',
+                  content: [
+                    {
+                      block: 'input',
+                      mods: {'required': true},
+                      fieldName: 'email',
+                      fieldAttrs: {
+                        type: 'email',
+                        placeholder: 'Email',
+                        required: true,
+                        checkable: true,
+                        checkType: 'email',
+                      },
+                    },
+                    {
+                      block: 'form-group',
+                      elem: 'help-text',
+                      elemMods: {type: 'hidden'},
+                      for: 'email',
                     },
                   ],
                 },
@@ -193,14 +251,20 @@ export default function createSignUp() {
                       block: 'input',
                       wrappedAs: 'input',
                       fieldName: 'password',
-                      fieldAttrs: {type: 'password', placeholder: 'Пароль'},
+                      fieldAttrs: {
+                        type: 'password',
+                        placeholder: 'Пароль',
+                        required: true,
+                        checkable: true,
+                        checkType: 'password',
+                      },
                       required: true,
                     },
                     {
+                      block: 'form-group',
                       elem: 'help-text',
-                      mods: {'type_error': true},
-                      cls: 'form-group__help-text_hidden',
-                      content: 'Заполните обязательное поле',
+                      elemMods: {type: 'hidden'},
+                      for: 'password',
                     },
                   ],
                 },
@@ -215,14 +279,17 @@ export default function createSignUp() {
                       fieldAttrs: {
                         type: 'password',
                         placeholder: 'Повторите пароль',
+                        required: true,
+                        checkable: true,
+                        checkType: 'repeatPassword',
                       },
                       required: true,
                     },
                     {
+                      block: 'form-group',
                       elem: 'help-text',
-                      mods: {'type_error': true},
-                      cls: 'form-group__help-text_hidden',
-                      content: 'Пароли не совпадают',
+                      elemMods: {type: 'hidden'},
+                      for: 'passwordRepeat',
                     },
                   ],
                 },
@@ -283,43 +350,43 @@ export default function createSignUp() {
     createMenu();
   });
 
-  const form = document.getElementById('signup-popup');
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
+  // const form = document.getElementById('signup-popup');
+  // form.addEventListener('submit', function(event) {
+  //   event.preventDefault();
+  //
+  //   const name = form.elements['name'].value;
+  //   const surname = form.elements['surname'].value;
+  //   const email = form.elements['email'].value;
+  //   const day = form.elements['day-select'].value;
+  //   const month = months[form.elements['month-select'].value];
+  //   const year = form.elements['year-select'].value;
+  //   const date = `${day}-${month}-${year}`;
+  //   const password = form.elements['password'].value;
+  //   const passwordRepeat = form.elements['password_repeat'].value;
 
-    const name = form.elements['firstName'].value;
-    const surname = form.elements['lastName'].value;
-    const email = form.elements['email'].value;
-    const day = form.elements['selectDay'].value;
-    const month = months[form.elements['selectMonth'].value];
-    const year = form.elements['selectYear'].value;
-    const date = `${day}-${month}-${year}`;
-    const password = form.elements['password'].value;
-    const passwordRepeat = form.elements['passworsRepeat'].value;
-
-    const errors = document.getElementsByClassName('form-group__help-text');
-    if (errors !== null) {
-      return;
-    }
-    if (password !== passwordRepeat) {
-      alert('Passwords is not equals');
-      return;
-    }
-
-    ajax.doPost({
-      callback() {
-        application.innerHTML = '';
-        createMenu(); // TODO: change to createUserProfile()
-      },
-      path: '/signup',
-      body: {
-        name: name,
-        surname: surname,
-        email: email,
-        date: date,
-        password: password,
-      },
-    });
-  });
+  // const errors = document.getElementsByClassName('form-group__help-text');
+  // if (errors !== null) {
+  //   return;
+  // }
+  // if (password !== passwordRepeat) {
+  //   alert('Passwords is not equals');
+  //   return;
+  // }
+  //
+  //   ajax.doPost({
+  //     callback() {
+  //       application.innerHTML = '';
+  //       createMenu(); // TODO: change to createUserProfile()
+  //     },
+  //     path: '/signup',
+  //     body: {
+  //       name: name,
+  //       surname: surname,
+  //       email: email,
+  //       date: date,
+  //       password: password,
+  //     },
+  //   });
+  // });
 };
 

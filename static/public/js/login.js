@@ -5,7 +5,7 @@ import AjaxModule from './ajax.js';
 const ajax = new AjaxModule();
 
 /**
- * create Login Page
+ * create login page
  */
 export default function createLoginPage() {
   createHeader();
@@ -35,10 +35,9 @@ export default function createLoginPage() {
         },
       },
       {
-        fieldName: 'login-form',
-        block: 'form', // login-form
+        block: 'form',
         attrs: {novalidate: true},
-        mix: {'block': 'login-form'}, // id: 'login-form', enctype: 'multipart/form-data', method: 'POST'
+        mix: {'block': 'login-form'},
         content: [
           {
             block: 'form-group',
@@ -47,20 +46,26 @@ export default function createLoginPage() {
               {
                 block: 'form-group',
                 mods: {size: 'large'},
-                content: {
-                  block: 'input',
-                  wrappedInside: 'login-form',
-                  //                  content: {
-                  //                    elem: 'field',
-                  //                    attrs: {type: 'email', placeholder: 'Телефон или электронная почта'},
-                  //                  },
-                  fieldName: 'loginEmail',
-                  fieldAttrs: {
-                    type: 'email',
-                    placeholder: 'Электронная почта',
-                    required: true,
+                content: [
+                  {
+                    block: 'input',
+                    wrappedInside: 'login-form',
+                    fieldName: 'loginEmail',
+                    fieldAttrs: {
+                      type: 'email',
+                      placeholder: 'Электронная почта',
+                      required: true,
+                      checkable: true,
+                      checkType: 'email',
+                    },
                   },
-                },
+                  {
+                    block: 'form-group',
+                    elem: 'help-text',
+                    elemMods: {type: 'hidden'},
+                    for: 'loginEmail',
+                  },
+                ],
               },
               {
                 block: 'input',
@@ -74,6 +79,8 @@ export default function createLoginPage() {
                       type: 'password',
                       placeholder: 'Пароль',
                       required: true,
+                      checkable: true,
+                      checkType: 'password',
                     },
                   },
                   {
@@ -88,6 +95,12 @@ export default function createLoginPage() {
                   },
                 ],
               },
+              {
+                block: 'form-group',
+                elem: 'help-text',
+                elemMods: {type: 'hidden'},
+                for: 'loginPassword',
+              },
             ],
           },
           {
@@ -98,19 +111,19 @@ export default function createLoginPage() {
                 content: [
                   {
                     block: 'checkbox',
+                    fieldName: 'rememberMe',
                     wrappedInside: 'login-form',
                     wrappedAs: 'remember-me-checkbox',
                     mods: {size: 'small'},
                     attrs: {
                       type: 'checkbox',
-                      id: 'login-form__remember-me-checkbox',
                     },
                   },
                   {
                     tag: 'label',
                     block: 'login-form',
                     elem: 'remember-me-label',
-                    attrs: {for: 'login-form__remember-me-checkbox'},
+                    for: 'rememberMe',
                     content: 'Запомнить пароль',
                   },
                 ],
@@ -177,22 +190,22 @@ export default function createLoginPage() {
         createMenu();
       }
   );
-  const form = document.getElementById('login-form');
+  const form = document.getElementsByClassName('login-form')[0];
   form.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const email = form.elements['email'].value;
-    const password = form.elements['loginPassword'].value;
-    ajax.doPost({
-      callback() {
-        application.innerHTML = '';
-        createMenu(); // TODO: add setCookies
-      },
-      path: '/login',
-      body: {
-        login: email,
-        password: password,
-      },
-    });
+    // const email = form.elements['loginEmail'].value;
+    // const password = form.elements['loginPassword'].value;
+    // ajax.doPost({
+    //   callback() {
+    //     application.innerHTML = '';
+    //     createMenu(); // TODO: add setCookies
+    //   },
+    //   path: '/login',
+    //   body: {
+    //     login: email,
+    //     password: password,
+    //   },
+    // });
   });
 }
