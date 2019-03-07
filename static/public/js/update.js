@@ -7,6 +7,12 @@ export default function createUpdateProfile() {
   createHeader();
   const template = [
     {
+      block: 'body',
+      mods: 'body_color_dark',
+      
+
+    },
+    {
       block: 'update-profile-popup',
       mods: {'main': true},
       addCloseButton: true,

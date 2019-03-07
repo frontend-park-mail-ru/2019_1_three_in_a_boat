@@ -16,9 +16,12 @@ class AjaxModule {
     path = '/',
     body = {},
   } = {}) {
-    const xhr = new XMLHttpRequest();
+    const XHR = ('onload' in new XMLHttpRequest())
+        ? XMLHttpRequest : XDomainRequest;
+    const xhr = new XHR();
+    // const xhr = new XMLHttpRequest();
     xhr.open(method, path, true);
-    xhr.withCredentials = true;
+    // xhr.withCredentials = true;
 
     if (body) {
       xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
@@ -39,6 +42,12 @@ class AjaxModule {
     }
   }
 
+  /**
+   *
+   * @param callback
+   * @param path
+   * @param body
+   */
   doGet({
     callback = noop,
     path = '/',
@@ -52,6 +61,12 @@ class AjaxModule {
     });
   }
 
+  /**
+   *
+   * @param callback
+   * @param path
+   * @param body
+   */
   doPost({
     callback = noop,
     path = '/',
@@ -67,4 +82,3 @@ class AjaxModule {
 }
 
 export default AjaxModule;
-// window.AjaxModule = new AjaxModule();
