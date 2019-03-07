@@ -56,7 +56,13 @@ export default function createSignUp() {
                     block: 'input',
                     wrappedAs: 'input',
                     fieldName: 'firstName',
-                    fieldAttrs: {type: 'text', placeholder: 'Имя'},
+                    fieldAttrs: {
+                      type: 'text',
+                      placeholder: 'Имя',
+                      required: true,
+                      checkable: true,
+                      checkType: 'name',
+                    },
                   },
                   {
                     elem: 'help-text',
@@ -71,9 +77,14 @@ export default function createSignUp() {
                 content: [
                   {
                     block: 'input',
-                    mods: {'required': true},
                     fieldName: 'lastName',
-                    fieldAttrs: {type: 'text', placeholder: 'Фамилия'},
+                    fieldAttrs: {
+                      type: 'text',
+                      placeholder: 'Фамилия',
+                      required: true,
+                      checkable: true,
+                      checkType: 'lastName',
+                    },
                   },
                   {
                     elem: 'help-text',
@@ -172,8 +183,13 @@ export default function createSignUp() {
                     block: 'input',
                     wrappedAs: 'input',
                     fieldName: 'password',
-                    fieldAttrs: {type: 'password', placeholder: 'Пароль'},
-                    required: true,
+                    fieldAttrs: {
+                      type: 'password',
+                      placeholder: 'Пароль',
+                      required: true,
+                      checkable: true,
+                      checkType: 'password',
+                    },
                   },
                   {
                     elem: 'help-text',
@@ -191,9 +207,13 @@ export default function createSignUp() {
                     block: 'input',
                     wrappedAs: 'input',
                     fieldName: 'passwordRepeat',
-                    fieldAttrs: {type: 'password',
-                      placeholder: 'Повторите пароль'},
-                    required: true,
+                    fieldAttrs: {
+                      type: 'password',
+                      placeholder: 'Повторите пароль',
+                      required: true,
+                      checkable: true,
+                      checkType: 'repeatPassword',
+                    },
                   },
                   {
                     elem: 'help-text',
