@@ -1,0 +1,40 @@
+.pagination {
+  $block: &;
+
+  width: 50%;
+  margin: 20px auto;
+  text-align: center;
+
+  &__link {
+    padding: 3px 10px;
+    border: #9940ea solid 1px;
+    border-right: none;
+    background-color: white;
+    color: #1b0c29;
+
+    cursor: pointer;
+    font-weight: bold;
+    &:hover:not(&_current) {
+      background-color: rgba(152, 64, 234, 0.19);
+      color: #6614b0;
+    }
+    &_first {
+      border-bottom-left-radius: 3px;
+      border-top-left-radius: 3px;
+      background-color: rgba(141, 59, 216, 0.51);
+      color: white;
+    }
+    &_last {
+      border-bottom-right-radius: 3px;
+      border-top-right-radius: 3px;
+      border-right: rgba(0, 0, 0, 0.50) solid 1px;
+      background-color: rgba(141, 59, 216, 0.51);
+      color: white;
+    }
+    &_current {
+      background-color: rgba(141, 59, 216, 0.51);
+      color: white;
+      cursor: auto;
+    }
+  }
+}
