@@ -10,10 +10,6 @@
     white-space: nowrap; //impor
                          //tant
     border-bottom: 1px solid #E0E0E0;
-
-    &:last-of-type {
-      border: none;
-    }
   }
 
   %profile-item-row {
