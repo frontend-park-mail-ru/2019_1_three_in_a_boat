@@ -73,9 +73,9 @@ function validatePassword(input) {
   if (!/[0-9]/.test(input.value)) {
     errors.push('Пароль должен содержать цифры');
   }
-  if (!/[A-z]/.test(input.value)) {
-    errors.push('Пароль должен содержать латинские буквы');
-  }
+  // if (!/[A-z]/.test(input.value)) {
+  //   errors.push('Пароль должен содержать латинские буквы');
+  // }
   if (!/^[\w\dA-z]+$/.test(input.value)) {
     errors.push('Пароль должен состоять из цифр и латинских букв');
   }

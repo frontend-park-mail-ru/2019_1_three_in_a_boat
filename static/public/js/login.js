@@ -208,9 +208,9 @@ export default function createLoginPage() {
         application.innerHTML = '';
         createMenu(); // TODO: add setCookies
       },
-      path: '/login',
+      path: 'http://127.0.0.1:3000/signin',
       body: {
-        login: email,
+        name: email,
         password: password,
       },
     });

@@ -83,8 +83,4 @@ export default function createAuthors(authors) {
       path: 'http://127.0.0.1:3000/authors',
     });
   }
-  // document.getElementById('application').insertAdjacentHTML(
-  //     'beforeend',
-  //     bemhtml.apply(template)
-  // );
 }

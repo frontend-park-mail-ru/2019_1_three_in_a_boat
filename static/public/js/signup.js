@@ -2,6 +2,8 @@ import createHeader from './header.js';
 import createMenu from './menu.js';
 import AjaxModule from './ajax.js';
 import {validateForm} from './validation.js';
+import initFileInputs from './file-input.js';
+import createProfile from './profile.js';
 
 const ajax = new AjaxModule();
 
@@ -317,15 +319,17 @@ export default function createSignUp() {
         },
       ],
     }];
+
   document.getElementById('application').insertAdjacentHTML(
       'beforeend',
-      bemhtml.apply(template));
+      bemhtml.apply(template)
+  );
 
-  const cnslBtn = document.getElementsByClassName('signup-form__cancel-btn')[0];
+  const cnslBtn = document.getElementsByClassName('btn_color_muted')[0];
   cnslBtn.addEventListener('click', function(event) {
     event.preventDefault();
     application.innerHTML = '';
-    createMenu();
+    createProfile();
   });
 
   const form = document.getElementById('signup-form');
@@ -336,29 +340,32 @@ export default function createSignUp() {
       return;
     }
 
-    const firstName = form.elements['firstName'].value;
-    const secondName = form.elements['secondName'].value;
-    const userName = form.elements['userName'].value;
-    const email = form.elements['email'].value;
-    const day = form.elements['selectDay'].value;
-    const month = months[form.elements['selectMonth'].value];
-    const year = form.elements['selectYear'].value;
+    const firstName = form['signup-form_firstName'].value;
+    const secondName = form['signup-form_lastName'].value;
+    const email = form['signup-form_email'].value;
+    const userName = form['signup-form_username'].value;
+
+    const selectField = document.getElementsByTagName('select');
+    const day = selectField['signup-form_selectDay'].value;
+    const month = months[selectField['signup-form_selectMonth'].value];
+    const year = selectField['signup-form_selectYear'].value;
     const date = `${day}-${month}-${year}`;
-    const password = form.elements['password'].value;
+
+    const password = form['signup-form_password'].value;
 
     ajax.doPost({
       callback() {
         application.innerHTML = '';
-        createMenu(); // TODO: change to createUserProfile()
+        createProfile(); // TODO: change to createUserProfile()
       },
-      path: 'http://127.0.0.1:3000/signup',
+      path: 'http://127.0.0.1:3000/users',
       body: {
-        firstName: firstName,
-        lastName: secondName,
-        userName: userName,
+        username: userName,
+        password: password,
+        name: firstName,
+        lastname: secondName,
         email: email,
         date: date,
-        password: password,
       },
     });
   });

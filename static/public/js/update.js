@@ -337,6 +337,13 @@ export default function createUpdateProfile() {
 
   initFileInputs();
 
+  const cnslBtn = document.getElementsByClassName('btn_color_muted')[0];
+  cnslBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    application.innerHTML = '';
+    createProfile();
+  });
+
   const form = document.getElementById('updateForm');
   console.log(form);
   form.addEventListener('submit', function(event) {
@@ -346,15 +353,17 @@ export default function createUpdateProfile() {
       return;
     }
 
-    const firstName = form.elements['firstName'].value;
-    const secondName = form.elements['secondName'].value;
-    const email = form.elements['email'].value;
-    const userName = form.elements['userName'].value;
-    const day = form.elements['selectDay'].value;
-    const month = months[form.elements['selectMonth'].value];
-    const year = form.elements['selectYear'].value;
+    const firstName = form['updateForm_firstName'].value;
+    const secondName = form['updateForm_lastName'].value;
+    const email = form['updateForm_email'].value;
+    const selectField = document.getElementsByTagName('select');
+    const userName = form['updateForm_userName'].value;
+    const day = selectField['updateForm_selectDay'].value;
+    const month = months[selectField['updateForm_selectMonth'].value];
+    const year = selectField['updateForm_selectYear'].value;
+    const male = selectField['updateForm_selectMale'].value;
     const date = `${day}-${month}-${year}`;
-    const password = form.elements['password'].value;
+    const password = form['updateForm_password'].value;
 
     ajax.doPost({
       callback() {
@@ -367,10 +376,10 @@ export default function createUpdateProfile() {
         lastName: secondName,
         userName: userName,
         email: email,
+        male: male,
         date: date,
         password: password,
       },
     });
   });
-}
-;
+};
