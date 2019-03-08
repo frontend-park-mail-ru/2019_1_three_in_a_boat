@@ -46,10 +46,9 @@ export default function createAuthors(authors) {
 
   if (authors) {
     const data = JSON.parse(JSON.stringify(authors));
-    console.log(data);
-    return;
     const bemAuthors = [];
-    data['data'].forEach(function(author) {
+
+    Array.from(data).forEach((author) => {
       bemAuthors.push({
         name: author.name,
         devInfo: author.devInfo,

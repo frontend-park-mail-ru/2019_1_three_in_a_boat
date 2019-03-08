@@ -1,4 +1,5 @@
 import createHeader from './header.js';
+import createPagination from './pagination.js';
 import AjaxModule from './ajax.js';
 
 const ajax = new AjaxModule();
@@ -42,35 +43,38 @@ export default function createScoreBoard(users) {
   //       },
   //     ],
   //   }];
+
   // document.getElementById('application').insertAdjacentHTML('beforeend',
   //     bemhtml.apply(template)
   // );
+
   if (users) {
     const data = JSON.parse(JSON.stringify(users));
-    let bemUsers = [];
-    for (const user in data) {
+    const bemUsers = [];
+    console.log(data);
+    Array.from(data.data.users).forEach((user) => {
       bemUsers.push({
-        name: user.name,
+        name: user.firstName,
         img: user.img,
         username: user.username,
-        score: user.score,
-        userId: user.userId,
+        score: user.highScore,
+        userId: user.uid,
       });
-    }
+    });
+    console.log(bemUsers);
     const draw = [
       {
         block: 'scoreboard',
         content: [
           {
             elem: 'items',
-            scores: [
-              bemUsers,
-            ],
+            scores: bemUsers,
           },
         ],
       }];
     document.getElementById('application').insertAdjacentHTML('beforeend',
         bemhtml.apply(draw));
+    createPagination(data.data.page + 1, data.data.nPages + 1);
   } else {
     ajax.doGet({
       callback(xhr) {
@@ -78,7 +82,7 @@ export default function createScoreBoard(users) {
         application.innerHTML = '';
         createScoreBoard(data);
       },
-      path: '/rating',
+      path: 'http://127.0.0.1:3000/users?sort=-HighScore',
     });
   }
 }
