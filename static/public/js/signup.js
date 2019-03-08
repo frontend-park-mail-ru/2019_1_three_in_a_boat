@@ -56,29 +56,6 @@ export default function createSignUp() {
                     {
                       block: 'input',
                       wrappedAs: 'input',
-                      fieldName: 'username',
-                      fieldAttrs: {
-                        type: 'text',
-                        placeholder: 'Username',
-                        required: true,
-                        checkable: true,
-                        checkType: 'username',
-                      },
-                    },
-                    {
-                      block: 'form-group',
-                      elem: 'help-text',
-                      elemMods: {type: 'hidden'},
-                      for: 'username',
-                    },
-                  ],
-                },
-                {
-                  block: 'form-group',
-                  content: [
-                    {
-                      block: 'input',
-                      wrappedAs: 'input',
                       fieldName: 'firstName',
                       fieldAttrs: {
                         type: 'text',
@@ -144,6 +121,29 @@ export default function createSignUp() {
                 },
                 {
                   block: 'form-group',
+                  content: [
+                    {
+                      block: 'input',
+                      wrappedAs: 'input',
+                      fieldName: 'username',
+                      fieldAttrs: {
+                        type: 'text',
+                        placeholder: 'Username',
+                        required: true,
+                        checkable: true,
+                        checkType: 'username',
+                      },
+                    },
+                    {
+                      block: 'form-group',
+                      elem: 'help-text',
+                      elemMods: {type: 'hidden'},
+                      for: 'username',
+                    },
+                  ],
+                },
+                {
+                  block: 'form-group',
                   content: {
                     elem: 'size_inline',
 
@@ -160,7 +160,8 @@ export default function createSignUp() {
                       },
                       {
                         block: 'form-group',
-                        cls: 'form-group__size_inline, form-group_align_stretch',
+                        cls: 'form-group__size_inline,' +
+                            'form-group_align_stretch',
                         content: {
                           block: 'field-group',
                           content: [
@@ -218,7 +219,6 @@ export default function createSignUp() {
                             },
                           ],
                         },
-
                       },
                     ],
                   },
@@ -330,43 +330,46 @@ export default function createSignUp() {
     createMenu();
   });
 
-  // const form = document.getElementById('signup-popup');
-  // form.addEventListener('submit', function(event) {
-  //   event.preventDefault();
-  //
-  //   const name = form.elements['name'].value;
-  //   const surname = form.elements['surname'].value;
-  //   const email = form.elements['email'].value;
-  //   const day = form.elements['day-select'].value;
-  //   const month = months[form.elements['month-select'].value];
-  //   const year = form.elements['year-select'].value;
-  //   const date = `${day}-${month}-${year}`;
-  //   const password = form.elements['password'].value;
-  //   const passwordRepeat = form.elements['password_repeat'].value;
+  const form = document.getElementById('signup-popup');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-  // const errors = document.getElementsByClassName('form-group__help-text');
-  // if (errors !== null) {
-  //   return;
-  // }
-  // if (password !== passwordRepeat) {
-  //   alert('Passwords is not equals');
-  //   return;
-  // }
-  //
-  //   ajax.doPost({
-  //     callback() {
-  //       application.innerHTML = '';
-  //       createMenu(); // TODO: change to createUserProfile()
-  //     },
-  //     path: '/signup',
-  //     body: {
-  //       name: name,
-  //       surname: surname,
-  //       email: email,
-  //       date: date,
-  //       password: password,
-  //     },
-  //   });
-  // });
+    const firstName = form.elements['firstName'].value;
+    const secondName = form.elements['secondName'].value;
+    const userName = form.elements['userName'].value;
+    const email = form.elements['email'].value;
+    const day = form.elements['selectDay'].value;
+    const month = months[form.elements['selectMonth'].value];
+    const year = form.elements['selectYear'].value;
+    const date = `${day}-${month}-${year}`;
+    const password = form.elements['password'].value;
+    const passwordRepeat = form.elements['passwordRepeat'].value;
+
+    const errors = document.getElementsByClassName('form-group__help-text');
+    if (errors !== null) {
+      alert(errors);
+      return;
+    }
+    if (password !== passwordRepeat) {
+      alert('Passwords is not equals');
+      return;
+    }
+
+    ajax.doPost({
+      callback() {
+        application.innerHTML = '';
+        createMenu(); // TODO: change to createUserProfile()
+      },
+      path: 'http://127.0.0.1:3000/signup',
+      body: {
+        firstName: firstName,
+        lastName: secondName,
+        userName: userName,
+        email: email,
+        date: date,
+        password: password,
+      },
+    });
+  });
 };
 
