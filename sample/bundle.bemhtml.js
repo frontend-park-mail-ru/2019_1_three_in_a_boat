@@ -2300,7 +2300,7 @@ if (typeof Object.create === 'function') {
 });;
 return module.exports || exports.bemhtml;
 }({}, {});
-var api = new bemhtml({"exportName":"bemhtml","escapeContent":true,"to":"/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat"});
+var api = new bemhtml({"exportName":"bemhtml","escapeContent":true,"to":"/media/alfaix/Data/drive/bmstu/tp/frontend/project"});
 api.compile(function(match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
 /* BEM-XJST User code here: */
 
@@ -2350,10 +2350,18 @@ block('btn').match((node, ctx) => (ctx.content && ctx.content.find(
 });
 
 block('checkbox')({
-  tag:'input',
+  tag: 'input',
   addAttrs: {
-    type: 'checkbox'
-  }
+    type: 'checkbox',
+  },
+});
+
+block('checkbox')({
+  tag: 'input',
+  addAttrs: (node, ctx) => ({
+    'id': node.formId + '_' + ctx.fieldName,
+    'name': ctx.fieldName,
+  }),
 });
 
 block('field-group')({
@@ -2415,8 +2423,8 @@ block('file-input')({
 block('form')({tag: 'form'});
 
 block('form')({
-  extend: (node) => ({
-    formId: node.generateId(),
+  extend: (node, ctx) => ({
+    formId: ctx.name,
   }),
 });
 
@@ -2428,7 +2436,7 @@ block('form-group')({
 
 block('form-group').elem('help-text')({
   addAttrs: (node, ctx) => ({
-    'id': `help_ + ${node.formId} + _ + ${ctx['for']}`,
+    'id': `help_${ctx['for']}`,
   }),
 });
 
@@ -2483,15 +2491,13 @@ block('input').match(
 });
 
 // emptied out in favor of form
-block('login-form')({tag: 'form'});
-
 
 block('menu').elem('link')({tag: 'a'});
 block('menu').elem('avatar')({tag: 'img'});
 block('menu').elem('items')({elemMods: {color: 'white-whitesmoke-chain'}});
 block('menu').elem('title')({
   block: 'title',
-  mods: {large: true}
+  mods: {large: true},
 });
 
 block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
@@ -2509,31 +2515,47 @@ block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
               borderless: true,
               size: 'xlarge',
               shape: 'round',
-              color: 'green'
+              color: 'green',
             },
             content: {
               block: 'icon',
-              mods: {color: 'white', type: elt.type}
+              mods: {color: 'white', type: elt.type},
             },
             wrappedInside: 'menu',
-            wrappedAs: 'icon-bg'
+            wrappedAs: 'icon-bg',
           },
-          elt.text
-        ]
+          elt.text,
+        ],
       },
       {
         block: 'icon',
         mods: {
           btn: true,
           color: 'black',
-          type: 'dropdown'
+          type: 'dropdown',
         },
         wrappedInside: 'menu',
-        wrappedAs: 'dropdown-btn'
-      }
-    ]
-  }))
+        wrappedAs: 'dropdown-btn',
+      },
+    ],
+  })),
 });
+
+block('pagination').elem('link')({tag: 'button'});
+block('pagination').elem('link').match((node, ctx) => ctx.content)({
+  addMix: (node, ctx) => {
+    let mods = {};
+    if (ctx.content[0] === 'Вперед') {
+      mods = {last: true};
+    }
+    if (ctx.content[0] === 'Назад') {
+      mods = {first: true};
+    }
+
+    return {block: 'pagination', elem: 'link', elemMods: mods};
+  },
+});
+
 block('profile-info').elem('item')({
   content: (node, ctx) => [
     {
@@ -2623,13 +2645,9 @@ block('select').match(
   })
 });
 
-block('signup-popup')({tag: 'form'});
+// block('signup-popup')({tag: 'form'});
 block('signup-popup').elem('hr')({tag: 'hr'});
 block('signup-popup').elem('explanation-text')({tag: 'span'});
-
-// block('signup-popup').elem('explanation-text').match((node, ctx) => ctx.content)(){
-//
-// }
 
 block('sm-icons-list').elem('icon-bg')({'tag': 'a'});
 block('sm-icons-list').elem('icon')({'tag': 'i'});

@@ -28,325 +28,308 @@ export default function createUpdateProfile() {
   createHeader();
   // TODO: add check auth
   const template = [{
-    block: 'profile-popup',
-    mods: {main: true},
-    content: [
-      {
-        block: 'title',
-        wrappedInside: 'profile-popup',
-        content: ['Профиль'],
-      },
-      {
-        block: 'icon-bg',
-        mods: {
-          bg: 'borderless', size: 'xxxlarge', shape: 'round',
-          color: 'muted-light',
-        },
-        wrappedInside: 'profile-popup',
-        wrappedAs: 'profile-icon',
+        block: 'profile-popup',
+        mods: {main: true},
         content: [
           {
-            tag: 'span',
-            block: 'profile-popup',
-            elem: 'userpic-text',
-            content: ['ИИ'],
-          },
-        ],
-      },
-      {
-        block: 'form',
-        attrs: {id: 'updateForm', novalidate: true},
-        fieldName: 'updateForm',
-        mix: {'block': 'signup-form'},
-        content: [
-          {
-            block: 'profile-info',
+            block: 'title',
             wrappedInside: 'profile-popup',
+            content: ['Профиль'],
+          },
+          {
+            block: 'icon-bg',
+            mods: {
+              bg: 'borderless', size: 'xxxlarge', shape: 'round',
+              color: 'muted-light',
+            },
+            wrappedInside: 'profile-popup',
+            wrappedAs: 'profile-icon',
             content: [
               {
-                elem: 'item',
-                name: 'Имя',
-                value: {
-                  block: 'form-group',
-                  content: [
-                    {
-                      block: 'input',
-                      wrappedAs: 'input',
-                      fieldName: 'firstName',
-                      fieldAttrs: {
-                        type: 'text',
-                        placeholder: 'Иван',
-                        checkable: true,
-                        checkType: 'name',
-                      },
-                    },
-                    {
-                      block: 'form-group',
-                      elem: 'help-text',
-                      elemMods: {type: 'hidden'},
-                      for: 'firstName',
-                    },
-                  ],
-                },
+                tag: 'span',
+                block: 'profile-popup',
+                elem: 'userpic-text',
+                content: ['ИИ'],
               },
+            ],
+          },
+          {
+            block: 'form',
+            attrs: {id: 'updateForm', novalidate: true},
+            fieldName: 'updateForm',
+            mix: {'block': 'signup-form'},
+            content: [
               {
-                elem: 'item',
-                name: 'Фамилия',
-                value: {
-                  block: 'form-group',
-                  content: [
-                    {
-                      block: 'input',
-                      mods: {'required': true},
-                      fieldName: 'lastName',
-                      fieldAttrs: {
-                        type: 'text',
-                        placeholder: 'Иванов',
-                        checkable: true,
-                        checkType: 'lastName',
-                      },
-                    },
-                    {
-                      block: 'form-group',
-                      elem: 'help-text',
-                      elemMods: {type: 'hidden'},
-                      for: 'lastName',
-                    },
-                  ],
-                },
-              },
-              {
-                elem: 'item',
-                name: 'E-mail',
-                value: {
-                  block: 'form-group',
-                  content: [
-                    {
-                      block: 'input',
-                      fieldName: 'email',
-                      fieldAttrs: {
-                        type: 'email',
-                        placeholder: 'your.name@site.com',
-                      },
-                    },
-                    {
-                      block: 'form-group',
-                      elem: 'help-text',
-                      elemMods: {type: 'hidden'},
-                      for: 'email',
-                    },
-                  ],
-                },
-              },
-              {
-                elem: 'item',
-                name: 'Никейм',
-                value: {
-                  block: 'form-group',
-                  content: [
-                    {
-                      block: 'input',
-                      mods: {'required': true},
-                      fieldName: 'userName',
-                      fieldAttrs: {
-                        type: 'text',
-                        placeholder: 'username',
-                        checkable: true,
-                        checkType: 'userName',
-                      },
-                    },
-                    {
-                      block: 'form-group',
-                      elem: 'help-text',
-                      elemMods: {type: 'hidden'},
-                      for: 'userName',
-                    },
-                  ],
-                },
-              },
-              {
-                elem: 'item',
-                name: 'Пол',
-                value: {
-                  block: 'form-group',
-                  content: [
-                    {
-                      elem: 'filed',
-                      content: {
-                        block: 'signup-form',
-                        elem: 'date-select',
-                        content: {
-                          block: 'select',
-                          fieldName: 'selectMale',
-                          wrappedInside: 'signup-form',
-                          attrs: {id: 'signup__selectMale'},
-                          options: ['Пол', 'Мужской', 'Женский'],
-                        },
-                      },
-                    },
-                    {
-                      block: 'form-group',
-                      elem: 'help-text',
-                      elemMods: {type: 'hidden'},
-                      for: '_',
-                    },
-                  ],
-                },
-              },
-              {
-                elem: 'item',
-                name: 'Дата рождения',
-                value: [
+                block: 'profile-info',
+                wrappedInside: 'profile-popup',
+                content: [
                   {
-                    block: 'form-group',
-                    content: {
-                      block: 'field-group',
+                    elem: 'item',
+                    name: 'Имя',
+                    value: {
+                      block: 'form-group',
+                      content: [
+                        {
+                          block: 'input',
+                          fieldName: 'firstName',
+                          fieldAttrs: {
+                            type: 'text',
+                            placeholder: 'Иван',
+                            checkable: true,
+                            checkType: 'name',
+                          },
+                        },
+                        {
+                          elem: 'help-text',
+                          elemMods: {type: 'hidden'},
+                          for: 'firstName',
+                        }
+                      ],
+                    },
+                  },
+                  {
+                    elem: 'item',
+                    name: 'Фамилия',
+                    value: {
+                      block: 'form-group',
+                      content: [
+                        {
+                          block: 'input',
+                          // mods: {'required': true},
+                          fieldName: 'lastName',
+                          fieldAttrs: {
+                            type: 'text',
+                            placeholder: 'Иванов',
+                            checkable: true,
+                            checkType: 'lastName',
+                          },
+                        },
+                        {
+                          elem: 'help-text',
+                          elemMods: {type: 'hidden'},
+                          for: 'lastName',
+                        }
+                      ],
+                    },
+                  },
+                  {
+                    elem: 'item',
+                    name: 'E-mail',
+                    value: {
+                      block: 'form-group',
+                      content: [
+                        {
+                          block: 'input',
+                          fieldName: 'email',
+                          fieldAttrs: {
+                            checkable: true,
+                            required: true,
+                            type: 'email',
+                            placeholder: 'your.name@site.com',
+                          },
+                        },
+                        {
+                          elem: 'help-text',
+                          elemMods: {type: 'hidden'},
+                          for: 'email',
+                        },
+                      ]
+                    },
+                  },
+                  {
+                    elem: 'item',
+                    name: 'Никейм',
+                    value: {
+                      block: 'form-group',
+                      content: [
+                        {
+                          block: 'input',
+                          fieldName: 'userName',
+                          fieldAttrs: {
+                            required: true,
+                            checkable: true,
+                            placeholder: 'username',
+                            checkType: 'userName',
+                          }
+                        },
+                        {
+                          elem: 'help-text',
+                          elemMods: {type: 'hidden'},
+                          for: 'userName',
+                        },],
+                    },
+                  },
+                  {
+                    elem: 'item',
+                    name: 'Пол',
+                    value: {
+                      block: 'form-group',
                       content: [
                         {
                           block: 'select',
-                          fieldName: 'selectDay',
-                          wrappedInside: 'signup-form',
-                          attrs: {id: 'signup__selectDay'},
-                          options: [...Array(30).keys()].map(
-                            (num) => num + 1
-                          ),
+                          fieldName: 'selectMale',
+                          attrs: {id: 'signup__selectMale'},
+                          options: ['Пол', 'Мужской', 'Женский'],
                         },
                         {
-                          block: 'select',
-                          fieldName: 'selectMonth',
-                          wrappedInside: 'signup-form',
-                          wrappedInside: 'date-select',
-                          attrs: {id: 'signup__selectMonth'},
-                          options: ['Месяц', 'Янаварь', 'Февраль',
-                            'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
-                            'Август', 'Сентябрь', 'Октябрь',
-                            'Ноябрь', 'Декабрь'],
+                          block: 'form-group',
+                          elem: 'help-text',
+                          elemMods: {type: 'hidden'},
+                          for: '_',
                         },
-                        {
-                          block: 'select',
-                          fieldName: 'selectYear',
-                          wrappedInside: 'signup-form',
-                          attrs: {id: 'signup__selectYear'},
-                          options: [...Array(119).keys()].map(
-                            (num) => num + 1900
-                          ).reverse(),
+                      ],
+                    },
+                  },
+                  {
+                    elem: 'item',
+                    name: 'Дата рождения',
+                    value: [
+                      {
+                        block: 'form-group',
+                        mods: {size: 'inline'},
+                        content: {
+                          block: 'field-group',
+                          content: [
+                            {
+                              block: 'select',
+                              fieldName: 'selectDay',
+                              attrs: {id: 'signup__selectDay'},
+                              options: [...Array(30).keys()].map(
+                                  (num) => num + 1
+                              ),
+                            },
+                            {
+                              block: 'select',
+                              fieldName: 'selectMonth',
+                              attrs: {id: 'signup__selectMonth'},
+                              options: ['Месяц', 'Янаварь', 'Февраль',
+                                'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
+                                'Август', 'Сентябрь', 'Октябрь',
+                                'Ноябрь', 'Декабрь'],
+                            },
+                            {
+                              block: 'select',
+                              fieldName: 'selectYear',
+                              attrs: {id: 'signup__selectYear'},
+                              options: [...Array(119).keys()].map(
+                                  (num) => num + 1900
+                              ).reverse(),
+                            }
+                          ]
                         }
-                      ]
+                      }
+                    ]
+                  },
+                  {
+                    elem: 'item',
+                    name: 'Аватар',
+                    value: {
+                      block: 'form-group',
+                      mods: {size: 'inline'},
+                      content: [{
+                        block: 'file-input',
+                        fieldName: 'avatar',
+                      }]
                     }
-                  }
-                ]
-              },
-              {
-                elem: 'item',
-                name: 'Аватар',
-                value: {
-                  block: 'file-input',
-                  fieldName: 'avatar',
-                  fieldAttrs: {
-                    script: 'static/public/js/file-input.js',
-                  },
-                },
-              },
-              {
-                elem: 'item',
-                name: 'Пароль',
-                value: {
-                  block: 'form-group',
-                  content: [
-                    {
-                      block: 'input',
-                      wrappedAs: 'input',
-                      fieldName: 'password',
-                      fieldAttrs: {
-                        type: 'password',
-                        placeholder: 'Пароль',
-                        required: true,
-                        checkable: true,
-                        checkType: 'password',
-                      },
-                    },
-                    {
-                      block: 'form-group',
-                      elem: 'help-text',
-                      elemMods: {type: 'hidden'},
-                      for: 'password',
-                    },
-                  ],
-                },
-              },
-              {
-                elem: 'item',
-                name: 'Повторите пароль',
-                value: {
-                  block: 'form-group',
-                  content: [
-                    {
-                      block: 'input',
-                      wrappedAs: 'input',
-                      fieldName: 'passwordRepeat',
-                      fieldAttrs: {
-                        type: 'password',
-                        placeholder: 'Повторите пароль',
-                        required: true,
-                        checkable: true,
-                        checkType: 'repeatPassword',
-                      },
-                    },
-                    {
-                      block: 'form-group',
-                      elem: 'help-text',
-                      elemMods: {type: 'hidden'},
-                      for: 'passwordRepeat',
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-          {
-            block: 'profile-popup',
-            elem: 'double-btn',
-            elemMods: {center: true},
-            content: [
-              {
-                block: 'btn',
-                attrs: {'type': 'submit'},
-                mods: {'size': 'large', 'with-icon': true, 'cancel': true},
-                wrappedInside: 'profile-popup',
-                content: [
-                  {
-                    block: 'icon',
-                    wrappedInside: 'btn',
-                    mods: {type: 'useredit', size: 'large'},
                   },
                   {
-                    elem: 'text',
-                    content: ' Обновить',
+                    elem: 'item',
+                    name: 'Пароль',
+                    value: {
+                      block: 'form-group',
+                      content: [
+                        {
+                          block: 'input',
+                          fieldName: 'password',
+                          fieldAttrs: {
+                            type: 'password',
+                            placeholder: 'Пароль',
+                            required: true,
+                            checkable: true,
+                            checkType: 'password',
+                          }
+                        },
+                        {
+                          elem: 'help-text',
+                          elemMods: {type: 'hidden'},
+                          for: 'password',
+                        }
+                      ],
+                    },
+                  },
+                  {
+                    elem: 'item',
+                    name: 'Повторите пароль',
+                    value: {
+                      block: 'form-group',
+                      content: [
+                        {
+                          block: 'input',
+                          fieldName: 'passwordRepeat',
+                          fieldAttrs: {
+                            type: 'password',
+                            placeholder: 'Повторите пароль',
+                            required: true,
+                            checkable: true,
+                            checkType: 'repeatPassword',
+                          }
+                        },
+                        {
+                          elem: 'help-text',
+                          elemMods: {type: 'hidden'},
+                          for: 'passwordRepeat',
+                        }
+                      ],
+                    },
                   },
                 ],
               },
               {
-                block: 'btn',
-                mods: {'size': 'large', 'with-icon': true, 'color': 'muted'},
-                wrappedInside: 'profile-popup',
+                block: 'profile-popup',
+                elem: 'double-btn',
+                elemMods: {center: true},
                 content: [
                   {
-                    block: 'icon',
-                    wrappedInside: 'btn',
-                    mods: {type: 'delete', size: 'large'},
+                    block: 'btn',
+                    attrs: {'type': 'submit'},
+                    mods: {'size': 'large', 'with-icon': true, 'cancel': true},
+                    wrappedInside: 'profile-popup',
+                    content: [
+                      {
+                        block: 'icon',
+                        wrappedInside: 'btn',
+                        mods: {type: 'useredit', size: 'large'},
+                      },
+                      {
+                        elem: 'text',
+                        content: ' Обновить',
+                      },
+                    ],
                   },
                   {
-                    elem: 'text',
-                    content: 'Удалить',
+                    block: 'btn',
+                    mods: {'size': 'large', 'with-icon': true, 'color': 'muted'},
+                    wrappedInside: 'profile-popup',
+                    content: [
+                      {
+                        block: 'icon',
+                        wrappedInside: 'btn',
+                        mods: {type: 'delete', size: 'large'},
+                      },
+                      {
+                        elem: 'text',
+                        content: 'Удалить',
+                      },
+                    ],
                   },
                 ],
               },
             ],
           },
         ],
-      },
-    ],
-  }];
+      }
+      ]
+  ;
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
@@ -355,7 +338,7 @@ export default function createUpdateProfile() {
   initFileInputs();
 
   const cnslBtn = document.getElementsByClassName('btn_cancel')[0];
-  cnslBtn.addEventListener('click', function(event) {
+  cnslBtn.addEventListener('click', function (event) {
     event.preventDefault();
     application.innerHTML = '';
     createProfile();
@@ -363,7 +346,7 @@ export default function createUpdateProfile() {
 
   const form = document.getElementById('updateForm');
   console.log(form);
-  form.addEventListener('submit', function(event) {
+  form.addEventListener('submit', function (event) {
     event.preventDefault();
     console.log('i am here');
     const firstName = form.elements['firstName'].value;
@@ -403,4 +386,5 @@ export default function createUpdateProfile() {
       },
     });
   });
-};
+}
+;
