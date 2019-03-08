@@ -57,7 +57,6 @@ export default function createUpdateProfile() {
         block: 'form',
         attrs: {id: 'updateForm', novalidate: true},
         fieldName: 'updateForm',
-        name: 'updateForm',
         mix: {'block': 'signup-form'},
         content: [
           {
@@ -69,12 +68,9 @@ export default function createUpdateProfile() {
                 name: 'Имя',
                 value: {
                   block: 'form-group',
-                  fieldName: 'firsName',
                   content: [
                     {
                       block: 'input',
-                      wrappedAs: 'input',
-                      name: 'firstName',
                       fieldName: 'firstName',
                       fieldAttrs: {
                         type: 'text',
@@ -84,7 +80,6 @@ export default function createUpdateProfile() {
                       },
                     },
                     {
-                      block: 'form-group',
                       elem: 'help-text',
                       elemMods: {type: 'hidden'},
                       for: 'firstName',
@@ -100,7 +95,6 @@ export default function createUpdateProfile() {
                   content: [
                     {
                       block: 'input',
-                      mods: {'required': true},
                       fieldName: 'lastName',
                       fieldAttrs: {
                         type: 'text',
@@ -110,7 +104,6 @@ export default function createUpdateProfile() {
                       },
                     },
                     {
-                      block: 'form-group',
                       elem: 'help-text',
                       elemMods: {type: 'hidden'},
                       for: 'lastName',
@@ -128,12 +121,13 @@ export default function createUpdateProfile() {
                       block: 'input',
                       fieldName: 'email',
                       fieldAttrs: {
+                        checkable: true,
+                        required: true,
                         type: 'email',
                         placeholder: 'your.name@site.com',
                       },
                     },
                     {
-                      block: 'form-group',
                       elem: 'help-text',
                       elemMods: {type: 'hidden'},
                       for: 'email',
@@ -149,22 +143,19 @@ export default function createUpdateProfile() {
                   content: [
                     {
                       block: 'input',
-                      mods: {'required': true},
                       fieldName: 'userName',
                       fieldAttrs: {
-                        type: 'text',
-                        placeholder: 'username',
+                        required: true,
                         checkable: true,
+                        placeholder: 'username',
                         checkType: 'userName',
                       },
                     },
                     {
-                      block: 'form-group',
                       elem: 'help-text',
                       elemMods: {type: 'hidden'},
                       for: 'userName',
-                    },
-                  ],
+                    }],
                 },
               },
               {
@@ -174,18 +165,10 @@ export default function createUpdateProfile() {
                   block: 'form-group',
                   content: [
                     {
-                      elem: 'filed',
-                      content: {
-                        block: 'signup-form',
-                        elem: 'date-select',
-                        content: {
-                          block: 'select',
-                          fieldName: 'selectMale',
-                          wrappedInside: 'signup-form',
-                          attrs: {id: 'signup__selectMale'},
-                          options: ['Пол', 'Мужской', 'Женский'],
-                        },
-                      },
+                      block: 'select',
+                      fieldName: 'selectMale',
+                      attrs: {id: 'signup__selectMale'},
+                      options: ['Пол', 'Мужской', 'Женский'],
                     },
                     {
                       block: 'form-group',
@@ -202,13 +185,13 @@ export default function createUpdateProfile() {
                 value: [
                   {
                     block: 'form-group',
+                    mods: {size: 'inline'},
                     content: {
                       block: 'field-group',
                       content: [
                         {
                           block: 'select',
                           fieldName: 'selectDay',
-                          wrappedInside: 'signup-form',
                           attrs: {id: 'signup__selectDay'},
                           options: [...Array(30).keys()].map(
                               (num) => num + 1
@@ -217,7 +200,6 @@ export default function createUpdateProfile() {
                         {
                           block: 'select',
                           fieldName: 'selectMonth',
-                          wrappedInside: 'signup-form',
                           attrs: {id: 'signup__selectMonth'},
                           options: ['Месяц', 'Янаварь', 'Февраль',
                             'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
@@ -227,7 +209,6 @@ export default function createUpdateProfile() {
                         {
                           block: 'select',
                           fieldName: 'selectYear',
-                          wrappedInside: 'signup-form',
                           attrs: {id: 'signup__selectYear'},
                           options: [...Array(119).keys()].map(
                               (num) => num + 1900
@@ -242,11 +223,12 @@ export default function createUpdateProfile() {
                 elem: 'item',
                 name: 'Аватар',
                 value: {
-                  block: 'file-input',
-                  fieldName: 'avatar',
-                  fieldAttrs: {
-                    script: 'static/public/js/file-input.js',
-                  },
+                  block: 'form-group',
+                  mods: {size: 'inline'},
+                  content: [{
+                    block: 'file-input',
+                    fieldName: 'avatar',
+                  }],
                 },
               },
               {
@@ -257,7 +239,6 @@ export default function createUpdateProfile() {
                   content: [
                     {
                       block: 'input',
-                      wrappedAs: 'input',
                       fieldName: 'password',
                       fieldAttrs: {
                         type: 'password',
@@ -268,7 +249,6 @@ export default function createUpdateProfile() {
                       },
                     },
                     {
-                      block: 'form-group',
                       elem: 'help-text',
                       elemMods: {type: 'hidden'},
                       for: 'password',
@@ -284,7 +264,6 @@ export default function createUpdateProfile() {
                   content: [
                     {
                       block: 'input',
-                      wrappedAs: 'input',
                       fieldName: 'passwordRepeat',
                       fieldAttrs: {
                         type: 'password',
@@ -295,7 +274,6 @@ export default function createUpdateProfile() {
                       },
                     },
                     {
-                      block: 'form-group',
                       elem: 'help-text',
                       elemMods: {type: 'hidden'},
                       for: 'passwordRepeat',
@@ -348,7 +326,9 @@ export default function createUpdateProfile() {
         ],
       },
     ],
-  }];
+  },
+  ]
+  ;
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
@@ -356,16 +336,16 @@ export default function createUpdateProfile() {
 
   initFileInputs();
 
-  const cnslBtn = document.getElementsByClassName('btn_color_muted')[0];
+  const cnslBtn = document.getElementsByClassName('btn_cancel')[0];
   cnslBtn.addEventListener('click', function(event) {
     event.preventDefault();
     application.innerHTML = '';
     createProfile();
   });
 
-  const form = document.getElementsByTagName('input');
-  const submitBtn = document.getElementsByClassName('btn_cancel')[0];
-  submitBtn.addEventListener('click', function(event) {
+  const form = document.getElementById('updateForm');
+  console.log(form);
+  form.addEventListener('submit', function(event) {
     event.preventDefault();
     const firstName = form['updateForm_firstName'].value;
     const secondName = form['updateForm_lastName'].value;

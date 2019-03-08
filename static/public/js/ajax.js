@@ -79,6 +79,25 @@ class AjaxModule {
       method: 'POST',
     });
   }
+
+  /**
+   *
+   * @param callback
+   * @param path
+   * @param body
+   */
+  doDelete({
+    callback = noop,
+    path = '/',
+    body = {},
+  } = {}) {
+    this._ajax({
+      callback,
+      path,
+      body,
+      method: 'DELETE',
+    });
+  }
 }
 
 export default AjaxModule;
