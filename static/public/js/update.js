@@ -55,8 +55,9 @@ export default function createUpdateProfile() {
       },
       {
         block: 'form',
+        name: 'updateForm',
         attrs: {id: 'updateForm', novalidate: true},
-        fieldName: 'updateForm',
+        // fieldName: 'updateForm',
         mix: {'block': 'signup-form'},
         content: [
           {
@@ -336,7 +337,7 @@ export default function createUpdateProfile() {
 
   initFileInputs();
 
-  const cnslBtn = document.getElementsByClassName('btn_cancel')[0];
+  const cnslBtn = document.getElementsByClassName('btn_color_muted')[0];
   cnslBtn.addEventListener('click', function(event) {
     event.preventDefault();
     application.innerHTML = '';
@@ -359,7 +360,7 @@ export default function createUpdateProfile() {
     const date = `${day}-${month}-${year}`;
     const password = form['updateForm_password'].value;
     const passwordRepeat = form['updateForm_passwordRepeat'].value;
-
+    console.log('i get information');
     const errors = document.getElementsByClassName('form-group__help-text');
     if (errors !== null) {
       console.log(errors);
