@@ -1,7 +1,7 @@
 block('form')({tag: 'form'});
 
 block('form')({
-  extend: (node) => ({
-    formId: node.generateId(),
+  extend: (node, ctx) => ({
+    formId: ctx.name, // node.generateId(),
   }),
 });

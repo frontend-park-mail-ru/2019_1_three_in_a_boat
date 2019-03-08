@@ -372,7 +372,7 @@ export default function createUpdateProfile() {
     createProfile();
   });
 
-  const form = document.getElementById('updateForm');
+  const form = document.getElementsByTagName('input');
   console.log(form);
   form.addEventListener('submit', function(event) {
     event.preventDefault();
