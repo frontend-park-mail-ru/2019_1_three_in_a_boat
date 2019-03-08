@@ -1,6 +1,8 @@
 import createHeader from './header.js';
 import createMenu from './menu.js';
 import AjaxModule from './ajax.js';
+import initFileInputs from './file-input.js';
+import createProfile from './profile.js';
 
 const ajax = new AjaxModule();
 
@@ -44,6 +46,7 @@ export default function createSignUp() {
         },
         {
           block: 'form',
+          name: 'signupForm',
           attrs: {id: 'signup-form', novalidate: true},
           mix: {'block': 'signup-form'},
           content: [
@@ -319,32 +322,37 @@ export default function createSignUp() {
       'beforeend',
       bemhtml.apply(template));
 
-  const cnslBtn = document.getElementsByClassName('signup-form__cancel-btn')[0];
+  initFileInputs();
+
+  const cnslBtn = document.getElementsByClassName('btn_color_muted')[0];
   cnslBtn.addEventListener('click', function(event) {
     event.preventDefault();
     application.innerHTML = '';
-    createMenu();
+    createProfile();
   });
 
-  const form = document.getElementById('signup-form');
-  form.addEventListener('submit', function(event) {
+  const form = document.getElementsByTagName('input');
+  const submitBtn = document.getElementsByClassName(
+      'signup-form__singup-btn')[0];
+  submitBtn.addEventListener('click', function(event) {
     event.preventDefault();
+    const firstName = form['signupForm_firstName'].value;
+    const secondName = form['signupForm_lastName'].value;
+    const email = form['signupForm_email'].value;
+    const userName = form['signupForm_username'].value;
 
-    const firstName = form.elements['firstName'].value;
-    const secondName = form.elements['secondName'].value;
-    const userName = form.elements['userName'].value;
-    const email = form.elements['email'].value;
-    const day = form.elements['selectDay'].value;
-    const month = months[form.elements['selectMonth'].value];
-    const year = form.elements['selectYear'].value;
+    const selectField = document.getElementsByTagName('select');
+    const day = selectField['signupForm_selectDay'].value;
+    const month = months[selectField['signupForm_selectMonth'].value];
+    const year = selectField['signupForm_selectYear'].value;
     const date = `${day}-${month}-${year}`;
-    const password = form.elements['password'].value;
-    const passwordRepeat = form.elements['passwordRepeat'].value;
+
+    const password = form['signupForm_password'].value;
+    const passwordRepeat = form['signupForm_passwordRepeat'].value;
 
     const errors = document.getElementsByClassName('form-group__help-text');
     if (errors !== null) {
-      alert(errors);
-      return;
+      console.log(errors);
     }
     if (password !== passwordRepeat) {
       alert('Passwords is not equals');
@@ -354,16 +362,16 @@ export default function createSignUp() {
     ajax.doPost({
       callback() {
         application.innerHTML = '';
-        createMenu(); // TODO: change to createUserProfile()
+        createProfile(); // TODO: change to createUserProfile()
       },
       path: 'http://127.0.0.1:3000/signup',
       body: {
-        firstName: firstName,
-        lastName: secondName,
-        userName: userName,
+        username: userName,
+        password: password,
+        name: firstName,
+        lastname: secondName,
         email: email,
         date: date,
-        password: password,
       },
     });
   });
