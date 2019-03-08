@@ -1,4 +1,6 @@
 import createHeader from './header.js';
+import createMenu from './menu.js';
+import createProfile from './profile.js';
 
 /**
  *
@@ -19,7 +21,7 @@ export default function createUpdateProfile() {
         block: 'icon-bg',
         mods: {
           bg: 'borderless', size: 'xxxlarge', shape: 'round',
-          color: 'muted-light'
+          color: 'muted-light',
         },
         wrappedInside: 'profile-popup',
         wrappedAs: 'profile-icon',
@@ -112,6 +114,32 @@ export default function createUpdateProfile() {
               },
               {
                 elem: 'item',
+                name: 'Никейм',
+                value: {
+                  block: 'form-group',
+                  content: [
+                    {
+                      block: 'input',
+                      mods: {'required': true},
+                      fieldName: 'userName',
+                      fieldAttrs: {
+                        type: 'text',
+                        placeholder: 'username',
+                        checkable: true,
+                        checkType: 'userName',
+                      },
+                    },
+                    {
+                      block: 'form-group',
+                      elem: 'help-text',
+                      elemMods: {type: 'hidden'},
+                      for: 'userName',
+                    },
+                  ],
+                },
+              },
+              {
+                elem: 'item',
                 name: 'Пол',
                 value: {
                   block: 'form-group',
@@ -134,7 +162,7 @@ export default function createUpdateProfile() {
                           },
                         },
                       },
-                    ]
+                    ],
                   },
                 },
               },
@@ -204,10 +232,22 @@ export default function createUpdateProfile() {
               },
               {
                 elem: 'item',
+                name: 'Аватар',
+                value: {
+                  block: 'input',
+                  fieldName: 'avatar',
+                  fieldAttrs: {
+                    type: 'file',
+                    accept: 'image/*',
+                  },
+                },
+              },
+              {
+                elem: 'item',
                 name: 'Пароль',
                 value: {
                   block: 'form-group',
-                  mix: {'block': 'signup-form__form-group'},
+                  cls: 'form-group__size_inline, form-group_align_stretch',
                   content: [
                     {
                       block: 'input',
@@ -236,7 +276,7 @@ export default function createUpdateProfile() {
                 name: 'Повторите пароль',
                 value: {
                   block: 'form-group',
-                  mix: {'block': 'signup-form__form-group'},
+                  cls: 'form-group__size_inline, form-group_align_stretch',
                   content: [
                     {
                       block: 'input',
@@ -307,4 +347,53 @@ export default function createUpdateProfile() {
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
   );
+
+  const cnslBtn = document.getElementsByClassName('btn_color_muted')[0];
+  cnslBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    application.innerHTML = '';
+    createProfile();
+  });
+
+  const form = document.getElementById('signup-popup');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const firstName = form.elements['firstName'].value;
+    const secondName = form.elements['secondName'].value;
+    const email = form.elements['email'].value;
+    const userName = form.elements['userName'].value;
+    const day = form.elements['selectDay'].value;
+    const month = months[form.elements['selectMonth'].value];
+    const year = form.elements['selectYear'].value;
+    const date = `${day}-${month}-${year}`;
+    const password = form.elements['password'].value;
+    const passwordRepeat = form.elements['passwordRepeat'].value;
+
+    const errors = document.getElementsByClassName('form-group__help-text');
+    if (errors !== null) {
+      return;
+    }
+    if (password !== passwordRepeat) {
+      alert('Passwords is not equals');
+      return;
+    }
+
+    ajax.doPost({
+      callback() {
+        application.innerHTML = '';
+        createMenu(); // TODO: change to createUserProfile()
+      },
+      path: '/signup',
+      body: {
+        firstName: firstName,
+        lastName: secondName,
+        userName: userName,
+        email: email,
+        date: date,
+        password: password,
+      },
+    });
+  });
+
 };
