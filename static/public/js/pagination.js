@@ -14,8 +14,9 @@ function getNumeration(currPage, pagesNumber) {
   }
 
   if (currPage + 2 < pagesNumber - 2) {
-    numbers.push('...', pagesNumber - 1, pagesNumber, 'Вперед');
+    numbers.push('...', pagesNumber - 1, pagesNumber); // TODO situation 5/8
   }
+  numbers.push('Вперед');
 
   return numbers;
 }

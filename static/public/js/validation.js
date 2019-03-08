@@ -4,8 +4,11 @@
  * @return {Array} array of errors
  */
 export function validate(input) {
-  if (input.required && input.value === '') {
-    return ['Заполните это поле'];
+  if (input.value === '') {
+    if (input.required) {
+      return ['Заполните это поле'];
+    }
+    return [];
   }
   let errors = [];
 

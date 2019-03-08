@@ -44,7 +44,7 @@ export default function createSignUp() {
         },
         {
           block: 'form',
-          attrs: {novalidate: true},
+          attrs: {id: 'signup-form', novalidate: true},
           mix: {'block': 'signup-form'},
           content: [
             {
@@ -60,7 +60,6 @@ export default function createSignUp() {
                       fieldAttrs: {
                         type: 'text',
                         placeholder: 'Имя',
-                        required: true,
                         checkable: true,
                         checkType: 'name',
                       },
@@ -78,12 +77,10 @@ export default function createSignUp() {
                   content: [
                     {
                       block: 'input',
-                      mods: {'required': true},
                       fieldName: 'lastName',
                       fieldAttrs: {
                         type: 'text',
                         placeholder: 'Фамилия',
-                        required: true,
                         checkable: true,
                         checkType: 'lastName',
                       },
@@ -101,7 +98,6 @@ export default function createSignUp() {
                   content: [
                     {
                       block: 'input',
-                      mods: {'required': true},
                       fieldName: 'email',
                       fieldAttrs: {
                         type: 'email',
@@ -330,7 +326,7 @@ export default function createSignUp() {
     createMenu();
   });
 
-  const form = document.getElementById('signup-popup');
+  const form = document.getElementById('signup-form');
   form.addEventListener('submit', function(event) {
     event.preventDefault();
 

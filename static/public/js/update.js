@@ -1,6 +1,8 @@
 import createHeader from './header.js';
 import createProfile from './profile.js';
 import AjaxModule from './ajax.js';
+import initFileInputs from './file-input.js';
+
 
 const ajax = new AjaxModule();
 
@@ -127,6 +129,12 @@ export default function createUpdateProfile() {
                         placeholder: 'your.name@site.com',
                       },
                     },
+                    {
+                      block: 'form-group',
+                      elem: 'help-text',
+                      elemMods: {type: 'hidden'},
+                      for: 'email',
+                    },
                   ],
                 },
               },
@@ -161,27 +169,28 @@ export default function createUpdateProfile() {
                 name: 'Пол',
                 value: {
                   block: 'form-group',
-                  cls: 'form-group__size_inline, form-group_align_stretch',
-                  content: {
-                    block: 'field-group',
-                    elem: 'field',
-                    content: [
-                      {
-                        elem: 'filed',
+                  content: [
+                    {
+                      elem: 'filed',
+                      content: {
+                        block: 'signup-form',
+                        elem: 'date-select',
                         content: {
-                          block: 'signup-form',
-                          elem: 'date-select',
-                          content: {
-                            block: 'select',
-                            fieldName: 'selectMale',
-                            wrappedInside: 'signup-form',
-                            attrs: {id: 'signup__selectMale'},
-                            options: ['Пол', 'Мужской', 'Женский'],
-                          },
+                          block: 'select',
+                          fieldName: 'selectMale',
+                          wrappedInside: 'signup-form',
+                          attrs: {id: 'signup__selectMale'},
+                          options: ['Пол', 'Мужской', 'Женский'],
                         },
                       },
-                    ],
-                  },
+                    },
+                    {
+                      block: 'form-group',
+                      elem: 'help-text',
+                      elemMods: {type: 'hidden'},
+                      for: '_',
+                    },
+                  ],
                 },
               },
               {
@@ -190,73 +199,51 @@ export default function createUpdateProfile() {
                 value: [
                   {
                     block: 'form-group',
-                    cls: 'form-group__size_inline, form-group_align_stretch',
                     content: {
                       block: 'field-group',
                       content: [
                         {
-                          elem: 'filed',
-                          content: {
-                            block: 'signup-form',
-                            elem: 'date-select',
-                            content: {
-                              block: 'select',
-                              fieldName: 'selectDay',
-                              wrappedInside: 'signup-form',
-                              attrs: {id: 'signup__selectDay'},
-                              options: [...Array(30).keys()].map(
-                                  (num) => num + 1
-                              ),
-                            },
-                          },
+                          block: 'select',
+                          fieldName: 'selectDay',
+                          wrappedInside: 'signup-form',
+                          attrs: {id: 'signup__selectDay'},
+                          options: [...Array(30).keys()].map(
+                            (num) => num + 1
+                          ),
                         },
                         {
-                          elem: 'filed',
-                          content: {
-                            block: 'signup-form',
-                            elem: 'date-select',
-                            content: {
-                              block: 'select',
-                              fieldName: 'selectMonth',
-                              wrappedInside: 'signup-form',
-                              attrs: {id: 'signup__selectMonth'},
-                              options: ['Месяц', 'Янаварь', 'Февраль',
-                                'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
-                                'Август', 'Сентябрь', 'Октябрь',
-                                'Ноябрь', 'Декабрь'],
-                            },
-                          },
+                          block: 'select',
+                          fieldName: 'selectMonth',
+                          wrappedInside: 'signup-form',
+                          wrappedInside: 'date-select',
+                          attrs: {id: 'signup__selectMonth'},
+                          options: ['Месяц', 'Янаварь', 'Февраль',
+                            'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
+                            'Август', 'Сентябрь', 'Октябрь',
+                            'Ноябрь', 'Декабрь'],
                         },
                         {
-                          elem: 'filed',
-                          content: {
-                            block: 'signup-form',
-                            elem: 'date-select',
-                            content: {
-                              block: 'select',
-                              fieldName: 'selectYear',
-                              wrappedInside: 'signup-form',
-                              attrs: {id: 'signup__selectYear'},
-                              options: [...Array(119).keys()].map(
-                                  (num) => num + 1900
-                              ).reverse(),
-                            },
-                          },
-                        },
-                      ],
-                    },
-                  },
-                ],
+                          block: 'select',
+                          fieldName: 'selectYear',
+                          wrappedInside: 'signup-form',
+                          attrs: {id: 'signup__selectYear'},
+                          options: [...Array(119).keys()].map(
+                            (num) => num + 1900
+                          ).reverse(),
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
                 elem: 'item',
                 name: 'Аватар',
                 value: {
-                  block: 'input',
+                  block: 'file-input',
                   fieldName: 'avatar',
                   fieldAttrs: {
-                    type: 'file',
-                    accept: 'image/*',
+                    script: 'static/public/js/file-input.js',
                   },
                 },
               },
@@ -265,7 +252,6 @@ export default function createUpdateProfile() {
                 name: 'Пароль',
                 value: {
                   block: 'form-group',
-                  cls: 'form-group__size_inline, form-group_align_stretch',
                   content: [
                     {
                       block: 'input',
@@ -274,10 +260,10 @@ export default function createUpdateProfile() {
                       fieldAttrs: {
                         type: 'password',
                         placeholder: 'Пароль',
+                        required: true,
                         checkable: true,
                         checkType: 'password',
                       },
-                      required: true,
                     },
                     {
                       block: 'form-group',
@@ -293,7 +279,6 @@ export default function createUpdateProfile() {
                 name: 'Повторите пароль',
                 value: {
                   block: 'form-group',
-                  cls: 'form-group__size_inline, form-group_align_stretch',
                   content: [
                     {
                       block: 'input',
@@ -302,10 +287,10 @@ export default function createUpdateProfile() {
                       fieldAttrs: {
                         type: 'password',
                         placeholder: 'Повторите пароль',
+                        required: true,
                         checkable: true,
                         checkType: 'repeatPassword',
                       },
-                      required: true,
                     },
                     {
                       block: 'form-group',
@@ -319,11 +304,13 @@ export default function createUpdateProfile() {
             ],
           },
           {
+            block: 'profile-popup',
             elem: 'double-btn',
+            elemMods: {center: true},
             content: [
               {
                 block: 'btn',
-                attrs: {'type' : 'submit'},
+                attrs: {'type': 'submit'},
                 mods: {'size': 'large', 'with-icon': true, 'cancel': true},
                 wrappedInside: 'profile-popup',
                 content: [
@@ -364,6 +351,8 @@ export default function createUpdateProfile() {
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
   );
+
+  initFileInputs();
 
   const cnslBtn = document.getElementsByClassName('btn_cancel')[0];
   cnslBtn.addEventListener('click', function(event) {
