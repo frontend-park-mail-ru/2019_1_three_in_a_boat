@@ -1,9 +1,26 @@
 import createHeader from './header.js';
-import createMenu from './menu.js';
 import createProfile from './profile.js';
+import AjaxModule from './ajax.js';
+
+const ajax = new AjaxModule();
+
+const months = {
+  'Январь': '01',
+  'Февраль': '02',
+  'Март': '03',
+  'Апрель': '04',
+  'Май': '05',
+  'Июнь': '06',
+  'Июль': '07',
+  'Август': '08',
+  'Сентябрь': '09',
+  'Октябрь': '10',
+  'Ноябрь': '11',
+  'Декабрь': '12',
+};
 
 /**
- *
+ * create Page with Profile Settings
  */
 export default function createUpdateProfile() {
   createHeader();
@@ -36,7 +53,8 @@ export default function createUpdateProfile() {
       },
       {
         block: 'form',
-        attrs: {novalidate: true},
+        attrs: {id: 'updateForm', novalidate: true},
+        fieldName: 'updateForm',
         mix: {'block': 'signup-form'},
         content: [
           {
@@ -155,9 +173,9 @@ export default function createUpdateProfile() {
                           elem: 'date-select',
                           content: {
                             block: 'select',
-                            fieldName: 'selectDay',
+                            fieldName: 'selectMale',
                             wrappedInside: 'signup-form',
-                            attrs: {id: 'signup__day-select'},
+                            attrs: {id: 'signup__selectMale'},
                             options: ['Пол', 'Мужской', 'Женский'],
                           },
                         },
@@ -185,7 +203,7 @@ export default function createUpdateProfile() {
                               block: 'select',
                               fieldName: 'selectDay',
                               wrappedInside: 'signup-form',
-                              attrs: {id: 'signup__day-select'},
+                              attrs: {id: 'signup__selectDay'},
                               options: [...Array(30).keys()].map(
                                   (num) => num + 1
                               ),
@@ -201,7 +219,7 @@ export default function createUpdateProfile() {
                               block: 'select',
                               fieldName: 'selectMonth',
                               wrappedInside: 'signup-form',
-                              attrs: {id: 'signup__date-select'},
+                              attrs: {id: 'signup__selectMonth'},
                               options: ['Месяц', 'Янаварь', 'Февраль',
                                 'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
                                 'Август', 'Сентябрь', 'Октябрь',
@@ -218,7 +236,7 @@ export default function createUpdateProfile() {
                               block: 'select',
                               fieldName: 'selectYear',
                               wrappedInside: 'signup-form',
-                              attrs: {id: 'signup__date-select'},
+                              attrs: {id: 'signup__selectYear'},
                               options: [...Array(119).keys()].map(
                                   (num) => num + 1900
                               ).reverse(),
@@ -256,7 +274,6 @@ export default function createUpdateProfile() {
                       fieldAttrs: {
                         type: 'password',
                         placeholder: 'Пароль',
-                        required: true,
                         checkable: true,
                         checkType: 'password',
                       },
@@ -285,7 +302,6 @@ export default function createUpdateProfile() {
                       fieldAttrs: {
                         type: 'password',
                         placeholder: 'Повторите пароль',
-                        required: true,
                         checkable: true,
                         checkType: 'repeatPassword',
                       },
@@ -307,6 +323,7 @@ export default function createUpdateProfile() {
             content: [
               {
                 block: 'btn',
+                attrs: {'type' : 'submit'},
                 mods: {'size': 'large', 'with-icon': true, 'cancel': true},
                 wrappedInside: 'profile-popup',
                 content: [
@@ -317,7 +334,7 @@ export default function createUpdateProfile() {
                   },
                   {
                     elem: 'text',
-                    content: 'Изменить',
+                    content: ' Обновить',
                   },
                 ],
               },
@@ -348,17 +365,18 @@ export default function createUpdateProfile() {
       bemhtml.apply(template)
   );
 
-  const cnslBtn = document.getElementsByClassName('btn_color_muted')[0];
+  const cnslBtn = document.getElementsByClassName('btn_cancel')[0];
   cnslBtn.addEventListener('click', function(event) {
     event.preventDefault();
     application.innerHTML = '';
     createProfile();
   });
 
-  const form = document.getElementById('signup-popup');
+  const form = document.getElementById('updateForm');
+  console.log(form);
   form.addEventListener('submit', function(event) {
     event.preventDefault();
-
+    console.log('i am here');
     const firstName = form.elements['firstName'].value;
     const secondName = form.elements['secondName'].value;
     const email = form.elements['email'].value;
@@ -372,6 +390,7 @@ export default function createUpdateProfile() {
 
     const errors = document.getElementsByClassName('form-group__help-text');
     if (errors !== null) {
+      alert('Passwords is not equals');
       return;
     }
     if (password !== passwordRepeat) {
@@ -382,9 +401,9 @@ export default function createUpdateProfile() {
     ajax.doPost({
       callback() {
         application.innerHTML = '';
-        createMenu(); // TODO: change to createUserProfile()
+        createProfile(); // TODO: change to createUserProfile()
       },
-      path: '/signup',
+      path: 'http://127.0.0.1:3000/settings',
       body: {
         firstName: firstName,
         lastName: secondName,
@@ -395,5 +414,4 @@ export default function createUpdateProfile() {
       },
     });
   });
-
 };

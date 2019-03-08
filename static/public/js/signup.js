@@ -336,6 +336,7 @@ export default function createSignUp() {
 
     const firstName = form.elements['firstName'].value;
     const secondName = form.elements['secondName'].value;
+    const userName = form.elements['userName'].value;
     const email = form.elements['email'].value;
     const day = form.elements['selectDay'].value;
     const month = months[form.elements['selectMonth'].value];
@@ -346,6 +347,7 @@ export default function createSignUp() {
 
     const errors = document.getElementsByClassName('form-group__help-text');
     if (errors !== null) {
+      alert(errors);
       return;
     }
     if (password !== passwordRepeat) {
@@ -358,7 +360,7 @@ export default function createSignUp() {
         application.innerHTML = '';
         createMenu(); // TODO: change to createUserProfile()
       },
-      path: '/signup',
+      path: 'http://127.0.0.1:3000/signup',
       body: {
         firstName: firstName,
         lastName: secondName,
