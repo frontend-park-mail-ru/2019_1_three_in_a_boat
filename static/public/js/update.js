@@ -7,20 +7,20 @@ import {validateForm} from './validation.js';
 
 const ajax = new AjaxModule();
 
-const months = {
-  'Январь': '01',
-  'Февраль': '02',
-  'Март': '03',
-  'Апрель': '04',
-  'Май': '05',
-  'Июнь': '06',
-  'Июль': '07',
-  'Август': '08',
-  'Сентябрь': '09',
-  'Октябрь': '10',
-  'Ноябрь': '11',
-  'Декабрь': '12',
-};
+const months = [
+  {content: 'Январь', value: 1},
+  {content: 'Февраль', value: 2},
+  {content: 'Март', value: 3},
+  {content: 'Апрель', value: 4},
+  {content: 'Май', value: 5},
+  {content: 'Июнь', value: 6},
+  {content: 'Июль', value: 7},
+  {content: 'Август', value: 8},
+  {content: 'Сентябрь', value: 9},
+  {content: 'Октябрь', value: 10},
+  {content: 'Ноябрь', value: 11},
+  {content: 'Декабрь', value: 12},
+];
 
 /**
  * create Page with Profile Settings
@@ -169,7 +169,12 @@ export default function createUpdateProfile() {
                       block: 'select',
                       fieldName: 'selectMale',
                       attrs: {id: 'signup__selectMale'},
-                      options: ['Пол', 'Мужской', 'Женский'],
+                      options: [
+                        {content: 'Пол', value: null},
+                        {content: 'Мужской', value: 'male'},
+                        {content: 'Женский', value: 'female'},
+                        {content: 'Другой', value: 'other'},
+                      ],
                     },
                     {
                       block: 'form-group',
@@ -194,26 +199,41 @@ export default function createUpdateProfile() {
                           block: 'select',
                           fieldName: 'selectDay',
                           attrs: {id: 'signup__selectDay'},
-                          options: [...Array(30).keys()].map(
-                              (num) => num + 1
-                          ),
+                          options: [
+                            {
+                              content: 'День',
+                              value: 0,
+                              selected: true,
+                            }].concat([...Array(30).keys()].map(
+                              (num) => ({
+                                content: num+1,
+                                value: num+1}))),
                         },
                         {
                           block: 'select',
                           fieldName: 'selectMonth',
                           attrs: {id: 'signup__selectMonth'},
-                          options: ['Месяц', 'Янаварь', 'Февраль',
-                            'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
-                            'Август', 'Сентябрь', 'Октябрь',
-                            'Ноябрь', 'Декабрь'],
+                          options: [{
+                            content: 'Месяц',
+                            value: 0,
+                            selected: true,
+                          }].concat(months),
                         },
                         {
                           block: 'select',
                           fieldName: 'selectYear',
                           attrs: {id: 'signup__selectYear'},
-                          options: [...Array(119).keys()].map(
-                              (num) => num + 1900
-                          ).reverse(),
+                          options: [
+                            {
+                              content: 'Год',
+                              value: 0,
+                              selected: true,
+                            }].concat([...Array(119).keys()].map(
+                              (num) => ({
+                                content: num + 1900,
+                                value: num + 1900,
+                              })
+                          ).reverse()),
                         },
                       ],
                     },
