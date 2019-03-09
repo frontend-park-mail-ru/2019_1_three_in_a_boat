@@ -14,7 +14,7 @@ export default function createScoreBoard(users) {
   if (users) {
     const data = JSON.parse(JSON.stringify(users));
     const bemUsers = [];
-    console.log(data);
+
     Array.from(data.data.users).forEach((user) => {
       bemUsers.push({
         name: user.firstName,
@@ -24,7 +24,7 @@ export default function createScoreBoard(users) {
         userId: user.uid,
       });
     });
-    console.log(bemUsers);
+
     const draw = [
       {
         block: 'scoreboard',
@@ -35,8 +35,10 @@ export default function createScoreBoard(users) {
           },
         ],
       }];
+
     document.getElementById('application').insertAdjacentHTML('beforeend',
         bemhtml.apply(draw));
+
     createPagination(data.data.page + 1, data.data.nPages + 1);
   } else {
     ajax.doGet({

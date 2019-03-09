@@ -191,7 +191,7 @@ function renderUpdateProfilePage(user) {
                       fieldName: 'selectMale',
                       attrs: {id: 'signup__selectMale'},
                       options: [
-                        {content: 'Пол', value: null},
+                        {content: 'Пол', value: ''},
                         {content: 'Мужской', value: 'male'},
                         {content: 'Женский', value: 'female'},
                         {content: 'Другой', value: 'other'},
@@ -369,7 +369,7 @@ function renderUpdateProfilePage(user) {
   },
   ];
 
-  setSelectedOptions(user);
+  setSelectedOptions(user, template);
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
@@ -424,6 +424,24 @@ function renderUpdateProfilePage(user) {
           img: file,
         },
       });
+    },
+    (error) => {
+      ajax.doPut({
+        callback() {
+          application.innerHTML = '';
+          createProfile();
+        },
+        path: 'http://127.0.0.1:3000/users/' + user.id,
+        body: {
+          name: firstName,
+          lastName: secondName,
+          userName: userName,
+          email: email,
+          gender: male,
+          date: date,
+          password: password,
+        },
+      });
     });
   });
 }
@@ -431,8 +449,9 @@ function renderUpdateProfilePage(user) {
 /**
  * Set selected options
  * @param {Object} user
+ * @param {Array} template
  */
-function setSelectedOptions(user) {
+function setSelectedOptions(user, template) {
   if (user.gender !== '') {
     const options = template[0].content[2].content[0].content[4]
         .value.content[0].options;

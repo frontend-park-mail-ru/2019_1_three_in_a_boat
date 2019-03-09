@@ -21,6 +21,7 @@ export default function createAuthors(authors) {
         description: author.description,
       });
     });
+
     const draw = [
       {
         block: 'authors',
@@ -35,13 +36,14 @@ export default function createAuthors(authors) {
           },
         ],
       }];
+
     document.getElementById('application').insertAdjacentHTML('beforeend',
         bemhtml.apply(draw));
   } else {
     ajax.doGet({
       callback(xhr) {
         const data = JSON.parse(xhr.responseText);
-        console.log(data['data']);
+
         application.innerHTML = '';
         createAuthors(data['data']);
       },
