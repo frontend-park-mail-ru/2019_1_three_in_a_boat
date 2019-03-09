@@ -15,6 +15,7 @@ $mailru-icon: $icons-path + "/mailru.svg";
 $ok-icon: $icons-path + "/ok.svg";
 $ru-png: $icons-path + "/ru.png";
 $signin-icon: $icons-path + "/sign_in.svg";
+$signout-icon: $icons-path + "/sign_out.svg";
 $useredit-icon: $icons-path + "/user_edit.svg";
 $users-icon: $icons-path + "/users.svg";
 $user-icon: $icons-path + "/user.svg";
@@ -114,6 +115,9 @@ $icon-sizes: (small: (12px, 12px),
         }
         &_signin {
             @include mask-image($signin-icon);
+        }
+        &_signout {
+            @include mask-image($signout-icon);
         }
         &_dropdown {
             @include mask-image($dropdown-icon);

@@ -3,6 +3,7 @@ import createProfile from './profile.js';
 import AjaxModule from './ajax.js';
 import initFileInputs from './file-input.js';
 import {validateForm} from './validation.js';
+import {parseUser} from './parsing.js';
 
 
 const ajax = new AjaxModule();
@@ -27,7 +28,22 @@ const months = [
  */
 export default function createUpdateProfile() {
   createHeader();
-  // TODO: add check auth
+  const ajax = new AjaxModule();
+  ajax.doGet({
+    callback(xhr) {
+      const data = JSON.parse(xhr.responseText);
+      const user = parseUser(data.user);
+      renderUpdateProfilePage(user);
+    },
+    path: 'http://127.0.0.1:3000/',
+  });
+}
+
+/**
+ * Render profile's update page
+ * @param {Object} user
+ */
+function renderUpdateProfilePage(user) {
   const template = [{
     block: 'profile-popup',
     mods: {main: true},
@@ -76,6 +92,7 @@ export default function createUpdateProfile() {
                       fieldAttrs: {
                         type: 'text',
                         placeholder: 'Иван',
+                        value: user.firstName,
                         checkable: true,
                         checkType: 'name',
                       },
@@ -100,6 +117,7 @@ export default function createUpdateProfile() {
                       fieldAttrs: {
                         type: 'text',
                         placeholder: 'Иванов',
+                        value: user.lastName,
                         checkable: true,
                         checkType: 'lastName',
                       },
@@ -123,7 +141,9 @@ export default function createUpdateProfile() {
                       fieldName: 'email',
                       fieldAttrs: {
                         checkable: true,
+                        checkType: 'email',
                         required: true,
+                        value: user.email,
                         type: 'email',
                         placeholder: 'your.name@site.com',
                       },
@@ -148,6 +168,7 @@ export default function createUpdateProfile() {
                       fieldAttrs: {
                         required: true,
                         checkable: true,
+                        value: user.nickname,
                         placeholder: 'username',
                         checkType: 'userName',
                       },
@@ -264,7 +285,6 @@ export default function createUpdateProfile() {
                       fieldAttrs: {
                         type: 'password',
                         placeholder: 'Пароль',
-                        required: true,
                         checkable: true,
                         checkType: 'password',
                       },
@@ -289,7 +309,6 @@ export default function createUpdateProfile() {
                       fieldAttrs: {
                         type: 'password',
                         placeholder: 'Повторите пароль',
-                        required: true,
                         checkable: true,
                         checkType: 'repeatPassword',
                       },
@@ -348,8 +367,44 @@ export default function createUpdateProfile() {
       },
     ],
   },
-  ]
-  ;
+  ];
+
+  if (user.gender !== '') {
+    const options = template[0].content[2].content[0].content[4]
+        .value.content[0].options;
+    options.forEach((option) => {
+      if (option.content === user.gender) {
+        option.selected = true;
+      }
+    });
+  }
+  if (user.date !== '') {
+    const date = user.date.split('.');
+    console.log(date);
+    const dateSelect = template[0].content[2].content[0].content[5]
+        .value[0].content.content;
+
+    const dayOptions = dateSelect[0].options;
+    dayOptions.forEach((option) => {
+      if (option.content === +date[0]) {
+        option.selected = true;
+      }
+    });
+
+    const mounthOptions = dateSelect[1].options;
+    mounthOptions.forEach((option) => {
+      if (option.value === +date[1]) {
+        option.selected = true;
+      }
+    });
+
+    const yearOptions = dateSelect[2].options;
+    yearOptions.forEach((option) => {
+      if (option.content === +date[2]) {
+        option.selected = true;
+      }
+    });
+  }
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
@@ -365,7 +420,6 @@ export default function createUpdateProfile() {
   });
 
   const form = document.getElementById('updateForm');
-  console.log(form);
   form.addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -379,27 +433,35 @@ export default function createUpdateProfile() {
     const selectField = document.getElementsByTagName('select');
     const userName = form['updateForm_userName'].value;
     const day = selectField['updateForm_selectDay'].value;
-    const month = months[selectField['updateForm_selectMonth'].value];
+    const month = selectField['updateForm_selectMonth'].value;
     const year = selectField['updateForm_selectYear'].value;
     const male = selectField['updateForm_selectMale'].value;
     const date = `${day}-${month}-${year}`;
     const password = form['updateForm_password'].value;
-
-    ajax.doPost({
+    console.log({
+      firstName: firstName,
+      lastName: secondName,
+      userName: userName,
+      email: email,
+      male: male,
+      date: date,
+      password: password,
+    });
+    ajax.doPut({
       callback() {
         application.innerHTML = '';
-        createProfile(); // TODO: change to createUserProfile()
+        createProfile();
       },
-      path: 'http://127.0.0.1:3000/settings',
+      path: 'http://127.0.0.1:3000/users/' + user.id,
       body: {
-        firstName: firstName,
+        name: firstName,
         lastName: secondName,
         userName: userName,
         email: email,
-        male: male,
+        gender: male,
         date: date,
         password: password,
       },
     });
   });
-};
+}

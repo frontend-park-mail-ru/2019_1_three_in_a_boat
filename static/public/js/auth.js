@@ -17,7 +17,7 @@ export default function checkAuth(callbackTrue, callbackFalse) {
         callbackFalse();
       }
     },
-    path: 'http://127.0.0.1:3000/users?sort=-HighScore',
+    path: 'http://127.0.0.1:3000/',
   });
 }
 

@@ -1,14 +1,30 @@
 import createHeader from './header.js';
 import createUpdateProfile from './update.js';
-import {addValidationOnBlur} from "./validation.js";
-import createConformWindow from './conform_win.js';
+import {addValidationOnBlur} from './validation.js';
+import {parseUser} from './parsing.js';
+import AjaxModule from './ajax.js';
 
 /**
  * Create page with user profile
  */
 export default function createProfile() {
   createHeader();
+  const ajax = new AjaxModule();
+  ajax.doGet({
+    callback(xhr) {
+      const data = JSON.parse(xhr.responseText);
+      const user = parseUser(data.user);
+      renderProfile(user);
+    },
+    path: 'http://127.0.0.1:3000/',
+  });
+}
 
+/**
+ * Render profile page
+ * @param {Object} user
+ */
+function renderProfile(user) {
   const template = [{
     block: 'profile-popup',
     mods: {main: true},
@@ -42,32 +58,32 @@ export default function createProfile() {
           {
             elem: 'item',
             name: 'Никнейм',
-            value: 'username',
+            value: user.nickname,
           },
           {
             elem: 'item',
             name: 'Имя',
-            value: 'Иван',
+            value: user.firstName === ''? '-': user.firstName,
           },
           {
             elem: 'item',
             name: 'Фамилия',
-            value: 'Иванов',
+            value: user.lastName === ''? '-': user.lastName,
           },
           {
             elem: 'item',
             name: 'Email',
-            value: 'ivanov.i@mail.ru',
+            value: user.email,
           },
           {
             elem: 'item',
             name: 'Дата рождения',
-            value: '15.06.1997',
+            value: user.date === ''? '-': user.date,
           },
           {
             elem: 'item',
             name: 'Пол',
-            value: 'Мужской',
+            value: user.gender === ''? '-': user.gender,
           },
         ],
       },
@@ -90,22 +106,6 @@ export default function createProfile() {
               },
             ],
           },
-          {
-            block: 'btn',
-            mods: {'size': 'large', 'with-icon': true, 'color': 'muted'},
-            wrappedInside: 'profile-popup',
-            content: [
-              {
-                block: 'icon',
-                wrappedInside: 'btn',
-                mods: {type: 'delete', size: 'large'},
-              },
-              {
-                elem: 'text',
-                content: 'Удалить',
-              },
-            ],
-          },
         ],
       },
     ],
@@ -122,12 +122,6 @@ export default function createProfile() {
         application.innerHTML = '';
         createUpdateProfile();
         addValidationOnBlur();
-      });
-  document.getElementsByClassName('btn_color_muted')[0].addEventListener(
-      'click',
-      (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        createConformWindow();
-      });
+      }
+  );
 }

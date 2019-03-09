@@ -5,6 +5,7 @@ import createAuthors from './authors.js';
 import createLoginPage from './login.js';
 import createSignUp from './signup.js';
 import createProfile from './profile.js';
+import doSignOut from './signout.js';
 import {addValidationOnBlur} from './validation.js';
 
 const application = document.getElementById('application');
@@ -18,6 +19,7 @@ const pages = {
   authors: createAuthors,
   leaders: createScoreBoard,
   profile: createProfile,
+  exit: doSignOut,
 };
 
 application.addEventListener('click', (event) => {

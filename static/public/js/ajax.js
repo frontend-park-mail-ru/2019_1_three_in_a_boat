@@ -11,7 +11,7 @@ class AjaxModule {
    * @private
    */
   _ajax({
-    callback = noop,
+    callback = () => {},
     method = 'GET',
     path = '/',
     body = {},
@@ -31,7 +31,7 @@ class AjaxModule {
       if (xhr.readyState !== 4) {
         return;
       }
-
+      console.log(xhr.response);
       callback(xhr);
     };
 
@@ -49,7 +49,7 @@ class AjaxModule {
    * @param body
    */
   doGet({
-    callback = noop,
+    callback = () => {},
     path = '/',
     body = {},
   } = {}) {
@@ -68,7 +68,7 @@ class AjaxModule {
    * @param body
    */
   doPost({
-    callback = noop,
+    callback = () => {},
     path = '/',
     body = {},
   } = {}) {
@@ -87,7 +87,7 @@ class AjaxModule {
    * @param body
    */
   doDelete({
-    callback = noop,
+    callback = () => {},
     path = '/',
     body = {},
   } = {}) {
@@ -96,6 +96,25 @@ class AjaxModule {
       path,
       body,
       method: 'DELETE',
+    });
+  }
+
+  /**
+   *
+   * @param callback
+   * @param path
+   * @param body
+   */
+  doPut({
+    callback = () => {},
+    path = '/',
+    body = {},
+  } = {}) {
+    this._ajax({
+      callback,
+      path,
+      body,
+      method: 'PUT',
     });
   }
 }

@@ -20,7 +20,7 @@ const authedTemplate = [
   {
     href: 'exit',
     text: 'Выйти',
-    type: 'exit',
+    type: 'signout',
   },
   {
     href: 'authors',
@@ -61,6 +61,11 @@ export default function createMenu() {
   checkAuth(menuPageDrawer(authedTemplate), menuPageDrawer(unauthedTemplate));
 }
 
+/**
+ * Get function to render menu with current data
+ * @param {Array} data array of menu points
+ * @return {Function} function, which drawing menu page with current data
+ */
 function menuPageDrawer(data) {
   const template = [
     {
