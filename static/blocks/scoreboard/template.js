@@ -10,7 +10,7 @@ block('scoreboard').elem('items').match((node, ctx) => ctx.scores !== undefined)
         content: [
           {
             elem: 'place',
-            content: '#' + (index + 1)
+            content: '#' + (index + 1),
           },
           {
             elem: 'link',
@@ -20,23 +20,23 @@ block('scoreboard').elem('items').match((node, ctx) => ctx.scores !== undefined)
               {
                 elem: 'avatar',
                 attrs: {
-                  src: elt.img,
-                  alt: elt.name
-                }
+                  src: '/img' + elt.img,
+                  alt: elt.name,
+                },
               },
               {
                 elem: 'username',
-                content: elt.username
-              }
-            ]
-          }
-        ]
+                content: elt.username,
+              },
+            ],
+          },
+        ],
       },
       {
         elem: 'score',
-        content: elt.score
-      }
+        content: elt.score,
+      },
     ],
-    elemMods: index < 3 ? {place: ['first', 'second', 'third'][index]} : {}
-  }))
+    elemMods: index < 3 ? {place: ['first', 'second', 'third'][index]} : {},
+  })),
 });

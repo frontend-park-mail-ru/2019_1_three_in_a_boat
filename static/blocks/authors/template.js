@@ -1,5 +1,5 @@
 block('authors').elem('img')({
-  'tag': 'img'
+  'tag': 'img',
 });
 
 block('authors').elem('items').match((node, ctx) => ctx.authors !== undefined)({
@@ -9,22 +9,22 @@ block('authors').elem('items').match((node, ctx) => ctx.authors !== undefined)({
       {
         elem: 'img',
         attrs: {
-          src: elt.img,
-          alt: elt.name
-        }
+          src: '/img' + elt.img,
+          alt: elt.name,
+        },
       },
       {
         elem: 'title',
-        content: elt.name
+        content: elt.name,
       },
       {
         elem: 'subtitle',
-        content: elt.devInfo
+        content: elt.devInfo,
       },
       {
         elem: 'description',
-        content: elt.description
-      }
-    ]
-  }))
+        content: elt.description,
+      },
+    ],
+  })),
 });
