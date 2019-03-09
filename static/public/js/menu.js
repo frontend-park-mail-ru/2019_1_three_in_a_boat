@@ -1,4 +1,56 @@
 import createHeader from './header.js';
+import checkAuth from './auth.js';
+
+const authedTemplate = [
+  {
+    href: 'leaders',
+    text: 'Лидеры',
+    type: 'crown',
+  },
+  {
+    href: 'play',
+    text: 'Играть',
+    type: 'gamepad',
+  },
+  {
+    href: 'profile',
+    text: 'Профиль',
+    type: 'user',
+  },
+  {
+    href: 'exit',
+    text: 'Выйти',
+    type: 'exit',
+  },
+  {
+    href: 'authors',
+    text: 'Авторы',
+    type: 'users',
+  },
+];
+
+const unauthedTemplate = [
+  {
+    href: 'signIn',
+    text: 'Авторизация',
+    type: 'signin',
+  },
+  {
+    href: 'signUp',
+    text: 'Регистрация',
+    type: 'key',
+  },
+  {
+    href: 'authors',
+    text: 'Авторы',
+    type: 'users',
+  },
+  {
+    href: 'leaders',
+    text: 'Лидеры',
+    type: 'crown',
+  },
+];
 
 /**
  * create Menu page
@@ -6,6 +58,10 @@ import createHeader from './header.js';
 export default function createMenu() {
   createHeader();
 
+  checkAuth(menuPageDrawer(authedTemplate), menuPageDrawer(unauthedTemplate));
+}
+
+function menuPageDrawer(data) {
   const template = [
     {
       block: 'menu',
@@ -23,43 +79,14 @@ export default function createMenu() {
         },
         {
           elem: 'items',
-          points: [
-            {
-              href: 'signIn',
-              text: 'Авторизация',
-              type: 'signin',
-            },
-            {
-              href: 'signUp',
-              text: 'Регистрация',
-              type: 'key',
-            },
-            {
-              href: 'authors',
-              text: 'Авторы',
-              type: 'users',
-            },
-            {
-              href: 'leaders',
-              text: 'Лидеры',
-              type: 'crown',
-            },
-            {
-              href: 'play',
-              text: 'Играть',
-              type: 'gamepad',
-            },
-            {
-              href: 'profile',
-              text: 'Профиль',
-              type: 'user',
-            },
-          ],
+          points: data,
         },
       ],
     }];
 
-  document.getElementById('application').insertAdjacentHTML('beforeend',
-      bemhtml.apply(template)
-  );
+  return function() {
+    document.getElementById('application').insertAdjacentHTML('beforeend',
+        bemhtml.apply(template)
+    );
+  };
 }
