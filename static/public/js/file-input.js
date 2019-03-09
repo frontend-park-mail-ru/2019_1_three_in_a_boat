@@ -5,7 +5,7 @@ const BLOCK = 'file-input';
 /**
  * Set handler for file inputs changes
  */
-export default function initFileInputs() {
+export function initFileInputs() {
   const fileInputs = document.getElementsByClassName(BLOCK);
   for (const inputBlock of fileInputs) {
     const children = inputBlock.childNodes;
@@ -38,4 +38,24 @@ export default function initFileInputs() {
       }
     };
   }
+}
+
+/**
+ * Get file in Base64 format
+ * @param {File} file
+ * @return {Promise<any>}
+ */
+export function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      let encoded = reader.result.replace(/^data:(.*;base64,)?/, '');
+      if ((encoded.length % 4) > 0) {
+        encoded += '='.repeat(4 - (encoded.length % 4));
+      }
+      resolve(encoded);
+    };
+    reader.onerror = (error) => reject(error);
+  });
 }

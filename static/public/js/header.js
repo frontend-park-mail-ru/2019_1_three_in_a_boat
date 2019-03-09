@@ -1,5 +1,5 @@
 /**
- *
+ * Create page header
  */
 export default function createHeader() {
   const header = {

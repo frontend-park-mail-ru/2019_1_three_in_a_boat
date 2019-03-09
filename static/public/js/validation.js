@@ -67,15 +67,15 @@ function clearErrors(input) {
 function validatePassword(input) {
   const errors = [];
 
-  if (input.value.length < 4) {
-    errors.push('Пароль должен содержать не менее 4х символов');
+  if (input.value.length < 8) {
+    errors.push('Пароль должен содержать не менее 8 символов');
   }
   if (!/[0-9]/.test(input.value)) {
     errors.push('Пароль должен содержать цифры');
   }
-  // if (!/[A-z]/.test(input.value)) {
-  //   errors.push('Пароль должен содержать латинские буквы');
-  // }
+  if (!/[A-z]/.test(input.value)) {
+    errors.push('Пароль должен содержать латинские буквы');
+  }
   if (!/^[\w\dA-z]+$/.test(input.value)) {
     errors.push('Пароль должен состоять из цифр и латинских букв');
   }

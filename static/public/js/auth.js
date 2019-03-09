@@ -10,7 +10,6 @@ export default function checkAuth(callbackTrue, callbackFalse) {
   ajax.doGet({
     callback(xhr) {
       const data = JSON.parse(xhr.responseText);
-      console.log(data.user);
       if (data.user !== null) {
         callbackTrue();
       } else {

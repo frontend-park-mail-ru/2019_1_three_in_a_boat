@@ -378,7 +378,7 @@ export default function createSignUp() {
     ajax.doPost({
       callback() {
         application.innerHTML = '';
-        createProfile(); // TODO: change to createUserProfile()
+        createProfile();
       },
       path: 'http://127.0.0.1:3000/users',
       body: {

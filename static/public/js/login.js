@@ -82,7 +82,7 @@ export default function createLoginPage() {
                       placeholder: 'Пароль',
                       required: true,
                       checkable: true,
-                      checkType: 'password',
+                      checkType: 'null',
                     },
                   },
                   {
@@ -184,15 +184,6 @@ export default function createLoginPage() {
       bemhtml.apply(template)
   );
 
-  document.getElementsByClassName('icon_type_cross')[0].addEventListener(
-      'click',
-      function(event) {
-        event.preventDefault();
-        application.innerHTML = '';
-        createMenu();
-      }
-  );
-
   const form = document.getElementById('loginForm');
   form.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -206,7 +197,8 @@ export default function createLoginPage() {
     ajax.doPost({
       callback() {
         application.innerHTML = '';
-        createMenu(); // TODO: add setCookies
+
+        createMenu();
       },
       path: 'http://127.0.0.1:3000/signin',
       body: {

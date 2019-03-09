@@ -1,7 +1,7 @@
 import createHeader from './header.js';
 import createProfile from './profile.js';
 import AjaxModule from './ajax.js';
-import initFileInputs from './file-input.js';
+import {initFileInputs, getBase64} from './file-input.js';
 import {validateForm} from './validation.js';
 import {parseUser} from './parsing.js';
 
@@ -369,42 +369,7 @@ function renderUpdateProfilePage(user) {
   },
   ];
 
-  if (user.gender !== '') {
-    const options = template[0].content[2].content[0].content[4]
-        .value.content[0].options;
-    options.forEach((option) => {
-      if (option.content === user.gender) {
-        option.selected = true;
-      }
-    });
-  }
-  if (user.date !== '') {
-    const date = user.date.split('.');
-    console.log(date);
-    const dateSelect = template[0].content[2].content[0].content[5]
-        .value[0].content.content;
-
-    const dayOptions = dateSelect[0].options;
-    dayOptions.forEach((option) => {
-      if (option.content === +date[0]) {
-        option.selected = true;
-      }
-    });
-
-    const mounthOptions = dateSelect[1].options;
-    mounthOptions.forEach((option) => {
-      if (option.value === +date[1]) {
-        option.selected = true;
-      }
-    });
-
-    const yearOptions = dateSelect[2].options;
-    yearOptions.forEach((option) => {
-      if (option.content === +date[2]) {
-        option.selected = true;
-      }
-    });
-  }
+  setSelectedOptions(user);
 
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
@@ -438,30 +403,69 @@ function renderUpdateProfilePage(user) {
     const male = selectField['updateForm_selectMale'].value;
     const date = `${day}-${month}-${year}`;
     const password = form['updateForm_password'].value;
-    console.log({
-      firstName: firstName,
-      lastName: secondName,
-      userName: userName,
-      email: email,
-      male: male,
-      date: date,
-      password: password,
-    });
-    ajax.doPut({
-      callback() {
-        application.innerHTML = '';
-        createProfile();
-      },
-      path: 'http://127.0.0.1:3000/users/' + user.id,
-      body: {
-        name: firstName,
-        lastName: secondName,
-        userName: userName,
-        email: email,
-        gender: male,
-        date: date,
-        password: password,
-      },
+    let file = form['updateForm_avatar'].files[0];
+    getBase64(file).then((result) => {
+      file = result;
+
+      ajax.doPut({
+        callback() {
+          application.innerHTML = '';
+          createProfile();
+        },
+        path: 'http://127.0.0.1:3000/users/' + user.id,
+        body: {
+          name: firstName,
+          lastName: secondName,
+          userName: userName,
+          email: email,
+          gender: male,
+          date: date,
+          password: password,
+          img: file,
+        },
+      });
     });
   });
+}
+
+/**
+ * Set selected options
+ * @param {Object} user
+ */
+function setSelectedOptions(user) {
+  if (user.gender !== '') {
+    const options = template[0].content[2].content[0].content[4]
+        .value.content[0].options;
+    options.forEach((option) => {
+      if (option.content === user.gender) {
+        option.selected = true;
+      }
+    });
+  }
+  if (user.date !== '') {
+    const date = user.date.split('.');
+    const dateSelect = template[0].content[2].content[0].content[5]
+        .value[0].content.content;
+
+    const dayOptions = dateSelect[0].options;
+    dayOptions.forEach((option) => {
+      if (option.content === +date[0]) {
+        option.selected = true;
+      }
+    });
+
+    const mounthOptions = dateSelect[1].options;
+    mounthOptions.forEach((option) => {
+      if (option.value === +date[1]) {
+        option.selected = true;
+      }
+    });
+
+    const yearOptions = dateSelect[2].options;
+    yearOptions.forEach((option) => {
+      if (option.content === +date[2]) {
+        option.selected = true;
+      }
+    });
+  }
 }
