@@ -18,15 +18,20 @@ block('scoreboard').elem('items').match((node, ctx) => ctx.scores !== undefined)
             attrs: {'href': '/profile?u=' + elt.userId}, // to be changed once api's here
             content: [
               {
-                elem: 'avatar',
-                attrs: {
-                  src: '/img' + elt.img,
-                  alt: elt.name,
-                },
-              },
-              {
-                elem: 'username',
-                content: elt.username,
+                elem: 'data-field',
+                content: [
+                  {
+                    elem: 'avatar',
+                    attrs: {
+                      src: '/img' + elt.img,
+                      alt: elt.name,
+                    },
+                  },
+                  {
+                    elem: 'username',
+                    content: elt.username,
+                  },
+                ],
               },
             ],
           },
