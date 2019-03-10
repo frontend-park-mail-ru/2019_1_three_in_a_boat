@@ -1,6 +1,6 @@
 import createHeader from './header.js';
 import createProfile from './profile.js';
-import AjaxModule from './ajax.js';
+import ajax from './ajax.js';
 import {initFileInputs, getBase64} from './file-input.js';
 import {settings} from './settings/config.js';
 import {validateForm, checkResponse} from './validation.js';
@@ -8,21 +8,22 @@ import {parseUser} from './parsing.js';
 import getTemplate from './views-templates/update-template.js';
 
 
-const ajax = new AjaxModule();
-
 /**
  * create Page with Profile Settings
  */
 export default function createUpdateProfile() {
   createHeader();
-  const ajax = new AjaxModule();
-  ajax.doGet({
-    callback(xhr) {
-      const data = JSON.parse(xhr.responseText);
+
+  ajax.doGet({path: settings.url + '/'}).then((response) => {
+    if (response.status > 499) {
+      alert('Server error');
+      return;
+    }
+
+    response.json().then((data) => {
       const user = parseUser(data.user);
       renderUpdateProfilePage(user);
-    },
-    path: settings.url + '/',
+    });
   });
 }
 
@@ -69,32 +70,39 @@ function renderUpdateProfilePage(user) {
     let img = form['updateForm_avatar'].files[0];
 
     const path = settings.url + '/users/' + user.id;
-    const callback = (xhr) => {
-      const data = JSON.parse(xhr.responseText);
-      const ok = checkResponse(data, form);
-      if (ok) {
-        application.innerHTML = '';
-        createProfile();
+    const callback = (response) => {
+      if (response.status > 499) {
+        alert('Server error');
+        return;
       }
+
+      response.json().then((data) => {
+        const ok = checkResponse(data, form);
+        if (ok) {
+          application.innerHTML = '';
+          console.log(data);
+          createProfile();
+        }
+      });
     };
 
     getBase64(img).then((result) => {
       img = result;
       const body = {
-        firstName, lastName, userName,
+        name: firstName, lastName, userName,
         email, gender, date, password,
         img,
       };
 
-      ajax.doPut({callback, path, body});
+      ajax.doPut({path, body}).then(callback);
     },
     () => {
       const body = {
-        firstName, lastName, userName,
+        name: firstName, lastName, userName,
         email, gender, date, password,
       };
-
-      ajax.doPut({callback, path, body});
+      console.log(body);
+      ajax.doPut({path, body}).then(callback);
     });
   });
 }

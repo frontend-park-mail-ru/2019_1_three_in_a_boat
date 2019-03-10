@@ -3,9 +3,9 @@ import checkAuth from './auth.js';
 
 const authedTemplate = [
   {
-    href: 'leaders',
-    text: 'Лидеры',
-    type: 'crown',
+    href: 'profile',
+    text: 'Профиль',
+    type: 'user',
   },
   {
     href: 'play',
@@ -13,19 +13,19 @@ const authedTemplate = [
     type: 'gamepad',
   },
   {
-    href: 'profile',
-    text: 'Профиль',
-    type: 'user',
-  },
-  {
-    href: 'exit',
-    text: 'Выйти',
-    type: 'signout',
+    href: 'leaders',
+    text: 'Лидеры',
+    type: 'crown',
   },
   {
     href: 'authors',
     text: 'Авторы',
     type: 'users',
+  },
+  {
+    href: 'exit',
+    text: 'Выйти',
+    type: 'signout',
   },
 ];
 
@@ -41,14 +41,14 @@ const unauthedTemplate = [
     type: 'key',
   },
   {
-    href: 'authors',
-    text: 'Авторы',
-    type: 'users',
-  },
-  {
     href: 'leaders',
     text: 'Лидеры',
     type: 'crown',
+  },
+  {
+    href: 'authors',
+    text: 'Авторы',
+    type: 'users',
   },
 ];
 

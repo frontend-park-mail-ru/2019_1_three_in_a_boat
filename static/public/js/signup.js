@@ -1,12 +1,11 @@
 import createHeader from './header.js';
 import createMenu from './menu.js';
-import AjaxModule from './ajax.js';
+import ajax from './ajax.js';
 import {validateForm, checkResponse} from './validation.js';
 import {settings} from './settings/config.js';
 import createProfile from './profile.js';
 import template from './views-templates/signup-template.js';
 
-const ajax = new AjaxModule();
 
 /**
  * Create SignUp page
@@ -32,7 +31,7 @@ export default function createSignUp() {
       return;
     }
 
-    const firstName = form['signup-form_firstName'].value;
+    const name = form['signup-form_firstName'].value;
     const lastName = form['signup-form_lastName'].value;
     const email = form['signup-form_email'].value;
     const userName = form['signup-form_username'].value;
@@ -45,19 +44,21 @@ export default function createSignUp() {
 
     const password = form['signup-form_password'].value;
 
-    const body = {userName, password, firstName, lastName, email, date};
+    const body = {userName, password, name, lastName, email, date};
 
-    ajax.doPost({
-      callback(xhr) {
-        const data = JSON.parse(xhr.responseText);
+    ajax.doPost({path: settings.url + '/users', body}).then((response) => {
+      if (response.status > 499) {
+        alert('Server error');
+        return;
+      }
+
+      response.json().then((data) => {
         const ok = checkResponse(data, form);
         if (ok) {
           application.innerHTML = '';
           createProfile();
         }
-      },
-      path: settings.url + '/users',
-      body,
+      });
     });
   });
 };

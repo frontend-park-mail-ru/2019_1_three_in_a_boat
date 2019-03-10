@@ -33,16 +33,6 @@ block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
           elt.text,
         ],
       },
-      {
-        block: 'icon',
-        mods: {
-          btn: true,
-          color: 'black',
-          type: 'dropdown',
-        },
-        wrappedInside: 'menu',
-        wrappedAs: 'dropdown-btn',
-      },
     ],
   })),
 });

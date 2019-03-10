@@ -1,4 +1,4 @@
-import AjaxModule from './ajax.js';
+import ajax from './ajax.js';
 import createScoreBoard from './scoreboard.js';
 import {settings} from './settings/config.js';
 
@@ -88,7 +88,6 @@ export default function createPagination(currPage, pagesNumber) {
  */
 function setPaginationLinks() {
   const pagLinks = document.getElementsByClassName('pagination__link');
-  const ajax = new AjaxModule();
 
   Array.from(pagLinks).forEach((link) => {
     if (Number(link.value) < 1) {
@@ -97,15 +96,19 @@ function setPaginationLinks() {
 
     link.addEventListener('click', (event) => {
       event.preventDefault();
-      console.log(link);
-      ajax.doGet({
-        callback(xhr) {
-          const data = JSON.parse(xhr.responseText);
+      const path = settings.url + '/users?sort=-HighScore&page='
+        + (link.value - 1);
 
+      ajax.doGet({path}).then((response) => {
+        if (response.status > 499) {
+          alert('Server error');
+          return;
+        }
+
+        response.json().then((data) => {
           application.innerHTML = '';
           createScoreBoard(data);
-        },
-        path: settings.url + '/users?sort=-HighScore&page=' + (link.value - 1),
+        });
       });
     });
   });
