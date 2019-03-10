@@ -1,3 +1,4 @@
+import {settings} from './settings/config.js';
 import createHeader from './header.js';
 import createPagination from './pagination.js';
 import AjaxModule from './ajax.js';
@@ -47,7 +48,7 @@ export default function createScoreBoard(users) {
         application.innerHTML = '';
         createScoreBoard(data);
       },
-      path: 'http://127.0.0.1:3000/users?sort=-HighScore',
+      path: settings.url + '/users?sort=-HighScore',
     });
   }
 }

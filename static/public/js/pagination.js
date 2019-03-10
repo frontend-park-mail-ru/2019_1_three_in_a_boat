@@ -1,5 +1,6 @@
 import AjaxModule from './ajax.js';
 import createScoreBoard from './scoreboard.js';
+import {settings} from './settings/config.js';
 
 
 /**
@@ -105,7 +106,7 @@ function setPaginationLinks() {
           application.innerHTML = '';
           createScoreBoard(data);
         },
-        path: 'http://127.0.0.1:3000/users?sort=-HighScore&page=' + (link.value - 1),
+        path: settings.url + '/users?sort=-HighScore&page=' + (link.value - 1),
       });
     });
   });

@@ -1,4 +1,5 @@
 import createHeader from './header.js';
+import {settings} from './settings/config.js';
 import AjaxModule from './ajax.js';
 
 const ajax = new AjaxModule();
@@ -47,7 +48,7 @@ export default function createAuthors(authors) {
         application.innerHTML = '';
         createAuthors(data['data']);
       },
-      path: 'http://127.0.0.1:3000/authors',
+      path: settings.url + '/authors',
     });
   }
 }

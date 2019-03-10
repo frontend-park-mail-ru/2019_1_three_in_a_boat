@@ -1,6 +1,7 @@
 import createHeader from './header.js';
 import createUpdateProfile from './update.js';
 import {addValidationOnBlur} from './validation.js';
+import {settings} from './settings/config.js';
 import {parseUser} from './parsing.js';
 import AjaxModule from './ajax.js';
 
@@ -16,7 +17,7 @@ export default function createProfile() {
       const user = parseUser(data.user);
       renderProfile(user);
     },
-    path: 'http://127.0.0.1:3000/',
+    path: settings.url+ '/',
   });
 }
 

@@ -1,7 +1,9 @@
+import {serverErrors} from "./settings/serverErrors";
+
 /**
  * Check if input is valid
  * @param {HTMLInputElement} input
- * @return {Array} array of errors
+ * @return {Array} array of serverErrors
  */
 function validate(input) {
   if (input.value === '') {
@@ -68,7 +70,7 @@ function validatePassword(input) {
   const errors = [];
 
   if (input.value.length < 8) {
-    errors.push('Пароль должен содержать не менее 8 символов');
+    serverErrors.push('Пароль должен содержать не менее 8 символов');
   }
   if (!/[0-9]/.test(input.value)) {
     errors.push('Пароль должен содержать цифры');
@@ -86,7 +88,7 @@ function validatePassword(input) {
 /**
  * Validate passport repeat field
  * @param {HTMLInputElement}input
- * @return {Array} array of errors
+ * @return {Array} array of serverErrors
  */
 function validateRepeatPassword(input) {
   const formId = input.id.split('_')[0];
@@ -216,4 +218,38 @@ export function validateForm(form) {
   }
 
   return isOk;
+}
+
+/**
+ * Check server response and add errors to help-texts
+ * @param {XMLHttpRequestResponseType} response
+ * @param {HTMLFormElement} form
+ * @return {boolean}
+ */
+export function checkResponse(response, form) {
+  if (response.status === 'ok') {
+    return true;
+  }
+
+  const fields = response.data.fields;
+  if (fields.name !== undefined && fields.name.ok !== true) {
+    const errors = [];
+    fields.name.errors.forEach((error) => {
+      errors.push(serverErrors[error]);
+    });
+
+    addErrors(form['email'], errors);
+  }
+
+  if (fields.password !== undefined && fields.password.ok !== true) {
+    const errors = [];
+    fields.password.errors.forEach((error) => {
+      console.log(error, serverErrors[error]);
+      errors.push(serverErrors[error]);
+    });
+
+    addErrors(form['password'], errors);
+  }
+
+  return false;
 }

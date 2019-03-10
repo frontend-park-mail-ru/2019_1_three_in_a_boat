@@ -31,7 +31,7 @@ class AjaxModule {
       if (xhr.readyState !== 4) {
         return;
       }
-
+      console.log(xhr.response);
       callback(xhr);
     };
 

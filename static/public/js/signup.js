@@ -1,7 +1,8 @@
 import createHeader from './header.js';
 import createMenu from './menu.js';
 import AjaxModule from './ajax.js';
-import {validateForm} from './validation.js';
+import {validateForm, checkResponse} from './validation.js';
+import {settings} from './settings/config.js';
 import createProfile from './profile.js';
 
 const ajax = new AjaxModule();
@@ -367,20 +368,16 @@ export default function createSignUp() {
 
     const password = form['signup-form_password'].value;
 
-    console.log({
-      username: userName,
-      password: password,
-      name: firstName,
-      lastname: secondName,
-      email: email,
-      date: date,
-    });
     ajax.doPost({
-      callback() {
-        application.innerHTML = '';
-        createProfile();
+      callback(xhr) {
+        const data = JSON.parse(xhr.responseText);
+        const ok = checkResponse(data, form);
+        if (ok) {
+          application.innerHTML = '';
+          createProfile();
+        }
       },
-      path: 'http://127.0.0.1:3000/users',
+      path: settings.url + '/users',
       body: {
         username: userName,
         password: password,

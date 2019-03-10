@@ -1,3 +1,4 @@
+import {settings} from './settings/config.js';
 import AjaxModule from './ajax.js';
 
 /**
@@ -16,7 +17,7 @@ export default function checkAuth(callbackTrue, callbackFalse) {
         callbackFalse();
       }
     },
-    path: 'http://127.0.0.1:3000/',
+    path: settings.url + '/',
   });
 }
 

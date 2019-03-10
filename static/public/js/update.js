@@ -2,7 +2,8 @@ import createHeader from './header.js';
 import createProfile from './profile.js';
 import AjaxModule from './ajax.js';
 import {initFileInputs, getBase64} from './file-input.js';
-import {validateForm} from './validation.js';
+import {settings} from './settings/config.js';
+import {validateForm, checkResponse} from './validation.js';
 import {parseUser} from './parsing.js';
 
 
@@ -35,7 +36,7 @@ export default function createUpdateProfile() {
       const user = parseUser(data.user);
       renderUpdateProfilePage(user);
     },
-    path: 'http://127.0.0.1:3000/',
+    path: settings.url + '/',
   });
 }
 
@@ -408,11 +409,15 @@ function renderUpdateProfilePage(user) {
       file = result;
 
       ajax.doPut({
-        callback() {
-          application.innerHTML = '';
-          createProfile();
+        callback(xhr) {
+          const data = JSON.parse(xhr.responseText);
+          const ok = checkResponse(data, form);
+          if (ok) {
+            application.innerHTML = '';
+            createProfile();
+          }
         },
-        path: 'http://127.0.0.1:3000/users/' + user.id,
+        path: settings.url + '/users/' + user.id,
         body: {
           name: firstName,
           lastName: secondName,
@@ -425,13 +430,17 @@ function renderUpdateProfilePage(user) {
         },
       });
     },
-    (error) => {
+    () => {
       ajax.doPut({
-        callback() {
-          application.innerHTML = '';
-          createProfile();
+        callback(xhr) {
+          const data = JSON.parse(xhr.responseText);
+          const ok = checkResponse(data, form);
+          if (ok) {
+            application.innerHTML = '';
+            createProfile();
+          }
         },
-        path: 'http://127.0.0.1:3000/users/' + user.id,
+        path: settings.url + '/users/' + user.id,
         body: {
           name: firstName,
           lastName: secondName,

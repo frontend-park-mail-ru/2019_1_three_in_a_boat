@@ -1,7 +1,8 @@
 import createHeader from './header.js';
 import createMenu from './menu.js';
 import AjaxModule from './ajax.js';
-import {validateForm} from './validation.js';
+import {validateForm, checkResponse} from './validation.js';
+import {settings} from './settings/config.js';
 
 const ajax = new AjaxModule();
 
@@ -52,7 +53,7 @@ export default function createLoginPage() {
                   {
                     block: 'input',
                     wrappedInside: 'login-form',
-                    fieldName: 'loginEmail',
+                    fieldName: 'email',
                     fieldAttrs: {
                       type: 'email',
                       placeholder: 'Электронная почта',
@@ -65,14 +66,14 @@ export default function createLoginPage() {
                     block: 'form-group',
                     elem: 'help-text',
                     elemMods: {type: 'hidden'},
-                    for: 'loginEmail',
+                    for: 'email',
                   },
                 ],
               },
               {
                 block: 'input',
                 mods: {with: 'icon'},
-                fieldName: 'loginPassword',
+                fieldName: 'password',
                 wrappedInside: 'login-form',
                 content: [
                   {
@@ -101,7 +102,7 @@ export default function createLoginPage() {
                 block: 'form-group',
                 elem: 'help-text',
                 elemMods: {type: 'hidden'},
-                for: 'loginPassword',
+                for: 'password',
               },
             ],
           },
@@ -192,15 +193,18 @@ export default function createLoginPage() {
       return;
     }
 
-    const email = form.elements['loginEmail'].value;
-    const password = form.elements['loginPassword'].value;
+    const email = form.elements['email'].value;
+    const password = form.elements['password'].value;
     ajax.doPost({
-      callback() {
-        application.innerHTML = '';
-
-        createMenu();
+      callback(xhr) {
+        const data = JSON.parse(xhr.responseText);
+        const ok = checkResponse(data, form);
+        if (ok) {
+          application.innerHTML = '';
+          createMenu();
+        }
       },
-      path: 'http://127.0.0.1:3000/signin',
+      path: settings.url + '/signin',
       body: {
         name: email,
         password: password,
