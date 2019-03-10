@@ -1,9 +1,8 @@
 import {settings} from './settings/config.js';
 import createHeader from './header.js';
 import createPagination from './pagination.js';
-import AjaxModule from './ajax.js';
+import ajax from './ajax.js';
 
-const ajax = new AjaxModule();
 
 /**
  * Create Score Board page
@@ -41,13 +40,18 @@ export default function createScoreBoard(users) {
 
     createPagination(data.data.page + 1, data.data.nPages + 1);
   } else {
-    ajax.doGet({
-      callback(xhr) {
-        const data = JSON.parse(xhr.responseText);
-        application.innerHTML = '';
-        createScoreBoard(data);
-      },
-      path: settings.url + '/users?sort=-HighScore',
-    });
+    ajax.doGet({path: settings.url + '/users?sort=-HighScore'}).then(
+        (response) => {
+          if (response.status > 499) {
+            alert('Server error');
+            return;
+          }
+
+          response.json().then((data) => {
+            application.innerHTML = '';
+            createScoreBoard(data);
+          });
+        }
+    );
   }
 }

@@ -1,5 +1,5 @@
 import {settings} from './settings/config.js';
-import AjaxModule from './ajax.js';
+import ajax from './ajax.js';
 
 /**
  * Call callbackTrue if current user is authorised otherwise call callbackFalse
@@ -7,17 +7,19 @@ import AjaxModule from './ajax.js';
  * @param {function} callbackFalse
  */
 export default function checkAuth(callbackTrue, callbackFalse) {
-  const ajax = new AjaxModule();
-  ajax.doGet({
-    callback(xhr) {
-      const data = JSON.parse(xhr.responseText);
+  ajax.doGet({path: settings.url + '/'}).then((response) => {
+    if (response.status > 499) {
+      alert('Server error');
+      return;
+    }
+
+    response.json().then((data) => {
       if (data.user !== null) {
         callbackTrue();
       } else {
         callbackFalse();
       }
-    },
-    path: settings.url + '/',
+    });
   });
 }
 
