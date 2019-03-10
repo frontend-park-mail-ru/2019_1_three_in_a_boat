@@ -14,7 +14,10 @@ export default function createAuthors(authors) {
 
     Array.from(data).forEach((author) => {
       const {name, devInfo, img, description} = author;
-      bemAuthors.push({name, devInfo, img, description});
+      bemAuthors.push({
+        name, devInfo,
+        img: settings.imgPath + img, description,
+      });
     });
 
     const draw = [

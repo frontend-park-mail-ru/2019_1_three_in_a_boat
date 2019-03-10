@@ -20,7 +20,8 @@ export default function createScoreBoard(users) {
         firstName: name, img, username,
         highScore: score, uid: userId,
       } = user;
-      bemUsers.push({name, img, username, score, userId});
+      bemUsers.push({name, img: settings.imgPath + img,
+        username, score, userId});
     });
 
     const draw = [
@@ -40,7 +41,7 @@ export default function createScoreBoard(users) {
 
     createPagination(data.data.page + 1, data.data.nPages + 1);
   } else {
-    ajax.doGet({path: settings.url + '/users?sort=-HighScore'}).then(
+    ajax.doGet({path: settings.url + '/users?sort=-highscore'}).then(
         (response) => {
           if (response.status > 499) {
             alert('Server error');

@@ -9,7 +9,7 @@ block('authors').elem('items').match((node, ctx) => ctx.authors !== undefined)({
       {
         elem: 'img',
         attrs: {
-          src: '/img' + elt.img,
+          src: elt.img,
           alt: elt.name,
         },
       },

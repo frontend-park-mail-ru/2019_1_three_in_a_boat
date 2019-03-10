@@ -45,7 +45,6 @@ const template = [
                 content: [
                   {
                     block: 'input',
-                    wrappedAs: 'input',
                     fieldName: 'firstName',
                     fieldAttrs: {
                       type: 'text',
@@ -55,7 +54,6 @@ const template = [
                     },
                   },
                   {
-                    block: 'form-group',
                     elem: 'help-text',
                     elemMods: {type: 'hidden'},
                     for: 'firstName',
@@ -110,7 +108,6 @@ const template = [
                 content: [
                   {
                     block: 'input',
-                    wrappedAs: 'input',
                     fieldName: 'username',
                     fieldAttrs: {
                       type: 'text',
@@ -130,103 +127,67 @@ const template = [
               },
               {
                 block: 'form-group',
-                content: {
-                  elem: 'size_inline',
-
-                  mods: {align_stretch: true},
-                  content: [
-                    {
-                      elem: 'title',
-                      mix: {elem: 'title_align_left'},
-                      content: {
-                        block: 'signup',
-                        elem: 'day-select',
-                        content: 'Дата рождения',
-                      },
+                mods: {size: 'inline'},
+                content: [
+                  {
+                    elem: 'title',
+                    elemMods: {align: 'left'},
+                    content: ['Дата рождения'],
+                  },
+                  {
+                    block: 'form-group',
+                    mods: {align: 'stretch'},
+                    content: {
+                      block: 'field-group',
+                      content: [
+                        {
+                          block: 'select',
+                          fieldName: 'selectDay',
+                          options: [
+                            {
+                              content: 'День',
+                              value: 0,
+                              selected: true,
+                            }].concat([...Array(30).keys()].map(
+                              (num) => ({
+                                content: num + 1,
+                                value: num + 1,
+                              }))),
+                        },
+                        {
+                          block: 'select',
+                          fieldName: 'selectMonth',
+                          wrappedInside: 'signup-form',
+                          options: [{
+                            content: 'Месяц',
+                            value: 0,
+                            selected: true,
+                          }].concat(months),
+                        },
+                        {
+                          block: 'select',
+                          fieldName: 'selectYear',
+                          wrappedInside: 'signup-form',
+                          options: [
+                            {
+                              content: 'Год',
+                              value: 0,
+                              selected: true,
+                            }].concat([...Array(119).keys()].map(
+                              (num) => ({
+                                content: num + 1900,
+                                value: num + 1900,
+                              })
+                          ).reverse()),
+                        },
+                      ],
                     },
-                    {
-                      block: 'form-group',
-                      cls: 'form-group__size_inline,' +
-                        'form-group_align_stretch',
-                      content: {
-                        block: 'field-group',
-                        content: [
-                          {
-                            elem: 'filed',
-                            cls: 'form-group__field',
-                            content: {
-                              block: 'signup-form',
-                              elem: 'date-select',
-                              content: {
-                                block: 'select',
-                                fieldName: 'selectDay',
-                                wrappedInside: 'signup-form',
-                                attrs: {id: 'signup__day-select'},
-                                options: [
-                                  {
-                                    content: 'День',
-                                    value: 0,
-                                    selected: true,
-                                  }].concat([...Array(30).keys()].map(
-                                    (num) => ({
-                                      content: num+1,
-                                      value: num+1}))),
-                              },
-                            },
-                          },
-                          {
-                            elem: 'filed',
-                            cls: 'form-group__field',
-                            content: {
-                              block: 'signup-form',
-                              elem: 'date-select',
-                              content: {
-                                block: 'select',
-                                fieldName: 'selectMonth',
-                                wrappedInside: 'signup-form',
-                                attrs: {id: 'signup__date-select'},
-                                options: [{
-                                  content: 'Месяц',
-                                  value: 0,
-                                  selected: true,
-                                }].concat(months),
-                              },
-                            },
-                          },
-                          {
-                            elem: 'filed',
-                            cls: 'form-group__field',
-                            content: {
-                              block: 'signup-form',
-                              elem: 'date-select',
-                              content: {
-                                block: 'select',
-                                fieldName: 'selectYear',
-                                wrappedInside: 'signup-form',
-                                attrs: {id: 'signup__date-select'},
-                                options: [
-                                  {
-                                    content: 'Год',
-                                    value: 0,
-                                    selected: true,
-                                  }].concat([...Array(119).keys()].map(
-                                    (num) => ({
-                                      content: num + 1900,
-                                      value: num + 1900,
-                                    })
-                                ).reverse()),
-                              },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
+                  },
+                ],
               },
               {
                 block: 'form-group',
-                mix: {'block': 'signup-form__form-group'},
+                mix: {block: 'signup-form', elem: 'form-group'},
                 content: [
                   {
                     block: 'input',
@@ -251,7 +212,6 @@ const template = [
               },
               {
                 block: 'form-group',
-                mix: {'block': 'signup-form__form-group'},
                 content: [
                   {
                     block: 'input',
@@ -287,7 +247,7 @@ const template = [
             content: [
               {
                 block: 'btn',
-                wrappedInside: 'signup-form',
+                wrappedInside: 'signup-popup',
                 wrappedAs: 'singup-btn',
                 mods: {size: 'large'},
                 attrs: {type: 'submit'},
@@ -295,14 +255,14 @@ const template = [
                   elem: 'inner',
                   content: {
                     elem: 'text',
-                    content: 'Зарегестиророваться',
+                    content: 'Зарегестироророваться',
                   },
                 }],
               },
               {
                 block: 'btn',
                 mods: {color: 'muted', size: 'large'},
-                wrappedInside: 'signup-form',
+                wrappedInside: 'signup-popup',
                 wrappedAs: 'cancel-btn',
                 content: [{
                   elem: 'inner',
@@ -319,7 +279,6 @@ const template = [
         ],
       },
     ],
-  },
-];
+  }];
 
 export default template;

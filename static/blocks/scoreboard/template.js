@@ -1,7 +1,8 @@
 block('scoreboard').elem('username')({tag: 'span'});
 block('scoreboard').elem('avatar')({tag: 'img'});
 
-block('scoreboard').elem('items').match((node, ctx) => ctx.scores !== undefined)({
+block('scoreboard').elem('items').match(
+    (node, ctx) => ctx.scores !== undefined)({
   appendContent: (node, ctx) => ctx.scores.map((elt, index) => ({
     elem: 'item',
     content: [
@@ -15,7 +16,7 @@ block('scoreboard').elem('items').match((node, ctx) => ctx.scores !== undefined)
           {
             elem: 'link',
             tag: 'a',
-            attrs: {'href': '/profile?u=' + elt.userId}, // to be changed once api's here
+            attrs: {'href': '/profile?u=' + elt.userId},
             content: [
               {
                 elem: 'data-field',
@@ -23,7 +24,7 @@ block('scoreboard').elem('items').match((node, ctx) => ctx.scores !== undefined)
                   {
                     elem: 'avatar',
                     attrs: {
-                      src: '/img' + elt.img,
+                      src: elt.img,
                       alt: elt.name,
                     },
                   },
