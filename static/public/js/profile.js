@@ -36,56 +36,19 @@ function renderProfile(user) {
         content: ['Профиль'],
       },
       {
-        block: 'icon-bg',
-        mods: {
-          bg: 'borderless', size: 'xxxlarge', shape: 'round',
-          color: 'muted-light',
-        },
-        wrappedInside: 'profile-popup',
-        wrappedAs: 'profile-icon',
-        content: [
-          {
-            tag: 'span',
-            block: 'profile-popup',
-            elem: 'userpic-text',
-            content: ['ИИ'],
-          },
-        ],
+        elem: 'profile-icon',
+        attrs: {src: user.img},
       },
       {
         block: 'profile-info',
         wrappedInside: 'profile-popup',
-        content: [
-          {
-            elem: 'item',
-            name: 'Никнейм',
-            value: user.nickname,
-          },
-          {
-            elem: 'item',
-            name: 'Имя',
-            value: user.firstName === ''? '-': user.firstName,
-          },
-          {
-            elem: 'item',
-            name: 'Фамилия',
-            value: user.lastName === ''? '-': user.lastName,
-          },
-          {
-            elem: 'item',
-            name: 'Email',
-            value: user.email,
-          },
-          {
-            elem: 'item',
-            name: 'Дата рождения',
-            value: user.date === ''? '-': user.date,
-          },
-          {
-            elem: 'item',
-            name: 'Пол',
-            value: user.gender === ''? '-': user.gender,
-          },
+        userInfo: [
+          ['Никнейм', user.nickname],
+          ['Имя', user.firstName],
+          ['Фамилия', user.lastName],
+          ['Email', user.email],
+          ['Дата рождения', user.date],
+          ['Пол', user.gender],
         ],
       },
       {

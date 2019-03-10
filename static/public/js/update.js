@@ -55,21 +55,8 @@ function renderUpdateProfilePage(user) {
         content: ['Профиль'],
       },
       {
-        block: 'icon-bg',
-        mods: {
-          bg: 'borderless', size: 'xxxlarge', shape: 'round',
-          color: 'muted-light',
-        },
-        wrappedInside: 'profile-popup',
-        wrappedAs: 'profile-icon',
-        content: [
-          {
-            tag: 'span',
-            block: 'profile-popup',
-            elem: 'userpic-text',
-            content: ['ИИ'],
-          },
-        ],
+        elem: 'profile-icon',
+        attrs: {src: user.img},
       },
       {
         block: 'form',

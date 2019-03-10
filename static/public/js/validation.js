@@ -1,9 +1,9 @@
-import {serverErrors} from "./settings/serverErrors";
+import {serverErrors} from './settings/serverErrors.js';
 
 /**
  * Check if input is valid
  * @param {HTMLInputElement} input
- * @return {Array} array of serverErrors
+ * @return {Array} array of errors
  */
 function validate(input) {
   if (input.value === '') {
@@ -70,7 +70,7 @@ function validatePassword(input) {
   const errors = [];
 
   if (input.value.length < 8) {
-    serverErrors.push('Пароль должен содержать не менее 8 символов');
+    errors.push('Пароль должен содержать не менее 8 символов');
   }
   if (!/[0-9]/.test(input.value)) {
     errors.push('Пароль должен содержать цифры');
