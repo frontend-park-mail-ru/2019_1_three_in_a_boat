@@ -1,8 +1,6 @@
 import createHeader from './header.js';
 import {settings} from './settings/config.js';
-import AjaxModule from './ajax.js';
-
-const ajax = new AjaxModule();
+import ajax from './ajax.js';
 
 /**
  * create Page with Authors
@@ -38,14 +36,16 @@ export default function createAuthors(authors) {
     const application = document.getElementById('application');
     application.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
   } else {
-    ajax.doGet({
-      callback(xhr) {
-        const data = JSON.parse(xhr.responseText);
+    ajax.doGet({path: settings.url + '/authors'}).then((response) => {
+      if (response.status > 499) {
+        alert('Server error');
+        return;
+      }
 
+      response.json().then((data) => {
         application.innerHTML = '';
         createAuthors(data['data']);
-      },
-      path: settings.url + '/authors',
+      });
     });
   }
 }

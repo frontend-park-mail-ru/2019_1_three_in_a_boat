@@ -3,7 +3,7 @@ import createUpdateProfile from './update.js';
 import {addValidationOnBlur} from './validation.js';
 import {settings} from './settings/config.js';
 import {parseUser} from './parsing.js';
-import AjaxModule from './ajax.js';
+import ajax from './ajax.js';
 import getTemplate from './views-templates/profile-template.js';
 
 /**
@@ -11,14 +11,18 @@ import getTemplate from './views-templates/profile-template.js';
  */
 export default function createProfile() {
   createHeader();
-  const ajax = new AjaxModule();
-  ajax.doGet({
-    callback(xhr) {
-      const data = JSON.parse(xhr.responseText);
+
+  ajax.doGet({path: settings.url+ '/'}).then((response) => {
+    if (response.status > 499) {
+      alert('Server error');
+      return;
+    }
+
+    response.json().then((data) => {
       const user = parseUser(data.user);
+      console.log(user);
       renderProfile(user);
-    },
-    path: settings.url+ '/',
+    });
   });
 }
 

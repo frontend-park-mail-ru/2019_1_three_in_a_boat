@@ -11,7 +11,7 @@ export function parseUser(user) {
     null: '',
   };
 
-  const {email, nickname, uid: id} = user;
+  const {email, username: nickname, uid: id} = user;
   let {firstName, lastName, gender, birthDate: date} = user;
 
   firstName = firstName !== null? firstName: '';

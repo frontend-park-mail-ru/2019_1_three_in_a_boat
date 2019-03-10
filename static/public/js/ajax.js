@@ -8,38 +8,22 @@ class AjaxModule {
    * @param method
    * @param path
    * @param body
+   * @param mode
    * @private
    */
-  _ajax({
-    callback = () => {},
-    method = 'GET',
-    path = '/',
-    body = {},
-  } = {}) {
-    const XHR = ('onload' in new XMLHttpRequest())
-        ? XMLHttpRequest : XDomainRequest;
-    const xhr = new XHR();
-    // const xhr = new XMLHttpRequest();
-    xhr.open(method, path, true);
-    xhr.withCredentials = true;
-
+  _ajax({callback, method, path, body, mode='cors'}) {
+    const headers = new Headers();
     if (body) {
-      xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+      headers.append('Content-Type', 'application/json; charset=utf-8');
+      body = JSON.stringify(body);
     }
 
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState !== 4) {
-        return;
-      }
-
-      callback(xhr);
-    };
-
+    const init = {headers, method, mode, credentials: 'include'};
     if (body) {
-      xhr.send(JSON.stringify(body));
-    } else {
-      xhr.send();
+      init.body = body;
     }
+
+    return fetch(path, init);
   }
 
   /**
@@ -48,17 +32,8 @@ class AjaxModule {
    * @param path
    * @param body
    */
-  doGet({
-    callback = () => {},
-    path = '/',
-    body = {},
-  } = {}) {
-    this._ajax({
-      callback,
-      path,
-      body,
-      method: 'GET',
-    });
+  doGet({callback = () => {}, path = '/', body = null}) {
+    return this._ajax({callback, path, body, method: 'GET'});
   }
 
   /**
@@ -67,17 +42,8 @@ class AjaxModule {
    * @param path
    * @param body
    */
-  doPost({
-    callback = () => {},
-    path = '/',
-    body = {},
-  } = {}) {
-    this._ajax({
-      callback,
-      path,
-      body,
-      method: 'POST',
-    });
+  doPost({callback = () => {}, path = '/', body = null}) {
+    return this._ajax({callback, path, body, method: 'POST'});
   }
 
   /**
@@ -86,37 +52,10 @@ class AjaxModule {
    * @param path
    * @param body
    */
-  doDelete({
-    callback = () => {},
-    path = '/',
-    body = {},
-  } = {}) {
-    this._ajax({
-      callback,
-      path,
-      body,
-      method: 'DELETE',
-    });
-  }
-
-  /**
-   *
-   * @param callback
-   * @param path
-   * @param body
-   */
-  doPut({
-    callback = () => {},
-    path = '/',
-    body = {},
-  } = {}) {
-    this._ajax({
-      callback,
-      path,
-      body,
-      method: 'PUT',
-    });
+  doPut({callback = () => {}, path = '/', body = null}) {
+    return this._ajax({callback, path, body, method: 'PUT'});
   }
 }
 
-export default AjaxModule;
+const ajax = new AjaxModule();
+export default ajax;
