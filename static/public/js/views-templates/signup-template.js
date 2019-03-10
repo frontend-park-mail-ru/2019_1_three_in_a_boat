@@ -13,7 +13,7 @@ const months = [
   {content: 'Декабрь', value: 12},
 ];
 
-const template = [
+const template = () => [
   {
     block: 'signup-popup',
     mods: {'main': true},

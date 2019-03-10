@@ -12,9 +12,9 @@ import template from './views-templates/signup-template.js';
  */
 export default function createSignUp() {
   createHeader();
-
+  const templ = template();
   const application = document.getElementById('application');
-  application.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  application.insertAdjacentHTML('beforeend', bemhtml.apply(templ));
 
   const cnslBtn = document.getElementsByClassName('btn_color_muted')[0];
   cnslBtn.addEventListener('click', function(event) {
