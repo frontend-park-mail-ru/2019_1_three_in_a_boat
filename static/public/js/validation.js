@@ -232,23 +232,38 @@ export function checkResponse(response, form) {
   }
 
   const fields = response.data.fields;
-  if (fields.name !== undefined && fields.name.ok !== true) {
+  if (fields.password !== undefined && fields.password.errors) {
+    const errors = [];
+    fields.password.errors.forEach((error) => {
+      errors.push(serverErrors[error]);
+    });
+    if (errors) {
+      addErrors(form['password'], errors);
+    }
+  }
+
+  if (fields.username !== undefined && fields.username.errors) {
+    const errors = [];
+    fields.username.errors.forEach((error) => {
+      errors.push(serverErrors[error]);
+    });
+    addErrors(form['username'], errors);
+  }
+
+  if (fields.name !== undefined && fields.name.errors) {
     const errors = [];
     fields.name.errors.forEach((error) => {
       errors.push(serverErrors[error]);
     });
-
     addErrors(form['email'], errors);
   }
 
-  if (fields.password !== undefined && fields.password.ok !== true) {
+  if (fields.email !== undefined && fields.email.errors) {
     const errors = [];
-    fields.password.errors.forEach((error) => {
-      console.log(error, serverErrors[error]);
+    fields.email.errors.forEach((error) => {
       errors.push(serverErrors[error]);
     });
-
-    addErrors(form['password'], errors);
+    addErrors(form['email'], errors);
   }
 
   return false;

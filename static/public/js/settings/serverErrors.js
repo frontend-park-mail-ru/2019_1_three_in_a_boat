@@ -7,5 +7,5 @@ export const serverErrors = {
   'E_EMAIL_DOMAIN_DOES_NOT_EXIST': 'Некорректный email',
   'E_TOO_LONG': 'Введенное значение слишком длинное',
   'E_TOO_SHORT': 'Введенное значение слишком короткое',
-  'E_DUPLICATE_NOT_ALLOWED': 'Такой email уже существует',
+  'E_DUPLICATE_NOT_ALLOWED': 'Это значение уже занято',
 };

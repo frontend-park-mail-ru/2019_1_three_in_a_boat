@@ -126,7 +126,7 @@ export default function getTemplate(user) {
                   content: [
                     {
                       block: 'input',
-                      fieldName: 'userName',
+                      fieldName: 'username',
                       fieldAttrs: {
                         required: true,
                         checkable: true,
@@ -138,7 +138,7 @@ export default function getTemplate(user) {
                     {
                       elem: 'help-text',
                       elemMods: {type: 'hidden'},
-                      for: 'userName',
+                      for: 'username',
                     }],
                 },
               },

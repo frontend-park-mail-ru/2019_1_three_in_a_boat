@@ -20,7 +20,6 @@ export default function createProfile() {
 
     response.json().then((data) => {
       const user = parseUser(data.user);
-      console.log(user);
       renderProfile(user);
     });
   });

@@ -60,7 +60,7 @@ function renderUpdateProfilePage(user) {
     const lastName = form['updateForm_lastName'].value;
     const email = form['updateForm_email'].value;
     const selectField = document.getElementsByTagName('select');
-    const userName = form['updateForm_userName'].value;
+    const userName = form['updateForm_username'].value;
     const day = selectField['updateForm_selectDay'].value;
     const month = selectField['updateForm_selectMonth'].value;
     const year = selectField['updateForm_selectYear'].value;
@@ -101,7 +101,7 @@ function renderUpdateProfilePage(user) {
         name: firstName, lastName, userName,
         email, gender, date, password,
       };
-      console.log(body);
+
       ajax.doPut({path, body}).then(callback);
     });
   });
