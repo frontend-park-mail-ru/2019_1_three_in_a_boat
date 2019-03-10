@@ -17,13 +17,11 @@ export default function createScoreBoard(users) {
     const bemUsers = [];
 
     Array.from(data.data.users).forEach((user) => {
-      bemUsers.push({
-        name: user.firstName,
-        img: user.img,
-        username: user.username,
-        score: user.highScore,
-        userId: user.uid,
-      });
+      const {
+        firstName: name, img, username,
+        highScore: score, uid: userId,
+      } = user;
+      bemUsers.push({name, img, username, score, userId});
     });
 
     const draw = [
@@ -35,10 +33,11 @@ export default function createScoreBoard(users) {
             scores: bemUsers,
           },
         ],
-      }];
+      },
+    ];
 
-    document.getElementById('application').insertAdjacentHTML('beforeend',
-        bemhtml.apply(draw));
+    const application = document.getElementById('application');
+    application.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
 
     createPagination(data.data.page + 1, data.data.nPages + 1);
   } else {

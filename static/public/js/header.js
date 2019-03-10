@@ -19,7 +19,6 @@ export default function createHeader() {
     ],
   };
 
-  document.getElementById('application').insertAdjacentHTML('beforeend',
-      bemhtml.apply(header)
-  );
+  const application = document.getElementById('application');
+  application.insertAdjacentHTML('beforeend', bemhtml.apply(header));
 }

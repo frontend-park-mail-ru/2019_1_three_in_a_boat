@@ -11,13 +11,13 @@ export function parseUser(user) {
     null: '',
   };
 
-  return {
-    email: user.email,
-    firstName: user.firstName !== null? user.firstName: '',
-    lastName: user.lastName !== null? user.lastName: '',
-    gender: user.gender !== null? genderToStr[user.gender]: '',
-    nickname: user.username,
-    date: user.birthDate === null? '': user.birthDate.split('-').join('.'),
-    id: user.uid,
-  };
+  const {email, nickname, uid: id} = user;
+  let {firstName, lastName, gender, birthDate: date} = user;
+
+  firstName = firstName !== null? firstName: '';
+  lastName = lastName !== null? lastName: '';
+  gender = gender !== null? genderToStr[gender]: '';
+  date = date !== null? date.split('-').join('.'): '';
+
+  return {firstName, lastName, gender, date, email, nickname, id};
 }

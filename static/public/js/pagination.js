@@ -77,9 +77,8 @@ export default function createPagination(currPage, pagesNumber) {
     template[0].content.push(number);
   });
 
-  document.getElementById('application').insertAdjacentHTML('beforeend',
-      bemhtml.apply(template)
-  );
+  const application = document.getElementById('application');
+  application.insertAdjacentHTML('beforeend', bemhtml.apply(template));
 
   setPaginationLinks();
 }

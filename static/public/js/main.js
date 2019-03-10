@@ -1,4 +1,5 @@
 'use strict';
+
 import createMenu from './menu.js';
 import createScoreBoard from './scoreboard.js';
 import createAuthors from './authors.js';

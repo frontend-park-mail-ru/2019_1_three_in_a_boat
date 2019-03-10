@@ -9,7 +9,8 @@ export function initFileInputs() {
   const fileInputs = document.getElementsByClassName(BLOCK);
   for (const inputBlock of fileInputs) {
     const children = inputBlock.childNodes;
-    let field; let info;
+    let field;
+    let info;
     for (const child of children) {
       if (child.classList.contains(`${BLOCK}__field`)) {
         field = child;

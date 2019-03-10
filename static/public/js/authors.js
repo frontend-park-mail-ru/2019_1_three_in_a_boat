@@ -15,12 +15,8 @@ export default function createAuthors(authors) {
     const bemAuthors = [];
 
     Array.from(data).forEach((author) => {
-      bemAuthors.push({
-        name: author.name,
-        devInfo: author.devInfo,
-        img: author.img,
-        description: author.description,
-      });
+      const {name, devInfo, img, description} = author;
+      bemAuthors.push({name, devInfo, img, description});
     });
 
     const draw = [
@@ -36,10 +32,11 @@ export default function createAuthors(authors) {
             authors: bemAuthors,
           },
         ],
-      }];
+      },
+    ];
 
-    document.getElementById('application').insertAdjacentHTML('beforeend',
-        bemhtml.apply(draw));
+    const application = document.getElementById('application');
+    application.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
   } else {
     ajax.doGet({
       callback(xhr) {
