@@ -44,7 +44,9 @@ export default function getTemplate(user) {
         },
         {
           elem: 'profile-icon',
-          attrs: {src: settings.imgPath + user.img},
+          attrs: {src: user.img.startsWith(settings.imgPath) ?
+                user.img :
+                settings.imgPath + user.img},
         },
         {
           block: 'profile-info',

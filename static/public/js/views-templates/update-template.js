@@ -35,7 +35,7 @@ export default function getTemplate(user) {
         attrs: {
           src: user.img.startsWith(settings.imgPath) ?
               user.img :
-              user.img.startsWith(settings.imgPath)},
+              settings.imgPath + user.img},
       },
       {
         block: 'form',
