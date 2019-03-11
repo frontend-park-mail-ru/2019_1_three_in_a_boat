@@ -10,9 +10,10 @@ import {settings} from './settings/config.js';
  */
 export default function createLoginPage() {
   createHeader();
+  const templ = template();
 
   const application = document.getElementById('application');
-  application.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  application.insertAdjacentHTML('beforeend', bemhtml.apply(templ));
 
   const form = document.getElementById('loginForm');
   form.addEventListener('submit', function(event) {

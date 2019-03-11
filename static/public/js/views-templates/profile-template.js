@@ -7,33 +7,32 @@ import {settings} from '../settings/config.js';
  * @return {Promise} promise with a template
  */
 export default function getTemplate(user) {
-  const editBtn = [];
   return ajax.doGet({path: settings.url + '/'}).then((response) => {
     if (response.status > 499) {
       alert('Server error');
       return;
     }
-    response.json().then((data) => {
-      if (data.user && data.user.uid === user.id) {
-        editBtn.push({
-          block: 'btn',
-          mods: {'size': 'large', 'with-icon': true, 'cancel': true},
-          wrappedInside: 'profile-popup',
-          content: [
-            {
-              block: 'icon',
-              wrappedInside: 'btn',
-              mods: {type: 'useredit', size: 'large'},
-            },
-            {
-              elem: 'text',
-              content: 'Изменить',
-            },
-          ],
-        });
-      }
-    });
-  }).then(() => {
+    return response.json();
+  }).then((data) => {
+    if (data.user && data.user.uid === user.id) {
+      return [{
+        block: 'btn',
+        mods: {'size': 'large', 'with-icon': true, 'cancel': true},
+        wrappedInside: 'profile-popup',
+        content: [
+          {
+            block: 'icon',
+            wrappedInside: 'btn',
+            mods: {type: 'useredit', size: 'large'},
+          },
+          {
+            elem: 'text',
+            content: 'Изменить',
+          },
+        ],
+      }];
+    }
+  }).then((btn) => {
     return [{
       block: 'profile-popup',
       mods: {main: true},
@@ -61,9 +60,9 @@ export default function getTemplate(user) {
         },
         {
           elem: 'double-btn',
-          content: editBtn,
+          content: btn,
         },
       ],
     }];
-  })
+  });
 }

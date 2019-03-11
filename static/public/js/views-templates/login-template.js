@@ -1,4 +1,4 @@
-const template = [{
+const template = () => [{
   block: 'login-popup',
   content: [
     {
