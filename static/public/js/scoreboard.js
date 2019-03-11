@@ -2,6 +2,10 @@ import {settings} from './settings/config.js';
 import createHeader from './header.js';
 import createPagination from './pagination.js';
 import ajax from './ajax.js';
+import {checkResponse} from "./validation.js";
+import createMenu from "./menu.js";
+import renderProfile from "./profile.js";
+import getTemplate from "./views-templates/profile-template.js";
 
 
 /**
@@ -47,11 +51,42 @@ export default function createScoreBoard(users) {
             return;
           }
 
-          response.json().then((data) => {
+          response.json().then((data) =>  {
             application.innerHTML = '';
             createScoreBoard(data);
           });
         }
     );
   }
+
+  const profiles = document.getElementsByClassName('scoreboard__link');
+
+  Array.from(profiles).forEach((link) => {
+    if (Number(link.value) < 1) {
+      return;
+    }
+
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const path = settings.url + '/users/'
+          + link.getAttribute('value');
+      console.log(link);
+      ajax.doGet({path}).then((response) => {
+        if (response.status > 499) {
+          alert('Server error');
+          return;
+        }
+
+        response.json().then((data) => {
+          console.log(data);
+          application.innerHTML = '';
+          createHeader();
+          const user = data.data;
+          const template = getTemplate(user);
+          const apllication = document.getElementById('application');
+          apllication.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+        });
+      });
+    });
+  });
 }

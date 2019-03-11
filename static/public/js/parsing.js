@@ -10,6 +10,7 @@ export function parseUser(user) {
     other: 'Другой',
     null: '',
   };
+  console.log(user);
 
   const {email, username: nickname, uid: id} = user;
   let {firstName, lastName, gender, birthDate: date} = user;

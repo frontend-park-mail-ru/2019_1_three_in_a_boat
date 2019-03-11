@@ -20,7 +20,6 @@ export default function createProfile() {
 
     response.json().then((data) => {
       const user = parseUser(data.user);
-      console.log(user);
       renderProfile(user);
     });
   });
@@ -30,7 +29,7 @@ export default function createProfile() {
  * Render profile page
  * @param {Object} user
  */
-function renderProfile(user) {
+export function renderProfile(user) {
   const template = getTemplate(user);
 
   const apllication = document.getElementById('application');

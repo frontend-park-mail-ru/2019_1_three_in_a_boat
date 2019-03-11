@@ -15,7 +15,9 @@ block('scoreboard').elem('items').match((node, ctx) => ctx.scores !== undefined)
           {
             elem: 'link',
             tag: 'a',
-            attrs: {'href': '/profile?u=' + elt.userId}, // to be changed once api's here
+            fieldName: 'userName',
+            value: elt.userId,
+            attrs: {value: elt.userId}, // to be changed once api's here
             content: [
               {
                 elem: 'data-field',
