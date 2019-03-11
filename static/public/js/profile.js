@@ -12,7 +12,7 @@ import getTemplate from './views-templates/profile-template.js';
 export default function createProfile() {
   createHeader();
 
-  ajax.doGet({path: settings.url+ '/'}).then((response) => {
+  ajax.doGet({path: settings.url + '/'}).then((response) => {
     if (response.status > 499) {
       alert('Server error');
       return;
@@ -30,18 +30,18 @@ export default function createProfile() {
  * @param {Object} user
  */
 export function renderProfile(user) {
-  const template = getTemplate(user);
+  return getTemplate(user).then((template) => {
+    const apllication = document.getElementById('application');
+    apllication.insertAdjacentHTML('beforeend', bemhtml.apply(template));
 
-  const apllication = document.getElementById('application');
-  apllication.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-
-  document.getElementsByClassName('btn_cancel')[0].addEventListener(
-      'click',
-      (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        createUpdateProfile();
-        addValidationOnBlur();
-      }
-  );
+    document.getElementsByClassName('btn_cancel')[0].addEventListener(
+        'click',
+        (event) => {
+          event.preventDefault();
+          application.innerHTML = '';
+          createUpdateProfile();
+          addValidationOnBlur();
+        }
+    );
+  });
 }

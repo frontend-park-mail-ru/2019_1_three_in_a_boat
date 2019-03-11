@@ -51,7 +51,7 @@ export default function createScoreBoard(users) {
             return;
           }
 
-          response.json().then((data) =>  {
+          response.json().then((data) => {
             application.innerHTML = '';
             createScoreBoard(data);
           });
@@ -82,9 +82,11 @@ export default function createScoreBoard(users) {
           application.innerHTML = '';
           createHeader();
           const user = data.data;
-          const template = getTemplate(user);
-          const apllication = document.getElementById('application');
-          apllication.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+          getTemplate(user).then((template) => {
+            const apllication = document.getElementById('application');
+            apllication.insertAdjacentHTML('beforeend',
+                bemhtml.apply(template));
+          });
         });
       });
     });
