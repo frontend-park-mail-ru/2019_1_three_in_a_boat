@@ -1,5 +1,6 @@
 import createHeader from './header.js';
 import createMenu from './menu.js';
+import initInputs from './input.js';
 import ajax from './ajax.js';
 import template from './views-templates/login-template.js';
 import {validateForm, checkResponse} from './validation.js';
@@ -15,6 +16,7 @@ export default function createLoginPage() {
   const application = document.getElementById('application');
   application.insertAdjacentHTML('beforeend', bemhtml.apply(templ));
 
+  initInputs();
   const form = document.getElementById('loginForm');
   form.addEventListener('submit', function(event) {
     event.preventDefault();

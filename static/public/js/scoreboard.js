@@ -24,8 +24,10 @@ export default function createScoreBoard(users) {
         firstName: name, img, username,
         highScore: score, uid: userId,
       } = user;
-      bemUsers.push({name, img: settings.imgPath + img,
-        username, score, userId});
+      bemUsers.push({
+        name, img: settings.imgPath + img,
+        username, score, userId,
+      });
     });
 
     const draw = [
@@ -39,6 +41,8 @@ export default function createScoreBoard(users) {
         ],
       },
     ];
+
+    draw[0].content[0].page = parseInt(data.data.page) || 0;
 
     const application = document.getElementById('application');
     application.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
@@ -71,7 +75,6 @@ export default function createScoreBoard(users) {
       event.preventDefault();
       const path = settings.url + '/users/'
           + link.getAttribute('value');
-      console.log(link);
       ajax.doGet({path}).then((response) => {
         if (response.status > 499) {
           alert('Server error');
@@ -79,7 +82,6 @@ export default function createScoreBoard(users) {
         }
 
         response.json().then((data) => {
-          console.log(data);
           application.innerHTML = '';
           createHeader();
           const user = data.data;

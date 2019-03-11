@@ -11,7 +11,7 @@ block('scoreboard').elem('items').match(
         content: [
           {
             elem: 'place',
-            content: '#' + (index + 1),
+            content: '#' + ((ctx.page * 10) + (index + 1)),
           },
           {
             elem: 'link',
@@ -45,6 +45,8 @@ block('scoreboard').elem('items').match(
         content: elt.score,
       },
     ],
-    elemMods: index < 3 ? {place: ['first', 'second', 'third'][index]} : {},
+    elemMods: index < 3 && ctx.page === 0 ?
+        {place: ['first', 'second', 'third'][index]}
+        : {},
   })),
 });

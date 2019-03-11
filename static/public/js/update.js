@@ -80,7 +80,6 @@ function renderUpdateProfilePage(user) {
         const ok = checkResponse(data, form);
         if (ok) {
           application.innerHTML = '';
-          console.log(data);
           createProfile();
         }
       });
