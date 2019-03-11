@@ -14,7 +14,7 @@ export default function getTemplate(user) {
     }
     return response.json();
   }).then((data) => {
-    if (data.user && data.user.uid === user.id) {
+    if (data.user && data.user.uid === (user.id || user.uid)) {
       return [{
         block: 'btn',
         mods: {'size': 'large', 'with-icon': true, 'cancel': true},
