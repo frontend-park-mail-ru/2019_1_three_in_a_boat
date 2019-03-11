@@ -1,5 +1,5 @@
 import createHeader from './header.js';
-import createProfile from './profile.js';
+import {createProfile} from './profile.js';
 import ajax from './ajax.js';
 import {initFileInputs, getBase64} from './file-input.js';
 import {settings} from './settings/config.js';

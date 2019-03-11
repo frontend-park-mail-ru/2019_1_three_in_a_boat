@@ -5,7 +5,7 @@ import createScoreBoard from './scoreboard.js';
 import createAuthors from './authors.js';
 import createLoginPage from './login.js';
 import createSignUp from './signup.js';
-import createProfile from './profile.js';
+import {createProfile} from './profile.js';
 import doSignOut from './signout.js';
 import {addValidationOnBlur} from './validation.js';
 

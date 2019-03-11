@@ -9,7 +9,7 @@ import getTemplate from './views-templates/profile-template.js';
 /**
  * Create page with user profile
  */
-export default function createProfile() {
+export function createProfile() {
   createHeader();
 
   ajax.doGet({path: settings.url + '/'}).then((response) => {
@@ -28,6 +28,7 @@ export default function createProfile() {
 /**
  * Render profile page
  * @param {Object} user
+ * @return {Promise} a promise to render the profile and make the world a better place
  */
 export function renderProfile(user) {
   return getTemplate(user).then((template) => {

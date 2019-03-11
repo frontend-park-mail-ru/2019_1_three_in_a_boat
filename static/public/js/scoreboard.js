@@ -2,7 +2,7 @@ import {settings} from './settings/config.js';
 import createHeader from './header.js';
 import createPagination from './pagination.js';
 import ajax from './ajax.js';
-import renderProfile from './profile.js';
+import {renderProfile} from './profile.js';
 
 
 /**
@@ -81,6 +81,7 @@ export default function createScoreBoard(users) {
         response.json().then((data) => {
           application.innerHTML = '';
           const user = data.data;
+          createHeader();
           renderProfile(user);
         });
       });
