@@ -94,42 +94,6 @@ const template = () => [{
         },
         {
           block: 'form-group',
-          mods: {align: 'space-between', size: 'large'},
-          content: [
-            {
-              content: [
-                {
-                  block: 'checkbox',
-                  fieldName: 'rememberMe',
-                  wrappedInside: 'login-form',
-                  wrappedAs: 'remember-me-checkbox',
-                  mods: {size: 'small'},
-                  attrs: {
-                    type: 'checkbox',
-                  },
-                },
-                {
-                  tag: 'label',
-                  block: 'login-form',
-                  elem: 'remember-me-label',
-                  for: 'rememberMe',
-                  content: 'Запомнить пароль',
-                },
-              ],
-            },
-            {
-              content: {
-                tag: 'a',
-                block: 'login-form',
-                elem: 'forgot-password-link',
-                href: '#',
-                content: 'Забыли пароль?',
-              },
-            },
-          ],
-        },
-        {
-          block: 'form-group',
           mods: {align: 'center'},
           wrappedInside: 'login-form',
           wrappedAs: 'form-group',
