@@ -1,0 +1,70 @@
+.form-group {
+  $block: &;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 5px 0;
+
+  &:last-of-type {
+    padding-bottom: 0;
+  }
+
+  &_align {
+    &_space-between {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &_center {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    &_stretch {
+      flex-direction: row;
+      justify-content: stretch;
+
+      #{$block}__field {
+        flex-grow: 1;
+      }
+    }
+  }
+
+  &_size {
+    &_inline {
+      padding: 0;
+    }
+    &_large {
+      padding-bottom: 10px;
+    }
+  }
+
+  &__help-text {
+    font-size: $small-font-size;
+    margin-top: 4px;
+    &_type {
+      &_error {
+        color: $error-color;
+      }
+    }
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__title {
+    display: block;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+
+    &_align {
+      &_left {
+        text-align: left;
+      }
+    }
+  }
+
+}

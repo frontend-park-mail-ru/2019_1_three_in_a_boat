@@ -1,0 +1,56 @@
+@import "../../modules/scss/mixins";
+@import "../../modules/scss/variables";
+
+.file-input{
+  $block: &;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  height: $field-height - 2px;
+  padding: 0;
+
+  border: 1px solid $border-color;
+  border-radius: 3px;
+
+  &__label {
+    @extend .btn;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    flex-grow: 0;
+    height: 30px;
+    margin: -1px;
+
+    border: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+
+    box-shadow: none;
+  }
+
+  &__field {
+    @include hide;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 130px; // supposed to fit any 20 characters
+    overflow: hidden;
+
+    flex-grow: 1;
+
+    white-space: nowrap;
+    padding: 0 15px;
+
+    font-size: 12px;
+  }
+}

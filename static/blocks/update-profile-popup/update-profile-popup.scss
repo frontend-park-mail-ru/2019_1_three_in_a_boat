@@ -1,0 +1,47 @@
+.update-profile-popup {
+  @extend %popup;
+  max-width: 250px;
+  margin: auto 0;
+
+  @include shadow($shadow);
+
+  &__close-popup {
+    @extend %popup__close-popup
+  }
+
+  &__hr {
+    margin: 16px (0-$popup-right-padding) 16px (0-$popup-left-padding);
+  }
+
+  &__title {
+    margin: 0 0 16px 0;
+  }
+
+  &__continue-with-text {
+    margin: 8px 0;
+    font-size: 9px;
+
+    text-align: center;
+    color: $muted-color-dark;
+    font-weight: bold;
+  }
+
+  &__signup-link {
+    font-size: $small-font-size;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  &__double-btn {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+  }
+
+  &__update-btn {
+    margin-right: 4px;
+  }
+  &__cancel-btn {
+    margin-left: 4px;
+  }
+}

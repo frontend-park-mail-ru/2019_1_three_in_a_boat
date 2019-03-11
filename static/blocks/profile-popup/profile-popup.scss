@@ -1,0 +1,56 @@
+@import "../../modules/scss/variables";
+
+.profile-popup {
+  @extend %popup;
+  align-items: center;
+
+  max-width: 400px;
+
+  border: 1px solid $border-color;
+
+  &__title {
+    margin-bottom: 8px;
+  }
+
+  &_main {
+    margin-top: 8px;
+  }
+
+  &__profile-info {
+    max-width: fit-content;
+    margin: 20px 0 10px;
+  }
+
+  &__profile-icon {
+    height: 120px;
+    width: 120px;
+    border: 1px solid $border-color;
+    border-radius: 100%;
+  }
+
+  &__double-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    margin: 0 auto;
+    padding: 0 40px;
+    &_center {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  &__btn {
+    width: 140px;
+    margin: 0 4px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.login-popup {
+  @extend %popup;
+
+  margin: auto 0;
+  max-width: 300px;
+
+
+  @include shadow($shadow);
+
+  &__close-popup {
+    @extend %popup__close-popup
+  }
+
+  &__hr {
+    margin: 16px (0-$popup-right-padding) 16px (0-$popup-left-padding);
+  }
+
+  &__title {
+    margin: 0 0 16px 0;
+  }
+
+  &__continue-with-text {
+    margin: 8px 0;
+    font-size: 9px;
+
+    text-align: center;
+    font-weight: bold;
+    color: $muted-color-dark;
+  }
+
+  &__signup-link {
+    font-size: $small-font-size;
+    text-align: center;
+    font-weight: bold;
+  }
+}
