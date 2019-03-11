@@ -21,7 +21,7 @@ const months = [
  * @return {Array} template of the profile's update page
  */
 export default function getTemplate(user) {
-  const template = [{
+  return [{
     block: 'profile-popup',
     mods: {main: true},
     content: [
@@ -325,7 +325,7 @@ export default function getTemplate(user) {
                   },
                   {
                     elem: 'text',
-                    content: 'Удалить',
+                    content: 'Отмена',
                   },
                 ],
               },
@@ -335,6 +335,4 @@ export default function getTemplate(user) {
       },
     ],
   }];
-
-  return template;
 }
