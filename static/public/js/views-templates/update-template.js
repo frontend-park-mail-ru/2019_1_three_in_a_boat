@@ -1,3 +1,5 @@
+import {settings} from "../settings/config";
+
 const months = [
   {content: 'Январь', value: 1},
   {content: 'Февраль', value: 2},
@@ -30,7 +32,7 @@ export default function getTemplate(user) {
       },
       {
         elem: 'profile-icon',
-        attrs: {src: user.img},
+        attrs: {src: settings.imgPath + user.img},
       },
       {
         block: 'form',
