@@ -2,10 +2,7 @@ import {settings} from './settings/config.js';
 import createHeader from './header.js';
 import createPagination from './pagination.js';
 import ajax from './ajax.js';
-import {checkResponse} from "./validation.js";
-import createMenu from "./menu.js";
-import renderProfile from "./profile.js";
-import getTemplate from "./views-templates/profile-template.js";
+import renderProfile from './profile.js';
 
 
 /**
@@ -83,13 +80,8 @@ export default function createScoreBoard(users) {
 
         response.json().then((data) => {
           application.innerHTML = '';
-          createHeader();
           const user = data.data;
-          getTemplate(user).then((template) => {
-            const apllication = document.getElementById('application');
-            apllication.insertAdjacentHTML('beforeend',
-                bemhtml.apply(template));
-          });
+          renderProfile(user);
         });
       });
     });
