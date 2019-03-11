@@ -52,7 +52,7 @@ export default function getTemplate(user) {
           block: 'profile-info',
           wrappedInside: 'profile-popup',
           userInfo: [
-            ['Никнейм', user.nickname],
+            ['Никнейм', user.nickname || user.username],
             ['Имя', user.firstName],
             ['Фамилия', user.lastName],
             ['Email', user.email],

@@ -28,21 +28,23 @@ export function createProfile() {
 /**
  * Render profile page
  * @param {Object} user
- * @return {Promise} a promise to render the profile and make the world a better place
+ * @return {Promise} a promise to render the profile and make the world better
  */
 export function renderProfile(user) {
   return getTemplate(user).then((template) => {
     const apllication = document.getElementById('application');
     apllication.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-
-    document.getElementsByClassName('btn_cancel')[0].addEventListener(
-        'click',
-        (event) => {
-          event.preventDefault();
-          application.innerHTML = '';
-          createUpdateProfile();
-          addValidationOnBlur();
-        }
-    );
+    const btn = document.getElementsByClassName('btn_cancel')[0];
+    if (btn) {
+      document.getElementsByClassName('btn_cancel')[0].addEventListener(
+          'click',
+          (event) => {
+            event.preventDefault();
+            application.innerHTML = '';
+            createUpdateProfile();
+            addValidationOnBlur();
+          }
+      );
+    }
   });
 }
