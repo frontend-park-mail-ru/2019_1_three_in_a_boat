@@ -4,6 +4,7 @@ import ajax from './ajax.js';
 
 /**
  * create Page with Authors
+ * @param {Object} authors Authors JSON, in the format returned by the server
  */
 export default function createAuthors(authors) {
   createHeader();

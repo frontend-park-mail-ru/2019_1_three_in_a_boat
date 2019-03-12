@@ -6,7 +6,7 @@ import createMenu from './menu.js';
  * Sign out
  */
 export default function doSignOut() {
-  ajax.doGet({path: settings.url + '/signout'}).then((response) => {
+  ajax.doPost({path: settings.url + '/signout'}).then((response) => {
     if (response.status > 499) {
       alert('Server error');
       return;
