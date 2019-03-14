@@ -6,10 +6,12 @@
 
   max-width: 400px;
 
-  border: 1px solid $border-color;
-
   &__title {
-    margin-bottom: 8px;
+    @extend %popup__title;
+  }
+
+  &__content {
+    @extend %popup__content;
   }
 
   &_main {
@@ -22,8 +24,8 @@
   }
 
   &__profile-icon {
-    height: 120px;
-    width: 120px;
+    height: 140px;
+    width: 140px;
     border-radius: 100%;
   }
 

@@ -8,12 +8,12 @@ export default function createHeader() {
     content: [
       {
         block: 'icon',
-        mods: {color: 'orange', size: 'xlarge', type: 'mailru'},
+        mods: {color: 'white', size: 'xlarge', type: 'hexagon'},
       },
       {
         elem: 'title',
         tag: 'a',
-        attrs: {type: 'menu'},
+        attrs: {'data-link-type': 'menu'},
         content: ['hexagon'],
       },
     ],

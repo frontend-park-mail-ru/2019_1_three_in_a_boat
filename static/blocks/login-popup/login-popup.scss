@@ -1,22 +1,23 @@
 .login-popup {
   @extend %popup;
-
+  padding: 0;
   margin: auto 0;
-  max-width: 250px;
-
-
-  @include shadow($shadow);
+  max-width: 300px;
 
   &__close-popup {
     @extend %popup__close-popup
   }
 
+  &__content {
+    @extend %popup__content;
+  }
+
   &__hr {
-    margin: 16px (0-$popup-right-padding) 16px (0-$popup-left-padding);
+    margin: 16px -16px;
   }
 
   &__title {
-    margin: 0 0 16px 0;
+    @extend %popup__title;
   }
 
   &__continue-with-text {

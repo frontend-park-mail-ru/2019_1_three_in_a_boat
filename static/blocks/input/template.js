@@ -7,7 +7,7 @@ block('input').elem('field')({
 });
 
 block('input').elem('field').match((node, ctx) => !ctx.attrs || !ctx.attrs.type)
-({addAttrs: {'type': 'text'}});
+({addAttrs: {type: 'text'}});
 
 block('input').match((node, ctx) => !ctx.content)({
   content: (node, ctx) => [{

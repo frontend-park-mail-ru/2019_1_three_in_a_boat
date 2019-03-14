@@ -10,12 +10,15 @@
   border-radius: 3px;
   // border takes up space, making colored elements leaves blank pixels
   // so I use a shadow-border
-  @include shadow(0 0 0 1px $border-color, $shadow-outline);
 
   &__title {
     margin:0;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
     padding: 15px;
     text-align: left;
+    background-color: $primary-color;
+    color: $primary-color-text;
   }
 
   &__link {
@@ -53,6 +56,12 @@
   }
 
   &__items {
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px $border-color solid;
+    border-top: 0;
+    //@include shadow(0 0 0 1px $border-color, $shadow-outline);
+
     &_color_white-whitesmoke-chain {
       // there's probably a better way, but I couldn't find it :<
       #{$block}__item:nth-of-type(even) {

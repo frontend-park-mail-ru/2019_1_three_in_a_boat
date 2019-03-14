@@ -11,9 +11,11 @@
 
 
   &__sumbit-btn {
-    width: 50%;
-    max-width: 160px;
+    margin-right: 4px;
+    flex-grow: 1;
+  }
 
-    margin: 16px;
+  &__cancel-btn {
+    flex-grow: 0;
   }
 }

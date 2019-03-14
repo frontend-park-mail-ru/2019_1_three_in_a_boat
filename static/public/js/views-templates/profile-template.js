@@ -43,26 +43,33 @@ export default function getTemplate(user) {
           content: ['Профиль'],
         },
         {
-          elem: 'profile-icon',
-          attrs: {src: user.img.startsWith(settings.imgPath) ?
-                user.img :
-                settings.imgPath + user.img},
-        },
-        {
-          block: 'profile-info',
-          wrappedInside: 'profile-popup',
-          userInfo: [
-            ['Никнейм', user.nickname || user.username],
-            ['Имя', user.firstName],
-            ['Фамилия', user.lastName],
-            ['Email', user.email],
-            ['Дата рождения', user.date],
-            ['Пол', user.gender],
+          elem: 'content',
+          content: [
+            {
+              elem: 'profile-icon',
+              attrs: {
+                src: user.img.startsWith(settings.imgPath) ?
+                    user.img :
+                    settings.imgPath + user.img,
+              },
+            },
+            {
+              block: 'profile-info',
+              wrappedInside: 'profile-popup',
+              userInfo: [
+                ['Никнейм', user.nickname || user.username],
+                ['Имя', user.firstName],
+                ['Фамилия', user.lastName],
+                ['Email', user.email],
+                ['Дата рождения', user.date],
+                ['Пол', user.gender],
+              ],
+            },
+            {
+              elem: 'double-btn',
+              content: btn,
+            },
           ],
-        },
-        {
-          elem: 'double-btn',
-          content: btn,
         },
       ],
     }];

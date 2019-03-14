@@ -32,7 +32,7 @@ application.addEventListener('click', (event) => {
   const link = event.target;
 
   application.innerHTML = '';
-  pages[link.type]();
+  pages[link.dataset['linkType']]();
 
   addValidationOnBlur();
 });

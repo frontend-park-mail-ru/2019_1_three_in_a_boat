@@ -25,9 +25,9 @@
     }
 
     &:not(&_current) {
-      background-color: $main-color;
+      background-color: $primary-color;
       color: white;
-      @include btn-color($block, $main-color, white);;
+      @include btn-color($block, $primary-color, white);;
     }
 
     &_first {

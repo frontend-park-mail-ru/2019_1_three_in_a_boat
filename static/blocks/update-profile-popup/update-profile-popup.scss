@@ -3,7 +3,7 @@
   max-width: 250px;
   margin: auto 0;
 
-  @include shadow($shadow);
+  border: 1px $primary-color-dark solid;
 
   &__close-popup {
     @extend %popup__close-popup
