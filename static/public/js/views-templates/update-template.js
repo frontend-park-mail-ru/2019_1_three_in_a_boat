@@ -1,6 +1,19 @@
 import {settings} from '../settings/config.js';
 
-const months = [
+const yearOptions = [
+  {
+    content: 'Год',
+    value: 0,
+    selected: true,
+  }].concat([...Array(119).keys()].map(
+    (num) => ({
+      content: num + 1900,
+      value: num + 1900,
+    })
+).reverse());
+
+const monthOptions = [
+  {content: 'Месяц', value: 0, selected: true},
   {content: 'Январь', value: 1},
   {content: 'Февраль', value: 2},
   {content: 'Март', value: 3},
@@ -14,6 +27,16 @@ const months = [
   {content: 'Ноябрь', value: 11},
   {content: 'Декабрь', value: 12},
 ];
+
+const dayOptions = [{
+  content: 'День',
+  value: 0,
+  selected: true,
+}].concat([...Array(30).keys()].map(
+    (num) => ({
+      content: num + 1,
+      value: num + 1,
+    })));
 
 /**
  * Get template of the profile's update page for user
@@ -32,13 +55,12 @@ export default function getTemplate(user) {
       },
       {
         elem: 'content', content: [
-
           {
             elem: 'profile-icon',
             attrs: {
               src: user.img.startsWith(settings.imgPath) ?
                   user.img :
-                  settings.imgPath + user.img
+                  settings.imgPath + user.img,
             },
           },
           {
@@ -50,247 +72,119 @@ export default function getTemplate(user) {
               {
                 block: 'profile-info',
                 wrappedInside: 'profile-popup',
-                content: [
+                fields: [
                   {
-                    elem: 'item',
                     name: 'Имя',
-                    value: {
-                      block: 'form-group',
-                      content: [
-                        {
-                          block: 'input',
-                          fieldName: 'firstName',
-                          fieldAttrs: {
-                            type: 'text',
-                            placeholder: 'Иван',
-                            value: user.firstName,
-                            checkable: true,
-                            checkType: 'name',
-                          },
-                        },
-                        {
-                          elem: 'help-text',
-                          elemMods: {type: 'hidden'},
-                          for: 'firstName',
-                        },
-                      ],
+                    fieldName: 'firstName',
+                    fieldAttrs: {
+                      placeholder: 'Иван',
+                      value: user.firstName,
+                      checkable: true,
+                      checkType: 'name',
                     },
                   },
                   {
-                    elem: 'item',
                     name: 'Фамилия',
-                    value: {
-                      block: 'form-group',
-                      content: [
-                        {
-                          block: 'input',
-                          fieldName: 'lastName',
-                          fieldAttrs: {
-                            type: 'text',
-                            placeholder: 'Иванов',
-                            value: user.lastName,
-                            checkable: true,
-                            checkType: 'lastName',
-                          },
-                        },
-                        {
-                          elem: 'help-text',
-                          elemMods: {type: 'hidden'},
-                          for: 'lastName',
-                        },
-                      ],
+                    fieldName: 'lastName',
+                    fieldAttrs: {
+                      placeholder: 'Иван',
+                      value: user.lastName,
+                      checkable: true,
+                      checkType: 'lastName',
                     },
                   },
                   {
-                    elem: 'item',
-                    name: 'E-mail',
-                    value: {
-                      block: 'form-group',
-                      content: [
-                        {
-                          block: 'input',
-                          fieldName: 'email',
-                          fieldAttrs: {
-                            checkable: true,
-                            checkType: 'email',
-                            required: true,
-                            value: user.email,
-                            type: 'email',
-                            placeholder: 'your.name@site.com',
-                          },
-                        },
-                        {
-                          elem: 'help-text',
-                          elemMods: {type: 'hidden'},
-                          for: 'email',
-                        },
-                      ],
+                    name: 'Email',
+                    fieldName: 'email',
+                    fieldAttrs: {
+                      checkable: true,
+                      checkType: 'email',
+                      required: true,
+                      value: user.email,
+                      type: 'email',
+                      placeholder: 'your.name@site.com',
                     },
                   },
                   {
-                    elem: 'item',
                     name: 'Никейм',
-                    value: {
-                      block: 'form-group',
-                      content: [
-                        {
-                          block: 'input',
-                          fieldName: 'username',
-                          fieldAttrs: {
-                            required: true,
-                            checkable: true,
-                            value: user.nickname,
-                            placeholder: 'username',
-                            checkType: 'userName',
-                          },
-                        },
-                        {
-                          elem: 'help-text',
-                          elemMods: {type: 'hidden'},
-                          for: 'username',
-                        }],
+                    fieldName: 'username',
+                    fieldAttrs: {
+                      required: true,
+                      checkable: true,
+                      value: user.nickname,
+                      placeholder: 'username',
+                      checkType: 'userName',
                     },
                   },
                   {
-                    elem: 'item',
                     name: 'Пол',
+                    novalidate: true,
                     value: {
-                      block: 'form-group',
-                      content: [
-                        {
-                          block: 'select',
-                          fieldName: 'selectMale',
-                          attrs: {id: 'signup__selectMale'},
-                          options: [
-                            {content: 'Пол', value: ''},
-                            {content: 'Мужской', value: 'male'},
-                            {content: 'Женский', value: 'female'},
-                            {content: 'Другой', value: 'other'},
-                          ],
-                        },
-                        {
-                          block: 'form-group',
-                          elem: 'help-text',
-                          elemMods: {type: 'hidden'},
-                          for: '_',
-                        },
+                      block: 'select',
+                      fieldName: 'selectMale',
+                      options: [
+                        {content: 'Пол', value: ''},
+                        {content: 'Мужской', value: 'male'},
+                        {content: 'Женский', value: 'female'},
+                        {content: 'Другой', value: 'other'},
                       ],
                     },
                   },
                   {
-                    elem: 'item',
                     name: 'Дата рождения',
+                    novalidate: true,
                     value: [
                       {
-                        block: 'form-group',
-                        mods: {size: 'inline'},
-                        content: {
-                          block: 'field-group',
-                          content: [
-                            {
-                              block: 'select',
-                              fieldName: 'selectDay',
-                              attrs: {id: 'signup__selectDay'},
-                              options: [
-                                {
-                                  content: 'День',
-                                  value: 0,
-                                  selected: true,
-                                }].concat([...Array(30).keys()].map(
-                                  (num) => ({
-                                    content: num + 1,
-                                    value: num + 1,
-                                  }))),
-                            },
-                            {
-                              block: 'select',
-                              fieldName: 'selectMonth',
-                              attrs: {id: 'signup__selectMonth'},
-                              options: [{
-                                content: 'Месяц',
-                                value: 0,
-                                selected: true,
-                              }].concat(months),
-                            },
-                            {
-                              block: 'select',
-                              fieldName: 'selectYear',
-                              attrs: {id: 'signup__selectYear'},
-                              options: [
-                                {
-                                  content: 'Год',
-                                  value: 0,
-                                  selected: true,
-                                }].concat([...Array(119).keys()].map(
-                                  (num) => ({
-                                    content: num + 1900,
-                                    value: num + 1900,
-                                  })
-                              ).reverse()),
-                            },
-                          ],
-                        },
+                        block: 'field-group',
+                        content: [
+                          {
+                            block: 'select',
+                            fieldName: 'selectDay',
+                            attrs: {id: 'signup__selectDay'},
+                            options: dayOptions,
+                          },
+                          {
+                            block: 'select',
+                            fieldName: 'selectMonth',
+                            attrs: {id: 'signup__selectMonth'},
+                            options: monthOptions,
+                          },
+                          {
+                            block: 'select',
+                            fieldName: 'selectYear',
+                            attrs: {id: 'signup__selectYear'},
+                            options: yearOptions,
+                          },
+                        ],
                       },
                     ],
                   },
                   {
-                    elem: 'item',
                     name: 'Аватар',
+                    novalidate: true,
                     value: {
-                      block: 'form-group',
-                      mods: {size: 'inline'},
-                      content: [{
-                        block: 'file-input',
-                        fieldName: 'avatar',
-                      }],
+                      block: 'file-input',
+                      fieldName: 'avatar',
                     },
                   },
                   {
-                    elem: 'item',
-                    name: 'Пароль',
-                    value: {
-                      block: 'form-group',
-                      content: [
-                        {
-                          block: 'input',
-                          fieldName: 'password',
-                          fieldAttrs: {
-                            type: 'password',
-                            placeholder: 'Пароль',
-                            checkable: true,
-                            checkType: 'password',
-                          },
-                        },
-                        {
-                          elem: 'help-text',
-                          elemMods: {type: 'hidden'},
-                          for: 'password',
-                        },
-                      ],
+                    name: 'Новый пароль',
+                    fieldName: 'password',
+                    fieldAttrs: {
+                      type: 'password',
+                      placeholder: 'Пароль',
+                      checkable: true,
+                      checkType: 'password',
                     },
                   },
                   {
-                    elem: 'item',
                     name: 'Повторите пароль',
-                    value: {
-                      block: 'form-group',
-                      content: [
-                        {
-                          block: 'input',
-                          fieldName: 'passwordRepeat',
-                          fieldAttrs: {
-                            type: 'password',
-                            placeholder: 'Повторите пароль',
-                            checkable: true,
-                            checkType: 'repeatPassword',
-                          },
-                        },
-                        {
-                          elem: 'help-text',
-                          elemMods: {type: 'hidden'},
-                          for: 'passwordRepeat',
-                        },
-                      ],
+                    fieldName: 'passwordRepeat',
+                    fieldAttrs: {
+                      type: 'password',
+                      placeholder: 'Повторите пароль',
+                      checkable: true,
+                      checkType: 'repeatPassword',
                     },
                   },
                 ],
@@ -303,39 +197,17 @@ export default function getTemplate(user) {
                   {
                     block: 'btn',
                     attrs: {'type': 'submit'},
-                    mods: {'size': 'large', 'with-icon': true},
+                    mods: {size: 'large'},
                     wrappedInside: 'profile-popup',
-                    content: [
-                      {
-                        block: 'icon',
-                        wrappedInside: 'btn',
-                        mods: {type: 'useredit', size: 'large'},
-                      },
-                      {
-                        elem: 'text',
-                        content: ' Обновить',
-                      },
-                    ],
+                    icon: 'useredit',
+                    btnText: 'Обновить',
                   },
                   {
                     block: 'btn',
-                    mods: {
-                      'size': 'large',
-                      'with-icon': true,
-                      'color': 'muted',
-                    },
+                    mods: {size: 'large', color: 'muted'},
                     wrappedInside: 'profile-popup',
-                    content: [
-                      {
-                        block: 'icon',
-                        wrappedInside: 'btn',
-                        mods: {type: 'delete', size: 'large'},
-                      },
-                      {
-                        elem: 'text',
-                        content: 'Отмена',
-                      },
-                    ],
+                    icon: 'delete',
+                    btnText: 'Отменить',
                   },
                 ],
               },
@@ -344,5 +216,6 @@ export default function getTemplate(user) {
         ],
       },
     ],
-  }];
+  },
+  ];
 }

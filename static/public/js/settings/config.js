@@ -1,4 +1,4 @@
 export const settings = {
-  url: 'http://ih1465635.vds.myihor.ru:3000',
+  url: 'http://localhost:3000',
   imgPath: '/img/',
 };

@@ -58,7 +58,7 @@ const template = () => [{
                     {
                       block: 'form-group',
                       elem: 'help-text',
-                      elemMods: {type: 'hidden'},
+                      elemMods: {hidden: true},
                       for: 'email',
                     },
                   ],
@@ -105,7 +105,7 @@ const template = () => [{
                     {
                       block: 'form-group',
                       elem: 'help-text',
-                      elemMods: {type: 'hidden'},
+                      elemMods: {hidden: true},
                       for: 'password',
                     },
                   ],
@@ -116,7 +116,8 @@ const template = () => [{
               block: 'form-group',
               wrappedInside: 'login-form',
               wrappedAs: 'form-group',
-              mods: {'align': 'stretch'},
+              mods: {align: 'stretch'},
+              mix: {block: 'login-form', elem: 'double-btn'},
               content: [
                 {
                   block: 'btn',

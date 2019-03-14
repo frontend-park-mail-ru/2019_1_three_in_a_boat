@@ -43,11 +43,13 @@ function validate(input) {
  * @param {Array}errMsgs
  */
 function addErrors(input, errMsgs) {
-  const msg = errMsgs.join('<br>');
-  const helpText = document.getElementById('help_' + input.name);
-  helpText.innerHTML = msg;
-  helpText.classList.remove('form-group__help-text_type_hidden');
-  helpText.classList.add('form-group__help-text_type_error');
+  if (errMsgs.length !== 0) {
+    const msg = errMsgs.join('<br>');
+    const helpText = document.getElementById('help_' + input.name);
+    helpText.innerHTML = msg;
+    helpText.classList.remove('form-group__help-text_hidden');
+    helpText.classList.add('form-group__help-text_type_error');
+  }
 }
 
 /**
@@ -57,7 +59,7 @@ function addErrors(input, errMsgs) {
 function clearErrors(input) {
   const helpText = document.getElementById('help_' + input.name);
   helpText.classList.remove('form-group__help-text_type_error');
-  helpText.classList.add('form-group__help-text_type_hidden');
+  helpText.classList.add('form-group__help-text_hidden');
   helpText.innerHTML = '';
 }
 
@@ -174,7 +176,7 @@ function validateUserName(input) {
 }
 
 /**
- * Add validation on blur event for evry input on page
+ * Add validation on blur event for every input on page
  */
 export function addValidationOnBlur() {
   const inputs = document.getElementsByTagName('input');
@@ -197,7 +199,7 @@ export function addValidationOnBlur() {
 /**
  * Validate form
  * @param {HTMLFormElement}form form to validate
- * @return {boolean} true if form is okey
+ * @return {boolean} true if form is okay
  */
 export function validateForm(form) {
   const inputs = document.getElementsByTagName('input');

@@ -7,6 +7,7 @@
   max-width: 400px;
 
   &__title {
+    @extend .title;
     @extend %popup__title;
   }
 
@@ -20,7 +21,7 @@
 
   &__profile-info {
     max-width: fit-content;
-    margin: 20px 0 10px;
+    margin: 20px auto 10px;
   }
 
   &__profile-icon {

@@ -24,12 +24,12 @@ const pages = {
 };
 
 application.addEventListener('click', (event) => {
-  if (!(event.target instanceof HTMLAnchorElement)) {
+  const link = event.target.closest('[data-link-type]');
+  if (link === null) {
     return;
   }
 
   event.preventDefault();
-  const link = event.target;
 
   application.innerHTML = '';
   pages[link.dataset['linkType']]();

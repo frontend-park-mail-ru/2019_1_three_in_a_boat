@@ -5,11 +5,11 @@
  * @param {string} 2 - path to directory 'blocks' with the following structure:
  * blocks
  * ├── block1
- * │   ├── <some other files>
- * │   └── template.js
+ * │   ├── <some other files>
+ * │   └── template.js
  * ├── block2
- * │   ├── <some other files>
- * │   └── template.js
+ * │   ├── <some other files>
+ * │   └── template.js
  * ├── <other blocks>
  * note: template.js files must be encoded UTF-8 and should not conflict
  * with each other (i.e. only affect their own block)
@@ -22,7 +22,8 @@ const bemxjst = require('bem-xjst');
 
 // checking the arguments
 if (process.argv.length !== 4) {
-  console.log("Usage: node bundle-all path/to/bundle.bemhtml.js path/to/blocks-dir");
+  console.log(
+      'Usage: node bundle-all path/to/bundle.bemhtml.js path/to/blocks-dir');
   process.exit(1);
 }
 
@@ -45,11 +46,12 @@ if (!fs.existsSync(bundlePath)) {
 }
 
 if (!fs.statSync(bundlePath).isDirectory()) {
-  console.log(`cannot write bundle: bundle path is not a directory: ${bundlePath}`);
+  console.log(
+      `cannot write bundle: bundle path is not a directory: ${bundlePath}`);
   process.exit(1);
 }
 
-//options
+// options
 const BEMHTML_BUNDLE_NAME = 'bundle.bemhtml.js';
 const BEMHTML_OPTIONS = {exportName: 'bemhtml', escapeContent: true};
 const bemhtmlBundlePath = path.resolve(bundlePath, BEMHTML_BUNDLE_NAME);
@@ -59,10 +61,10 @@ const BEMTREE_OPTIONS = {exportName: 'bemtree', runtimeLinting: true};
 const bemtreeBundlePath = path.resolve(bundlePath, BEMTREE_BUNDLE_NAME);
 
 
-let templates = "";
+let templates = '';
 fs.readdir(blocksPath, (err, files) => {
   // extracting templates
-  files.forEach(file => {
+  files.forEach((file) => {
     const blockDir = path.resolve(blocksPath, file);
 
     if (fs.statSync(blockDir).isDirectory()) {
@@ -71,9 +73,11 @@ fs.readdir(blocksPath, (err, files) => {
       if (fs.existsSync(templateFile)) {
         console.log(`adding ${path.basename(blockDir)}`);
         // \n is needed for the one line comments
-        templates += fs.readFileSync(templateFile, {'encoding': 'utf8'}) + '\n';
+        templates += fs.readFileSync(
+            templateFile, {'encoding': 'utf8'}) + '\n';
       } else {
-        console.log(`skipping ${path.basename(blockDir)}: template.js not found`);
+        console.log(
+            `skipping ${path.basename(blockDir)}: template.js not found`);
       }
     }
   });
@@ -102,7 +106,4 @@ fs.readdir(blocksPath, (err, files) => {
       console.log(`Tree bundle written to ${bemtreeBundlePath}`);
     }
   });
-
 });
-
-

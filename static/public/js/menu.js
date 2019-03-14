@@ -79,10 +79,6 @@ function menuPageDrawer(data) {
           wrappedAs: 'title',
         },
         {
-          block: 'hr',
-          mods: {inline: true},
-        },
-        {
           elem: 'items',
           points: data,
         },

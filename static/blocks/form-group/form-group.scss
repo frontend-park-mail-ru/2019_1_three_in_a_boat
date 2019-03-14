@@ -3,8 +3,9 @@
 
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 
-  padding: 5px 0;
+  padding: 3px 0;
 
   &:last-of-type {
     padding-bottom: 0;
@@ -50,6 +51,7 @@
     }
     &_hidden {
       display: none;
+      margin-top: 0;
     }
   }
 

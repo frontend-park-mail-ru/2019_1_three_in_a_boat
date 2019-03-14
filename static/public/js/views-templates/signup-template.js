@@ -34,7 +34,7 @@ const template = () => [
             block: 'form',
             attrs: {id: 'signup-form', novalidate: true},
             name: 'signup-form',
-            mix: {'block': 'signup-form'},
+            mix: {block: 'signup-form'},
             content: [
               {
                 block: 'signup-form',
@@ -54,7 +54,7 @@ const template = () => [
                       },
                       {
                         elem: 'help-text',
-                        elemMods: {type: 'hidden'},
+                        elemMods: {hidden: true},
                         for: 'firstName',
                       },
                     ],
@@ -75,7 +75,7 @@ const template = () => [
                       {
                         block: 'form-group',
                         elem: 'help-text',
-                        elemMods: {type: 'hidden'},
+                        elemMods: {hidden: true},
                         for: 'lastName',
                       },
                     ],
@@ -97,7 +97,7 @@ const template = () => [
                       {
                         block: 'form-group',
                         elem: 'help-text',
-                        elemMods: {type: 'hidden'},
+                        elemMods: {hidden: true},
                         for: 'email',
                       },
                     ],
@@ -119,14 +119,13 @@ const template = () => [
                       {
                         block: 'form-group',
                         elem: 'help-text',
-                        elemMods: {type: 'hidden'},
+                        elemMods: {hidden: true},
                         for: 'username',
                       },
                     ],
                   },
                   {
                     block: 'form-group',
-                    mods: {size: 'inline'},
                     content: [
                       {
                         elem: 'title',
@@ -186,7 +185,6 @@ const template = () => [
                   },
                   {
                     block: 'form-group',
-                    mix: {block: 'signup-form', elem: 'form-group'},
                     content: [
                       {
                         block: 'input',
@@ -204,7 +202,7 @@ const template = () => [
                       {
                         block: 'form-group',
                         elem: 'help-text',
-                        elemMods: {type: 'hidden'},
+                        elemMods: {hidden: true},
                         for: 'password',
                       },
                     ],
@@ -228,7 +226,7 @@ const template = () => [
                       {
                         block: 'form-group',
                         elem: 'help-text',
-                        elemMods: {type: 'hidden'},
+                        elemMods: {hidden: true},
                         for: 'passwordRepeat',
                       },
                     ],
