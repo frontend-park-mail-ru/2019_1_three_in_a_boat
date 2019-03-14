@@ -34,6 +34,7 @@ block('profile-info').match((node, ctx) => !ctx.content && ctx.fields)({
         name: elt.name,
         value: {
           block: 'form-group',
+          mods: {size: 'inline'},
           content: elt.content ? elt.content : [
             elt.value || {
               block: 'input',
