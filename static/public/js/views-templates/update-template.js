@@ -44,6 +44,40 @@ const dayOptions = [{
  * @return {Array} template of the profile's update page
  */
 export default function getTemplate(user) {
+  const date = [
+    {
+      block: 'select',
+      fieldName: 'selectDay',
+      attrs: {id: 'signup__selectDay'},
+      options: dayOptions,
+    },
+    {
+      block: 'select',
+      fieldName: 'selectMonth',
+      attrs: {id: 'signup__selectMonth'},
+      options: monthOptions,
+    },
+    {
+      block: 'select',
+      fieldName: 'selectYear',
+      attrs: {id: 'signup__selectYear'},
+      options: yearOptions,
+    },
+  ];
+  setSelectedDate(user, date);
+
+  const gender = {
+    block: 'select',
+    fieldName: 'selectMale',
+    options: [
+      {content: 'Пол', value: ''},
+      {content: 'Мужской', value: 'male'},
+      {content: 'Женский', value: 'female'},
+      {content: 'Другой', value: 'other'},
+    ],
+  };
+  setSelectedGender(user, gender);
+
   return [{
     block: 'profile-popup',
     mods: {main: true},
@@ -119,16 +153,7 @@ export default function getTemplate(user) {
                   {
                     name: 'Пол',
                     novalidate: true,
-                    value: {
-                      block: 'select',
-                      fieldName: 'selectMale',
-                      options: [
-                        {content: 'Пол', value: ''},
-                        {content: 'Мужской', value: 'male'},
-                        {content: 'Женский', value: 'female'},
-                        {content: 'Другой', value: 'other'},
-                      ],
-                    },
+                    value: gender,
                   },
                   {
                     name: 'Дата рождения',
@@ -136,26 +161,7 @@ export default function getTemplate(user) {
                     value: [
                       {
                         block: 'field-group',
-                        content: [
-                          {
-                            block: 'select',
-                            fieldName: 'selectDay',
-                            attrs: {id: 'signup__selectDay'},
-                            options: dayOptions,
-                          },
-                          {
-                            block: 'select',
-                            fieldName: 'selectMonth',
-                            attrs: {id: 'signup__selectMonth'},
-                            options: monthOptions,
-                          },
-                          {
-                            block: 'select',
-                            fieldName: 'selectYear',
-                            attrs: {id: 'signup__selectYear'},
-                            options: yearOptions,
-                          },
-                        ],
+                        content: date,
                       },
                     ],
                   },
@@ -218,4 +224,52 @@ export default function getTemplate(user) {
     ],
   },
   ];
+}
+
+/**
+ * Set selected gender
+ * @param {Object} user
+ * @param {Object} gender
+ */
+function setSelectedGender(user, gender) {
+  if (user.gender !== '') {
+    const options = gender.options;
+    options.forEach((option) => {
+      if (option.content === user.gender) {
+        option.selected = true;
+      }
+    });
+  }
+}
+
+/**
+ * Set selected date
+ * @param {Object} user
+ * @param {Array} date
+ */
+function setSelectedDate(user, date) {
+  if (user.date !== '') {
+    const userDate = user.date.split('.');
+
+    const dayOptions = date[0].options;
+    dayOptions.forEach((option) => {
+      if (option.content === +userDate[0]) {
+        option.selected = true;
+      }
+    });
+
+    const mounthOptions = date[1].options;
+    mounthOptions.forEach((option) => {
+      if (option.value === +userDate[1]) {
+        option.selected = true;
+      }
+    });
+
+    const yearOptions = date[2].options;
+    yearOptions.forEach((option) => {
+      if (option.content === +userDate[2]) {
+        option.selected = true;
+      }
+    });
+  }
 }

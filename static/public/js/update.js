@@ -33,8 +33,6 @@ export default function createUpdateProfile() {
  */
 function renderUpdateProfilePage(user) {
   const template = getTemplate(user);
-  setSelectedOptions(user, template);
-
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
   );
@@ -104,47 +102,4 @@ function renderUpdateProfilePage(user) {
       ajax.doPut({path, body}).then(callback);
     });
   });
-}
-
-/**
- * Set selected options
- * @param {Object} user
- * @param {Array} template
- */
-function setSelectedOptions(user, template) {
-  if (user.gender !== '') {
-    const options = template[0].content[2].content[0].content[4]
-        .value.content[0].options;
-    options.forEach((option) => {
-      if (option.content === user.gender) {
-        option.selected = true;
-      }
-    });
-  }
-  if (user.date !== '') {
-    const date = user.date.split('.');
-    const dateSelect = template[0].content[2].content[0].content[5]
-        .value[0].content.content;
-
-    const dayOptions = dateSelect[0].options;
-    dayOptions.forEach((option) => {
-      if (option.content === +date[0]) {
-        option.selected = true;
-      }
-    });
-
-    const mounthOptions = dateSelect[1].options;
-    mounthOptions.forEach((option) => {
-      if (option.value === +date[1]) {
-        option.selected = true;
-      }
-    });
-
-    const yearOptions = dateSelect[2].options;
-    yearOptions.forEach((option) => {
-      if (option.content === +date[2]) {
-        option.selected = true;
-      }
-    });
-  }
 }
