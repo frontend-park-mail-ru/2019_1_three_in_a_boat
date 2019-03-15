@@ -6,6 +6,9 @@ import template from './views-templates/login-template.js';
 import {validateForm, checkResponse} from './validation.js';
 import {settings} from './settings/config.js';
 
+// Array for collecting events
+const events = [];
+
 /**
  * Create login page
  */
@@ -18,30 +21,62 @@ export default function createLoginPage() {
 
   initInputs();
   const form = document.getElementById('loginForm');
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
+  form.addEventListener('submit', submitHandler);
+  application.addEventListener('click', clickHandler);
+  events.push(
+      {item: form, type: 'submit', handler: submitHandler},
+      {item: application, type: 'click', handler: clickHandler}
+  );
+}
 
-    if (!validateForm(event.target)) {
+/**
+ * Calls removeListeners with click on some link
+ * @param {Event} event
+ */
+function clickHandler(event) {
+  const link = event.target.closest('[data-link-type]');
+  if (link === null) {
+    return;
+  }
+  removeListeners();
+}
+
+/**
+ * Event handler for submit button
+ * @param {Event} event
+ */
+function submitHandler(event) {
+  event.preventDefault();
+  if (!validateForm(event.target)) {
+    return;
+  }
+  const form = event.target;
+  const name = form.elements['email'].value;
+  const password = form.elements['password'].value;
+
+  const body = {name, password};
+  ajax.doPost({path: settings.url + '/signin', body}).then((response) => {
+    if (response.status > 499) {
+      alert('Server error');
       return;
     }
 
-    const name = form.elements['email'].value;
-    const password = form.elements['password'].value;
-
-    const body = {name, password};
-    ajax.doPost({path: settings.url + '/signin', body}).then((response) => {
-      if (response.status > 499) {
-        alert('Server error');
-        return;
+    response.json().then((data) => {
+      const ok = checkResponse(data, form);
+      if (ok) {
+        removeListeners();
+        application.innerHTML = '';
+        createMenu();
       }
-
-      response.json().then((data) => {
-        const ok = checkResponse(data, form);
-        if (ok) {
-          application.innerHTML = '';
-          createMenu();
-        }
-      });
     });
+  });
+}
+
+/**
+ * Remove all event listeners
+ */
+function removeListeners() {
+  events.forEach((event) => {
+    event.item.removeEventListener(event.type, event.handler);
   });
 }
