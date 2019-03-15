@@ -52,7 +52,7 @@ const template = () => [{
                         type: 'email',
                         required: true,
                         checkable: true,
-                        checkType: 'null',
+                        checkType: 'email',
                       },
                     },
                     {
@@ -84,7 +84,7 @@ const template = () => [{
                             type: 'password',
                             required: true,
                             checkable: true,
-                            checkType: 'null',
+                            checkType: 'password',
                           },
                         },
                         {

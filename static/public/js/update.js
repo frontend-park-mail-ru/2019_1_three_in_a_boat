@@ -6,6 +6,7 @@ import {settings} from './settings/config.js';
 import {validateForm, checkResponse} from './validation.js';
 import {parseUser} from './parsing.js';
 import getTemplate from './views-templates/update-template.js';
+import {addValidationOnBlur} from './validation.js';
 
 
 /**
@@ -23,6 +24,7 @@ export default function createUpdateProfile() {
     response.json().then((data) => {
       const user = parseUser(data.user);
       renderUpdateProfilePage(user);
+      addValidationOnBlur();
     });
   });
 }

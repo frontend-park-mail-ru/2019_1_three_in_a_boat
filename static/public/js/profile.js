@@ -1,6 +1,5 @@
 import createHeader from './header.js';
 import createUpdateProfile from './update.js';
-import {addValidationOnBlur} from './validation.js';
 import {settings} from './settings/config.js';
 import {parseUser} from './parsing.js';
 import ajax from './ajax.js';
@@ -42,7 +41,6 @@ export function renderProfile(user) {
             event.preventDefault();
             application.innerHTML = '';
             createUpdateProfile();
-            addValidationOnBlur();
           }
       );
     }
