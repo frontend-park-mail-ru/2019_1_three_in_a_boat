@@ -2,6 +2,8 @@ import ajax from './ajax.js';
 import createScoreBoard from './scoreboard.js';
 import {settings} from './settings/config.js';
 
+// Array for collecting events
+const events = [];
 
 /**
  * Get array of the pages, which are showed in pagination
@@ -94,22 +96,55 @@ function setPaginationLinks() {
       return;
     }
 
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const path = settings.url + '/users?sort=-HighScore&page='
-        + (link.value - 1);
+    link.addEventListener('click', pagesLinkHandler);
+    events.push({item: link, type: 'click', handler: pagesLinkHandler});
+  });
 
-      ajax.doGet({path}).then((response) => {
-        if (response.status > 499) {
-          alert('Server error');
-          return;
-        }
+  application.addEventListener('click', clickHandler);
+  events.push({item: application, type: 'click', handler: clickHandler});
+}
 
-        response.json().then((data) => {
-          application.innerHTML = '';
-          createScoreBoard(data);
-        });
-      });
+/**
+ * Calls removeListeners with click on some link
+ * @param {Event} event
+ */
+function clickHandler(event) {
+  const link = event.target.closest('a');
+  if (link === null && event.target.tagName !== 'Button' ) {
+    return;
+  }
+  removeListeners();
+}
+
+/**
+ * Handler for pagination link's click event
+ * @param {Event} event
+ */
+function pagesLinkHandler(event) {
+  event.preventDefault();
+  removeListeners();
+  const path = settings.url + '/users?sort=-HighScore&page='
+      + (link.value - 1);
+
+  ajax.doGet({path}).then((response) => {
+    if (response.status > 499) {
+      alert('Server error');
+      return;
+    }
+
+    response.json().then((data) => {
+      application.innerHTML = '';
+      createScoreBoard(data);
     });
   });
+}
+
+/**
+ * Remove all event listeners
+ */
+function removeListeners() {
+  while (events.length) {
+    const event = events.pop();
+    event.item.removeEventListener(event.type, event.handler);
+  }
 }

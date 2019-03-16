@@ -38,7 +38,7 @@ const template = () => [{
                 {
                   elem: 'title',
                   elemMods: {align: 'left'},
-                  content: ['Логин или email: '],
+                  content: ['Email: '],
                 },
                 {
                   block: 'form-group',
@@ -52,7 +52,7 @@ const template = () => [{
                         type: 'email',
                         required: true,
                         checkable: true,
-                        checkType: 'email',
+                        checkType: 'null',
                       },
                     },
                     {
@@ -84,7 +84,7 @@ const template = () => [{
                             type: 'password',
                             required: true,
                             checkable: true,
-                            checkType: 'password',
+                            checkType: 'null',
                           },
                         },
                         {
