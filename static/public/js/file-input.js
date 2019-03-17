@@ -3,6 +3,23 @@
 const BLOCK = 'file-input';
 
 /**
+ * Show the selected image from users data before sending it to the server
+ */
+export function previewFile() {
+  let preview = document.querySelector('img');
+  let file = document.querySelector('input[type=file]').files[0];
+  let reader = new FileReader();
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  };
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
+
+/**
  * Set handler for file inputs changes
  */
 export function initFileInputs() {
@@ -19,6 +36,9 @@ export function initFileInputs() {
       }
     }
     field.onchange = (e) => {
+      if (e.srcElement.id === 'updateForm_avatar') {
+        previewFile(e.target);
+      };
       const elt = e.target || e.srcElement;
       if (elt.files && elt.files.length > 0) {
         if (elt.files.length === 1) {

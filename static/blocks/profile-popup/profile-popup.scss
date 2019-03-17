@@ -25,10 +25,14 @@
   }
 
   &__profile-icon {
+    display: flex;
+    justify-content: center;
     width: 140px;
     height: 140px;
     margin: 0 auto;
 
+    overflow: hidden;
+    object-fit: cover;
     border-radius: 100%;
   }
 
