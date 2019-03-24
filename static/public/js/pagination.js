@@ -122,9 +122,8 @@ function clickHandler(event) {
  */
 function pagesLinkHandler(event) {
   event.preventDefault();
-  removeListeners();
   const path = settings.url + '/users?sort=-HighScore&page='
-      + (link.value - 1);
+      + (event.target.value - 1);
 
   ajax.doGet({path}).then((response) => {
     if (response.status > 499) {
@@ -133,6 +132,7 @@ function pagesLinkHandler(event) {
     }
 
     response.json().then((data) => {
+      removeListeners();
       application.innerHTML = '';
       createScoreBoard(data);
     });
