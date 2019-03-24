@@ -100,7 +100,6 @@ function clickHandler(event) {
 function removeListeners() {
   while (events.length) {
     const event = events.pop();
-    console.log(event);
     event.item.removeEventListener(event.type, event.handler);
   }
 }
