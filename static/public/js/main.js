@@ -1,38 +1,23 @@
 'use strict';
 
-import createMenu from './menu.js';
-import createScoreBoard from './scoreboard.js';
-import createAuthors from './authors.js';
-import createLoginPage from './login.js';
-import createSignUp from './signup.js';
-import {createProfile} from './profile.js';
-import doSignOut from './signout.js';
-import {addValidationOnBlur} from './validation.js';
+import {settings} from './settings/config.js';
+import createHeader from './views/header.js';
+import MenuView from './views/menu.js';
+// import createScoreBoard from './views/scoreboard.js';
+import AuthorsView from './views/authors.js';
+// import createLoginPage from './views/login.js';
+// import createSignUp from './views/signup.js';
+// import {createProfile} from './views/profile.js';
+// import doSignOut from './signout.js';
+import Router from './router.js';
 
 const application = document.getElementById('application');
+createHeader();
 
-createMenu();
+application.insertAdjacentHTML('beforeend', '<div id="main"></div>');
+const main = document.getElementById('main');
 
-const pages = {
-  menu: createMenu,
-  signIn: createLoginPage,
-  signUp: createSignUp,
-  authors: createAuthors,
-  leaders: createScoreBoard,
-  profile: createProfile,
-  exit: doSignOut,
-};
-
-application.addEventListener('click', (event) => {
-  const link = event.target.closest('[data-link-type]');
-  if (link === null) {
-    return;
-  }
-
-  event.preventDefault();
-
-  application.innerHTML = '';
-  pages[link.dataset['linkType']]();
-
-  addValidationOnBlur();
-});
+const router = new Router(settings.home, main)
+    .addRoute('/', new MenuView(main))
+    .addRoute('authors', new AuthorsView(main));
+router.start();

@@ -1,6 +1,6 @@
-import ajax from './ajax.js';
+import ajax from '../ajax.js';
 import createScoreBoard from './scoreboard.js';
-import {settings} from './settings/config.js';
+import {settings} from '../settings/config.js';
 
 // Array for collecting events
 const events = [];

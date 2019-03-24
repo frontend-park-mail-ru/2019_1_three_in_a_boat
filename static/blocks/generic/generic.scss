@@ -1,4 +1,4 @@
-html, body, #application {
+html, body, #application, #main {
   margin: 0;
   height: 100%;
   width: 100%;
@@ -6,7 +6,7 @@ html, body, #application {
   background-color: $body-color;
 }
 
-#application {
+#application, #main {
   display: flex;
   flex-direction: column;
   align-items: center;

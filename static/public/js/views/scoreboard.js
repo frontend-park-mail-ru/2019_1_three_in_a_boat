@@ -1,7 +1,7 @@
-import {settings} from './settings/config.js';
+import {settings} from '../settings/config.js';
 import createHeader from './header.js';
 import createPagination from './pagination.js';
-import ajax from './ajax.js';
+import ajax from '../ajax.js';
 import {renderProfile} from './profile.js';
 
 // Array for collecting events

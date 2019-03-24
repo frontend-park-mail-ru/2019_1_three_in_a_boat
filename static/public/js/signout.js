@@ -1,6 +1,6 @@
 import {settings} from './settings/config.js';
 import ajax from './ajax.js';
-import createMenu from './menu.js';
+import createMenu from './views/menu.js';
 
 /**
  * Sign out

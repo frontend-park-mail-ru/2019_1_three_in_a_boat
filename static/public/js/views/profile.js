@@ -1,8 +1,8 @@
 import createHeader from './header.js';
 import createUpdateProfile from './update.js';
-import {settings} from './settings/config.js';
-import {parseUser} from './parsing.js';
-import ajax from './ajax.js';
+import {settings} from '../settings/config.js';
+import {parseUser} from '../parsing.js';
+import ajax from '../ajax.js';
 import getTemplate from './views-templates/profile-template.js';
 
 // Array for collecting events

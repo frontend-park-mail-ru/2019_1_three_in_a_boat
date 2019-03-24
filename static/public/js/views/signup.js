@@ -1,8 +1,8 @@
 import createHeader from './header.js';
 import createMenu from './menu.js';
-import ajax from './ajax.js';
-import {validateForm, checkResponse} from './validation.js';
-import {settings} from './settings/config.js';
+import ajax from '../ajax.js';
+import {validateForm, checkResponse} from '../validation.js';
+import {settings} from '../settings/config.js';
 import {createProfile} from './profile.js';
 import template from './views-templates/signup-template.js';
 

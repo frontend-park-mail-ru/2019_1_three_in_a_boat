@@ -1,12 +1,12 @@
 import createHeader from './header.js';
 import {createProfile} from './profile.js';
-import ajax from './ajax.js';
-import {initFileInputs, getBase64, previewFile} from './file-input.js';
-import {settings} from './settings/config.js';
-import {validateForm, checkResponse} from './validation.js';
-import {parseUser} from './parsing.js';
+import ajax from '../ajax.js';
+import {initFileInputs, getBase64, previewFile} from '../file-input.js';
+import {settings} from '../settings/config.js';
+import {validateForm, checkResponse} from '../validation.js';
+import {parseUser} from '../parsing.js';
 import getTemplate from './views-templates/update-template.js';
-import {addValidationOnBlur} from './validation.js';
+import {addValidationOnBlur} from '../validation.js';
 
 // Array for collecting events
 const events = [];

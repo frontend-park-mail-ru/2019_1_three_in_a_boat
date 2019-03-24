@@ -1,4 +1,4 @@
-import {settings} from '../settings/config.js';
+import {settings} from '../../settings/config.js';
 
 const yearOptions = [
   {

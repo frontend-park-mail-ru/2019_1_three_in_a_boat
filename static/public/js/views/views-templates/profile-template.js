@@ -1,5 +1,5 @@
-import ajax from '../ajax.js';
-import {settings} from '../settings/config.js';
+import ajax from '../../ajax.js';
+import {settings} from '../../settings/config.js';
 
 /**
  * Get template of the profile's page for user

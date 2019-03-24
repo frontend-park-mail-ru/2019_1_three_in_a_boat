@@ -1,10 +1,10 @@
 import createHeader from './header.js';
 import createMenu from './menu.js';
-import initInputs from './input.js';
-import ajax from './ajax.js';
+import initInputs from '../input.js';
+import ajax from '../ajax.js';
 import template from './views-templates/login-template.js';
-import {validateForm, checkResponse} from './validation.js';
-import {settings} from './settings/config.js';
+import {validateForm, checkResponse} from '../validation.js';
+import {settings} from '../settings/config.js';
 
 // Array for collecting events
 const events = [];
