@@ -1,9 +1,14 @@
 import ajax from '../ajax.js';
-import createScoreBoard from './scoreboard.js';
 import {settings} from '../settings/config.js';
 import View from './view.js';
 
+/**
+ * @class PaginationView
+ */
 export default class PaginationView extends View {
+  /**
+   * @param {HTMLElement} parent
+   */
   constructor(parent) {
     super(parent);
   }
@@ -34,25 +39,25 @@ export default class PaginationView extends View {
 
     if (currPage + 2 < pagesNumber - 2) {
       numbers.push(
-        {content: '...', attrs: {value: 1}},
-        {content: pagesNumber - 1, attrs: {value: pagesNumber - 1}},
-        {content: pagesNumber, attrs: {value: pagesNumber}},
+          {content: '...', attrs: {value: 1}},
+          {content: pagesNumber - 1, attrs: {value: pagesNumber - 1}},
+          {content: pagesNumber, attrs: {value: pagesNumber}},
       );
     } else if (currPage + 2 < pagesNumber - 1) {
       numbers.push(
-        {content: pagesNumber - 1, attrs: {value: pagesNumber - 1}},
-        {content: pagesNumber, attrs: {value: pagesNumber}},
+          {content: pagesNumber - 1, attrs: {value: pagesNumber - 1}},
+          {content: pagesNumber, attrs: {value: pagesNumber}},
       );
     } else if (currPage + 2 < pagesNumber) {
       numbers.push(
-        {content: pagesNumber, attrs: {value: pagesNumber}},
+          {content: pagesNumber, attrs: {value: pagesNumber}},
       );
     }
     numbers.push(
-      {
-        content: 'Вперед',
-        attrs: {value: currPage < pagesNumber ? currPage + 1 : -1},
-      },
+        {
+          content: 'Вперед',
+          attrs: {value: currPage < pagesNumber ? currPage + 1 : -1},
+        },
     );
 
     return numbers;
@@ -70,7 +75,6 @@ export default class PaginationView extends View {
         content: [],
       },
     ];
-    console.log(111);
 
     const numbers = this.getNumeration(currPage, pagesNumber);
     numbers.forEach((number) => {
@@ -99,11 +103,9 @@ export default class PaginationView extends View {
       }
 
       link.addEventListener('click', this.pagesLinkHandler);
-      this.events.push({item: link, type: 'click', handler: this.pagesLinkHandler});
+      this.events.push({item: link, type: 'click', handler:
+        this.pagesLinkHandler});
     });
-
-    application.addEventListener('click', clickHandler);
-    this.events.push({item: application, type: 'click', handler: clickHandler});
   }
 
   /**
@@ -112,19 +114,10 @@ export default class PaginationView extends View {
    */
   pagesLinkHandler(event) {
     event.preventDefault();
-    const path = settings.url + '/users?sort=-HighScore&page='
-      + (event.target.value - 1);
+    const path = 'leaders?page=' + (event.target.value - 1);
 
-    ajax.doGet({path}).then((response) => {
-      if (response.status > 499) {
-        alert('Server error');
-        return;
-      }
-
-      response.json().then((data) => {
-        this.parent.innerHTML = '';
-        createScoreBoard(data);
-      });
-    });
+    window.history.pushState({}, '', path);
+    window.history.pushState({}, '', path);
+    window.history.back();
   }
 }

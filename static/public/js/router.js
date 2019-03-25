@@ -35,13 +35,17 @@ export default class Router {
     if (this.currentView) {
       this.currentView.destructor();
     }
+    // to make paths like leaders and /leaders similar
+    if (url.startsWith('/') && url.length > 1) {
+      url = url.slice(1);
+    }
+
     const newView = this.routes[url];
     if (!newView) {
       // we have to do something here, 404 or home?
       console.log('404: ', url);
     }
-    console.log(newView);
-    window.history.pushState({}, '', url);
+    // window.history.pushState({}, '', url);
     newView.render();
     this.currentView = newView;
   }
@@ -63,7 +67,7 @@ export default class Router {
 
       event.preventDefault();
 
-      console.log(link.dataset['linkType']);
+      window.history.pushState({}, '', link.dataset['linkType']);
       this.open(link.dataset['linkType']);
     });
 
