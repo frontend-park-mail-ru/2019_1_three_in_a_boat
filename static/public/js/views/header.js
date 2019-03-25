@@ -13,7 +13,7 @@ export default function createHeader() {
       {
         elem: 'title',
         tag: 'a',
-        attrs: {'data-link-type': 'menu'},
+        attrs: {'data-link-type': '/'},
         content: ['hexagon'],
       },
     ],

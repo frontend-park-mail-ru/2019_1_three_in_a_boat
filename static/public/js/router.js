@@ -13,7 +13,7 @@ export default class Router {
     this.rootPath = rootPath;
     this.rootElement = rootElement;
     this.routes = {};
-    this.currentView = new View(rootElement);
+    this.currentView = undefined;
   }
 
   /**
@@ -32,8 +32,9 @@ export default class Router {
    * @param {string} url
    */
   open(url) {
-    this.rootElement.innerHTML = '';
-    this.currentView.destructor();
+    if (this.currentView) {
+      this.currentView.destructor();
+    }
     const newView = this.routes[url];
     if (!newView) {
       // we have to do something here, 404 or home?
@@ -42,6 +43,7 @@ export default class Router {
     console.log(newView);
     window.history.pushState({}, '', url);
     newView.render();
+    this.currentView = newView;
   }
 
   /**
