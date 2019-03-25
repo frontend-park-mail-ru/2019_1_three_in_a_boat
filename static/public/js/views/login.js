@@ -5,6 +5,30 @@ import ajax from '../ajax.js';
 import template from './views-templates/login-template.js';
 import {validateForm, checkResponse} from '../validation.js';
 import {settings} from '../settings/config.js';
+import View from './view.js'
+
+/**
+ * @class LoginView
+ */
+export default class LoginView extends View {
+  /**
+   *
+   * @param {HTMLElement}parent
+   */
+  constructor(parent) {
+    super(parent);
+  }
+
+  /**
+   * Render Login page
+   */
+  render() {
+    const draw = template();
+    this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw))
+    initInputs();
+  }
+}
+
 
 // Array for collecting events
 const events = [];
@@ -12,7 +36,7 @@ const events = [];
 /**
  * Create login page
  */
-export default function createLoginPage() {
+function createLoginPage() {
   createHeader();
   const templ = template();
 

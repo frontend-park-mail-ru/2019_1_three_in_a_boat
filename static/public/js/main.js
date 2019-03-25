@@ -10,6 +10,9 @@ import AuthorsView from './views/authors.js';
 // import {createProfile} from './views/profile.js';
 // import doSignOut from './signout.js';
 import Router from './router.js';
+import SignUpView from './views/signup.js';
+import ProfileView from './views/profile.js';
+import LoginView from './views/login.js';
 
 const application = document.getElementById('application');
 createHeader();
@@ -19,5 +22,8 @@ const main = document.getElementById('main');
 
 const router = new Router(settings.home, main)
     .addRoute('/', new MenuView(main))
-    .addRoute('authors', new AuthorsView(main));
+    .addRoute('authors', new AuthorsView(main))
+    .addRoute('profile', new ProfileView(main))
+    .addRoute('signUp', new SignUpView(main))
+    .addRoute('signIn', new LoginView(main));
 router.start();

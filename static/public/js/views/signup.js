@@ -5,6 +5,48 @@ import {validateForm, checkResponse} from '../validation.js';
 import {settings} from '../settings/config.js';
 import {createProfile} from './profile.js';
 import template from './views-templates/signup-template.js';
+import View from './view.js';
+
+/**
+ * @class SignUpView
+ */
+export default class SignUpView extends View {
+  /**
+   *
+   * @param {HTMLElement}parent
+   */
+  constructor(parent) {
+    console.log('Create signUpView');
+    super(parent);
+  }
+
+  /**
+   * Render SignUp page
+   */
+  render() {
+    console.log('Render signUpView');
+    const draw = template();
+    this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
+    const cnslHandler = (event) => {
+      event.preventDefault();
+      removeListeners();
+      application.innerHTML = '';
+      // createMenu();
+    };
+    const cnslBtn = this.parent.getElementsByClassName('btn_color_muted')[0];
+    cnslBtn.addEventListener('click', cnslHandler);
+    const form = document.getElementById('signup-form');
+    console.log(cnslBtn, form);
+    form.addEventListener('submit', submitHandler);
+    // application.addEventListener('click', clickHandler);
+    events.push(
+        {item: form, type: 'submit', handler: submitHandler},
+        {item: application, type: 'click', handler: clickHandler},
+        {item: cnslBtn, type: 'click', handler: cnslHandler},
+    );
+  }
+}
+
 
 // Array for collecting events
 const events = [];
@@ -12,7 +54,7 @@ const events = [];
 /**
  * Create SignUp page
  */
-export default function createSignUp() {
+export function createSignUp() {
   createHeader();
   const templ = template();
   const application = document.getElementById('application');
@@ -42,6 +84,7 @@ export default function createSignUp() {
  * @param {Event} event
  */
 function submitHandler(event) {
+  console.log('submitHandler is launch');
   event.preventDefault();
 
   if (!validateForm(event.target)) {

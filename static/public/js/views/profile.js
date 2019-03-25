@@ -4,6 +4,65 @@ import {settings} from '../settings/config.js';
 import {parseUser} from '../parsing.js';
 import ajax from '../ajax.js';
 import getTemplate from './views-templates/profile-template.js';
+import View from './view.js';
+
+
+/**
+ * @class ProfileView
+ */
+export default class ProfileView extends View {
+  /**
+   *
+   * @param {HTMLElement} parent
+   */
+  constructor(parent) {
+    super(parent);
+  }
+
+  render(user) {
+    if (user) {
+      const profile = parseUser(user);
+      ajax.doGet({path: settings.url + '/'}).then((response) => {
+        if (response.status > 499) {
+          alert('Server error');
+          return;
+        }
+        return response.json();
+      }).then((data) => {
+        return [{
+          block: 'profile-popup',
+          mods: {main: true},
+          title: 'Профиль',
+          img: profile.img.startsWith(settings.imgPath) ?
+              profile.img :
+              settings.imgPath + profile.img,
+          allowEdit: data.user && data.user.uid === (profile.id || profile.uid),
+          info: [
+            ['Никнейм', profile.nickname || profile.username],
+            ['Имя', profile.firstName],
+            ['Фамилия', profile.lastName],
+            ['Email', profile.email],
+            ['Дата рождения', profile.date],
+            ['Пол', profile.gender],
+          ],
+        }];
+      });
+    } else {
+      ajax.doGet({path: settings.url + '/'}).then((response) => {
+        if (response.status > 499) {
+          alert('Server error');
+          return;
+        }
+
+        response.json().then((data) => {
+          this.render(data.user);
+        });
+      });
+    }
+  }
+
+
+}
 
 // Array for collecting events
 const events = [];

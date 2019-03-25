@@ -7,6 +7,74 @@ import {validateForm, checkResponse} from '../validation.js';
 import {parseUser} from '../parsing.js';
 import getTemplate from './views-templates/update-template.js';
 import {addValidationOnBlur} from '../validation.js';
+import View from './view.js'
+
+/**
+ * @class UpdateView
+ */
+export default class UpdateView extends View {
+  /**
+   *
+   * @param {HTMLElement}parent
+   */
+  constructor(parent) {
+    super(parent);
+    this._user = null;
+  }
+
+  /**
+   * Get users data
+   */
+  getUser() {
+    ajax.doGet({path: settings.url + '/'}).then((response) => {
+      if (response.status > 499) {
+        alert('Server error');
+        return;
+      }
+
+      response.json().then((data) => {
+        this._user = parseUser(data.user);
+      });
+    });
+  }
+
+  /**
+   * Render update page
+   */
+  render() {
+    if (this._user) {
+      const template = getTemplate(this._user);
+      document.getElementById('application').insertAdjacentHTML('beforeend',
+          bemhtml.apply(template)
+      );
+
+      initFileInputs();
+
+      const cnslBtn = document.getElementsByClassName('btn_color_muted')[0];
+      const cnslHandler = (event) => {
+        event.preventDefault();
+        removeListeners();
+        application.innerHTML = '';
+        createProfile();
+      };
+      cnslBtn.addEventListener('click', cnslHandler);
+      events.push({item: cnslBtn, type: 'click', handler: cnslHandler});
+
+      const form = document.getElementById('updateForm');
+      const formHandler = submitHandler.bind(null, this._user);
+      form.addEventListener('submit', formHandler);
+      application.addEventListener('click', clickHandler);
+      events.push(
+          {item: form, type: 'submit', handler: formHandler},
+          {item: application, type: 'click', handler: clickHandler}
+      );
+      addValidationOnBlur();
+    } else {
+      this.getUser();
+    }
+  }
+}
+
 
 // Array for collecting events
 const events = [];
@@ -14,7 +82,7 @@ const events = [];
 /**
  * create Page with Profile Settings
  */
-export default function createUpdateProfile() {
+function createUpdateProfile() {
   createHeader();
 
   ajax.doGet({path: settings.url + '/'}).then((response) => {
