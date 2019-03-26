@@ -19,6 +19,7 @@ export default class View {
       const event = this.events.pop();
       event.item.removeEventListener(event.type, event.handler);
     }
+    this.parent.innerHTML = '';
   }
 
   /**

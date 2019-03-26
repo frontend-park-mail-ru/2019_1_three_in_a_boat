@@ -57,14 +57,13 @@ const unauthedTemplate = [
  */
 export default class MenuView extends View {
   /**
-   *
    * @param {HTMLElement} parent
    */
   constructor(parent) {
     super(parent);
   }
   /**
-   * create Menu page
+   * Create Menu page
    */
   render() {
     checkAuth(this.menuPageDrawer(authedTemplate),

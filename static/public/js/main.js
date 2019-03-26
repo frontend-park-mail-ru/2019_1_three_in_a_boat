@@ -13,4 +13,5 @@ const main = document.getElementById('main');
 
 const router = new Router(settings.home, main)
     .addRoute('/', new MenuController(main));
+
 router.start();
