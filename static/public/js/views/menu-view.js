@@ -68,9 +68,8 @@ export default class MenuView extends View {
    * @param {JSON} user data
    */
   render(user) {
-    console.log('I am in menu view render');
     if (!user) {
-      console.log('user didn`t auth');
+      console.log('user did not auth');
       this.menuPageDrawer(unauthedTemplate);
     } else {
       console.log('user is auth');
