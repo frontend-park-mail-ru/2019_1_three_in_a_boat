@@ -1,5 +1,4 @@
 import {settings} from '../settings/config.js';
-import ajax from '../ajax.js';
 import View from '../core/view.js';
 
 /**
@@ -18,7 +17,6 @@ export default class AuthorsView extends View {
    */
   render(authors) {
     if (authors) {
-      // const data = JSON.parse(JSON.stringify(authors));
       const bemAuthors = [];
 
       Array.from(authors).forEach((author) => {

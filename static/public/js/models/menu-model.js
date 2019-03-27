@@ -19,4 +19,4 @@ export default class MenuModel extends Model {
       response.json().then((data) => data.user );
     });
   }
-}
+};
