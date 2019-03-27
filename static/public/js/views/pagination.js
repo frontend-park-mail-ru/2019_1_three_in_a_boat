@@ -1,16 +1,12 @@
-import ajax from '../ajax.js';
-import {settings} from '../settings/config.js';
-import View from './view.js';
-
 /**
- * @class PaginationView
+ * @class Paginator
  */
-export default class PaginationView extends View {
+export default class Paginator {
   /**
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    super(parent);
+    this.parent = parent;
   }
 
   /**
@@ -18,8 +14,9 @@ export default class PaginationView extends View {
    * @param {int} currPage number of the current page
    * @param {int} pagesNumber number of he pages
    * @return {Array} array of elements of pagination
+   * @private
    */
-  getNumeration(currPage, pagesNumber) {
+  _getNumeration(currPage, pagesNumber) {
     const numbers = [
       {content: 'Назад', attrs: {value: currPage - 1}},
       {content: 1, attrs: {value: 1}},
@@ -68,7 +65,7 @@ export default class PaginationView extends View {
    * @param {int} currPage number of the current page
    * @param {int} pagesNumber number of he pages
    */
-  createPagination(currPage, pagesNumber) {
+  render(currPage, pagesNumber) {
     const template = [
       {
         block: 'pagination',
@@ -76,7 +73,7 @@ export default class PaginationView extends View {
       },
     ];
 
-    const numbers = this.getNumeration(currPage, pagesNumber);
+    const numbers = this._getNumeration(currPage, pagesNumber);
     numbers.forEach((number) => {
       number.elem = 'link';
 
@@ -88,13 +85,14 @@ export default class PaginationView extends View {
     });
 
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-    this.setPaginationLinks();
   }
 
   /**
    * Add event listener for each pagination item
+   * @param {Array} events
+   * @param {function} handler
    */
-  setPaginationLinks() {
+  static setPaginationLinks(events, handler) {
     const pagLinks = document.getElementsByClassName('pagination__link');
 
     Array.from(pagLinks).forEach((link) => {
@@ -102,22 +100,8 @@ export default class PaginationView extends View {
         return;
       }
 
-      link.addEventListener('click', this.pagesLinkHandler);
-      this.events.push({item: link, type: 'click', handler:
-        this.pagesLinkHandler});
+      link.addEventListener('click', handler);
+      events.push({item: link, type: 'click', handler: handler});
     });
-  }
-
-  /**
-   * Handler for pagination link's click event
-   * @param {Event} event
-   */
-  pagesLinkHandler(event) {
-    event.preventDefault();
-    const path = 'leaders?page=' + (event.target.value - 1);
-
-    window.history.pushState({}, '', path);
-    window.history.pushState({}, '', path);
-    window.history.back();
   }
 }

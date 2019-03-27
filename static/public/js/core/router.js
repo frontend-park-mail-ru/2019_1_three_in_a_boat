@@ -40,13 +40,12 @@ export default class Router {
 
     const newController = this.routes[url];
     if (!newController) {
+      console.log(this.routes, url);
       // we have to do something here, 404 or home?
       console.log('404: ', url, this.routes);
     }
-    console.log(newController);
-    // window.history.pushState({}, '', url);
-    newController.action();
 
+    newController.action();
     this.currentController = newController;
   }
 

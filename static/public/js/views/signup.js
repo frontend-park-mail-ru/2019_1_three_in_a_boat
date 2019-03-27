@@ -16,7 +16,6 @@ export default class SignUpView extends View {
    * @param {HTMLElement}parent
    */
   constructor(parent) {
-    console.log('Create signUpView');
     super(parent);
   }
 
@@ -24,7 +23,6 @@ export default class SignUpView extends View {
    * Render SignUp page
    */
   render() {
-    console.log('Render signUpView');
     const draw = template();
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
     const cnslHandler = (event) => {
@@ -36,7 +34,6 @@ export default class SignUpView extends View {
     const cnslBtn = this.parent.getElementsByClassName('btn_color_muted')[0];
     cnslBtn.addEventListener('click', cnslHandler);
     const form = document.getElementById('signup-form');
-    console.log(cnslBtn, form);
     form.addEventListener('submit', submitHandler);
     // application.addEventListener('click', clickHandler);
     events.push(

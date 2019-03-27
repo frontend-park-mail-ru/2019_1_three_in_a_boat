@@ -68,12 +68,9 @@ export default class MenuView extends View {
    * @param {JSON} user data
    */
   render(user) {
-    console.log('I am in menu view render');
     if (!user) {
-      console.log('user didn`t auth');
       this.menuPageDrawer(unauthedTemplate);
     } else {
-      console.log('user is auth');
       this.menuPageDrawer(authedTemplate);
     }
   }
@@ -81,10 +78,8 @@ export default class MenuView extends View {
   /**
    * Get function to render menu with current data
    * @param {Array} data array of menu points
-   * @return {Function} function, which drawing menu page with current data
    */
   menuPageDrawer(data) {
-    console.log(data);
     const template = [
       {
         block: 'menu',
@@ -103,8 +98,5 @@ export default class MenuView extends View {
         ],
       }];
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-    return () => {
-      this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-    };
   }
 }
