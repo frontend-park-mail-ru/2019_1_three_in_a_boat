@@ -1,5 +1,3 @@
-import View from './view.js';
-import Controller from './controller.js';
 /**
  * @class Router
  */
@@ -13,7 +11,7 @@ export default class Router {
     this.rootPath = rootPath;
     this.rootElement = rootElement;
     this.routes = {};
-    this.currentController = new Controller(rootElement);
+    this.currentController = undefined;
   }
 
   /**
@@ -32,16 +30,24 @@ export default class Router {
    * @param {string} url
    */
   open(url) {
-    this.rootElement.innerHTML = '';
-    this.currentController.destructor();
+    if (this.currentController) {
+      this.currentController.destructor();
+    }
+    // to make paths like leaders and /leaders similar
+    if (url.startsWith('/') && url.length > 1) {
+      url = url.slice(1);
+    }
+
     const newController = this.routes[url];
     if (!newController) {
       // we have to do something here, 404 or home?
-      console.log('404: ', url);
+      console.log('404: ', url, this.routes);
     }
     console.log(newController);
-    window.history.pushState({}, '', url);
+    // window.history.pushState({}, '', url);
     newController.action();
+
+    this.currentController = newController;
   }
 
   /**
@@ -61,7 +67,7 @@ export default class Router {
 
       event.preventDefault();
 
-      console.log(link.dataset['linkType']);
+      window.history.pushState({}, '', link.dataset['linkType']);
       this.open(link.dataset['linkType']);
     });
 

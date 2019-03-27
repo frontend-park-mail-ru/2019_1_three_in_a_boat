@@ -1,7 +1,5 @@
 'use strict';
 
-import View from './view.js';
-
 /**
  * @class Controller
  */
@@ -11,7 +9,7 @@ export default class Controller {
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    this.view = new View(parent);
+    this.parent = parent;
     this.events = [];
   }
 
@@ -23,6 +21,7 @@ export default class Controller {
       const event = this.events.pop();
       event.item.removeEventListener(event.type, event.handler);
     }
+    this.parent.innerHTML = '';
   }
 
   /**

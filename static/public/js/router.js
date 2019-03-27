@@ -43,7 +43,7 @@ export default class Router {
     const newView = this.routes[url];
     if (!newView) {
       // we have to do something here, 404 or home?
-      console.log('404: ', url);
+      console.log('404: ', url, this.routes);
     }
     // window.history.pushState({}, '', url);
     newView.render();
