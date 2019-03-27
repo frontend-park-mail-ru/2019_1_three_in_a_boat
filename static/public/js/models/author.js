@@ -5,14 +5,14 @@ import {settings} from '../settings/config.js';
 import Model from '../core/model.js';
 
 /**
- * @class AuthorsModel
+ * @class Author
  */
-export default class AuthorsModel extends Model {
+export default class Author extends Model {
   /**
    * Get list of authors
    * @return {Promise<any | never>}
    */
-  getData() {
+  getAuthors() {
     return ajax.doGet({path: settings.url + '/authors'}).then((response) => {
       if (response.status > 499) {
         alert('Server error');
@@ -20,6 +20,9 @@ export default class AuthorsModel extends Model {
       }
 
       return response.json().then((data) => data.data);
+    },
+    (error) => {
+      throw new Error(error);
     });
   }
 }

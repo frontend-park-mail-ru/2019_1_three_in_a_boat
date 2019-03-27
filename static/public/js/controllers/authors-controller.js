@@ -1,8 +1,8 @@
 'use strict';
 
 import Controller from '../core/controller.js';
-import AuthorsView from '../views/authors.js';
-import AuthorsModel from '../models/author.js';
+import AuthorsView from '../views/authors-view.js';
+import Author from '../models/author.js';
 
 /**
  * @class AuthorsController
@@ -14,16 +14,17 @@ export default class AuthorsController extends Controller {
    */
   constructor(parent) {
     super(parent);
-    this.authors = null;
-    this.model = new AuthorsModel();
+    this.model = new Author();
     this.view = new AuthorsView(parent);
   }
   /**
    * Create action
    */
   action() {
-    this.model.getData().then((data) => {
-      this.view.render(data);
-    });
+    this.model.getAuthors().then(
+        (data) => {
+          this.view.render(data);
+        },
+        (error) => console.log(error)); // TODO show 5** err mb
   }
 };

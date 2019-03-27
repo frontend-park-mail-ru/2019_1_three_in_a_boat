@@ -16,9 +16,7 @@ export default class AuthorsView extends View {
    * @param {Object} authors Authors JSON, in the format returned by the server
    */
   render(authors) {
-    console.log(authors);
     const data = JSON.parse(JSON.stringify(authors));
-    console.log(data);
     const bemAuthors = [];
 
     Array.from(data).forEach((author) => {
