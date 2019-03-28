@@ -36,4 +36,45 @@ export default class User extends Model {
         }
     );
   }
+
+  /**
+   * Get user by id. If id == -1 get current user.
+   * @param {number} id
+   * @return {Promise<any | never>}
+   */
+  getUser(id) {
+    if (id !== -1) {
+      const path = settings.url + '/users/' + id;
+
+      return ajax.doGet({path}).then((response) => {
+        if (response.status > 499) {
+          alert('Server error');
+          return;
+        }
+
+        return response.json().then((data) => {
+          data.data.isCurrent = data.data.uid === data.user.uid;
+          return data.data;
+        },
+        (error) => {
+          throw new Error(error);
+        });
+      });
+    } else {
+      return ajax.doGet({path: settings.url + '/'}).then((response) => {
+        if (response.status > 499) {
+          alert('Server error');
+          return;
+        }
+
+        return response.json().then((data) => {
+          data.user.isCurrent = true;
+          return data.user;
+        },
+        (error) => {
+          throw new Error(error);
+        });
+      });
+    }
+  }
 }

@@ -30,6 +30,8 @@ export default class Router {
    * @param {string} url
    */
   open(url) {
+    console.log(url);
+    console.log(this.routes);
     if (this.currentController) {
       this.currentController.destructor();
     }
@@ -40,7 +42,6 @@ export default class Router {
 
     const newController = this.routes[url];
     if (!newController) {
-      console.log(this.routes, url);
       // we have to do something here, 404 or home?
       console.log('404: ', url, this.routes);
     }

@@ -7,7 +7,7 @@ import {validateForm, checkResponse} from '../validation.js';
 import {parseUser} from '../parsing.js';
 import getTemplate from './views-templates/update-template.js';
 import {addValidationOnBlur} from '../validation.js';
-import View from './view.js'
+import View from './view.js';
 
 /**
  * @class UpdateView

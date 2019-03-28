@@ -6,6 +6,7 @@ import Router from './core/router.js';
 import MenuController from './controllers/menu-controller.js';
 import AuthorsController from './controllers/authors-controller.js';
 import ScoreboardController from './controllers/scoreboard-controller.js';
+import ProfileController from './controllers/profile-controller.js';
 
 const application = document.getElementById('application');
 createHeader();
@@ -16,6 +17,7 @@ const main = document.getElementById('main');
 const router = new Router(settings.home, application)
     .addRoute('/', new MenuController(main))
     .addRoute('authors', new AuthorsController(main))
-    .addRoute('leaders', new ScoreboardController(main));
+    .addRoute('leaders', new ScoreboardController(main))
+    .addRoute('profile', new ProfileController(main));
 
 router.start();

@@ -77,22 +77,12 @@ export default class ScoreboardController extends Controller {
    */
   _eventHandler(event) {
     event.preventDefault();
-
-    const path = settings.url + '/users/'
+    const path = 'profile?id='
       + event.target.closest('.scoreboard__link').getAttribute('value');
-    // TODO use model
-    ajax.doGet({path}).then((response) => {
-      if (response.status > 499) {
-        alert('Server error');
-        return;
-      }
 
-      response.json().then((data) => {
-        this.parent.innerHTML = '';
-        const user = data.data;
-        renderProfile(user);
-      });
-    });
+    window.history.pushState({}, '', path);
+    window.history.pushState({}, '', path);
+    window.history.back();
   }
 
   /**
