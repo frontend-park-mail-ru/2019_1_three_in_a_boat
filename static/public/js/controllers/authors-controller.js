@@ -2,7 +2,7 @@
 
 import Controller from '../core/controller.js';
 import AuthorsModel from '../models/authors-model.js';
-import AuthorsView from '../views/authors.js';
+import AuthorsView from '../views/authors-view.js';
 
 /**
  * @class AuthorsController
@@ -24,8 +24,16 @@ export default class AuthorsController extends Controller {
    */
   action() {
     if (!this.authors) {
-      this.authors = this.model.getData();
+      console.log('aaaaaaaa');
+      console.log(this.model);
+      this.model.getData()
+          .then((data) => {
+            console.log('promise');
+            this.view.render(data['data']);
+            this.authors = data['data'];
+          });
+    } else {
+      this.view.render(this.authors);
     }
-    this.view.render(this.authors);
   }
 };

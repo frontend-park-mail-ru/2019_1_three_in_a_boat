@@ -202,7 +202,8 @@ export function addValidationOnBlur() {
  * @return {boolean} true if form is okay
  */
 export function validateForm(form) {
-  const inputs = document.getElementsByTagName('input');
+  console.log(form);
+  const inputs = form.getElementsByTagName('input');
   let isOk = true;
 
   for (const input of inputs) {

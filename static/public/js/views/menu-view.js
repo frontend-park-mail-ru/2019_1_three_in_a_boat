@@ -36,7 +36,7 @@ const unauthedTemplate = [
     type: 'signin',
   },
   {
-    href: 'signUp',
+    href: 'signup',
     text: 'Регистрация',
     type: 'key',
   },

@@ -10,6 +10,7 @@ export default class Model {
 
   /**
    * Send model data
+   * @param {event} event
    */
-  sendData() {}
+  sendData(event) {}
 };
