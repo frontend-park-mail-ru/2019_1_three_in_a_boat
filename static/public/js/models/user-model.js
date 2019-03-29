@@ -10,7 +10,7 @@ import {checkResponse, validateForm} from '../validation.js';
  */
 export default class UserModel extends Model {
   /**
-   * Create user oblject
+   * Create user object
    */
   constructor() {
     super();
@@ -21,28 +21,29 @@ export default class UserModel extends Model {
    * Get users data
    * @return {Promise} promise to get user data
    */
-  getData() {
-    if (!this.user) {
-      return ajax.doGet({path: settings.url + '/'}).then((response) => {
-        if (response.status > 499) {
-          alert('Server error');
-          return;
-        }
-        return response.json().then((data) => {
-          this.user = data;
-          return data.user;
-        });
+  static getData() {
+    // if (!this.user) {
+    return ajax.doGet({path: settings.url + '/'}).then((response) => {
+      if (response.status > 499) {
+        alert('Server error');
+        return;
+      }
+      return response.json().then((data) => {
+        // this.user = data;
+        return data.user;
       });
-    }
-    return new Promise(() => null);
+    });
+    // }
+    // return new Promise(() => null);
   }
 
   /**
    * Send user data to server
    * @param {event.target} form
+   * @param {Object} body
    * @return {Promise}
    */
-  sendData(form, body) {
+  static sendData(form, body) {
     // По идее надо бы сделать на каждый урл свой метод
     let path = '';
     if (form.id === 'loginForm') {
@@ -69,7 +70,7 @@ export default class UserModel extends Model {
    * @return {{date: string, lastName: *, password: *,
    * name: *, userName: *, email: *}} input form
    */
-  getFromSignUp(event) {
+  static getFromSignUp(event) {
     if (!validateForm(event.target)) {
       return;
     }

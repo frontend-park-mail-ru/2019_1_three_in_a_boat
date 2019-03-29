@@ -16,7 +16,6 @@ export default class LoginController extends Controller {
    */
   constructor(parent) {
     super(parent);
-    this.model = new UserModel();
     this.view = new LoginView(parent);
     this.events = [];
   }
@@ -26,15 +25,15 @@ export default class LoginController extends Controller {
    */
   action() {
     this.view.render();
-    this.initInputs();
+    this._initInputs();
     const form = document.getElementById('loginForm');
     form.addEventListener('submit', this.submitHandler);
     const cancel = this.view.parent
         .getElementsByClassName('btn_color_muted')[0];
-    cancel.addEventListener('click', this.clickHandler);
+    cancel.addEventListener('click', this_._clickHandler);
     this.events.push(
         {item: form, type: 'submit', handler: this.submitHandler},
-        {item: application, type: 'click', handler: this.clickHandler}
+        {item: application, type: 'click', handler: this._clickHandler}
     );
   }
 
@@ -52,8 +51,7 @@ export default class LoginController extends Controller {
     const password = form.elements['password'].value;
 
     const body = {name, password};
-    this.model = new UserModel();
-    this.model.sendData(form, body).then((ok) => {
+    UserModel.sendData(form, body).then((ok) => {
       if (ok) {
         window.location.href = '/'; // temporarily
       } else {
@@ -65,7 +63,7 @@ export default class LoginController extends Controller {
   /**
    * Initializes show password buttons and maybe other stuff in the future
    */
-  initInputs() {
+  _initInputs() {
     const buttons = document.getElementsByClassName('icon_show-pwd');
     for (const btn of buttons) {
       btn.onclick = (e) => {
@@ -85,7 +83,7 @@ export default class LoginController extends Controller {
    * @param {event} event
    * @return {boolean} ok-status
    */
-  clickHandler(event) {
+  _clickHandler(event) {
     const link = event.target.closest('[data-link-type]');
     return link === null;
   }

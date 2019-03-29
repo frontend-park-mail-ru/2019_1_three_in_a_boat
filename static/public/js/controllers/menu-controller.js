@@ -16,14 +16,13 @@ export default class MenuController extends Controller {
   constructor(parent) {
     super(parent);
     this.user = null;
-    this.model = new UserModel(); // MenuModel();
     this.view = new MenuView(parent);
   }
   /**
    * Create action
    */
   action() {
-    this.model.getData().then(
+    UserModel.getData().then(
         (user) => {
           this.user = user;
           this.view.render(this.user);

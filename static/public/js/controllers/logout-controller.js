@@ -13,7 +13,6 @@ export default class LogoutController extends Controller {
    */
   constructor(parent) {
     super(parent);
-    this.model = new UserModel();
     this.view = new MenuView(parent);
     this.events = [];
   }
@@ -23,7 +22,7 @@ export default class LogoutController extends Controller {
    */
   action() {
     const form = {id: undefined};
-    this.model.sendData(form, undefined)
+    UserModel.sendData(form, undefined)
         .then(() => {
           // temporarily
           window.location.href = '/';

@@ -14,7 +14,6 @@ export default class SignUpController extends Controller {
    */
   constructor(parent) {
     super(parent);
-    this.model = new UserModel();
     this.view = new SignUpView(parent);
     // Array for collecting events
     this.events = [];
@@ -28,12 +27,12 @@ export default class SignUpController extends Controller {
     this.view.render();
     const cancel = this.view.parent
         .getElementsByClassName('btn_color_muted')[0];
-    cancel.addEventListener('click', this.cancelHandler);
+    cancel.addEventListener('click', this._cancelHandler);
     const form = document.getElementById('signup-form');
-    form.addEventListener('submit', this.submitHandler);
+    form.addEventListener('submit', this._submitHandler);
     this.events.push(
-        {item: form, type: 'submit', handler: this.submitHandler},
-        {item: cancel, type: 'click', handler: this.cancelHandler},
+        {item: form, type: 'submit', handler: this._submitHandler},
+        {item: cancel, type: 'click', handler: this._cancelHandler},
     );
   }
 
@@ -41,25 +40,24 @@ export default class SignUpController extends Controller {
    * Handel cancel event
    * @param {event} event
    */
-  cancelHandler(event) {
+  _cancelHandler(event) {
     event.preventDefault();
     window.location.href = '/'; // temporarily
   };
 
   /**
-   * Handel click on submit event 
+   * Handel click on submit event
    * @param {event} event
    */
-  submitHandler(event) {
+  _submitHandler(event) {
     event.preventDefault();
 
     if (!validateForm(event.target)) {
       return;
     }
 
-    this.model = new UserModel();
-    const body = this.model.getFromSignUp(event);
-    this.model.sendData(event.target, body).then((ok) => {
+    const body = UserModel.getFromSignUp(event);
+    UserModel.sendData(event.target, body).then((ok) => {
       if (ok) {
         window.location.href = 'profile'; // temporarily
       } else {
