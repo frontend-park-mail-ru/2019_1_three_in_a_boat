@@ -67,8 +67,7 @@ export default class UserModel extends Model {
   /**
    * Get data from input form on sign up page
    * @param {event} event
-   * @return {{date: string, lastName: *, password: *,
-   * name: *, userName: *, email: *}} input form
+   * @return {Object} input form
    */
   static getFromSignUp(event) {
     if (!validateForm(event.target)) {

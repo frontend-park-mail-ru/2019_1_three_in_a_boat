@@ -30,7 +30,7 @@ export default class LoginController extends Controller {
     form.addEventListener('submit', this.submitHandler);
     const cancel = this.view.parent
         .getElementsByClassName('btn_color_muted')[0];
-    cancel.addEventListener('click', this_._clickHandler);
+    cancel.addEventListener('click', this._clickHandler);
     this.events.push(
         {item: form, type: 'submit', handler: this.submitHandler},
         {item: application, type: 'click', handler: this._clickHandler}
