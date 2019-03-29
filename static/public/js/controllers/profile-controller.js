@@ -1,8 +1,8 @@
 'use strict';
 
 import Controller from '../core/controller.js';
-import User from '../models/user.js';
-import ProfileView from '../views/profile.js';
+import UserService from '../models/user-service.js';
+import ProfileView from '../views/profile-view.js';
 
 /**
  * @class ProfileController
@@ -14,7 +14,6 @@ export default class ProfileController extends Controller {
    */
   constructor(parent) {
     super(parent);
-    this.user = new User();
     this.view = new ProfileView(parent);
   }
 
@@ -24,7 +23,7 @@ export default class ProfileController extends Controller {
   action() {
     const id = this._parseIdFromUrl();
 
-    this.user.getUser(id).then(
+    UserService.getUser(id).then(
         (data) => {
           this.view.render(data);
           this._configureEvents();

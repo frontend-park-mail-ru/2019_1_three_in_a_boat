@@ -1,4 +1,5 @@
 'use strict';
+
 import View from '../core/view.js';
 
 const authedTemplate = [
@@ -31,12 +32,12 @@ const authedTemplate = [
 
 const unauthedTemplate = [
   {
-    href: 'signIn',
+    href: 'signin',
     text: 'Авторизация',
     type: 'signin',
   },
   {
-    href: 'signUp',
+    href: 'signup',
     text: 'Регистрация',
     type: 'key',
   },

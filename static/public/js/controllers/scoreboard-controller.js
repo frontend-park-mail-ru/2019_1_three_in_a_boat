@@ -1,8 +1,8 @@
 'use strict';
 
 import Controller from '../core/controller.js';
-import User from '../models/user.js';
-import ScoreboardView from '../views/scoreboard.js';
+import UserService from '../models/user-service.js';
+import ScoreboardView from '../views/scoreboard-view.js';
 import Paginator from '../views/pagination.js';
 
 /**
@@ -15,7 +15,6 @@ export default class ScoreboardController extends Controller {
    */
   constructor(parent) {
     super(parent);
-    this.user = new User();
     this.view = new ScoreboardView(parent);
   }
   /**
@@ -24,7 +23,7 @@ export default class ScoreboardController extends Controller {
   action() {
     const page = this._parsePageNumber();
 
-    this.user.getUsers(page).then(
+    UserService.getUsers(page).then(
         (data) => {
           this.view.render(data);
           this._configureEvents();

@@ -9,7 +9,7 @@ import Author from '../models/author.js';
  */
 export default class AuthorsController extends Controller {
   /**
-   * Construct obj
+   * Construct obj AuthorsController
    * @param {HTMLElement} parent
    */
   constructor(parent) {

@@ -1,5 +1,5 @@
 import {settings} from '../settings/config.js';
-import View from './view.js';
+import View from '../core/view.js';
 
 /**
  * @class AuthorsView

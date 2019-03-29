@@ -6,7 +6,11 @@ export default class Model {
   /**
    * Get model data
    */
-  getData() {
+  getData() {}
 
-  }
-}
+  /**
+   * Send model data
+   * @param {event} event
+   */
+  sendData(event) {}
+};

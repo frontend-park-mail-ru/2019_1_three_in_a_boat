@@ -7,6 +7,9 @@ import MenuController from './controllers/menu-controller.js';
 import AuthorsController from './controllers/authors-controller.js';
 import ScoreboardController from './controllers/scoreboard-controller.js';
 import ProfileController from './controllers/profile-controller.js';
+import SignUpController from './controllers/signup-controller.js';
+import LoginController from './controllers/login-controller.js';
+import LogoutController from './controllers/logout-controller.js';
 
 const application = document.getElementById('application');
 createHeader();
@@ -18,6 +21,10 @@ const router = new Router(settings.home, application)
     .addRoute('/', new MenuController(main))
     .addRoute('authors', new AuthorsController(main))
     .addRoute('leaders', new ScoreboardController(main))
-    .addRoute('profile', new ProfileController(main));
+    .addRoute('profile', new ProfileController(main))
+    .addRoute('signup', new SignUpController(main))
+    .addRoute('signin', new LoginController(main))
+    .addRoute('exit', new LogoutController(main))
+    .addRoute('authors', new AuthorsController(main));
 
 router.start();
