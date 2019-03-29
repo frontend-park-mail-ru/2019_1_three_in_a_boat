@@ -24,7 +24,5 @@ export default class View {
   /**
    * Render view
    */
-  render() {
-
-  }
+  render() {}
 }

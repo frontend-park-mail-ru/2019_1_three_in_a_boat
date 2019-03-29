@@ -68,8 +68,7 @@ export default class SignUpController extends Controller {
     this.model.sendData(event.target, body).then((ok) => {
       if (ok) {
         console.log('Ok. Create profile page');
-        // const menu = new MenuController(super.view.parent);
-        // menu.action();
+        window.location.href = 'profile';
       } else {
         console.log('Client error, stay here');
       }

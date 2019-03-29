@@ -4,6 +4,7 @@ import UserModel from '../models/user-model.js';
 import LoginView from '../views/login-view.js';
 import {validateForm} from '../validation.js';
 import MenuController from './menu-controller.js';
+import {settings} from '../settings/config.js';
 
 /**
  * @class LoginController
@@ -57,9 +58,7 @@ export default class LoginController extends Controller {
     this.model.sendData(form, body).then((ok) => {
       if (ok) {
         console.log('Ok. user is auth');
-        this.view = new LoginView(parent);
-        const menu = new MenuController(this.view.parent);
-        menu.action();
+        window.location.href = '/';
       } else {
         console.log('Client error, stay here');
       }

@@ -43,15 +43,14 @@ export default class UserModel extends Model {
    * @return {Promise}
    */
   sendData(form, body) {
-    // const form = event.target;
-    // const body = UserModel.getFromSignUp(event);
+    // По идее надо бы сделать на каждый урл свой метод
     let path = '';
     if (form.id === 'loginForm') {
       path = '/signin';
     } else if (form.id === 'signup-form') {
       path = '/users';
     } else {
-      path = '/';
+      path = '/signout';
     }
     return ajax.doPost({path: settings.url + path, body})
         .then((response) => {

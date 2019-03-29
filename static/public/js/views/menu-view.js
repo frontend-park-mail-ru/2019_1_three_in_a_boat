@@ -31,7 +31,7 @@ const authedTemplate = [
 
 const unauthedTemplate = [
   {
-    href: 'signIn',
+    href: 'signin',
     text: 'Авторизация',
     type: 'signin',
   },
