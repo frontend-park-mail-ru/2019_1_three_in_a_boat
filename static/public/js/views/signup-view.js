@@ -18,7 +18,6 @@ export default class SigUpView extends View {
    * Rendering view
    */
   render() {
-    console.log('Render signUpView');
     const draw = template();
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
   }

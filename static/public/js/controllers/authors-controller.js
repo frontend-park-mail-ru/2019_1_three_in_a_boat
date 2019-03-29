@@ -24,11 +24,9 @@ export default class AuthorsController extends Controller {
    */
   action() {
     if (!this.authors) {
-      console.log('aaaaaaaa');
       console.log(this.model);
       this.model.getData()
           .then((data) => {
-            console.log('promise');
             this.view.render(data['data']);
             this.authors = data['data'];
           });

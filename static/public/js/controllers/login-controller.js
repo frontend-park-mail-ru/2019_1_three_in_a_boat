@@ -43,7 +43,6 @@ export default class LoginController extends Controller {
    * @param {event} event
    */
   submitHandler(event) {
-    console.log('submitHandler is launch');
     event.preventDefault();
     if (!validateForm(event.target)) {
       return;
@@ -54,11 +53,9 @@ export default class LoginController extends Controller {
 
     const body = {name, password};
     this.model = new UserModel();
-    console.log(this.model);
     this.model.sendData(form, body).then((ok) => {
       if (ok) {
-        console.log('Ok. user is auth');
-        window.location.href = '/';
+        window.location.href = '/'; // temporarily
       } else {
         console.log('Client error, stay here');
       }

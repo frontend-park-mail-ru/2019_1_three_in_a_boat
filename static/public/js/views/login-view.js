@@ -18,7 +18,6 @@ export default class LoginView extends View {
    * Render Login page
    */
   render() {
-    console.log('Render login page');
     const draw = template();
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
   }

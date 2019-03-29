@@ -69,10 +69,8 @@ export default class MenuView extends View {
    */
   render(user) {
     if (!user) {
-      console.log('user did not auth');
       this.menuPageDrawer(unauthedTemplate);
     } else {
-      console.log('user is auth');
       this.menuPageDrawer(authedTemplate);
     }
   }
@@ -83,7 +81,6 @@ export default class MenuView extends View {
    * @return {Function} function, which drawing menu page with current data
    */
   menuPageDrawer(data) {
-    console.log(data);
     const template = [
       {
         block: 'menu',

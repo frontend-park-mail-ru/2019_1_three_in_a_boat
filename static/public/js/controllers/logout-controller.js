@@ -1,7 +1,6 @@
 'use strict';
 import Controller from '../core/controller.js';
 import UserModel from '../models/user-model.js';
-import {validateForm} from '../validation.js';
 import MenuView from '../views/menu-view.js';
 
 /**
@@ -26,6 +25,7 @@ export default class LogoutController extends Controller {
     const form = {id: undefined};
     this.model.sendData(form, undefined)
         .then(() => {
+          // temporarily
           window.location.href = '/';
         });
   }

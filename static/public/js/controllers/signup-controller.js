@@ -25,7 +25,6 @@ export default class SignUpController extends Controller {
    // * @param {event} event
    */
   action() {
-    console.log(this.model);
     this.view.render();
     const cancel = this.view.parent
         .getElementsByClassName('btn_color_muted')[0];
@@ -44,18 +43,14 @@ export default class SignUpController extends Controller {
    */
   cancelHandler(event) {
     event.preventDefault();
-    console.log('cancel button pressed');
-    // this.view.render()
-    // application.innerHTML = '';
-    // createMenu();
+    window.location.href = '/'; // temporarily
   };
 
   /**
-   * Handel click on submit event
+   * Handel click on submit event 
    * @param {event} event
    */
   submitHandler(event) {
-    console.log('submitHandler is launch');
     event.preventDefault();
 
     if (!validateForm(event.target)) {
@@ -63,12 +58,10 @@ export default class SignUpController extends Controller {
     }
 
     this.model = new UserModel();
-    console.log(this.model);
     const body = this.model.getFromSignUp(event);
     this.model.sendData(event.target, body).then((ok) => {
       if (ok) {
-        console.log('Ok. Create profile page');
-        window.location.href = 'profile';
+        window.location.href = 'profile'; // temporarily
       } else {
         console.log('Client error, stay here');
       }
