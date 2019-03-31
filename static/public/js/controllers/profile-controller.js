@@ -41,6 +41,9 @@ export default class ProfileController extends Controller {
       const handle = (event) => {
         event.preventDefault();
         this.view.parent.innerHTML = '';
+        window.history.pushState({}, '', '/profile/update');
+        window.history.pushState({}, '', '/profile/update');
+        window.history.back();
         // createUpdateProfile(); // TODO call popup event
       };
 
@@ -50,7 +53,7 @@ export default class ProfileController extends Controller {
   }
 
   /**
-   * Get id from url
+     * Get id from url
    * @return {undefined}
    * @private
    */

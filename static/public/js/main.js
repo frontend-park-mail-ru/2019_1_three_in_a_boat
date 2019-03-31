@@ -10,6 +10,7 @@ import ProfileController from './controllers/profile-controller.js';
 import SignUpController from './controllers/signup-controller.js';
 import LoginController from './controllers/login-controller.js';
 import LogoutController from './controllers/logout-controller.js';
+import UpdateController from './controllers/update-controller.js';
 
 const application = document.getElementById('application');
 createHeader();
@@ -25,6 +26,7 @@ const router = new Router(settings.home, application)
     .addRoute('signup', new SignUpController(main))
     .addRoute('signin', new LoginController(main))
     .addRoute('exit', new LogoutController(main))
-    .addRoute('authors', new AuthorsController(main));
+    .addRoute('authors', new AuthorsController(main))
+    .addRoute('profile/update', new UpdateController(main));
 
 router.start();

@@ -18,28 +18,24 @@ export default class UserService extends Model {
     this.event = null;
   }
   /**
-   * Get users data
+   * Get users data from server
    * @return {Promise} promise to get user data
    */
   static getData() {
-    // if (!this.user) {
     return ajax.doGet({path: settings.url + '/'}).then((response) => {
       if (response.status > 499) {
         alert('Server error');
         return;
       }
       return response.json().then((data) => {
-        // this.user = data;
         return data.user;
       });
     });
-    // }
-    // return new Promise(() => null);
   }
 
   /**
-   * Send user data to server
-   * @param {event.target} form
+   * Send user data to the server
+   * @param {HTMLFormElement} form
    * @param {Object} body
    * @return {Promise}
    */
@@ -60,6 +56,25 @@ export default class UserService extends Model {
             return;
           }
 
+          return response.json().then((data) => checkResponse(data, form) );
+        });
+  }
+
+  /**
+   * Update user data on the server
+   * @param {HTMLFormElement} form
+   * @param {Object} body
+   * @param {int} userId
+   * @return {Promise}
+   */
+  static updateData(form, body, userId) {
+    const path = `${settings.url}/users/${userId}`;
+    return ajax.doPut({path: path, body})
+        .then((response) => {
+          if (response.status > 499) {
+            alert('Server error');
+            return;
+          }
           return response.json().then((data) => checkResponse(data, form) );
         });
   }
@@ -103,11 +118,6 @@ export default class UserService extends Model {
     const password = form.elements['password'].value;
     return {name, password};
   }
-
-  /**
-   * Create user authentication
-   */
-  login() {}
 
   /**
    * Get list of users with pagination
