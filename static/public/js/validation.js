@@ -1,4 +1,4 @@
-import {serverErrors} from './settings/serverErrors.js';
+import {serverErrors} from './settings/server-errors.js';
 
 /**
  * Check if input is valid
@@ -202,7 +202,7 @@ export function addValidationOnBlur() {
  * @return {boolean} true if form is okay
  */
 export function validateForm(form) {
-  const inputs = document.getElementsByTagName('input');
+  const inputs = form.getElementsByTagName('input');
   let isOk = true;
 
   for (const input of inputs) {

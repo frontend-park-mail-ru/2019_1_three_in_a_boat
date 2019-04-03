@@ -19,7 +19,7 @@ const template = () => [{
         type: 'cross',
       },
       attrs: {
-        'data-link-type': 'menu',
+        'data-link-type': '/',
       },
     },
     {
@@ -136,7 +136,7 @@ const template = () => [{
                 {
                   block: 'btn',
                   mods: {color: 'muted'},
-                  attrs: {'data-link-type': 'menu', 'role': 'link'},
+                  attrs: {'data-link-type': '/', 'role': 'link'},
                   content: [{
                     block: 'btn',
                     elem: 'inner',
@@ -162,7 +162,7 @@ const template = () => [{
             tag: 'a',
             href: '#',
             content: 'Зарегистрироваться',
-            attrs: {'data-link-type': 'signUp'},
+            attrs: {'data-link-type': 'signup'},
           },
         },
       ],

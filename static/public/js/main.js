@@ -1,38 +1,32 @@
 'use strict';
 
-import createMenu from './menu.js';
-import createScoreBoard from './scoreboard.js';
-import createAuthors from './authors.js';
-import createLoginPage from './login.js';
-import createSignUp from './signup.js';
-import {createProfile} from './profile.js';
-import doSignOut from './signout.js';
-import {addValidationOnBlur} from './validation.js';
+import {settings} from './settings/config.js';
+import createHeader from './views/header.js';
+import Router from './core/router.js';
+import MenuController from './controllers/menu-controller.js';
+import AuthorsController from './controllers/authors-controller.js';
+import ScoreboardController from './controllers/scoreboard-controller.js';
+import ProfileController from './controllers/profile-controller.js';
+import SignUpController from './controllers/signup-controller.js';
+import LoginController from './controllers/login-controller.js';
+import LogoutController from './controllers/logout-controller.js';
+import UpdateController from './controllers/update-controller.js';
 
 const application = document.getElementById('application');
+createHeader();
 
-createMenu();
+application.insertAdjacentHTML('beforeend', '<div id="main"></div>');
+const main = document.getElementById('main');
 
-const pages = {
-  menu: createMenu,
-  signIn: createLoginPage,
-  signUp: createSignUp,
-  authors: createAuthors,
-  leaders: createScoreBoard,
-  profile: createProfile,
-  exit: doSignOut,
-};
+const router = new Router(settings.home, application)
+    .addRoute('/', new MenuController(main))
+    .addRoute('authors', new AuthorsController(main))
+    .addRoute('leaders', new ScoreboardController(main))
+    .addRoute('profile', new ProfileController(main))
+    .addRoute('signup', new SignUpController(main))
+    .addRoute('signin', new LoginController(main))
+    .addRoute('exit', new LogoutController(main))
+    .addRoute('authors', new AuthorsController(main))
+    .addRoute('profile/update', new UpdateController(main));
 
-application.addEventListener('click', (event) => {
-  const link = event.target.closest('[data-link-type]');
-  if (link === null) {
-    return;
-  }
-
-  event.preventDefault();
-
-  application.innerHTML = '';
-  pages[link.dataset['linkType']]();
-
-  addValidationOnBlur();
-});
+router.start();

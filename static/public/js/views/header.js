@@ -13,12 +13,14 @@ export default function createHeader() {
       {
         elem: 'title',
         tag: 'a',
-        attrs: {'data-link-type': 'menu'},
+        attrs: {'data-link-type': '/'},
         content: ['hexagon'],
       },
     ],
   };
 
   const application = document.getElementById('application');
-  application.insertAdjacentHTML('beforeend', bemhtml.apply(header));
+  application.insertAdjacentHTML('beforeend', '<div class="header"></div>');
+  const headerDiv = document.getElementsByClassName('header')[0];
+  headerDiv.insertAdjacentHTML('beforeend', bemhtml.apply(header));
 }

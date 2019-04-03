@@ -6,6 +6,8 @@
   justify-self: flex-start;
   align-items: center;
 
+  margin-bottom: 5%;
+
   height: 50px;
   min-height: 50px;
   padding-left: 75px;
@@ -13,7 +15,7 @@
   background-color: $primary-color;
 
   &_main {
-    margin: 8px 8px 24px;
+    margin: 0 8px 24px;
   }
 
   &__title {

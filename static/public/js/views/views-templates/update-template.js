@@ -1,4 +1,4 @@
-import {settings} from '../settings/config.js';
+import {settings} from '../../settings/config.js';
 
 const yearOptions = [
   {
@@ -43,7 +43,7 @@ const dayOptions = [{
  * @param {Object} user
  * @return {Array} template of the profile's update page
  */
-export default function getTemplate(user) {
+export default function template(user) {
   const date = [
     {
       block: 'select',
@@ -121,7 +121,7 @@ export default function getTemplate(user) {
                     name: 'Фамилия',
                     fieldName: 'lastName',
                     fieldAttrs: {
-                      placeholder: 'Иван',
+                      placeholder: 'Иванов',
                       value: user.lastName,
                       checkable: true,
                       checkType: 'lastName',
@@ -145,7 +145,7 @@ export default function getTemplate(user) {
                     fieldAttrs: {
                       required: true,
                       checkable: true,
-                      value: user.nickname,
+                      value: user.username || user.nickname,
                       placeholder: 'username',
                       checkType: 'userName',
                     },
@@ -248,8 +248,8 @@ function setSelectedGender(user, gender) {
  * @param {Array} date
  */
 function setSelectedDate(user, date) {
-  if (user.date !== '') {
-    const userDate = user.date.split('.');
+  if (user.birthDate !== '') {
+    const userDate = user.birthDate.split('.');
 
     const dayOptions = date[0].options;
     dayOptions.forEach((option) => {
