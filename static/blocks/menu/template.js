@@ -1,6 +1,5 @@
 block('menu').elem('link')({tag: 'a'});
 block('menu').elem('avatar')({tag: 'img'});
-block('menu').elem('items')({elemMods: {color: 'white-whitesmoke-chain'}});
 block('menu').elem('title')({
   block: 'title',
   mods: {large: true},
@@ -19,18 +18,21 @@ block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
             block: 'icon-bg',
             mods: {
               borderless: true,
-              size: 'xlarge',
-              shape: 'round',
-              color: 'green',
+              size: 'full',
+              // shape: 'round',
+              color: 'dark-gray',
             },
             content: {
               block: 'icon',
-              mods: {color: 'white', type: elt.type},
+              mods: {color: 'white', type: elt.type, size: 'fit'},
             },
             wrappedInside: 'menu',
             wrappedAs: 'icon-bg',
           },
-          elt.text,
+          {
+            elem: 'text',
+            content: elt.text,
+          },
         ],
       },
     ],

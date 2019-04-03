@@ -1,52 +1,41 @@
 .menu {
   $block: &;
-  $menu-item-height: 55px;
+  $menu-item-height: 4.5rem;
 
+  margin: 4% auto 0 auto;
   width: 60%;
+  height: 90%;
   min-width: fit-content;
   max-width: 600px;
-  margin: 0 auto;
 
   border: 0;
   border-radius: 3px;
   // border takes up space, making colored elements leaves blank pixels
   // so I use a shadow-border
 
-  &__title {
-    margin:0;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
-    padding: 15px;
-    text-align: left;
-    background-color: $primary-color;
-    color: $primary-color-text;
-  }
-
   &__link {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
 
-    color: black;
+    width: 100%;
+    height: 100%;
   }
 
   &__item {
     position: relative;
-    border-right: 1px solid $border-color;
-    border-left: 1px solid $border-color;
 
     display: flex;
     align-items: center;
+    margin-bottom: 4%;
 
     height: $menu-item-height;
-    padding: 0 15px 0 20px;
+    background-color: $primary-color;
+    color: $primary-color-text;
 
-    &:last-child {
-      border-bottom: 1px solid $border-color;
-      border-bottom-right-radius: 3px;
-      border-bottom-left-radius: 3px;
-    }
+    border: 1px solid $border-color;
+    border-radius: 5px;
   }
 
   &__dropdown-btn {
@@ -55,25 +44,16 @@
     right: 10px;
   }
 
+  &__text {
+    width: 85%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+
+    color: $primary-color-text;
+  }
+
   &__icon-bg {
-    margin-right: 12px;
+    width: 15%;
   }
-
-  &__items {
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-top: 0;
-    //@include shadow(0 0 0 1px $border-color, $shadow-outline);
-
-    &_color_white-whitesmoke-chain {
-      // there's probably a better way, but I couldn't find it :<
-      #{$block}__item:nth-of-type(even) {
-        background-color: whitesmoke;
-      }
-      #{$block}__item:nth-of-type(odd) {
-        background-color: white;
-      }
-    }
-  }
-
 }
