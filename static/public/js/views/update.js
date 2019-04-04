@@ -5,7 +5,7 @@ import {initFileInputs, getBase64, previewFile} from '../file-input.js';
 import {settings} from '../settings/config.js';
 import {validateForm, checkResponse} from '../validation.js';
 import {parseUser} from '../parsing.js';
-import getTemplate from './views-templates/update-template.js';
+import template from './views-templates/update-template.js';
 import {addValidationOnBlur} from '../validation.js';
 import View from './view.js';
 
@@ -43,9 +43,9 @@ export default class UpdateView extends View {
    */
   render() {
     if (this._user) {
-      const template = getTemplate(this._user);
+      const draw = template(this._user);
       document.getElementById('application').insertAdjacentHTML('beforeend',
-          bemhtml.apply(template)
+          bemhtml.apply(draw)
       );
 
       initFileInputs();
@@ -104,7 +104,7 @@ function createUpdateProfile() {
  * @param {Object} user
  */
 function renderUpdateProfilePage(user) {
-  const template = getTemplate(user);
+  const template = template(user);
   document.getElementById('application').insertAdjacentHTML('beforeend',
       bemhtml.apply(template)
   );
@@ -174,25 +174,25 @@ function submitHandler(user, event) {
     });
   };
 
-  getBase64(img).then((result) => {
-    img = result;
-    const body = {
-      name: firstName, lastName, userName,
-      email, gender, date, password,
-      img,
-    };
+  getBase64(img).then(
+      (result) => {
+        img = result;
+        const body = {
+          name: firstName, lastName, userName,
+          email, gender, date, password,
+          img,
+        };
 
-    ajax.doPut({path, body}).then(callback);
-  },
-  () => {
-    const body = {
-      name: firstName, lastName, userName,
-      email, gender, date, password,
-    };
+        ajax.doPut({path, body}).then(callback);
+      },
+      () => {
+        const body = {
+          name: firstName, lastName, userName,
+          email, gender, date, password,
+        };
 
-    ajax.doPut({path, body}).then(callback);
-  }
-  );
+        ajax.doPut({path, body}).then(callback);
+      });
 }
 
 /**

@@ -15,13 +15,33 @@ export default class SignUpController extends Controller {
   constructor(parent) {
     super(parent);
     this.view = new SignUpView(parent);
-    // Array for collecting events
-    this.events = [];
+    this.events = []; // Array for collecting events
   }
-
   /**
-   * Send user data to server
-   // * @param {event} event
+   * Get data from input form on sign up page
+   * @param {event} event
+   * @return {Object} input form
+   */
+  _getFromSignUp(event) {
+    const form = document.getElementById('signup-form');
+
+    const name = form['signup-form_firstName'].value;
+    const lastName = form['signup-form_lastName'].value;
+    const email = form['signup-form_email'].value;
+    const userName = form['signup-form_username'].value;
+
+    const selectField = document.getElementsByTagName('select');
+    const day = selectField['signup-form_selectDay'].value;
+    const month = selectField['signup-form_selectMonth'].value;
+    const year = selectField['signup-form_selectYear'].value;
+    const date = `${day}-${month}-${year}`;
+
+    const password = form['signup-form_password'].value;
+
+    return {userName, password, name, lastName, email, date};
+  }
+  /**
+   * Call 'sign up' rendering func and add event listeners
    */
   action() {
     this.view.render();
@@ -29,9 +49,9 @@ export default class SignUpController extends Controller {
         .getElementsByClassName('btn_color_muted')[0];
     cancel.addEventListener('click', this._cancelHandler);
     const form = document.getElementById('signup-form');
-    form.addEventListener('submit', this._submitHandler);
+    form.addEventListener('submit', this._submitHandler.bind(this));
     this.events.push(
-        {item: form, type: 'submit', handler: this._submitHandler},
+        {item: form, type: 'submit', handler: this._submitHandler.bind(this)},
         {item: cancel, type: 'click', handler: this._cancelHandler},
     );
   }
@@ -57,8 +77,7 @@ export default class SignUpController extends Controller {
     if (!validateForm(event.target)) {
       return;
     }
-
-    const body = UserService.getFromSignUp(event);
+    const body = this._getFromSignUp(event);
     UserService.sendData(event.target, body).then((ok) => {
       if (ok) {
         window.history.pushState({}, '', 'profile');

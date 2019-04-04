@@ -9,8 +9,17 @@ export default class Model {
   getData() {}
 
   /**
-   * Send model data
-   * @param {event} event
+   * Send user data to the server
+   * @param {HTMLFormElement} form
+   * @param {Object} body
    */
-  sendData(event) {}
+  sendData(form, body) {}
+
+  /**
+   * Update user data on the server
+   * @param {HTMLFormElement} form
+   * @param {Object} body
+   * @param {int} userId
+   */
+  updateData(form, body, userId) {}
 };
