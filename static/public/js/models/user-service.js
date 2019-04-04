@@ -22,12 +22,20 @@ export default class UserService extends Model {
    * @return {Promise} promise to get user data
    */
   static getData() {
+    if (this.user) {
+      return new Promise((resolve) => {
+        resolve(this.user);
+      });
+    }
+
     return ajax.doGet({path: settings.url + '/'}).then((response) => {
       if (response.status > 499) {
         alert('Server error');
         return;
       }
       return response.json().then((data) => {
+        this.user = data.user;
+        this.user.isCurrent = true;
         return data.user;
       });
     });
@@ -75,7 +83,14 @@ export default class UserService extends Model {
             alert('Server error');
             return;
           }
-          return response.json().then((data) => checkResponse(data, form) );
+          return response.json().then((data) => {
+            if (checkResponse(data, form)) {
+              this.user = undefined;
+              return true;
+            } else {
+              return false;
+            }
+          });
         });
   }
 
@@ -133,6 +148,12 @@ export default class UserService extends Model {
         });
       });
     } else {
+      if (this.user) {
+        return new Promise((resolve) => {
+          resolve(this.user);
+        });
+      }
+
       return ajax.doGet({path: settings.url + '/'}).then((response) => {
         if (response.status > 499) {
           alert('Server error');
@@ -141,6 +162,7 @@ export default class UserService extends Model {
 
         return response.json().then((data) => {
           data.user.isCurrent = true;
+          this.user = data.user;
           return data.user;
         },
         (error) => {

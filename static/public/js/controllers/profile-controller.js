@@ -25,6 +25,7 @@ export default class ProfileController extends Controller {
 
     UserService.getUser(id).then(
         (data) => {
+          console.log(data);
           this.view.render(data);
           this._configureEvents();
         },
