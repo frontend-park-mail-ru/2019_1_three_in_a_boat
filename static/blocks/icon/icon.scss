@@ -21,6 +21,7 @@ $users-icon: $icons-path + "/users.svg";
 $user-icon: $icons-path + "/user.svg";
 $vk-icon: $icons-path + "/vk.svg";
 $crown-icon: $icons-path + "/crown.svg";
+$back_icon: $icons-path + "/arrow_previous.svg";
 
 $icon-size: 14px, 14px;
 $icon-sizes: (small: (12px, 12px),
@@ -132,6 +133,9 @@ $icon-sizes: (small: (12px, 12px),
         }
         &_crown{
             @include mask-image($crown-icon);
+        }
+        &_back{
+            @include mask-image($back_icon);
         }
         &_ru {
             background-image: url($ru-png);

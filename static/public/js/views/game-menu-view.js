@@ -37,7 +37,7 @@ export default class GameMenuView extends View {
               {
                 href: '/',
                 text: 'Главное меню',
-                type: 'menu',
+                type: 'back',
               },
             ],
           },

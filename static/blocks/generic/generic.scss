@@ -3,7 +3,6 @@ html, body, #application, #main {
   height: 100%;
   width: 100%;
   font-family: $font-stack;
-  background-color: $body-color;
 }
 
 #application, #main {
@@ -11,11 +10,8 @@ html, body, #application, #main {
   flex-direction: column;
   align-items: center;
 
-  &_color {
-    &_dark {
-      background-color: $body-color-dark;
-    }
-  }
+  background: #424242 url("../../images/hexagon.jpg") no-repeat;
+  background-size: 100%;
 }
 
 a {
