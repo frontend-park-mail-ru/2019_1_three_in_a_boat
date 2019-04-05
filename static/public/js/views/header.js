@@ -8,13 +8,13 @@ export default function createHeader() {
     content: [
       {
         block: 'icon',
-        mods: {color: 'white', size: 'xlarge', type: 'hexagon'},
+        mods: {color: 'white', size: 'header-fit', type: 'hexagon'},
       },
       {
         elem: 'title',
         tag: 'a',
         attrs: {'data-link-type': '/'},
-        content: ['hexagon'],
+        content: ['HEXAGON'],
       },
     ],
   };

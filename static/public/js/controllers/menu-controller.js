@@ -26,6 +26,9 @@ export default class MenuController extends Controller {
         (user) => {
           this.user = user;
           this.view.render(this.user);
+        },
+        (error) => {
+          console.log(error);
         }
     );
   }

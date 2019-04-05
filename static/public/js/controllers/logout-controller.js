@@ -21,8 +21,7 @@ export default class LogoutController extends Controller {
    * realize page logic
    */
   action() {
-    const form = {id: undefined};
-    UserService.sendData(form, undefined)
+    UserService.singout()
         .then(() => {
           window.history.pushState({}, '', '/');
           window.history.pushState({}, '', '/');

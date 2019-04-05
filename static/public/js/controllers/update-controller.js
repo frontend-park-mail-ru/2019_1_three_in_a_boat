@@ -86,8 +86,8 @@ export default class UpdateController extends Controller {
         () => UserService.updateData(event.target, body, this.user.uid)
     ).then((ok) => {
       if (ok) {
-        window.history.pushState({}, '', '/');
-        window.history.pushState({}, '', '/');
+        window.history.pushState({}, '', '/profile');
+        window.history.pushState({}, '', '/profile');
         window.history.back();
       } else {
         console.log('Client error, stay here');

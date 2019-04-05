@@ -14,7 +14,7 @@ export default class UserService extends Model {
    */
   constructor() {
     super();
-    this.user = null;
+    this.user = undefined;
     this.event = null;
   }
   /**
@@ -35,9 +35,14 @@ export default class UserService extends Model {
       }
       return response.json().then((data) => {
         this.user = data.user;
-        this.user.isCurrent = true;
+        if (this.user !== null) {
+          this.user.isCurrent = true;
+        }
         return data.user;
       });
+    },
+    (error) => {
+      throw new Error(error);
     });
   }
 
@@ -65,6 +70,27 @@ export default class UserService extends Model {
           }
 
           return response.json().then((data) => checkResponse(data, form) );
+        });
+  }
+
+  /**
+   * Send user data to the server
+   * @param {HTMLFormElement} form
+   * @param {Object} body
+   * @return {Promise}
+   */
+  static singout() {
+    const path = settings.url + '/signout';
+
+    return ajax.doPost({path: path})
+        .then((response) => {
+          if (response.status > 499) {
+            alert('Server error');
+            return;
+          }
+
+          this.user = undefined;
+          return response.json().then(() => true);
         });
   }
 
