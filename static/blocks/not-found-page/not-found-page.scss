@@ -1,0 +1,29 @@
+.not-found-page {
+  $block: &;
+  $menu-item-height: 55px;
+
+  width: fit-content;
+  margin: 5rem auto auto auto;
+
+  border-radius: 5px;
+
+  &__link {
+    font-size: 1.5rem;
+    text-decoration: $primary-color-text;
+    color: $primary-color-text;
+  }
+
+  &__text {
+    &_main {
+      font-size: 4rem;
+      font-weight: bold;
+      color: $primary-color-text;
+    }
+    &_additional {
+      text-align: right;
+      font-size: 1.5rem;
+      color: lightgray;
+    }
+  }
+
+}

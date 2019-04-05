@@ -3,7 +3,7 @@
 import Model from '../core/model.js';
 import ajax from '../ajax.js';
 import {settings} from '../settings/config.js';
-import {checkResponse, validateForm} from '../validation.js';
+import {checkResponse} from '../validation.js';
 
 /**
  * @class UserService

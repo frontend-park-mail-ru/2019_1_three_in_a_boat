@@ -1,3 +1,7 @@
+'use strict';
+
+import NotFoundController from '../controllers/not-found-controller.js';
+
 /**
  * @class Router
  */
@@ -8,7 +12,6 @@ export default class Router {
    * @param {HTMLElement} rootElement
    */
   constructor(rootPath, rootElement) {
-    this.rootPath = rootPath;
     this.rootElement = rootElement;
     this.routes = {};
     this.currentController = undefined;
@@ -30,8 +33,6 @@ export default class Router {
    * @param {string} url
    */
   open(url) {
-    console.log(url);
-    console.log(this.routes);
     if (this.currentController) {
       this.currentController.destructor();
     }
@@ -40,10 +41,9 @@ export default class Router {
       url = url.slice(1);
     }
 
-    const newController = this.routes[url];
+    let newController = this.routes[url];
     if (!newController) {
-      // we have to do something here, 404 or home?
-      console.log('404: ', url, this.routes);
+      newController = new NotFoundController();
     }
 
     newController.action();
