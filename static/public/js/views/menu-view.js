@@ -86,13 +86,6 @@ export default class MenuView extends View {
         block: 'menu',
         content: [
           {
-            block: 'title',
-            mods: {large: true},
-            content: 'Меню',
-            wrappedInside: 'menu',
-            wrappedAs: 'title',
-          },
-          {
             elem: 'items',
             points: data,
           },

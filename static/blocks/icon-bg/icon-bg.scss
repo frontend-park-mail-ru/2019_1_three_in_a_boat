@@ -6,7 +6,8 @@ $icon-bg-sizes: (large: (24px, 24px),
         xlarge: (28px, 28px),
         xxlarge: (36px, 36px),
         xxxlarge: (50px, 50px),
-        tall: (30px, 24px));
+        tall: (30px, 24px),
+        full: (100%, 100%));
 
 @function get-icon-bg-height($size) {
   @if $size == nil {
@@ -48,6 +49,9 @@ $icon-bg-sizes: (large: (24px, 24px),
     }
     &_muted {
       background-color: $muted-color-dark;
+    }
+    &_dark-gray {
+      background-color: $dark-gray;
     }
     &_muted-light {
       background-color: $muted-color-light;
