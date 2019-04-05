@@ -85,7 +85,7 @@ export default function template(user) {
       {
         block: 'title',
         wrappedInside: 'profile-popup',
-        content: ['Профиль'],
+        content: ['Обновление провиля'],
       },
       {
         elem: 'content', content: [

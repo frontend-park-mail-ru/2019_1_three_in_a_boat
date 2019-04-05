@@ -5,13 +5,15 @@ html, body, #application, #main {
   font-family: $font-stack;
 }
 
+body {
+  background: #424242 url("../../images/hexagon.jpg");
+  background-size: 100%;
+}
+
 #application, #main {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  background: #424242 url("../../images/hexagon.jpg") no-repeat;
-  background-size: 100%;
 }
 
 a {

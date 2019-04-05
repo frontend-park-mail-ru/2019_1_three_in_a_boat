@@ -2,9 +2,7 @@
 import Controller from '../core/controller.js';
 import UserService from '../models/user-service.js';
 import LoginView from '../views/login-view.js';
-import {validateForm} from '../validation.js';
-import MenuController from './menu-controller.js';
-import {settings} from '../settings/config.js';
+import {validateForm, addValidationOnBlur} from '../validation.js';
 
 /**
  * @class LoginController
@@ -26,6 +24,7 @@ export default class LoginController extends Controller {
   action() {
     this.view.render();
     this._initInputs();
+    addValidationOnBlur();
     const form = document.getElementById('loginForm');
     form.addEventListener('submit', this.submitHandler);
     const cancel = this.view.parent

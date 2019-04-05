@@ -19,7 +19,6 @@ block('menu').elem('items').match((node, ctx) => ctx.points !== undefined)({
             mods: {
               borderless: true,
               size: 'full',
-              // shape: 'round',
               color: 'dark-gray',
             },
             content: {

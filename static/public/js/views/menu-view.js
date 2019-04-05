@@ -37,6 +37,11 @@ const unauthedTemplate = [
     type: 'signin',
   },
   {
+    href: 'single',
+    text: 'Играть',
+    type: 'gamepad',
+  },
+  {
     href: 'signup',
     text: 'Регистрация',
     type: 'key',

@@ -2,7 +2,7 @@
 import Controller from '../core/controller.js';
 import UpdateView from '../views/update-view.js';
 import UserService from '../models/user-service.js';
-import {validateForm} from '../validation.js';
+import {validateForm, addValidationOnBlur} from '../validation.js';
 import {getBase64} from '../file-input.js';
 
 /**
@@ -51,6 +51,7 @@ export default class UpdateController extends Controller {
         (user) => {
           this.user = user;
           this.view.render(this.user);
+          addValidationOnBlur();
           const cancel = this.view.parent
               .getElementsByClassName('btn_color_muted')[0];
           cancel.addEventListener('click', this._cancelHandler);

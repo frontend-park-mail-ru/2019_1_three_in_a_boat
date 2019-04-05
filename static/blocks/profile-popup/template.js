@@ -20,13 +20,37 @@ block('profile-popup').match((node, ctx) => !ctx.content && ctx.title &&
         },
         {
           elem: 'double-btn',
-          content: ctx.allowEdit ? [{
-            block: 'btn',
-            mods: {'size': 'large', 'with-icon': true, 'cancel': true},
-            wrappedInside: 'profile-popup',
-            icon: 'useredit',
-            btnText: 'Изменить',
-          }] : [],
+          content: ctx.allowEdit ? [
+            {
+              block: 'btn',
+              mods: {'size': 'large', 'with-icon': true, 'cancel': true},
+              wrappedInside: 'profile-popup',
+              icon: 'useredit',
+              btnText: 'Изменить',
+            },
+            {
+              block: 'btn',
+              mods: {
+                'size': 'large',
+                'with-icon': true,
+                'cancel': false,
+                'color': 'muted',
+              },
+              wrappedInside: 'profile-popup',
+              icon: 'back',
+              btnText: 'Назад',
+            }] : [{
+              block: 'btn',
+              mods: {
+                'size': 'large',
+                'with-icon': true,
+                'cancel': false,
+                'color': 'muted',
+              },
+              wrappedInside: 'profile-popup',
+              icon: 'back',
+              btnText: 'Назад',
+            }],
         },
       ],
     },

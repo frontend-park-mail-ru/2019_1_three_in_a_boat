@@ -32,8 +32,8 @@ export default class PageNotFoundView extends View {
           },
           {
             elem: 'link',
-            href: '/',
-            content: 'But u can go to our main page!',
+            attrs: {'href': '#', 'data-link-type': '/'},
+            content: 'But you can go to our main page!',
           },
         ],
       },

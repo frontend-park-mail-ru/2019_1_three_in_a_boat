@@ -3,6 +3,7 @@ import Controller from '../core/controller.js';
 import UserService from '../models/user-service.js';
 import SignUpView from '../views/signup-view.js';
 import {validateForm} from '../validation.js';
+import {addValidationOnBlur} from '../validation.js';
 
 /**
  * @class SignUpController
@@ -50,6 +51,7 @@ export default class SignUpController extends Controller {
     cancel.addEventListener('click', this._cancelHandler);
     const form = document.getElementById('signup-form');
     form.addEventListener('submit', this._submitHandler.bind(this));
+    addValidationOnBlur();
     this.events.push(
         {item: form, type: 'submit', handler: this._submitHandler.bind(this)},
         {item: cancel, type: 'click', handler: this._cancelHandler},

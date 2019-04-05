@@ -40,15 +40,24 @@ export default class ProfileController extends Controller {
     if (btn) {
       const handle = (event) => {
         event.preventDefault();
-        this.view.parent.innerHTML = '';
         window.history.pushState({}, '', '/profile/update');
         window.history.pushState({}, '', '/profile/update');
         window.history.back();
-        // createUpdateProfile(); // TODO call popup event
       };
 
       btn.addEventListener('click', handle);
       this.events.push({item: btn, type: 'click', handler: handle});
+    }
+
+    const backBtn = document.getElementsByClassName('btn_color_muted')[0];
+    if (backBtn) {
+      const handle = (event) => {
+        event.preventDefault();
+        window.history.back();
+      };
+
+      backBtn.addEventListener('click', handle);
+      this.events.push({item: backBtn, type: 'click', handler: handle});
     }
   }
 
