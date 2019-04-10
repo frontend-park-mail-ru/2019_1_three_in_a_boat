@@ -1,7 +1,7 @@
 import {settings} from '../settings/config.js';
 import {parseUser} from '../parsing.js';
 import View from '../core/view.js';
-
+const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 /**
  * @class ProfileView

@@ -5,7 +5,7 @@ const logger = require('morgan');
 
 const app = express();
 
-const publicDir = path.resolve(__dirname, '../', 'static', 'public');
+const publicDir = path.resolve(__dirname, '../', 'static', 'public', 'dist');
 
 app.use(logger('dev'));
 app.use(express.urlencoded({extended: false}));

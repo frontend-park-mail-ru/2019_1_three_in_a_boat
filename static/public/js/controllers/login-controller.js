@@ -13,7 +13,7 @@ export default class LoginController extends Controller {
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    super(parent);
+    super(parent, true);
     this.view = new LoginView(parent);
     this.events = [];
   }

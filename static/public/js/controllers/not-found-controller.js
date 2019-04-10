@@ -13,7 +13,7 @@ export default class NotFoundController extends Controller {
    */
   constructor() {
     const main = document.getElementById('main');
-    super(main);
+    super(main, false);
     this.view = new PageNotFoundView(main);
   }
   /**

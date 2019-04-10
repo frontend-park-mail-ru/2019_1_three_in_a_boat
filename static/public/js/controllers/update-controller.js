@@ -14,7 +14,7 @@ export default class UpdateController extends Controller {
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    super(parent);
+    super(parent, true);
     this.view = new UpdateView(parent);
     this.user = null;
     this.events = [];

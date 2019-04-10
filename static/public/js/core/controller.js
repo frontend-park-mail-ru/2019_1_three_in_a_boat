@@ -7,9 +7,12 @@ export default class Controller {
   /**
    * Construct base controller
    * @param {HTMLElement} parent
+   * @param {boolean} isRequiredOnline does this page require
+   * internet connection
    */
-  constructor(parent) {
+  constructor(parent, isRequiredOnline) {
     this.parent = parent;
+    this.isRequiredOnline = isRequiredOnline;
     this.events = [];
   }
 

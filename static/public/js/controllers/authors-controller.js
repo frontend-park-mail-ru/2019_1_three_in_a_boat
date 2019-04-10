@@ -13,7 +13,7 @@ export default class AuthorsController extends Controller {
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    super(parent);
+    super(parent, true);
     this.model = new Author();
     this.view = new AuthorsView(parent);
   }

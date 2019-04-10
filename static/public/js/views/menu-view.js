@@ -1,6 +1,7 @@
 'use strict';
 
 import View from '../core/view.js';
+const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 const authedTemplate = [
   {
