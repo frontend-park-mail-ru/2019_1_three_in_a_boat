@@ -44,7 +44,13 @@ export default class Router {
       newController = new NotFoundController();
     }
     if (!navigator.onLine && newController.isRequiredOnline) {
-      showMessage(this.currentController.parent);
+      if (!this.currentController) {
+        window.history.pushState({}, '', '/');
+        window.history.pushState({}, '', '/');
+        window.history.back();
+      } else {
+        showMessage(this.currentController.parent);
+      }
       return;
     }
     if (this.currentController) {
