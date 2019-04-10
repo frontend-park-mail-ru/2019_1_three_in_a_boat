@@ -1,0 +1,22 @@
+.result-time {
+  $block: &;
+  margin-left: auto;
+  margin-right: auto;
+  width: 12rem;
+  border: 4px solid #0e100f;
+  border-radius: 10px;
+  margin-top: 1rem;
+
+  &__title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: lighter;
+    color: black;
+  }
+
+  &__seconds {
+    font-weight: bold;
+    text-align: center;
+    font-size: 50px;
+  }
+}

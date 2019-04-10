@@ -85,10 +85,11 @@ export default function template(user) {
       {
         block: 'title',
         wrappedInside: 'profile-popup',
-        content: ['Обновление провиля'],
+        content: ['Обновление профиля'],
       },
       {
-        elem: 'content', content: [
+        elem: 'content',
+        content: [
           {
             elem: 'profile-icon',
             attrs: {
@@ -107,6 +108,14 @@ export default function template(user) {
                 block: 'profile-info',
                 wrappedInside: 'profile-popup',
                 fields: [
+                  {
+                    name: 'Аватар',
+                    novalidate: true,
+                    value: {
+                      block: 'file-input',
+                      fieldName: 'avatar',
+                    },
+                  },
                   {
                     name: 'Имя',
                     fieldName: 'firstName',
@@ -164,14 +173,6 @@ export default function template(user) {
                         content: date,
                       },
                     ],
-                  },
-                  {
-                    name: 'Аватар',
-                    novalidate: true,
-                    value: {
-                      block: 'file-input',
-                      fieldName: 'avatar',
-                    },
                   },
                   {
                     name: 'Новый пароль',

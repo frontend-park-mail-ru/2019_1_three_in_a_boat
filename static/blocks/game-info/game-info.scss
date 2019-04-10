@@ -1,0 +1,36 @@
+.game-info {
+  $block: &;
+
+  align-items: center;
+  margin: auto 0;
+  padding-top: 3rem;
+
+  &__one-btn {
+    position: absolute;
+    bottom: 0;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, 70%);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    font-family: Helvetica, sans-serif;
+    font-weight: normal;
+    &-name {
+      font-size: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-right: 10px;
+    }
+    &-value {
+      font-size: 35px;
+      font-weight: bold;
+      padding-left: 10px;
+    }
+  }
+}
