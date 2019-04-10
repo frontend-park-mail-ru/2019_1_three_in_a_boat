@@ -9,11 +9,13 @@
   &__description {
     text-align: center;
     font-size: 20px;
+    color: white;
   }
 
   &__header {
     font-size: 40px;
     font-weight: bold;
+    color: white;
   }
 
   &__img {
@@ -47,12 +49,13 @@
     text-align: center;
     font-size: 30px;
     margin: 10px 0 0;
+    color: white;
   }
 
   &__subtitle {
     text-align: center;
     font-size: 16px;
     margin: 0 0 10px;
-    color: $muted-color-dark;
+    color: $muted-color-light;
   }
 }
