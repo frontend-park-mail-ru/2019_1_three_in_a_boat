@@ -13,6 +13,7 @@ import LogoutController from './controllers/logout-controller.js';
 import UpdateController from './controllers/update-controller.js';
 import GameMenuController from './controllers/game-menu-controller.js';
 import GameOverController from './controllers/game-over-controller.js';
+import GameOverMltController from './controllers/game-over-mlt-controller.js';
 
 const application = document.getElementById('application');
 createHeader();
@@ -31,6 +32,7 @@ const router = new Router(settings.home, application)
     .addRoute('authors', new AuthorsController(main))
     .addRoute('profile/update', new UpdateController(main))
     .addRoute('single', new GameOverController(main))
+    .addRoute('multi', new GameOverMltController(main))
     .addRoute('play', new GameMenuController(main));
 
 router.start();

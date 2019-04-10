@@ -3,8 +3,11 @@
   padding: 1rem;
   font-family: Helvetica, sans-serif;
   font-weight: normal;
-  position: absolute;
+  position: relative;
   bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 33rem;
 
   &__item {
     &_center {
@@ -20,8 +23,12 @@
   &__btn {
     @extend .btn;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    width: 33rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 0%);
     border: 1px solid #a3653bde;
     -webkit-box-shadow: 0 2px #977575a6;
     -moz-box-shadow: 0 2px #977575a6;

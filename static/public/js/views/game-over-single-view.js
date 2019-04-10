@@ -18,7 +18,6 @@ export default class GameOverSingleClass extends View {
    * render page
    */
   render() {
-    console.log('creating template...');
 
     const template = [
       {
@@ -45,6 +44,7 @@ export default class GameOverSingleClass extends View {
           },
           {
             block: 'game-info',
+            mods: {'single': true},
             content: [
               {
                 elem: 'item',

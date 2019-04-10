@@ -3,8 +3,18 @@
 
   align-items: center;
   margin: auto 0;
-  padding-top: 3rem;
 
+  &_single {
+    padding-top: 3rem;
+  }
+
+  &_main {
+    display: block;
+    padding-top: 9rem;
+    &_title {
+      margin-bottom: 2rem;
+    }
+  }
   &__one-btn {
     position: absolute;
     bottom: 0;
@@ -13,11 +23,27 @@
     transform: translate(-50%, 70%);
   }
 
+  &__avatar {
+    border-radius: 8rem;
+    width: 185px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  &__nickname {
+    text-align: center;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 45px;
+  }
+
+
   &__item {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
     font-family: Helvetica, sans-serif;
     font-weight: normal;
     &-name {

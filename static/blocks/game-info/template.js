@@ -11,7 +11,7 @@ block('game-info').elem('item')({
   ],
 });
 
-block('game-info').elem('profile-icon')({
+block('game-info').elem('avatar')({
   tag: 'img',
 });
 
