@@ -14,7 +14,7 @@ export default class SignUpController extends Controller {
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    super(parent);
+    super(parent, true);
     this.view = new SignUpView(parent);
     this.events = []; // Array for collecting events
   }

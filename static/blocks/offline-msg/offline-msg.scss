@@ -1,0 +1,43 @@
+.offline-msg {
+  $block: &;
+  background: rgba(102, 102, 102, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &__window {
+    width: 300px;
+    height: 70px;
+    text-align: center;
+    padding: 15px;
+    border: 3px solid black;
+    border-radius: 10px;
+    color: $primary-color;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+  }
+
+  &__btn {
+    display: inline-block;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    padding: 0 12px;
+    margin: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    background: #f2f2f2;
+    font-size: 14pt;
+    cursor: pointer;
+
+    &:hover {
+      background: #e6e6ff;
+    }
+  }
+}

@@ -12,7 +12,7 @@ export default class GameMenuController extends Controller {
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    super(parent);
+    super(parent, true);
     this.view = new GameMenuView(parent);
   }
   /**

@@ -14,7 +14,7 @@ export default class ScoreboardController extends Controller {
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    super(parent);
+    super(parent, true);
     this.view = new ScoreboardView(parent);
   }
   /**
