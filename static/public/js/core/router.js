@@ -43,6 +43,7 @@ export default class Router {
     if (!newController) {
       newController = new NotFoundController();
     }
+    // comment this to work offline
     if (!navigator.onLine && newController.isRequiredOnline) {
       if (!this.currentController) {
         window.history.pushState({}, '', '/');

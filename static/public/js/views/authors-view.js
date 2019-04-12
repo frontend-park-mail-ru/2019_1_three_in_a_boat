@@ -37,6 +37,21 @@ export default class AuthorsView extends View {
             content: 'Проект разработали',
           },
           {
+            block: 'icon',
+            tag: 'a',
+            wrappedInside: 'authors',
+            wrappedAs: 'close-popup',
+            mods: {
+              size: 'large',
+              color: 'black',
+              btn: true,
+              type: 'cross',
+            },
+            attrs: {
+              'data-link-type': '/',
+            },
+          },
+          {
             elem: 'items',
             authors: bemAuthors,
           },

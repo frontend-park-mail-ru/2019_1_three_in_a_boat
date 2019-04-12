@@ -30,7 +30,7 @@ export default class Paginator {
       numbers.push({content: '...', attrs: {value: 1}});
     }
 
-    for (let i = currPage - 2; i <= currPage + 2 && i <= pagesNumber - 2; i++) {
+    for (let i = currPage - 2; i <= currPage + 2 && i <= pagesNumber; i++) {
       if (i > 2) {
         numbers.push({content: i, attrs: {value: i}});
       }

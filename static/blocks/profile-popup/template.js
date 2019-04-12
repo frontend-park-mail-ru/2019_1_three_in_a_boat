@@ -30,6 +30,7 @@ block('profile-popup').match((node, ctx) => !ctx.content && ctx.title &&
             },
             {
               block: 'btn',
+              attrs: {'data-type': 'menu'},
               mods: {
                 'size': 'large',
                 'with-icon': true,
@@ -38,9 +39,10 @@ block('profile-popup').match((node, ctx) => !ctx.content && ctx.title &&
               },
               wrappedInside: 'profile-popup',
               icon: 'back',
-              btnText: 'Назад',
+              btnText: 'В меню',
             }] : [{
               block: 'btn',
+              attrs: {'data-type': 'back'},
               mods: {
                 'size': 'large',
                 'with-icon': true,

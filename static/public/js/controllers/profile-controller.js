@@ -28,7 +28,11 @@ export default class ProfileController extends Controller {
           this.view.render(data);
           this._configureEvents();
         },
-        (error) => console.log(error)); // TODO show 5** err mb
+        () => {
+          window.history.pushState({}, '', '/signin');
+          window.history.pushState({}, '', '/signin');
+          window.history.back();
+        });
   }
 
   /**
@@ -51,10 +55,20 @@ export default class ProfileController extends Controller {
 
     const backBtn = document.getElementsByClassName('btn_color_muted')[0];
     if (backBtn) {
-      const handle = (event) => {
-        event.preventDefault();
-        window.history.back();
-      };
+      let handle;
+      if (backBtn.attributes['data-type'].value === 'back') {
+        handle = (event) => {
+          event.preventDefault();
+          window.history.back();
+        };
+      } else {
+        handle = (event) => {
+          event.preventDefault();
+          window.history.pushState({}, '', '/');
+          window.history.pushState({}, '', '/');
+          window.history.back();
+        };
+      }
 
       backBtn.addEventListener('click', handle);
       this.events.push({item: backBtn, type: 'click', handler: handle});
