@@ -1,7 +1,6 @@
 'use strict';
 
 import Controller from '../core/controller.js';
-// import MenuModel from '../models/menu-model.js';
 import MenuView from '../views/menu-view.js';
 import UserService from '../models/user-service.js';
 
