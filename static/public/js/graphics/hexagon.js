@@ -2,7 +2,6 @@
 
 const FALL_SPEED = 1;
 const FALL_SIZE = 5;
-const MIN_SIZE = 100;
 
 /**
  * @class Hexagon
