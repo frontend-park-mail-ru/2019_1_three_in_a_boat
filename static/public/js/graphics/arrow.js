@@ -6,21 +6,19 @@ export default class UserArrow {
   /**
    * Construct user arrow element in canvas
    * @param {Object} ctx
-   * @param {Number} width
+   * @param {Number} base
    * @param {Number} height
    * @param {Number} side
    * @param {string} color
    */
-  constructor(ctx, width, height, side, color) {
+  constructor(ctx, base, height, side, color) {
     this.ctx = ctx;
     this.color = color;
-    this.width = width;
-    this.height = height;
     this.currentAngle = 0;
     side /= 1.5;
-    this.radius = side + 20;
-    this.lineRadius = Math.sqrt(width * width / 4 + side * side);
-    this.alpha = Math.asin(width / 2 / this.lineRadius);
+    this.radius = side + height;
+    this.lineRadius = Math.sqrt(base * base / 4 + side * side);
+    this.alpha = Math.asin(base / 2 / this.lineRadius);
   }
 
   /**
