@@ -1,21 +1,37 @@
 'use strict';
-import GameView from '../views/game-view.js';
-import GameModel from '../models/game.js';
+
 import NotificationController from '../controllers/notification-controller.js';
+import GAME_MODES from '../game/mods.js';
+import Game from '../game/game.js';
 import Controller from '../core/controller.js';
+
 /**
- * The main class Game
+ * The main class GameController
  */
-export default class Game extends Controller {
+export default class GameController extends Controller {
   /**
    * Init game object
    * @param {HTMLElement} parent
    */
   constructor(parent) {
     super(parent);
-    this.view = new GameView(parent);
-    this.model = new GameModel();
+    this.canvas = null;
+    this.game = null;
     this.notify = NotificationController.Instance;
+
+    this.bus.on('CLOSE_GAME', function() {
+      if (this.active) {
+        this.router.open('/');
+      }
+    }.bind(this));
+  }
+
+  /**
+   * Destructor
+   */
+  destructor() {
+    super.destructor();
+    this.game.destroy();
   }
 
   /**
@@ -49,10 +65,20 @@ export default class Game extends Controller {
   action() {
     // init event listeners
     // while WebSocket.connect
-    while (this.model.run()) {
-      const angel = this.model.getAngel();
-      this.notify.sendAngel(angel);
+    // while (this.model.run()) {
+    //   const angel = this.model.getAngel();
+    //   this.notify.sendAngel(angel);
+    // }
+    // this.endView.render(this.model.result());
+
+    let mode = '';
+    if (false) { // TODO replace it in future
+      mode = GAME_MODES.ONLINE;
+    } else {
+      mode = GAME_MODES.OFFLINE;
     }
-    this.endView.render(this.model.result());
+
+    this.game = new Game(mode, this.canvas);
+    this.game.start();
   }
 }

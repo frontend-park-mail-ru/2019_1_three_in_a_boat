@@ -13,7 +13,7 @@ export default class GameView extends View {
   }
 
   /**
-   * Render Game
+   * Render GameController
    * @params {Array, Array} array with info about hexagons
    */
   render(localData, serverData) {
