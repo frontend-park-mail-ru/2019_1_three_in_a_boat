@@ -1,7 +1,7 @@
 # 2019_1_three_in_a_boat
 Репозиторий команды "Трое в лодке" семестрового проекта в Технопарке@mail.ru
 
-[Деплой](http://ih1465635.vds.myihor.ru/)
+[Деплой](https://hexagon.alfaix.dev)
 
 # Члены команды
 * [Котов Никита](https://github.com/Kotyarich)
