@@ -63,7 +63,6 @@ export default class Hexagon {
    * Draw hexagon
    */
   draw() {
-    // console.log('_______________');
     if (!this.sidesMask) {
       this.ctx.beginPath();
     }
@@ -71,7 +70,6 @@ export default class Hexagon {
     this.ctx.strokeStyle = this.color;
     let x = this.currentSide * Math.sqrt(3) / 4;
     let y = this.currentSide / 4;
-    // console.log(x, y);
 
     this.ctx.moveTo(x, y);
     for (let i = 1; i < 7; ++i) {
@@ -79,7 +77,6 @@ export default class Hexagon {
 
       x = this.currentSide / 2 * Math.cos(angle);
       y = this.currentSide / 2 * Math.sin(angle);
-      // console.log(x, y);
       if (this.emptySides[i - 1] ||
           (i - 2 >= 0 && this.emptySides[i - 1])) {
         this.ctx.moveTo(x, y);
