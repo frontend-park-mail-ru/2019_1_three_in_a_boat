@@ -3,6 +3,7 @@
 // import NotificationController from '../controllers/notification-controller.js';
 import GAME_MODES from '../game/mods.js';
 import Game from '../game/game.js';
+import GameView from '../views/game-view.js';
 import Controller from '../core/controller.js';
 import bus from '../event-bus.js';
 
@@ -16,7 +17,7 @@ export default class GameController extends Controller {
    */
   constructor(parent) {
     super(parent);
-    this.canvas = null;
+    this.view = new GameView(parent);
     this.game = null;
     this.bus = bus;
     // this.notify = NotificationController.Instance;
@@ -80,7 +81,7 @@ export default class GameController extends Controller {
       mode = GAME_MODES.OFFLINE;
     }
 
-    this.game = new Game(mode, this.canvas);
+    this.game = new Game(mode, this.view);
     this.game.start();
   }
 }

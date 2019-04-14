@@ -6197,9 +6197,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameController; });
 /* harmony import */ var _game_mods_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/mods.js */ "./static/public/js/game/mods.js");
 /* harmony import */ var _game_game_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game/game.js */ "./static/public/js/game/game.js");
-/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
-/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/game-view.js */ "./static/public/js/views/game-view.js");
+/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
  // import NotificationController from '../controllers/notification-controller.js';
+
 
 
 
@@ -6209,16 +6211,16 @@ __webpack_require__.r(__webpack_exports__);
  * The main class GameController
  */
 
-class GameController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_2__["default"] {
+class GameController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"] {
   /**
    * Init game object
    * @param {HTMLElement} parent
    */
   constructor(parent) {
     super(parent);
-    this.canvas = null;
+    this.view = new _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
     this.game = null;
-    this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_3__["default"]; // this.notify = NotificationController.Instance;
+    this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_4__["default"]; // this.notify = NotificationController.Instance;
 
     this.bus.on('CLOSE_GAME', function () {
       if (this.active) {
@@ -6285,7 +6287,7 @@ class GameController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_2__["d
       mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
     }
 
-    this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](mode, this.canvas);
+    this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](mode, this.view);
     this.game.start();
   }
 
@@ -7636,10 +7638,8 @@ __webpack_require__.r(__webpack_exports__);
 class GameControllers {
   /**
    * Constructor
-   * @param {HTMLElement} root
    */
-  constructor(root) {
-    this.root = root;
+  constructor() {
     this.previous = {};
     this.keys = {};
     this._onPress = this._keyHandler.bind(this, 'press');
@@ -8191,7 +8191,7 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
 
   onGameStarted(evt) {
     this.controller.start();
-    this.scene.init(evt);
+    this.scene.render(evt);
     this.scene.start();
     this.lastFrame = performance.now();
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
@@ -8204,6 +8204,7 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
 
   onGameFinished(evt) {
     cancelAnimationFrame(this.gameloopRequestId);
+    this.scene.stop();
   }
   /**
    *
@@ -8212,7 +8213,7 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
 
 
   onGameStateChanged(evt) {
-    this.scene.setState(evt);
+    this.scene.update(evt);
   }
 
 }
@@ -8276,9 +8277,9 @@ class Game {
   /**
    * GameController class constructor
    * @param {Object} mode
-   * @param {HTMLCanvasElement} canvas
+   * @param {View} view
    */
-  constructor(mode, canvas) {
+  constructor(mode, view) {
     let GameConstructor = null;
 
     switch (mode) {
@@ -8300,7 +8301,7 @@ class Game {
     } // this.gameScene = new GameScene(canvas); TODO
 
 
-    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_1__["default"](canvas);
+    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_1__["default"](view);
     this.gameCore = new GameConstructor(this.gameControllers, this.gameScene);
   }
   /**
@@ -8338,6 +8339,184 @@ const GAME_MODES = {
   OFFLINE: 'OFFLINE'
 };
 /* harmony default export */ __webpack_exports__["default"] = (GAME_MODES);
+
+/***/ }),
+
+/***/ "./static/public/js/graphics/arrow.js":
+/*!********************************************!*\
+  !*** ./static/public/js/graphics/arrow.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserArrow; });
+
+/**
+ * @class UserArrow
+ */
+
+class UserArrow {
+  /**
+   * Construct user arrow element in canvas
+   * @param {Object} ctx
+   * @param {Number} width
+   * @param {Number} height
+   * @param {Number} side
+   * @param {string} color
+   */
+  constructor(ctx, width, height, side, color) {
+    this.ctx = ctx;
+    this.color = color;
+    this.width = width;
+    this.height = height;
+    this.currentAngle = 0;
+    this.radius = side;
+  }
+  /**
+   * Draw arrow
+   * @param {Number} angel - local angel
+   */
+
+
+  draw(angel) {
+    this.currentAngle = angel;
+    const vx = Math.cos(this.currentAngle) * this.radius;
+    const vy = Math.sin(this.currentAngle) * this.radius;
+    this.ctx.fillStyle = '#fff';
+    this.ctx.beginPath();
+    this.ctx.moveTo(vx, vy); // пока что не знаю, как отрисовать перпендикулярно касательной
+
+    this.ctx.lineTo(vx - 30, vy + 15);
+    this.ctx.lineTo(vx - 30, vy - 15);
+    this.ctx.fill();
+  }
+
+}
+
+/***/ }),
+
+/***/ "./static/public/js/graphics/hexagon.js":
+/*!**********************************************!*\
+  !*** ./static/public/js/graphics/hexagon.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Hexagon; });
+
+
+const FALL_SPEED = 1;
+const FALL_SIZE = 5;
+/**
+ * @class Hexagon
+ */
+
+class Hexagon {
+  /**
+   * Create Hexagon in canvas
+   * @param {Object} ctx
+   * @param {Number} side
+   * @param {Number} lineWidth
+   * @param {Number} emptySides
+   * @param {string} color
+   */
+  constructor(ctx, side, lineWidth, emptySides, color) {
+    this.center = {
+      x: canvas.width / 2,
+      y: canvas.height / 2
+    };
+    this.side = side;
+    this.currentSide = side;
+    this.ctx = ctx;
+    this.sidesMask = emptySides;
+    this.lineWidth = lineWidth;
+    this.emptySides = new Array(6);
+    this.color = color;
+
+    this._parseMask();
+  }
+  /**
+   * Set parameters for new hexagon
+   * @param {Number} emptySides
+   * @param {string} color
+   */
+
+
+  setNewParameters(emptySides, color) {
+    this.currentSide = this.side;
+    this.sidesMask = emptySides;
+    this.emptySides = [];
+    this.color = color;
+
+    this._parseMask();
+  }
+  /**
+   * Parses mask from server or client to detect blank sides.
+   * @private
+   */
+
+
+  _parseMask() {
+    let copyNum = this.sidesMask;
+
+    for (let i = 0; i < 6 && copyNum; ++i) {
+      this.emptySides[i] = copyNum & 1;
+      console.log(copyNum);
+      copyNum >>= 1;
+    }
+  }
+  /**
+   * Reduces the sides size
+   */
+
+
+  fallDown() {
+    this.currentSide -= FALL_SPEED * FALL_SIZE;
+  }
+  /**
+   * Draw hexagon
+   */
+
+
+  draw() {
+    // console.log('_______________');
+    if (!this.sidesMask) {
+      this.ctx.beginPath();
+    }
+
+    this.ctx.lineWidth = this.lineWidth;
+    this.ctx.strokeStyle = this.color;
+    let x = this.currentSide * Math.sqrt(3) / 4;
+    let y = this.currentSide / 4; // console.log(x, y);
+
+    this.ctx.moveTo(x, y);
+
+    for (let i = 1; i < 7; ++i) {
+      const angle = 2 * Math.PI / 6 * (i + 0.5);
+      x = this.currentSide / 2 * Math.cos(angle);
+      y = this.currentSide / 2 * Math.sin(angle); // console.log(x, y);
+
+      if (this.emptySides[i - 1] || i - 2 >= 0 && this.emptySides[i - 1]) {
+        this.ctx.moveTo(x, y);
+      } else {
+        this.ctx.lineTo(x, y);
+      }
+    }
+
+    this.ctx.restore();
+
+    if (!this.sidesMask) {
+      this.ctx.closePath();
+    }
+
+    this.ctx.stroke();
+  }
+
+}
 
 /***/ }),
 
@@ -9492,6 +9671,148 @@ class GameOverSingleClass extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["de
 
 }
 ;
+
+/***/ }),
+
+/***/ "./static/public/js/views/game-view.js":
+/*!*********************************************!*\
+  !*** ./static/public/js/views/game-view.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameView; });
+/* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+/* harmony import */ var _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../graphics/hexagon.js */ "./static/public/js/graphics/hexagon.js");
+/* harmony import */ var _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../graphics/arrow.js */ "./static/public/js/graphics/arrow.js");
+
+
+
+
+
+
+const MIN_SIZE = 100;
+const color = '#ff4d00';
+/**
+ * @class GameView
+ */
+
+class GameView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  /**
+   *
+   * @param {HTMLElement}parent
+   */
+  constructor(parent) {
+    super(parent);
+  }
+  /**
+   * Render GameController
+   * @param {Object} state with info about hexagons
+   */
+
+
+  render(state) {
+    const draw = [{
+      block: 'game',
+      mods: {
+        main: true
+      },
+      content: [{
+        block: 'current',
+        content: [{
+          elem: 'item',
+          name: 'Время',
+          value: localData.seconds
+        }, {
+          elem: 'item',
+          name: 'Счет',
+          value: localData.score
+        }, {
+          elem: 'item',
+          name: 'Рекорд',
+          value: localData.record
+        }]
+      }, {
+        block: 'hexagons',
+        addAttr: serverData,
+        content: [{
+          elem: 'user',
+          content: localData.angel
+        }]
+      }]
+    }];
+    this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
+    this.canvas = document.createElement('canvas');
+    this.canvas.width = 800;
+    this.canvas.height = 600;
+    document.body.appendChild(this.canvas); // добавляем canvas в DOM
+
+    this.ctx = this.canvas.getContext('2d');
+    this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
+
+    state.hexagons.forEach(hexagon => {
+      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, 10, hexagon.side, hexagon.sides, color));
+    });
+    this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 50, 50, 90, '#fff');
+  }
+
+  update(state) {
+    this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
+
+    state.hexagons.forEach(hexagon => {
+      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, 10, hexagon.side, hexagon.sides, color));
+    });
+    const angle = state.cursorAngle;
+    this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 50, 50, 90, '#fff');
+  }
+  /**
+   * Rotate all canvas
+   * @param {Number} direction, value: 1 or -1
+   * @private
+   */
+
+
+  _rotate(direction) {
+    // TODO: can be more properly cleaned. added to the to-do list
+    ctx.clearRect(-100, -100, this.canvas.width * 1.5, this.canvas.height * 2);
+    ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+    this.baseHex.draw();
+    this.arrow.draw(0);
+
+    if (this.hexagon.currentSide >= MIN_SIZE) {
+      this.hexagon.draw();
+    } else {
+      this.hexagon.setNewParameters(0, '#ff4d00');
+    }
+
+    ctx.rotate(Math.PI / 180 * 2);
+    ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+  }
+  /**
+   *
+   */
+
+
+  start() {
+    this.lastFrameTime = performance.now();
+    this.requestFrameId = requestAnimationFrame(this.renderScene);
+  }
+  /**
+   *
+   */
+
+
+  stop() {
+    if (this.requestFrameId) {
+      window.cancelAnimationFrame(this.requestFrameId);
+      this.requestFrameId = null;
+    } // this.scene.clear(); TODO
+
+  }
+
+}
 
 /***/ }),
 

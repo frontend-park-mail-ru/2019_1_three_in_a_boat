@@ -9,9 +9,9 @@ export default class Game {
   /**
    * GameController class constructor
    * @param {Object} mode
-   * @param {HTMLCanvasElement} canvas
+   * @param {View} view
    */
-  constructor(mode, canvas) {
+  constructor(mode, view) {
     let GameConstructor = null;
     switch (mode) {
       case GAME_MODES.ONLINE: {
@@ -28,7 +28,7 @@ export default class Game {
     }
 
     // this.gameScene = new GameScene(canvas); TODO
-    this.gameControllers = new GameControllers(canvas);
+    this.gameControllers = new GameControllers(view);
 
     this.gameCore = new GameConstructor(this.gameControllers, this.gameScene);
   }

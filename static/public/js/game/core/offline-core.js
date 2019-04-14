@@ -113,7 +113,7 @@ export default class OfflineGame extends GameCore {
    */
   onGameStarted(evt) {
     this.controller.start();
-    this.scene.init(evt);
+    this.scene.render(evt);
     this.scene.start();
 
     this.lastFrame = performance.now();
@@ -126,6 +126,7 @@ export default class OfflineGame extends GameCore {
    */
   onGameFinished(evt) {
     cancelAnimationFrame(this.gameloopRequestId);
+    this.scene.stop();
   }
 
   /**
@@ -133,6 +134,6 @@ export default class OfflineGame extends GameCore {
    * @param evt
    */
   onGameStateChanged(evt) {
-    this.scene.setState(evt);
+    this.scene.update(evt);
   }
 }

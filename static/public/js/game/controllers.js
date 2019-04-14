@@ -4,10 +4,8 @@
 export default class GameControllers {
   /**
    * Constructor
-   * @param {HTMLElement} root
    */
-  constructor(root) {
-    this.root = root;
+  constructor() {
     this.previous = {};
     this.keys = {};
 
