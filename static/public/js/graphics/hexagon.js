@@ -61,24 +61,24 @@ export default class Hexagon {
 
   /**
    * Draw hexagon
+   * @param {Number} angle - angle in radian
    */
-  draw() {
+  draw(angle) {
     if (!this.sidesMask) {
       this.ctx.beginPath();
     }
     this.ctx.lineWidth = this.lineWidth;
     this.ctx.strokeStyle = this.color;
-    let x = this.currentSide * Math.sqrt(3) / 4;
-    let y = this.currentSide / 4;
-
+    let x = -this.currentSide / 2 * Math.sin(angle);
+    let y = this.currentSide / 2 * Math.cos(angle);
     this.ctx.moveTo(x, y);
     for (let i = 1; i < 7; ++i) {
-      const angle = (2 * Math.PI) / 6 * (i + 0.5);
+      const localAngle = (2 * Math.PI) / 6 * (i + 0.5) + angle;
 
-      x = this.currentSide / 2 * Math.cos(angle);
-      y = this.currentSide / 2 * Math.sin(angle);
-      if (this.emptySides[i - 1] ||
-          (i - 2 >= 0 && this.emptySides[i - 1])) {
+      x = this.currentSide / 2 * Math.cos(localAngle);
+      y = this.currentSide / 2 * Math.sin(localAngle);
+
+      if (this.emptySides[i - 1] || (i - 2 >= 0 && this.emptySides[i - 1])) {
         this.ctx.moveTo(x, y);
       } else {
         this.ctx.lineTo(x, y);
