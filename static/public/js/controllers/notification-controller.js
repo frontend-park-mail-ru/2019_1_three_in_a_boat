@@ -1,7 +1,7 @@
 'use strict';
 
 // import {settings} from '../settings/config.js';
-import Game from '../controllers/game-controller.js';
+import GameController from '../controllers/game-controller.js';
 
 const singleton = Symbol();
 const singletonEnforcer = Symbol();
@@ -37,7 +37,7 @@ class NotificationController {
     this.ws.onopen = () => {
       console.log('ws success connected');
       this.ws.onmessage = (event) => {
-        Game.selectAction(event);
+        GameController.selectAction(event);
       };
     };
   }
