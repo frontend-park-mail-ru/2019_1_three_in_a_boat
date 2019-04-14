@@ -1,0 +1,3 @@
+block('hexagons')({
+  tag: 'canvas',
+});
