@@ -40,7 +40,8 @@ export default class GameCore {
     this.controllersLoopIntervalId = setInterval(() => {
       const actions = controller.diff();
 
-      if (Object.keys(actions).some((k) => actions[k])) {
+      // if (Object.keys(actions).some((k) => actions[k])) {
+      if (actions.length > 0) {
         bus.emit(events.CONTROLS_PRESSED, actions);
       }
     }, 50);
@@ -100,6 +101,6 @@ export default class GameCore {
    * @private
    */
   _pressed(name, data) {
-    return KEYS[name].some((k) => data[k.toLowerCase()]);
+    return KEYS[name].some((k) => data.toLowerCase() === k.toLowerCase());
   }
 };

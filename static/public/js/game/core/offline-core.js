@@ -87,6 +87,7 @@ export default class OfflineGame extends GameCore {
 
       if (condition) {
         setTimeout(function() {
+          alert('finish');
           bus.emit(events.FINISH_GAME);
         });
       }
@@ -100,11 +101,13 @@ export default class OfflineGame extends GameCore {
    * @param evt
    */
   onControllsPressed(evt) {
-    if (this._pressed('LEFT', evt)) {
-      this.state.cursorAngle += CURSOR.rotatingSpeed;
-    } else if (this._pressed('RIGHT', evt)) {
-      this.state.cursorAngle -= CURSOR.rotatingSpeed;
-    }
+    evt.forEach((btn) => {
+      if (this._pressed('LEFT', btn)) {
+        this.state.cursorAngle += CURSOR.rotatingSpeed;
+      } else if (this._pressed('RIGHT', btn)) {
+        this.state.cursorAngle -= CURSOR.rotatingSpeed;
+      }
+    });
   }
 
   /**

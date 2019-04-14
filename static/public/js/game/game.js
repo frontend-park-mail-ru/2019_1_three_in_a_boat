@@ -1,7 +1,6 @@
 import OfflineGame from './core/offline-core.js';
 import GameControllers from './controllers.js';
 import GAME_MODES from './mods.js';
-import GameScene from "./game-scene/game-scene";
 
 /**
  *
