@@ -1,17 +1,8 @@
-import GameCore from 'core.js';
+import GameCore from './core.js';
+import Geometry from './geometry.js';
 import bus from '../../event-bus.js';
-import events from 'events.js';
-
-const CURSOR = {
-  radius: 100,
-  height: 40,
-};
-
-const HEXAGON = {
-  minSize: 20,
-  width: 10,
-  speed: 20,
-};
+import events from './events.js';
+import {HEXAGON, CURSOR} from './settings.js';
 
 const mask2 = 9;
 const mask5 = 31;
@@ -41,14 +32,14 @@ export default class OfflineGame extends GameCore {
     super.start();
     this.state = {
       hexagons: [],
-      cursorAngle: 0,
+      cursorAngle: Math.PI / 2,
     };
 
     this.state.hexagons = Array.from(new Array(3), function(_, position) {
       return {
-        radius: 700 + 50 * position,
+        side: 700 + 50 * position,
         sides: Math.floor(Math.random() * 2) === 1? mask2: mask5,
-        angle: Math.floor(Math.random() * 360),
+        angle: Math.floor(Math.random() * 2 * Math.PI),
       };
     });
 
@@ -67,13 +58,14 @@ export default class OfflineGame extends GameCore {
 
     this.state.hexagons = this.state.hexagons
         .map(function(hexagon) {
-          hexagon.radius += HEXAGON.speed * delay;
+          hexagon.side += HEXAGON.speed * delay;
+          hexagon.angle += HEXAGON.rotatingSpeed * delay;
           return hexagon;
         })
         .filter(function(hexagon) {
-          if (hexagon.radius < HEXAGON.minSize) {
+          if (hexagon.side < HEXAGON.minSize) {
             const newHexagon = {
-              radius: 700,
+              side: 700,
               sides: Math.floor(Math.random() * 2) === 1? mask2: mask5,
               angle: Math.floor(Math.random() * 360),
             };
@@ -86,11 +78,16 @@ export default class OfflineGame extends GameCore {
 
     bus.emit(events.GAME_STATE_CHANGED, this.state);
 
+    const cursor = Geometry.cursorAngleToDot(this.state.cursorAngle);
     this.state.hexagons.forEach((hexagon) => {
-      const condition = false; // TODO check collisions
+      let condition = false;
+      this.state.hexagons.forEach((hexagon) => {
+        condition = Geometry.checkHexagonCollision(hexagon, cursor);
+      });
+
       if (condition) {
         setTimeout(function() {
-          bus.emit('CLOSE_GAME');
+          bus.emit(events.FINISH_GAME);
         });
       }
     });
@@ -104,9 +101,9 @@ export default class OfflineGame extends GameCore {
    */
   onControllsPressed(evt) {
     if (this._pressed('LEFT', evt)) {
-      this.state.cursorAngle--;
+      this.state.cursorAngle += CURSOR.rotatingSpeed;
     } else if (this._pressed('RIGHT', evt)) {
-      this.state.cursorAngle++;
+      this.state.cursorAngle -= CURSOR.rotatingSpeed;
     }
   }
 
@@ -129,8 +126,6 @@ export default class OfflineGame extends GameCore {
    */
   onGameFinished(evt) {
     cancelAnimationFrame(this.gameloopRequestId);
-
-    bus.emit(events.FINISH_GAME);
   }
 
   /**
