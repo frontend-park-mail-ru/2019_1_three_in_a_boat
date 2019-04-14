@@ -16,7 +16,6 @@ export default class Hexagon {
    * @param {string} color
    */
   constructor(ctx, side, lineWidth, emptySides, color) {
-    this.center = {x: canvas.width / 2, y: canvas.height / 2};
     this.side = side;
     this.currentSide = side;
     this.ctx = ctx;
