@@ -23,20 +23,18 @@ export default class UserArrow {
 
   /**
    * Draw arrow
-   * @param {Number} angel - local angel
+   * @param {Number} angle - local angle
    */
-  draw(angel) {
-    this.currentAngle = angel;
+  draw(angle) {
+    this.currentAngle = angle;
     const vx = Math.cos(this.currentAngle) * this.radius;
     const vy = Math.sin(this.currentAngle) * this.radius;
     const x1 = Math.cos(this.currentAngle + this.alpha) * this.lineRadius;
     const y1 = Math.sin(this.currentAngle + this.alpha) * this.lineRadius;
     const x2 = Math.cos(this.currentAngle - this.alpha) * this.lineRadius;
     const y2 = Math.sin(this.currentAngle - this.alpha) * this.lineRadius;
-    console.log(vx, vy, x1, y1, x2, y2);
     this.ctx.fillStyle = this.color;
 
-    console.log(vx, vy);
     this.ctx.beginPath();
     this.ctx.moveTo(vx, vy);
     this.ctx.lineTo(x1, y1);
