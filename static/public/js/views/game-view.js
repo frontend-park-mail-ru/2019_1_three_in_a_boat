@@ -83,17 +83,35 @@ export default class GameView extends View {
     this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
   }
 
+  /**
+   * Render new scene
+   * @param {number} now
+   */
+  renderScene(now) {
+    const delay = now - this.lastFrameTime; // use for time mb
+    this.lastFrameTime = now;
+
+    this.hexagons.forEach((hexagon) => {
+      hexagon.draw();
+    });
+    this.arrow.draw(this.cursorAngle);
+
+    this.requestFrameId = requestAnimationFrame(this.renderScene);
+  }
+
+  /**
+   * Update state
+   * @param {Object} state
+   */
   update(state) {
-    this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
+    this.hexagons = [];
     state.hexagons.forEach((hexagon) => {
       this.hexagons.push(
           new Hexagon(this.ctx, 10, hexagon.side, hexagon.sides, color)
       );
     });
 
-    const angle = state.cursorAngle;
-
-
+    this.cursorAngle = state.cursorAngle;
     this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
   }
 

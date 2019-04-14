@@ -8372,7 +8372,10 @@ class UserArrow {
     this.width = width;
     this.height = height;
     this.currentAngle = 0;
-    this.radius = side;
+    side /= 1.5;
+    this.radius = side + 20;
+    this.lineRadius = Math.sqrt(width * width / 4 + side * side);
+    this.alpha = Math.asin(width / 2 / this.lineRadius);
   }
   /**
    * Draw arrow
@@ -8384,12 +8387,17 @@ class UserArrow {
     this.currentAngle = angel;
     const vx = Math.cos(this.currentAngle) * this.radius;
     const vy = Math.sin(this.currentAngle) * this.radius;
-    this.ctx.fillStyle = '#fff';
+    const x1 = Math.cos(this.currentAngle + this.alpha) * this.lineRadius;
+    const y1 = Math.sin(this.currentAngle + this.alpha) * this.lineRadius;
+    const x2 = Math.cos(this.currentAngle - this.alpha) * this.lineRadius;
+    const y2 = Math.sin(this.currentAngle - this.alpha) * this.lineRadius;
+    console.log(vx, vy, x1, y1, x2, y2);
+    this.ctx.fillStyle = this.color;
+    console.log(vx, vy);
     this.ctx.beginPath();
-    this.ctx.moveTo(vx, vy); // пока что не знаю, как отрисовать перпендикулярно касательной
-
-    this.ctx.lineTo(vx - 30, vy + 15);
-    this.ctx.lineTo(vx - 30, vy - 15);
+    this.ctx.moveTo(vx, vy);
+    this.ctx.lineTo(x1, y1);
+    this.ctx.lineTo(x2, y2);
     this.ctx.fill();
   }
 
@@ -8425,10 +8433,6 @@ class Hexagon {
    * @param {string} color
    */
   constructor(ctx, side, lineWidth, emptySides, color) {
-    this.center = {
-      x: canvas.width / 2,
-      y: canvas.height / 2
-    };
     this.side = side;
     this.currentSide = side;
     this.ctx = ctx;
@@ -9757,14 +9761,34 @@ class GameView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     });
     this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 50, 50, 90, '#fff');
   }
+  /**
+   * Render new scene
+   * @param {number} now
+   */
+
+
+  renderScene(now) {
+    const delay = now - this.lastFrameTime; // use for time mb
+
+    this.lastFrameTime = now;
+    this.hexagons.forEach(hexagon => {
+      hexagon.draw();
+    });
+    this.arrow.draw(this.cursorAngle);
+    this.requestFrameId = requestAnimationFrame(this.renderScene);
+  }
+  /**
+   * Update state
+   * @param {Object} state
+   */
+
 
   update(state) {
-    this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
-
+    this.hexagons = [];
     state.hexagons.forEach(hexagon => {
       this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, 10, hexagon.side, hexagon.sides, color));
     });
-    const angle = state.cursorAngle;
+    this.cursorAngle = state.cursorAngle;
     this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 50, 50, 90, '#fff');
   }
   /**
