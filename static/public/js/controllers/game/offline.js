@@ -21,8 +21,8 @@ export default class OfflineGame extends GameCore {
     document.body.appendChild(this.canvas); // добавляем canvas в DOM
 
     this.ctx = this.canvas.getContext('2d');
-    this.baseHex = new Hexagon(this.ctx, 100, 10, 0, '#ff4d00');
-    this.hexagon = new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
+    this.baseHex = new Hexagon(this.ctx, 100, 10, 0, '#ff4d00', 0);
+    this.hexagon = new Hexagon(this.ctx, 600, 10, 9, '#ff4d00', 0);
     this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
   }
 

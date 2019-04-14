@@ -1,6 +1,7 @@
 import OfflineGame from './core/offline-core.js';
 import GameControllers from './controllers.js';
 import GAME_MODES from './mods.js';
+import GameScene from "./game-scene/game-scene";
 
 /**
  *
@@ -28,9 +29,9 @@ export default class Game {
     }
 
     // this.gameScene = new GameScene(canvas); TODO
-    this.gameControllers = new GameControllers(view);
-
-    this.gameCore = new GameConstructor(this.gameControllers, this.gameScene);
+    this.gameControllers = new GameControllers();
+    // this.gameScene = new GameScene(ctx);
+    this.gameCore = new GameConstructor(this.gameControllers, view);
   }
 
   /**

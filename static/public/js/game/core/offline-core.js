@@ -18,7 +18,7 @@ export default class OfflineGame extends GameCore {
    */
   constructor(controller, scene) {
     super(controller, scene);
-
+    this.scene = scene;
     this.state = {};
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
@@ -58,7 +58,7 @@ export default class OfflineGame extends GameCore {
 
     this.state.hexagons = this.state.hexagons
         .map(function(hexagon) {
-          hexagon.side += HEXAGON.speed * delay;
+          hexagon.side -= HEXAGON.speed * delay;
           hexagon.angle += HEXAGON.rotatingSpeed * delay;
           return hexagon;
         })

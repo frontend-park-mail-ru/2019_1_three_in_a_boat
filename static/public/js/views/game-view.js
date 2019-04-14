@@ -3,7 +3,7 @@
 import View from '../core/view.js';
 import Hexagon from '../graphics/hexagon.js';
 import UserArrow from '../graphics/arrow.js';
-import hexagon from "../graphics/hexagon";
+const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 const MIN_SIZE = 100;
 const color = '#ff4d00';
@@ -13,11 +13,11 @@ const color = '#ff4d00';
  */
 export default class GameView extends View {
   /**
-   *
    * @param {HTMLElement}parent
    */
   constructor(parent) {
     super(parent);
+    this.lastFrameTime = 0;
   }
 
   /**
@@ -25,6 +25,7 @@ export default class GameView extends View {
    * @param {Object} state with info about hexagons
    */
   render(state) {
+    const localData = {seconds: '12:38', score: 36, record: '38:09'};
     const draw = [
       {
         block: 'game',
@@ -52,13 +53,11 @@ export default class GameView extends View {
           },
           {
             block: 'hexagons',
-            addAttr: serverData,
-            content: [
-              {
-                elem: 'user',
-                content: localData.angel,
-              },
-            ],
+            attrs: {
+              id: 'game-canvas',
+              width: 1000,
+              height: 800,
+            },
           },
         ],
       },
@@ -66,21 +65,23 @@ export default class GameView extends View {
 
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
 
-    this.canvas = document.createElement('canvas');
-    this.canvas.width = 800;
-    this.canvas.height = 600;
+    // this.canvas = document.createElement('canvas');
+    this.canvas = document.getElementById('game-canvas');
+    // this.canvas.width = 800;
+    // this.canvas.height = 600;
 
-    document.body.appendChild(this.canvas); // добавляем canvas в DOM
+    // document.body.appendChild(this.canvas); // добавляем canvas в DOM
 
     this.ctx = this.canvas.getContext('2d');
 
     this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
     state.hexagons.forEach((hexagon) => {
       this.hexagons.push(
-          new Hexagon(this.ctx, 10, hexagon.side, hexagon.sides, color)
+          new Hexagon(this.ctx, hexagon.side, 10, hexagon.sides, color, 0)
       );
     });
-    this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
+    this.arrow = new UserArrow(this.ctx, 50, 50, 100, '#fff');
+    this.baseHex = new Hexagon(this.ctx, 100, 10, 0, color, 0);
   }
 
   /**
@@ -90,13 +91,17 @@ export default class GameView extends View {
   renderScene(now) {
     const delay = now - this.lastFrameTime; // use for time mb
     this.lastFrameTime = now;
-
+    this.ctx.fillStyle = '#000';
+    this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
     this.hexagons.forEach((hexagon) => {
       hexagon.draw();
     });
+    this.baseHex.draw();
     this.arrow.draw(this.cursorAngle);
+    ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
 
-    this.requestFrameId = requestAnimationFrame(this.renderScene);
+    this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
   }
 
   /**
@@ -107,7 +112,7 @@ export default class GameView extends View {
     this.hexagons = [];
     state.hexagons.forEach((hexagon) => {
       this.hexagons.push(
-          new Hexagon(this.ctx, 10, hexagon.side, hexagon.sides, color)
+          new Hexagon(this.ctx, 10, hexagon.side, hexagon.sides, color, 0)
       );
     });
 
@@ -140,7 +145,7 @@ export default class GameView extends View {
    */
   start() {
     this.lastFrameTime = performance.now();
-    this.requestFrameId = requestAnimationFrame(this.renderScene);
+    this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
   }
 
   /**
