@@ -16,10 +16,6 @@
     cursor: pointer;
     font-weight: bold;
 
-    &:hover:not(&_current) {
-      color: #6614b0;
-      cursor: pointer;
-    }
     &:focus {
       outline: none;
     }
@@ -27,7 +23,12 @@
     &:not(&_current) {
       background-color: $primary-color;
       color: white;
-      @include btn-color($block, $primary-color, white);;
+      @include btn-color($block, $primary-color, white);
+    }
+
+    &:hover:not(&_current) {
+      color: #6614b0;
+      cursor: pointer;
     }
 
     &_first {

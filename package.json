@@ -4,9 +4,11 @@
   "private": true,
   "main": "static/public/dist/bundle.js",
   "scripts": {
+    "lint:css": "stylelint static/**/*.scss",
+    "lint:js": "./node_modules/.bin/eslint --init && ./node_modules/.bin/eslint static/public/js/**",
     "build:css": "sass ./static/style.scss:./static/public/css/style.css",
     "build:templates": "node ./scripts/bundle-all.js ./static/public/js ./static/blocks",
-    "build-all": "npm run build:css && npm run build:templates",
+    "build-all": "npm run build:css && npm run build:templates && webpack",
     "start": "PORT=8080 node run-local.js"
   },
   "dependencies": {
@@ -33,6 +35,8 @@
     "css-loader": "^2.1.1",
     "image-webpack-loader": "^4.6.0",
     "style-loader": "^0.23.1",
+    "stylelint": "^10.0.0",
+    "stylelint-config-recommended": "^2.2.0",
     "webpack-cli": "^3.3.0"
   }
 }

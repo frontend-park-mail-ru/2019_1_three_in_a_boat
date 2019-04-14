@@ -62,12 +62,12 @@
   cursor: pointer;
   font-weight: bold;
 
-  &:focus {
-    outline: none;
-  }
-
   &::-moz-focus-inner {
     border: 0;
+  }
+
+  &:focus {
+    outline: none;
   }
 
   // modifiers
