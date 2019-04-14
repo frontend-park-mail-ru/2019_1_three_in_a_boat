@@ -1,10 +1,14 @@
 .authors {
   $img-size: 300px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 4%;
+  padding: 5%;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
 
   &__description {
     text-align: center;
@@ -30,7 +34,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
   }
 
   &__items {
@@ -54,5 +57,11 @@
     font-size: 16px;
     margin: 0 0 10px;
     color: $muted-color-dark;
+  }
+
+  &__close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }

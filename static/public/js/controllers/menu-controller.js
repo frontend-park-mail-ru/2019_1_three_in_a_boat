@@ -13,7 +13,7 @@ export default class MenuController extends Controller {
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    super(parent);
+    super(parent, false);
     this.user = null;
     this.view = new MenuView(parent);
   }

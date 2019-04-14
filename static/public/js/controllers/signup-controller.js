@@ -14,7 +14,7 @@ export default class SignUpController extends Controller {
    * @param {HTMLElement} parent
    */
   constructor(parent) {
-    super(parent);
+    super(parent, true);
     this.view = new SignUpView(parent);
     this.events = []; // Array for collecting events
   }
@@ -82,8 +82,8 @@ export default class SignUpController extends Controller {
     const body = this._getFromSignUp(event);
     UserService.sendData(event.target, body).then((ok) => {
       if (ok) {
-        window.history.pushState({}, '', 'profile');
-        window.history.pushState({}, '', 'profile');
+        window.history.pushState({}, '', '/');
+        window.history.pushState({}, '', '/');
         window.history.back();
       } else {
         console.log('Client error, stay here');

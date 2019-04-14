@@ -1,6 +1,7 @@
 'use strict';
 
 import NotFoundController from '../controllers/not-found-controller.js';
+import showMessage from '../views/offline-messagebox.js';
 
 /**
  * @class Router
@@ -33,9 +34,6 @@ export default class Router {
    * @param {string} url
    */
   open(url) {
-    if (this.currentController) {
-      this.currentController.destructor();
-    }
     // to make paths like leaders and /leaders similar
     if (url.startsWith('/') && url.length > 1) {
       url = url.slice(1);
@@ -44,6 +42,20 @@ export default class Router {
     let newController = this.routes[url];
     if (!newController) {
       newController = new NotFoundController();
+    }
+    // comment this to work offline
+    if (!navigator.onLine && newController.isRequiredOnline) {
+      if (!this.currentController) {
+        window.history.pushState({}, '', '/');
+        window.history.pushState({}, '', '/');
+        window.history.back();
+      } else {
+        showMessage(this.currentController.parent);
+      }
+      return;
+    }
+    if (this.currentController) {
+      this.currentController.destructor();
     }
 
     newController.action();

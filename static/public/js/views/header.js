@@ -1,3 +1,5 @@
+const bemhtml = require('../bundle.bemhtml.js').bemhtml;
+
 /**
  * Create page header
  */

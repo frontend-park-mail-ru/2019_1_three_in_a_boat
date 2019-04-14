@@ -1,5 +1,6 @@
 import {settings} from '../settings/config.js';
 import View from '../core/view.js';
+const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 /**
  * @class AuthorsView
@@ -34,6 +35,21 @@ export default class AuthorsView extends View {
           {
             elem: 'header',
             content: 'Проект разработали',
+          },
+          {
+            block: 'icon',
+            tag: 'a',
+            wrappedInside: 'authors',
+            wrappedAs: 'close-popup',
+            mods: {
+              size: 'large',
+              color: 'black',
+              btn: true,
+              type: 'cross',
+            },
+            attrs: {
+              'data-link-type': '/',
+            },
           },
           {
             elem: 'items',

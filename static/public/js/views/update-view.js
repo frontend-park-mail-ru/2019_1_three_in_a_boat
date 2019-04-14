@@ -1,6 +1,7 @@
 'use strict';
 import View from '../core/view.js';
 import template from './views-templates/update-template.js';
+const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 /**
  * @class SigUpView

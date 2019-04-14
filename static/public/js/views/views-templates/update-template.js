@@ -236,7 +236,8 @@ function setSelectedGender(user, gender) {
   if (user.gender !== '') {
     const options = gender.options;
     options.forEach((option) => {
-      if (option.content === user.gender) {
+      console.log(option, user.gender);
+      if (option.value === user.gender) {
         option.selected = true;
       }
     });
@@ -249,7 +250,7 @@ function setSelectedGender(user, gender) {
  * @param {Array} date
  */
 function setSelectedDate(user, date) {
-  if (user.birthDate !== '') {
+  if (user.birthDate !== '' && user.birthDate !== null) {
     const userDate = user.birthDate.split('.');
 
     const dayOptions = date[0].options;

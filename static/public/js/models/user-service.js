@@ -42,7 +42,7 @@ export default class UserService extends Model {
       });
     },
     (error) => {
-      throw new Error(error);
+      return undefined;
     });
   }
 

@@ -1,17 +1,18 @@
 'use strict';
 
 import View from '../core/view.js';
+const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 const authedTemplate = [
-  {
-    href: 'profile',
-    text: 'Профиль',
-    type: 'user',
-  },
   {
     href: 'play',
     text: 'Играть',
     type: 'gamepad',
+  },
+  {
+    href: 'profile',
+    text: 'Профиль',
+    type: 'user',
   },
   {
     href: 'leaders',
@@ -32,14 +33,14 @@ const authedTemplate = [
 
 const unauthedTemplate = [
   {
-    href: 'signin',
-    text: 'Авторизация',
-    type: 'signin',
-  },
-  {
     href: 'single',
     text: 'Играть',
     type: 'gamepad',
+  },
+  {
+    href: 'signin',
+    text: 'Авторизация',
+    type: 'signin',
   },
   {
     href: 'signup',

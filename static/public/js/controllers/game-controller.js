@@ -1,9 +1,10 @@
 'use strict';
 
-import NotificationController from '../controllers/notification-controller.js';
+// import NotificationController from '../controllers/notification-controller.js';
 import GAME_MODES from '../game/mods.js';
 import Game from '../game/game.js';
 import Controller from '../core/controller.js';
+import bus from '../event-bus.js';
 
 /**
  * The main class GameController
@@ -17,7 +18,8 @@ export default class GameController extends Controller {
     super(parent);
     this.canvas = null;
     this.game = null;
-    this.notify = NotificationController.Instance;
+    this.bus = bus;
+    // this.notify = NotificationController.Instance;
 
     this.bus.on('CLOSE_GAME', function() {
       if (this.active) {

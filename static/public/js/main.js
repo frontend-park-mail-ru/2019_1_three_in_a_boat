@@ -1,5 +1,7 @@
 'use strict';
 
+require('./bundle.bemhtml.js');
+require('./bundle.bemtree.js');
 import {settings} from './settings/config.js';
 import createHeader from './views/header.js';
 import Router from './core/router.js';
@@ -15,9 +17,14 @@ import GameMenuController from './controllers/game-menu-controller.js';
 import GameOverController from './controllers/game-over-controller.js';
 import GameOverMltController from './controllers/game-over-mlt-controller.js';
 import GameController from './controllers/game-controller.js';
+import '../css/style.css';
 
 const application = document.getElementById('application');
 createHeader();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
 
 application.insertAdjacentHTML('beforeend', '<div id="main"></div>');
 const main = document.getElementById('main');

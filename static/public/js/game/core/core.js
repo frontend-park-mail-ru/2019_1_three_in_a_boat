@@ -1,5 +1,5 @@
 import bus from '../../event-bus.js';
-import events from 'events.js';
+import events from './events.js';
 
 const KEYS = {
   LEFT: ['a', 'A', 'ф', 'Ф', 'ArrowLeft'],
