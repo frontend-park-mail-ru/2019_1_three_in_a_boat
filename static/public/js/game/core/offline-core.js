@@ -37,7 +37,7 @@ export default class OfflineGame extends GameCore {
 
     this.state.hexagons = Array.from(new Array(3), function(_, position) {
       return {
-        side: 700 + 250 * position,
+        side: 200 + 50 * position,
         sides: Math.floor(Math.random() * 2) === 1? mask2: mask5,
         angle: Math.floor(Math.random() * 2 * Math.PI),
       };
@@ -57,8 +57,8 @@ export default class OfflineGame extends GameCore {
     this.lastFrame = now;
     this.state.hexagons = this.state.hexagons
         .map(function(hexagon) {
-          hexagon.side -= HEXAGON.speed * delay;
-          hexagon.angle += HEXAGON.rotatingSpeed * delay;
+          hexagon.side -= 0;//HEXAGON.speed * delay;
+          hexagon.angle += 0;//HEXAGON.rotatingSpeed * delay;
           return hexagon;
         });
 
@@ -88,7 +88,7 @@ export default class OfflineGame extends GameCore {
           alert('finish'); // for debug
           bus.emit(events.FINISH_GAME);
         });
-        // return;
+        return;
       }
     }
 

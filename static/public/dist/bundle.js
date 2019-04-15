@@ -7890,11 +7890,10 @@ class Geometry {
    */
   static checkHexagonCollision(hexagon, cursor) {
     const lines = this.convertHexagonToLines(hexagon);
-    let isCollide = false;
-    console.log(hexagon, lines);
+    let isCollide = false; // console.log(hexagon, lines);
+
     lines.forEach(line => {
-      line = this.rotateLine(line.first, line.second, hexagon.angle);
-      console.log(cursor, line.first, line.second);
+      line = this.rotateLine(line.first, line.second, hexagon.angle); // console.log(cursor, line.first, line.second);
 
       if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
         isCollide = true;
@@ -8012,9 +8011,10 @@ class Geometry {
       x: dot1.x - dot0.x,
       y: dot1.y - dot0.y
     };
+    const r = 15;
     const a = d1.x * d1.x + d1.y * d1.y;
     const k = d0.x * d1.x + d0.y * d1.y;
-    const c = d0.x * d0.x + d0.y * d0.y - 225; // CURSOR.height * CURSOR.height;
+    const c = d0.x * d0.x + d0.y * d0.y - r * r; // CURSOR.height * CURSOR.height;
 
     const disc = k * k - a * c;
 
@@ -8062,6 +8062,7 @@ class Geometry {
 
 
   static rotateDot(dot, angle) {
+    // angle = -angle;
     const newX = dot.x * Math.cos(angle) - dot.y * Math.sin(angle);
     dot.y = dot.x * Math.sin(angle) + dot.y * Math.cos(angle);
     dot.x = newX;
@@ -8076,8 +8077,8 @@ class Geometry {
 
   static cursorAngleToDot(cursorAngle) {
     return {
-      x: _settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].radius * Math.cos(cursorAngle),
-      y: _settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].radius * Math.sin(cursorAngle)
+      x: (_settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].radius - 30) * Math.cos(-cursorAngle),
+      y: (_settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].radius - 30) * Math.sin(-cursorAngle)
     };
   }
 
@@ -8138,7 +8139,7 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     };
     this.state.hexagons = Array.from(new Array(3), function (_, position) {
       return {
-        side: 700 + 250 * position,
+        side: 200 + 50 * position,
         sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
         angle: Math.floor(Math.random() * 2 * Math.PI)
       };
@@ -8157,8 +8158,10 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     const delay = now - this.lastFrame;
     this.lastFrame = now;
     this.state.hexagons = this.state.hexagons.map(function (hexagon) {
-      hexagon.side -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].speed * delay;
-      hexagon.angle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].rotatingSpeed * delay;
+      hexagon.side -= 0; //HEXAGON.speed * delay;
+
+      hexagon.angle += 0; //HEXAGON.rotatingSpeed * delay;
+
       return hexagon;
     });
 
@@ -8185,7 +8188,8 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
           alert('finish'); // for debug
 
           _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
-        }); // return;
+        });
+        return;
       }
     }
 
@@ -8376,6 +8380,9 @@ const GAME_MODES = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserArrow; });
+/* harmony import */ var _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/core/geometry.js */ "./static/public/js/game/core/geometry.js");
+
+
 
 /**
  * @class UserArrow
@@ -8420,6 +8427,10 @@ class UserArrow {
     this.ctx.lineTo(x2, y2);
     this.ctx.closePath();
     this.ctx.fill();
+    const dot = _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__["default"].cursorAngleToDot(-this.currentAngle);
+    this.ctx.beginPath();
+    this.ctx.arc(dot.x, dot.y, 10, 0, 2 * Math.PI);
+    this.ctx.fill();
   }
 
 }
@@ -8436,6 +8447,8 @@ class UserArrow {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Hexagon; });
+/* harmony import */ var _game_core_geometry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/core/geometry */ "./static/public/js/game/core/geometry.js");
+
 
 
 const FALL_SPEED = 1;
@@ -8517,9 +8530,10 @@ class Hexagon {
     // this.ctx.moveTo(x, y);
 
     for (let i = 1; i < 7; ++i) {
-      const localAngle = 2 * Math.PI / 6 * (i - 2) - this.currentAngle;
-      const x = this.currentSide / 2 * Math.cos(localAngle);
-      const y = this.currentSide / 2 * Math.sin(localAngle);
+      const localAngle = 2 * Math.PI / 6 * (i - 3) + this.currentAngle;
+      const x = this.currentSide * Math.cos(localAngle);
+      const y = this.currentSide * Math.sin(localAngle);
+      console.log(x, y);
 
       if (this.emptySides[i - 1] || i - 2 >= 0 && this.emptySides[i - 1]) {
         this.ctx.moveTo(x, y);
@@ -8535,6 +8549,22 @@ class Hexagon {
     }
 
     this.ctx.stroke();
+    const lines = _game_core_geometry__WEBPACK_IMPORTED_MODULE_0__["default"].convertHexagonToLines({
+      side: this.side,
+      sides: this.sidesMask,
+      angle: this.currentAngle
+    });
+    console.log(lines, this.sidesMask);
+
+    for (let i = 0; i < lines.length; ++i) {
+      const line = _game_core_geometry__WEBPACK_IMPORTED_MODULE_0__["default"].rotateLine(lines[i].first, lines[i].second, this.currentAngle);
+      this.ctx.strokeStyle = '#fff';
+      this.ctx.beginPath();
+      this.ctx.moveTo(line.first.x, line.first.y);
+      this.ctx.lineTo(line.second.x, line.second.y);
+      this.ctx.closePath();
+      this.ctx.stroke();
+    }
   }
 
 }

@@ -15,10 +15,10 @@ export default class Geometry {
   static checkHexagonCollision(hexagon, cursor) {
     const lines = this.convertHexagonToLines(hexagon);
     let isCollide = false;
-    console.log(hexagon, lines);
+    // console.log(hexagon, lines);
     lines.forEach((line) => {
       line = this.rotateLine(line.first, line.second, hexagon.angle);
-      console.log(cursor, line.first, line.second);
+      // console.log(cursor, line.first, line.second);
       if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
         isCollide = true;
       }
@@ -135,9 +135,11 @@ export default class Geometry {
       y: dot1.y - dot0.y,
     };
 
+    const r = 15;
+
     const a = d1.x * d1.x + d1.y * d1.y;
     const k = d0.x * d1.x + d0.y * d1.y;
-    const c = d0.x * d0.x + d0.y * d0.y - 225; // CURSOR.height * CURSOR.height;
+    const c = d0.x * d0.x + d0.y * d0.y - r * r; // CURSOR.height * CURSOR.height;
     const disc = k * k - a * c;
 
     if (disc < 0) {
@@ -181,6 +183,7 @@ export default class Geometry {
    * @return {{x: number, y: number}}
    */
   static rotateDot(dot, angle) {
+    // angle = -angle;
     const newX = dot.x * Math.cos(angle) - dot.y * Math.sin(angle);
     dot.y = dot.x * Math.sin(angle) + dot.y * Math.cos(angle);
     dot.x = newX;
@@ -194,8 +197,8 @@ export default class Geometry {
    */
   static cursorAngleToDot(cursorAngle) {
     return {
-      x: CURSOR.radius * Math.cos(cursorAngle),
-      y: CURSOR.radius * Math.sin(cursorAngle),
+      x: (CURSOR.radius - 30) * Math.cos(-cursorAngle),
+      y: (CURSOR.radius - 30) * Math.sin(-cursorAngle),
     };
   }
 }
