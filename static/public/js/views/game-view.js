@@ -98,11 +98,11 @@ export default class GameView extends View {
     this.ctx.fillStyle = '#000';
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+    this.arrow.draw(this.cursorAngle);
     this.hexagons.forEach((hexagon) => {
       hexagon.draw();
     });
     this.baseHex.draw();
-    this.arrow.draw(this.cursorAngle);
     this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
 
     this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));

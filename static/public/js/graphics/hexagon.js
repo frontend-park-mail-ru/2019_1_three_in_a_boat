@@ -65,20 +65,16 @@ export default class Hexagon {
    * Draw hexagon
    */
   draw() {
-    if (!this.sidesMask) {
-      this.ctx.beginPath();
-    }
+    this.ctx.beginPath();
     this.ctx.lineWidth = this.lineWidth;
     this.ctx.strokeStyle = this.color;
-    let x = -this.currentSide / 2 * Math.sin(this.currentAngle);
-    let y = this.currentSide / 2 * Math.cos(this.currentAngle);
-    this.ctx.moveTo(x, y);
+    // let x = -this.currentSide / 2 * Math.sin(this.currentAngle);
+    // let y = this.currentSide / 2 * Math.cos(this.currentAngle);
+    // this.ctx.moveTo(x, y);
     for (let i = 1; i < 7; ++i) {
       const localAngle = (2 * Math.PI) / 6 * (i - 2) - this.currentAngle;
-
-      x = this.currentSide / 2 * Math.cos(localAngle);
-      y = this.currentSide / 2 * Math.sin(localAngle);
-
+      const x = this.currentSide / 2 * Math.cos(localAngle);
+      const y = this.currentSide / 2 * Math.sin(localAngle);
       if (this.emptySides[i - 1] || (i - 2 >= 0 && this.emptySides[i - 1])) {
         this.ctx.moveTo(x, y);
       } else {

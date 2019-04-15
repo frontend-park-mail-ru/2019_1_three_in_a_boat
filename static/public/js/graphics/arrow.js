@@ -39,6 +39,7 @@ export default class UserArrow {
     this.ctx.moveTo(vx, vy);
     this.ctx.lineTo(x1, y1);
     this.ctx.lineTo(x2, y2);
+    this.ctx.closePath();
     this.ctx.fill();
   }
 }
