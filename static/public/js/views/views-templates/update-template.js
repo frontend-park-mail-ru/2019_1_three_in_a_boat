@@ -236,7 +236,6 @@ function setSelectedGender(user, gender) {
   if (user.gender !== '') {
     const options = gender.options;
     options.forEach((option) => {
-      console.log(option, user.gender);
       if (option.value === user.gender) {
         option.selected = true;
       }
@@ -260,8 +259,8 @@ function setSelectedDate(user, date) {
       }
     });
 
-    const mounthOptions = date[1].options;
-    mounthOptions.forEach((option) => {
+    const monthOptions = date[1].options;
+    monthOptions.forEach((option) => {
       if (option.value === +userDate[1]) {
         option.selected = true;
       }
