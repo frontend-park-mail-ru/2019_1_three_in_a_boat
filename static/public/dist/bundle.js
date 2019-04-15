@@ -8447,7 +8447,7 @@ class UserArrow {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Hexagon; });
-/* harmony import */ var _game_core_geometry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/core/geometry */ "./static/public/js/game/core/geometry.js");
+/* harmony import */ var _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/core/geometry.js */ "./static/public/js/game/core/geometry.js");
 
 
 
@@ -8529,16 +8529,23 @@ class Hexagon {
     // let y = this.currentSide / 2 * Math.cos(this.currentAngle);
     // this.ctx.moveTo(x, y);
 
-    for (let i = 1; i < 7; ++i) {
-      const localAngle = 2 * Math.PI / 6 * (i - 3) + this.currentAngle;
-      const x = this.currentSide * Math.cos(localAngle);
-      const y = this.currentSide * Math.sin(localAngle);
-      console.log(x, y);
+    const lines = _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__["default"].convertHexagonToLines({
+      side: this.side,
+      sides: this.sidesMask,
+      angle: this.currentAngle
+    });
 
-      if (this.emptySides[i - 1] || i - 2 >= 0 && this.emptySides[i - 1]) {
-        this.ctx.moveTo(x, y);
+    for (let i = 0; i < lines.length; ++i) {
+      const line = _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__["default"].rotateLine(lines[i].first, lines[i].second, this.currentAngle);
+
+      if (i === 0) {
+        this.ctx.moveTo(line.first.x, line.first.y);
       } else {
-        this.ctx.lineTo(x, y);
+        this.ctx.lineTo(line.first.x, line.first.y);
+      }
+
+      if (i === lines.length - 1) {
+        this.ctx.lineTo(line.second.x, line.second.y);
       }
     }
 
@@ -8549,22 +8556,6 @@ class Hexagon {
     }
 
     this.ctx.stroke();
-    const lines = _game_core_geometry__WEBPACK_IMPORTED_MODULE_0__["default"].convertHexagonToLines({
-      side: this.side,
-      sides: this.sidesMask,
-      angle: this.currentAngle
-    });
-    console.log(lines, this.sidesMask);
-
-    for (let i = 0; i < lines.length; ++i) {
-      const line = _game_core_geometry__WEBPACK_IMPORTED_MODULE_0__["default"].rotateLine(lines[i].first, lines[i].second, this.currentAngle);
-      this.ctx.strokeStyle = '#fff';
-      this.ctx.beginPath();
-      this.ctx.moveTo(line.first.x, line.first.y);
-      this.ctx.lineTo(line.second.x, line.second.y);
-      this.ctx.closePath();
-      this.ctx.stroke();
-    }
   }
 
 }
