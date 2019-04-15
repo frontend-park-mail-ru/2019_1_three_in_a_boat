@@ -15,8 +15,7 @@ export default class Author extends Model {
   getAuthors() {
     return ajax.doGet({path: settings.url + '/authors'}).then((response) => {
       if (response.status > 499) {
-        alert('Server error');
-        return;
+        throw new Error('Server error');
       }
 
       return response.json().then((data) => data.data);

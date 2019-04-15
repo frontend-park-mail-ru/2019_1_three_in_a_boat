@@ -30,8 +30,7 @@ export default class UserService extends Model {
 
     return ajax.doGet({path: settings.url + '/'}).then((response) => {
       if (response.status > 499) {
-        alert('Server error');
-        return;
+        return undefined; // TODO show message here
       }
       return response.json().then((data) => {
         this.user = data.user;
@@ -65,8 +64,7 @@ export default class UserService extends Model {
     return ajax.doPost({path: settings.url + path, body})
         .then((response) => {
           if (response.status > 499) {
-            alert('Server error');
-            return;
+            throw new Error('Server error');
           }
 
           return response.json().then((data) => checkResponse(data, form) );
@@ -85,8 +83,7 @@ export default class UserService extends Model {
     return ajax.doPost({path: path})
         .then((response) => {
           if (response.status > 499) {
-            alert('Server error');
-            return;
+            throw new Error('Server error');
           }
 
           this.user = undefined;
@@ -106,8 +103,7 @@ export default class UserService extends Model {
     return ajax.doPut({path: path, body})
         .then((response) => {
           if (response.status > 499) {
-            alert('Server error');
-            return;
+            throw new Error('Server error');
           }
           return response.json().then((data) => {
             if (checkResponse(data, form)) {
@@ -131,8 +127,7 @@ export default class UserService extends Model {
     return ajax.doGet({path: url}).then(
         (response) => {
           if (response.status > 499) {
-            alert('Server error');
-            return;
+            throw new Error('Server error');
           }
 
           return response.json().then(
@@ -160,8 +155,7 @@ export default class UserService extends Model {
 
       return ajax.doGet({path}).then((response) => {
         if (response.status > 499) {
-          alert('Server error');
-          return;
+          throw new Error('Server error');
         }
 
         return response.json().then((data) => {
@@ -182,8 +176,7 @@ export default class UserService extends Model {
 
       return ajax.doGet({path: settings.url + '/'}).then((response) => {
         if (response.status > 499) {
-          alert('Server error');
-          return;
+          throw new Error('Server error');
         }
 
         return response.json().then((data) => {
