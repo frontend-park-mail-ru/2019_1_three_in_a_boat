@@ -18,10 +18,12 @@ export default class Geometry {
 
     lines.forEach((line) => {
       line = this.rotateLine(line.first, line.second, hexagon.angle);
-      isCollide = this._lineAndCursorCollision(line.first, line.second, cursor);
+      if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
+        isCollide = true;
+      }
     });
 
-    return isCollide;
+    return !isCollide;
   }
 
   /**
@@ -32,7 +34,7 @@ export default class Geometry {
   static convertHexagonToLines(hexagon) {
     const lines = [];
 
-    if (hexagon.sides & MASKS.top) {
+    if (hexagon.sides & MASKS.top === 0) {
       lines.push({
         first: {
           x: -hexagon.side / 2,
@@ -45,7 +47,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.topRight) {
+    if (hexagon.sides & MASKS.topRight === 0) {
       lines.push({
         first: {
           x: hexagon.side / 2,
@@ -58,7 +60,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.bottomRight) {
+    if (hexagon.sides & MASKS.bottomRight === 0) {
       lines.push({
         first: {
           x: hexagon.side,
@@ -71,7 +73,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.bottom) {
+    if (hexagon.sides & MASKS.bottom === 0) {
       lines.push({
         first: {
           x: hexagon.side / 2,
@@ -84,7 +86,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.bottomLeft) {
+    if (hexagon.sides & MASKS.bottomLeft === 0) {
       lines.push({
         first: {
           x: -hexagon.side / 2,
@@ -97,7 +99,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.topLeft) {
+    if (hexagon.sides & MASKS.topLeft === 0) {
       lines.push({
         first: {
           x: -hexagon.side,

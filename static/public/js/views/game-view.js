@@ -96,7 +96,7 @@ export default class GameView extends View {
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
     this.hexagons.forEach((hexagon) => {
-      // hexagon.draw();
+      hexagon.draw();
     });
     this.baseHex.draw();
     this.arrow.draw(this.cursorAngle);
@@ -110,6 +110,7 @@ export default class GameView extends View {
    * @param {Object} state
    */
   update(state) {
+    console.log('view', state);
     this.hexagons = [];
     state.hexagons.forEach((hexagon) => {
       this.hexagons.push(

@@ -4,7 +4,7 @@ import bus from '../../event-bus.js';
 import events from './events.js';
 import {HEXAGON, CURSOR} from './settings.js';
 
-const mask2 = 9;
+const mask2 = 1;
 const mask5 = 31;
 
 /**
@@ -37,7 +37,7 @@ export default class OfflineGame extends GameCore {
 
     this.state.hexagons = Array.from(new Array(3), function(_, position) {
       return {
-        side: 700 + 50 * position,
+        side: 700 + 150 * position,
         sides: Math.floor(Math.random() * 2) === 1? mask2: mask5,
         angle: Math.floor(Math.random() * 2 * Math.PI),
       };
@@ -60,37 +60,39 @@ export default class OfflineGame extends GameCore {
           hexagon.side -= HEXAGON.speed * delay;
           hexagon.angle += HEXAGON.rotatingSpeed * delay;
           return hexagon;
-        })
-        .filter(function(hexagon) {
-          if (hexagon.side < HEXAGON.minSize) {
-            const newHexagon = {
-              side: 700,
-              sides: Math.floor(Math.random() * 2) === 1? mask2: mask5,
-              angle: Math.floor(Math.random() * 360),
-            };
-            this.state.hexagons.unshift(newHexagon);
-            return false;
-          }
+        });
 
-          return true;
-        }.bind(this));
+    for (let i = 0; i < this.state.hexagons.length; i++) {
+      if (this.state.hexagons[i].side < HEXAGON.minSize) {
+        const newHexagon = {
+          side: 700,
+          sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
+          angle: Math.floor(Math.random() * 2 * Math.PI),
+        };
+        this.state.hexagons[i] = newHexagon;
+      }
+    }
 
+    console.log(this.state);
+
+    // console.log('core', this.state);
     bus.emit(events.GAME_STATE_CHANGED, this.state);
 
     const cursor = Geometry.cursorAngleToDot(this.state.cursorAngle);
-    this.state.hexagons.forEach((hexagon) => {
-      let condition = false;
-      this.state.hexagons.forEach((hexagon) => {
-        condition = Geometry.checkHexagonCollision(hexagon, cursor);
-      });
 
-      if (condition) {
-        setTimeout(function() {
-          alert('finish');
-          bus.emit(events.FINISH_GAME);
-        });
-      }
-    });
+    // for (let i = 0; i < this.state.hexagons.length; i++) {
+    //   const condition = Geometry.checkHexagonCollision(
+    //       this.state.hexagons[i], cursor
+    //   );
+    //   if (condition) {
+    //     console.log(this.state.hexagons[i], cursor);
+    //     setTimeout(function() {
+    //       alert('finish');
+    //       bus.emit(events.FINISH_GAME);
+    //     });
+    //     return;
+    //   }
+    // }
 
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
   }
