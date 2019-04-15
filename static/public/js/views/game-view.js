@@ -78,10 +78,13 @@ export default class GameView extends View {
     this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
     state.hexagons.forEach((hexagon) => {
       this.hexagons.push(
-          new Hexagon(this.ctx, hexagon.side, 10, hexagon.sides, color, 0)
+          new Hexagon(this.ctx, hexagon.side, 10,
+              hexagon.sides, color, hexagon.angle)
       );
     });
-    this.arrow = new UserArrow(this.ctx, 20, CURSOR.height, CURSOR.radius, '#fff');
+    this.arrow = new UserArrow(
+        this.ctx, 20, CURSOR.height, CURSOR.radius, '#fff'
+    );
     this.baseHex = new Hexagon(this.ctx, 100, 10, 0, color, 0);
   }
 
@@ -110,11 +113,11 @@ export default class GameView extends View {
    * @param {Object} state
    */
   update(state) {
-    console.log('view', state);
     this.hexagons = [];
     state.hexagons.forEach((hexagon) => {
       this.hexagons.push(
-          new Hexagon(this.ctx, hexagon.side, 10, hexagon.sides, color, 0)
+          new Hexagon(this.ctx, hexagon.side, 10,
+              hexagon.sides, color, hexagon.angle)
       );
     });
 

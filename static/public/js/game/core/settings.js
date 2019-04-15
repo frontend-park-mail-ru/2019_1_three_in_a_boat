@@ -5,10 +5,10 @@ export const CURSOR = {
 };
 
 export const HEXAGON = {
-  minSize: 20,
+  minSize: 100,
   width: 10,
   speed: 0.2,
-  rotatingSpeed: Math.PI / 90,
+  rotatingSpeed: Math.PI / 4000,
 };
 
 export const MASKS = {

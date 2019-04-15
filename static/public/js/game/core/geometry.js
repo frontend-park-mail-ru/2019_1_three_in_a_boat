@@ -15,15 +15,16 @@ export default class Geometry {
   static checkHexagonCollision(hexagon, cursor) {
     const lines = this.convertHexagonToLines(hexagon);
     let isCollide = false;
-
+    console.log(hexagon, lines);
     lines.forEach((line) => {
       line = this.rotateLine(line.first, line.second, hexagon.angle);
+      console.log(cursor, line.first, line.second);
       if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
         isCollide = true;
       }
     });
 
-    return !isCollide;
+    return isCollide;
   }
 
   /**
@@ -34,7 +35,7 @@ export default class Geometry {
   static convertHexagonToLines(hexagon) {
     const lines = [];
 
-    if (hexagon.sides & MASKS.top === 0) {
+    if (!(hexagon.sides & MASKS.top)) {
       lines.push({
         first: {
           x: -hexagon.side / 2,
@@ -47,7 +48,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.topRight === 0) {
+    if (!(hexagon.sides & MASKS.topRight)) {
       lines.push({
         first: {
           x: hexagon.side / 2,
@@ -60,7 +61,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.bottomRight === 0) {
+    if (!(hexagon.sides & MASKS.bottomRight)) {
       lines.push({
         first: {
           x: hexagon.side,
@@ -73,7 +74,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.bottom === 0) {
+    if (!(hexagon.sides & MASKS.bottom)) {
       lines.push({
         first: {
           x: hexagon.side / 2,
@@ -86,7 +87,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.bottomLeft === 0) {
+    if (!(hexagon.sides & MASKS.bottomLeft)) {
       lines.push({
         first: {
           x: -hexagon.side / 2,
@@ -99,7 +100,7 @@ export default class Geometry {
       });
     }
 
-    if (hexagon.sides & MASKS.topLeft === 0) {
+    if (!(hexagon.sides & MASKS.topLeft)) {
       lines.push({
         first: {
           x: -hexagon.side,
@@ -136,7 +137,7 @@ export default class Geometry {
 
     const a = d1.x * d1.x + d1.y * d1.y;
     const k = d0.x * d1.x + d0.y * d1.y;
-    const c = d0.x * d0.x + d0.y * d0.y - CURSOR.radius * CURSOR.radius;
+    const c = d0.x * d0.x + d0.y * d0.y - CURSOR.height * CURSOR.height;
     const disc = k * k - a * c;
 
     if (disc < 0) {

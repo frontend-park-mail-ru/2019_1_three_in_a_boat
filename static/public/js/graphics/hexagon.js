@@ -16,7 +16,7 @@ export default class Hexagon {
    * @param {string} color
    * @param {Number} angle
    */
-  constructor(ctx, side, lineWidth, emptySides, color, angle = 0) {
+  constructor(ctx, side, lineWidth, emptySides, color, angle) {
     this.side = side;
     this.currentSide = side;
     this.ctx = ctx;
@@ -74,7 +74,7 @@ export default class Hexagon {
     let y = this.currentSide / 2 * Math.cos(this.currentAngle);
     this.ctx.moveTo(x, y);
     for (let i = 1; i < 7; ++i) {
-      const localAngle = (2 * Math.PI) / 6 * (i + 0.5) + this.currentAngle;
+      const localAngle = (2 * Math.PI) / 6 * (i - 2) - this.currentAngle;
 
       x = this.currentSide / 2 * Math.cos(localAngle);
       y = this.currentSide / 2 * Math.sin(localAngle);

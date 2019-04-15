@@ -7892,14 +7892,16 @@ class Geometry {
   static checkHexagonCollision(hexagon, cursor) {
     const lines = this.convertHexagonToLines(hexagon);
     let isCollide = false;
+    console.log(hexagon, lines);
     lines.forEach(line => {
       line = this.rotateLine(line.first, line.second, hexagon.angle);
+      console.log(cursor, line.first, line.second);
 
       if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
         isCollide = true;
       }
     });
-    return !isCollide;
+    return isCollide;
   }
   /**
    * Convert hexagon object to array of lines
@@ -7911,7 +7913,7 @@ class Geometry {
   static convertHexagonToLines(hexagon) {
     const lines = [];
 
-    if (hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].top === 0) {
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].top)) {
       lines.push({
         first: {
           x: -hexagon.side / 2,
@@ -7924,7 +7926,7 @@ class Geometry {
       });
     }
 
-    if (hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topRight === 0) {
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topRight)) {
       lines.push({
         first: {
           x: hexagon.side / 2,
@@ -7937,7 +7939,7 @@ class Geometry {
       });
     }
 
-    if (hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomRight === 0) {
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomRight)) {
       lines.push({
         first: {
           x: hexagon.side,
@@ -7950,7 +7952,7 @@ class Geometry {
       });
     }
 
-    if (hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottom === 0) {
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottom)) {
       lines.push({
         first: {
           x: hexagon.side / 2,
@@ -7963,7 +7965,7 @@ class Geometry {
       });
     }
 
-    if (hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomLeft === 0) {
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomLeft)) {
       lines.push({
         first: {
           x: -hexagon.side / 2,
@@ -7976,7 +7978,7 @@ class Geometry {
       });
     }
 
-    if (hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topLeft === 0) {
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topLeft)) {
       lines.push({
         first: {
           x: -hexagon.side,
@@ -8013,7 +8015,7 @@ class Geometry {
     };
     const a = d1.x * d1.x + d1.y * d1.y;
     const k = d0.x * d1.x + d0.y * d1.y;
-    const c = d0.x * d0.x + d0.y * d0.y - _settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].radius * _settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].radius;
+    const c = d0.x * d0.x + d0.y * d0.y - _settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].height * _settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].height;
     const disc = k * k - a * c;
 
     if (disc < 0) {
@@ -8136,9 +8138,10 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     };
     this.state.hexagons = Array.from(new Array(3), function (_, position) {
       return {
-        side: 700 + 150 * position,
+        side: 700 + 200 * position,
         sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
-        angle: Math.floor(Math.random() * 2 * Math.PI)
+        angle: 0 // Math.floor(Math.random() * 2 * Math.PI),
+
       };
     });
     setTimeout(function () {
@@ -8156,7 +8159,8 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     this.lastFrame = now;
     this.state.hexagons = this.state.hexagons.map(function (hexagon) {
       hexagon.side -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].speed * delay;
-      hexagon.angle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].rotatingSpeed * delay;
+      hexagon.angle += 0; // HEXAGON.rotatingSpeed * delay;
+
       return hexagon;
     });
 
@@ -8165,28 +8169,27 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
         const newHexagon = {
           side: 700,
           sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
-          angle: Math.floor(Math.random() * 2 * Math.PI)
+          angle: 0 // Math.floor(Math.random() * 2 * Math.PI),
+
         };
         this.state.hexagons[i] = newHexagon;
       }
     }
 
-    console.log(this.state); // console.log('core', this.state);
-
     _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].GAME_STATE_CHANGED, this.state);
-    const cursor = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].cursorAngleToDot(this.state.cursorAngle); // for (let i = 0; i < this.state.hexagons.length; i++) {
-    //   const condition = Geometry.checkHexagonCollision(
-    //       this.state.hexagons[i], cursor
-    //   );
-    //   if (condition) {
-    //     console.log(this.state.hexagons[i], cursor);
-    //     setTimeout(function() {
-    //       alert('finish');
-    //       bus.emit(events.FINISH_GAME);
-    //     });
-    //     return;
-    //   }
-    // }
+    const cursor = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].cursorAngleToDot(this.state.cursorAngle);
+
+    for (let i = 0; i < this.state.hexagons.length; i++) {
+      const condition = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].checkHexagonCollision(this.state.hexagons[i], cursor);
+
+      if (condition) {
+        console.log(this.state.hexagons[i], cursor);
+        setTimeout(function () {
+          alert('finish');
+          _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
+        }); // return;
+      }
+    }
 
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
   }
@@ -8260,10 +8263,10 @@ const CURSOR = {
   rotatingSpeed: Math.PI / 20
 };
 const HEXAGON = {
-  minSize: 20,
+  minSize: 100,
   width: 10,
   speed: 0.2,
-  rotatingSpeed: Math.PI / 90
+  rotatingSpeed: Math.PI / 4000
 };
 const MASKS = {
   top: 1,
@@ -8452,7 +8455,7 @@ class Hexagon {
    * @param {string} color
    * @param {Number} angle
    */
-  constructor(ctx, side, lineWidth, emptySides, color, angle = 0) {
+  constructor(ctx, side, lineWidth, emptySides, color, angle) {
     this.side = side;
     this.currentSide = side;
     this.ctx = ctx;
@@ -8519,7 +8522,7 @@ class Hexagon {
     this.ctx.moveTo(x, y);
 
     for (let i = 1; i < 7; ++i) {
-      const localAngle = 2 * Math.PI / 6 * (i + 0.5) + this.currentAngle;
+      const localAngle = 2 * Math.PI / 6 * (i - 2) - this.currentAngle;
       x = this.currentSide / 2 * Math.cos(localAngle);
       y = this.currentSide / 2 * Math.sin(localAngle);
 
@@ -9786,7 +9789,7 @@ class GameView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
 
     state.hexagons.forEach(hexagon => {
-      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, hexagon.side, 10, hexagon.sides, color, 0));
+      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, hexagon.side, 10, hexagon.sides, color, hexagon.angle));
     });
     this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 20, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].height, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].radius, '#fff');
     this.baseHex = new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, 100, 10, 0, color, 0);
@@ -9819,10 +9822,9 @@ class GameView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
 
 
   update(state) {
-    console.log('view', state);
     this.hexagons = [];
     state.hexagons.forEach(hexagon => {
-      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, hexagon.side, 10, hexagon.sides, color, 0));
+      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, hexagon.side, 10, hexagon.sides, color, hexagon.angle));
     });
     this.cursorAngle = state.cursorAngle;
     this.arrow.currentAngle = state.cursorAngle; // если не заработает
