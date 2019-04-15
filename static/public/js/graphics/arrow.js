@@ -26,7 +26,7 @@ export default class UserArrow {
    * @param {Number} angle - local angle
    */
   draw(angle = 0) {
-    this.currentAngle = angle;
+    this.currentAngle = -angle;
     const vx = Math.cos(this.currentAngle) * this.radius;
     const vy = Math.sin(this.currentAngle) * this.radius;
     const x1 = Math.cos(this.currentAngle + this.alpha) * this.lineRadius;

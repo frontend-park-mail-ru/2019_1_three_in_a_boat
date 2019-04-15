@@ -7647,7 +7647,7 @@ class GameControllers {
    */
   constructor() {
     this.previous = {};
-    this.keys = {};
+    this.keys = [];
     this._onPress = this._keyHandler.bind(this, 'press');
     this._onUp = this._keyHandler.bind(this, 'up');
   }
@@ -7687,7 +7687,9 @@ class GameControllers {
 
 
   _keyHandler(type, event) {
-    this.keys[event.key.toLowerCase()] = type === 'press';
+    if (event.type.toLowerCase() === 'keydown') {
+      this.keys.push(event.key);
+    }
   }
   /**
    * Получить клавиши, нажатые с момента прошлого запроса
@@ -7696,19 +7698,24 @@ class GameControllers {
 
 
   diff() {
-    let allkeys = [];
-    allkeys.push.apply(allkeys, Object.keys(this.previous));
-    allkeys.push.apply(allkeys, Object.keys(this.keys));
-    allkeys = allkeys.map(k => k.toLowerCase());
-    allkeys = allkeys.filter((key, pos, all) => {
-      return all.indexOf(key, pos + 1) === -1;
-    });
-    const clicked = allkeys.reduce((res, key) => {
-      res[key] = !this.previous[key] && this.keys[key];
-      return res;
-    }, {});
-    this.previous = Object.assign({}, this.keys);
-    return clicked;
+    // let allkeys = [];
+    // allkeys.push.apply(allkeys, Object.keys(this.previous));
+    // allkeys.push.apply(allkeys, Object.keys(this.keys));
+    // allkeys = allkeys.map((k) => k.toLowerCase());
+    // // allkeys = allkeys.filter((key, pos, all) => {
+    // //   return all.indexOf(key, pos + 1) === -1;
+    // // });
+    // console.log(allkeys)
+    //
+    // const clicked = allkeys.reduce((res, key) => {
+    //   res[key] = !this.previous[key] && this.keys[key];
+    //   return res;
+    // }, {});
+    //
+    // this.previous = Object.assign({}, this.keys);
+    const newKeys = this.keys;
+    this.keys = [];
+    return newKeys;
   }
 
 }
@@ -7764,9 +7771,9 @@ class GameCore {
     _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].GAME_STATE_CHANGED, this.onGameStateChanged);
     const controller = this.controller;
     this.controllersLoopIntervalId = setInterval(() => {
-      const actions = controller.diff();
+      const actions = controller.diff(); // if (Object.keys(actions).some((k) => actions[k])) {
 
-      if (Object.keys(actions).some(k => actions[k])) {
+      if (actions.length > 0) {
         _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, actions);
       }
     }, 50);
@@ -7831,7 +7838,7 @@ class GameCore {
 
 
   _pressed(name, data) {
-    return KEYS[name].some(k => data[k.toLowerCase()]);
+    return KEYS[name].some(k => data.toLowerCase() === k.toLowerCase());
   }
 
 }
@@ -8171,6 +8178,7 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
 
       if (condition) {
         setTimeout(function () {
+          alert('finish');
           _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
         });
       }
@@ -8184,11 +8192,13 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
 
 
   onControllsPressed(evt) {
-    if (this._pressed('LEFT', evt)) {
-      this.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
-    } else if (this._pressed('RIGHT', evt)) {
-      this.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
-    }
+    evt.forEach(btn => {
+      if (this._pressed('LEFT', btn)) {
+        this.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+      } else if (this._pressed('RIGHT', btn)) {
+        this.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+      }
+    });
   }
   /**
    *
@@ -8241,12 +8251,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MASKS", function() { return MASKS; });
 const CURSOR = {
   radius: 100,
-  height: 40
+  height: 15,
+  rotatingSpeed: Math.PI / 20
 };
 const HEXAGON = {
   minSize: 20,
   width: 10,
-  speed: 4,
+  speed: 20,
   rotatingSpeed: Math.PI / 90
 };
 const MASKS = {
@@ -8257,47 +8268,6 @@ const MASKS = {
   bottomLeft: 16,
   topLeft: 32
 };
-
-/***/ }),
-
-/***/ "./static/public/js/game/game-scene/game-scene.js":
-/*!********************************************************!*\
-  !*** ./static/public/js/game/game-scene/game-scene.js ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameScene; });
-/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../event-bus.js */ "./static/public/js/event-bus.js");
-
-
-
-/**
- * @class GameScene
- */
-
-class GameScene {
-  /**
-   * Construct Game Scene
-   * @param {HTMLElement} canvas
-   */
-  constructor(canvas) {
-    this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"];
-    this.canvas = canvas;
-    const ctx = canvas.getContext('2d');
-    this.ctx = ctx;
-    this.scene = new Scene(ctx);
-    this.state = null;
-    this.requestFrameId = null;
-    this.lastFrameTime = 0;
-    this.field = [];
-    this.me = null;
-    this.renderScene = this.renderScene.bind(this);
-  }
-
-}
 
 /***/ }),
 
@@ -8314,8 +8284,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/offline-core.js */ "./static/public/js/game/core/offline-core.js");
 /* harmony import */ var _controllers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controllers.js */ "./static/public/js/game/controllers.js");
 /* harmony import */ var _mods_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mods.js */ "./static/public/js/game/mods.js");
-/* harmony import */ var _game_scene_game_scene__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./game-scene/game-scene */ "./static/public/js/game/game-scene/game-scene.js");
-
 
 
 
@@ -8351,8 +8319,7 @@ class Game {
     } // this.gameScene = new GameScene(canvas); TODO
 
 
-    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_1__["default"](); // this.gameScene = new GameScene(ctx);
-
+    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
     this.gameCore = new GameConstructor(this.gameControllers, view);
   }
   /**
@@ -8433,7 +8400,7 @@ class UserArrow {
 
 
   draw(angle = 0) {
-    this.currentAngle = angle;
+    this.currentAngle = -angle;
     const vx = Math.cos(this.currentAngle) * this.radius;
     const vy = Math.sin(this.currentAngle) * this.radius;
     const x1 = Math.cos(this.currentAngle + this.alpha) * this.lineRadius;
@@ -8517,8 +8484,8 @@ class Hexagon {
     let copyNum = this.sidesMask;
 
     for (let i = 0; i < 6 && copyNum; ++i) {
-      this.emptySides[i] = copyNum & 1;
-      console.log(copyNum);
+      this.emptySides[i] = copyNum & 1; // console.log(copyNum);
+
       copyNum >>= 1;
     }
   }
@@ -9738,6 +9705,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
 /* harmony import */ var _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../graphics/hexagon.js */ "./static/public/js/graphics/hexagon.js");
 /* harmony import */ var _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../graphics/arrow.js */ "./static/public/js/graphics/arrow.js");
+/* harmony import */ var _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../game/core/settings.js */ "./static/public/js/game/core/settings.js");
+
 
 
 
@@ -9806,6 +9775,7 @@ class GameView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     this.canvas = document.getElementById('game-canvas'); // this.canvas.width = 800;
     // this.canvas.height = 600;
     // document.body.appendChild(this.canvas); // добавляем canvas в DOM
+    // console.log(this.canvas);
 
     this.ctx = this.canvas.getContext('2d');
     this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
@@ -9813,7 +9783,7 @@ class GameView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     state.hexagons.forEach(hexagon => {
       this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, hexagon.side, 10, hexagon.sides, color, 0));
     });
-    this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 50, 50, 100, '#fff');
+    this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 20, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].height, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].radius, '#fff');
     this.baseHex = new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, 100, 10, 0, color, 0);
   }
   /**
@@ -9829,12 +9799,11 @@ class GameView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     this.ctx.fillStyle = '#000';
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-    this.hexagons.forEach(hexagon => {
-      hexagon.draw();
+    this.hexagons.forEach(hexagon => {// hexagon.draw();
     });
     this.baseHex.draw();
     this.arrow.draw(this.cursorAngle);
-    ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+    this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
     this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
   }
   /**
@@ -9846,10 +9815,11 @@ class GameView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   update(state) {
     this.hexagons = [];
     state.hexagons.forEach(hexagon => {
-      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, 10, hexagon.side, hexagon.sides, color, 0));
+      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, hexagon.side, 10, hexagon.sides, color, 0));
     });
     this.cursorAngle = state.cursorAngle;
-    this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 50, 50, 90, '#fff');
+    this.arrow.currentAngle = state.cursorAngle; // если не заработает
+    // this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
   }
   /**
    * Rotate all canvas

@@ -72,7 +72,7 @@ export default class GameView extends View {
     // this.canvas.height = 600;
 
     // document.body.appendChild(this.canvas); // добавляем canvas в DOM
-
+    // console.log(this.canvas);
     this.ctx = this.canvas.getContext('2d');
 
     this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
@@ -96,7 +96,7 @@ export default class GameView extends View {
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
     this.hexagons.forEach((hexagon) => {
-      hexagon.draw();
+      // hexagon.draw();
     });
     this.baseHex.draw();
     this.arrow.draw(this.cursorAngle);
@@ -111,7 +111,6 @@ export default class GameView extends View {
    */
   update(state) {
     this.hexagons = [];
-    console.log(state.hexagons);
     state.hexagons.forEach((hexagon) => {
       this.hexagons.push(
           new Hexagon(this.ctx, hexagon.side, 10, hexagon.sides, color, 0)
@@ -119,8 +118,9 @@ export default class GameView extends View {
     });
 
     this.cursorAngle = state.cursorAngle;
-    // this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
     this.arrow.currentAngle = state.cursorAngle;
+    // если не заработает
+    // this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
   }
 
   /**
