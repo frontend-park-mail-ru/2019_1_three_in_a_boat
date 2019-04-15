@@ -1,0 +1,10 @@
+.game-msg {
+  $block: &;
+  padding-top: 1rem;
+  font-size: 45px;
+  font-weight: bold;
+
+  &_center {
+    text-align: center;
+  }
+}

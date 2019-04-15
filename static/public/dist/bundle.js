@@ -118,7 +118,7 @@ var ___CSS_LOADER_URL___18___ = urlEscape(__webpack_require__(/*! ../icons/ru.pn
 var ___CSS_LOADER_URL___19___ = urlEscape(__webpack_require__(/*! ../icons/done.svg */ "./static/public/icons/done.svg"));
 
 // Module
-exports.push([module.i, "html, body, #application, #main {\n  margin: 0;\n  height: 100%;\n  width: 100%;\n  font-family: Helvetica, Arial, sans-serif; }\n\nbody {\n  background: #424242 url(" + ___CSS_LOADER_URL___0___ + ");\n  background-size: 100%; }\n\n#application, #main {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\na {\n  color: #005BD1;\n  text-decoration: none;\n  cursor: pointer; }\n  a:hover {\n    text-decoration: underline; }\n  a:focus {\n    outline: none; }\n\nlabel {\n  cursor: pointer; }\n\n.title, .profile-popup__title {\n  display: block;\n  text-align: center;\n  font-size: 24px;\n  font-weight: bold; }\n  .title_size_large {\n    font-size: 28px; }\n\n.hr {\n  display: block;\n  height: 0;\n  padding: 0;\n  border: 0;\n  border-top: 1px solid #E0E0E0; }\n  .hr_inline {\n    margin: 0; }\n\n.login-popup, .profile-popup, .signup-popup, .update-profile-popup {\n  position: relative;\n  z-index: 100;\n  width: 50%;\n  min-width: fit-content;\n  min-width: -moz-max-content;\n  background-color: white;\n  border-radius: 5px; }\n  .login-popup__close-popup, .update-profile-popup__close-popup {\n    position: absolute;\n    top: 11px;\n    right: 8px; }\n  .login-popup__content, .profile-popup__content, .signup-popup__content {\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 18px 15px 15px 15px;\n    border: 1px #E0E0E0 solid;\n    border-top: 0;\n    border-bottom-left-radius: 3px;\n    border-bottom-right-radius: 3px; }\n  .login-popup__title, .profile-popup__title, .signup-popup__title {\n    padding: 10px;\n    border-top-right-radius: 3px;\n    border-top-left-radius: 3px;\n    background-color: #fb6a06;\n    color: white; }\n\n.icon, .checkbox:checked::before, .select::after, .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n  display: inline-block;\n  -webkit-mask-size: contain;\n  mask-size: contain;\n  -webkit-mask-repeat: no-repeat;\n  mask-repeat: no-repeat;\n  height: 14px;\n  width: 14px; }\n  .icon_size_small, .checkbox_size_small::before, .sm-icons-list__icon {\n    height: 12px;\n    width: 12px; }\n  .icon_size_large, .checkbox_size_large::before {\n    height: 20px;\n    width: 20px; }\n  .icon_size_xlarge {\n    height: 24px;\n    width: 24px; }\n  .icon_size_xxlarge {\n    height: 32px;\n    width: 32px; }\n  .icon_size_xxxlarge {\n    height: 40px;\n    width: 40px; }\n  .icon_size_fit {\n    height: 60%;\n    width: 60%; }\n  .icon_size_header-fit {\n    height: 2.5em;\n    width: 2.5em; }\n  .icon_color_green {\n    background-color: #2e7d32; }\n  .icon_color_orange {\n    background-color: #FD9E0B; }\n  .icon_color_white, .checkbox:checked::before, .sm-icons-list__icon {\n    background-color: white; }\n  .icon_color_black, .select::after {\n    background-color: black; }\n  .icon_color_muted {\n    background-color: #A9A9A9; }\n  .icon_color_muted-light {\n    background-color: #F7F7F7; }\n  .icon_type_cross {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___1___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___1___ + "); }\n  .icon_type_eye {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___2___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___2___ + "); }\n  .icon_type_vk {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___3___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___3___ + "); }\n  .icon_type_fb {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___4___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___4___ + "); }\n  .icon_type_ok {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___5___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___5___ + "); }\n  .icon_type_hexagon {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___6___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___6___ + "); }\n  .icon_type_users {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___7___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___7___ + "); }\n  .icon_type_user {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___8___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___8___ + "); }\n  .icon_type_key {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___9___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___9___ + "); }\n  .icon_type_gamepad {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___10___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___10___ + "); }\n  .icon_type_signin {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___11___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___11___ + "); }\n  .icon_type_signout {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___12___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___12___ + "); }\n  .icon_type_dropdown, .select::after {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___13___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___13___ + "); }\n  .icon_type_useredit {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___14___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___14___ + "); }\n  .icon_type_delete {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___15___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___15___ + "); }\n  .icon_type_crown, .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___16___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___16___ + "); }\n  .icon_type_back {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___17___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___17___ + "); }\n  .icon_type_ru {\n    background-image: url(" + ___CSS_LOADER_URL___18___ + ");\n    background-repeat: no-repeat;\n    background-size: 100%;\n    background-position: 0 25%; }\n  .icon_btn {\n    cursor: pointer; }\n\n.icon-bg {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  width: 20px;\n  border-radius: 4px;\n  border: 1px solid #E0E0E0; }\n  .icon-bg_shape_round {\n    border-radius: 100%; }\n  .icon-bg_color_green {\n    background-color: #2e7d32; }\n  .icon-bg_color_white {\n    background-color: white; }\n  .icon-bg_color_black {\n    background-color: black; }\n  .icon-bg_color_muted {\n    background-color: #A9A9A9; }\n  .icon-bg_color_dark-gray {\n    background-color: #393939; }\n  .icon-bg_color_muted-light {\n    background-color: #F7F7F7; }\n  .icon-bg_color_vk {\n    background-color: #4A76A8; }\n  .icon-bg_color_fb {\n    background-color: #3B5998; }\n  .icon-bg_color_ok {\n    background-color: #EE8208; }\n  .icon-bg_size_large {\n    height: 24px;\n    width: 24px; }\n  .icon-bg_size_xlarge {\n    height: 28px;\n    width: 28px; }\n  .icon-bg_size_xxlarge {\n    height: 36px;\n    width: 36px; }\n  .icon-bg_size_xxxlarge {\n    height: 50px;\n    width: 50px; }\n  .icon-bg_size_tall, .sm-icons-list__icon-bg {\n    height: 30px;\n    width: 24px; }\n  .icon-bg_size_full {\n    height: 100%;\n    width: 100%; }\n  .icon-bg_btn, .sm-icons-list__icon-bg {\n    cursor: pointer;\n    transition: box-shadow 0.2s ease 0s; }\n    .icon-bg_btn:hover, .sm-icons-list__icon-bg:hover {\n      -webkit-box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue;\n      -moz-box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue;\n      box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue; }\n  .icon-bg_borderless {\n    border: none; }\n\n.btn, .file-input__label {\n  height: 32px;\n  padding: 0 15px;\n  font-size: 16px;\n  line-height: 16px;\n  border: 1px solid #a74604;\n  border-radius: 3px;\n  -webkit-box-shadow: 0 2px #F5F5F5;\n  -moz-box-shadow: 0 2px #F5F5F5;\n  box-shadow: 0 2px #F5F5F5;\n  transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n  background-color: #fb6a06;\n  color: white;\n  cursor: pointer;\n  font-weight: bold; }\n  .btn .btn__icon, .file-input__label .btn__icon {\n    transition: background-color 0.5s ease 0s;\n    background-color: white; }\n  .btn:hover:not(.btn_disabled), .file-input__label:hover:not(.btn_disabled) {\n    transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n    background-color: #a74604;\n    color: white; }\n    .btn:hover:not(.btn_disabled) .btn__icon, .file-input__label:hover:not(.btn_disabled) .btn__icon {\n      transition: background-color 0.5s ease 0s;\n      background-color: white; }\n  .btn:active:not(.btn_disabled), .file-input__label:active:not(.btn_disabled) {\n    transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n    background-color: #7f3503;\n    color: white; }\n    .btn:active:not(.btn_disabled) .btn__icon, .file-input__label:active:not(.btn_disabled) .btn__icon {\n      transition: background-color 0.2s ease 0s;\n      background-color: white; }\n  .btn::-moz-focus-inner, .file-input__label::-moz-focus-inner {\n    border: 0; }\n  .btn:focus, .file-input__label:focus {\n    outline: none; }\n  .btn_size_large {\n    height: 40px; }\n    .btn_size_large .btn__text {\n      line-height: 20px; }\n  .btn_color_muted {\n    border-color: #E0E0E0;\n    transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n    background-color: #F7F7F7;\n    color: #A9A9A9; }\n    .btn_color_muted .btn__icon {\n      transition: background-color 0.5s ease 0s;\n      background-color: #A9A9A9; }\n    .btn_color_muted:hover:not(.btn_disabled) {\n      transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n      background-color: #c4c4c4;\n      color: #767676; }\n      .btn_color_muted:hover:not(.btn_disabled) .btn__icon {\n        transition: background-color 0.5s ease 0s;\n        background-color: #767676; }\n    .btn_color_muted:active:not(.btn_disabled) {\n      transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n      background-color: #b0b0b0;\n      color: #434343; }\n      .btn_color_muted:active:not(.btn_disabled) .btn__icon {\n        transition: background-color 0.2s ease 0s;\n        background-color: #434343; }\n  .btn_disabled {\n    opacity: 0.6;\n    cursor: not-allowed; }\n  .btn__inner {\n    display: flex;\n    flex-direction: row;\n    align-content: center;\n    justify-content: center; }\n  .btn__text {\n    margin: auto 0;\n    font-size: 16px;\n    line-height: 16px;\n    padding-top: 1px; }\n@-moz-document url-prefix() {\n  .btn__text {\n    padding-top: 0; } }\n    .btn__text_normal {\n      color: black;\n      font-weight: normal; }\n  .btn__icon {\n    margin: auto 8px auto 0; }\n\n.checkbox {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  position: relative;\n  top: -3px;\n  vertical-align: bottom;\n  z-index: 200;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  height: 14px;\n  width: 14px;\n  margin: 0;\n  border-radius: 3px;\n  cursor: pointer;\n  background-color: #fb6a06; }\n  .checkbox:checked::before {\n    content: \"\";\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___19___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___19___ + "); }\n  .checkbox:focus {\n    outline: none; }\n  .checkbox_size_small {\n    width: 12px;\n    height: 12px; }\n    .checkbox_size_small::before {\n      margin-bottom: 0; }\n  .checkbox_size_large {\n    width: 16px;\n    height: 16px; }\n\n.form-group {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  padding: 3px 0; }\n  .form-group:last-of-type {\n    padding-bottom: 0; }\n  .form-group_align_space-between {\n    flex-direction: row;\n    justify-content: space-between; }\n  .form-group_align_center {\n    flex-direction: row;\n    justify-content: center; }\n  .form-group_align_stretch {\n    flex-direction: row;\n    justify-content: stretch; }\n    .form-group_align_stretch .form-group__field {\n      flex-grow: 1; }\n  .form-group_size_inline {\n    padding: 0; }\n  .form-group_size_large {\n    padding-bottom: 10px; }\n  .form-group__help-text {\n    font-size: 12px;\n    margin-top: 4px; }\n    .form-group__help-text_type_error {\n      color: #FF1100; }\n    .form-group__help-text_hidden {\n      display: none;\n      margin-top: 0; }\n  .form-group__title {\n    display: block;\n    font-size: 14px;\n    font-weight: bold;\n    text-align: center; }\n    .form-group__title_align_left {\n      text-align: left; }\n\n.file-input {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  height: 28px;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px; }\n  .file-input__label {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    flex-grow: 0;\n    height: 30px;\n    margin: -1px;\n    border: none;\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n    border-top-left-radius: inherit;\n    border-bottom-left-radius: inherit;\n    box-shadow: none; }\n  .file-input__field {\n    width: 0.1px;\n    height: 0.1px;\n    opacity: 0;\n    overflow: hidden;\n    position: absolute;\n    z-index: -1; }\n  .file-input__info {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    min-width: 130px;\n    overflow: hidden;\n    flex-grow: 1;\n    white-space: nowrap;\n    padding: 0 15px;\n    font-size: 12px; }\n\n.input {\n  position: relative;\n  z-index: 200;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  min-width: fit-content;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px;\n  transition: box-shadow 0.2s ease 0s;\n  border-width: 1px; }\n  .input:focus-within {\n    z-index: 300;\n    border-color: lightblue;\n    -webkit-box-shadow: 0 0 50px -12px lightblue;\n    -moz-box-shadow: 0 0 50px -12px lightblue;\n    box-shadow: 0 0 50px -12px lightblue; }\n  .input_status_error {\n    border-color: #FF1100; }\n  .input__icon {\n    margin-left: 5px;\n    margin-right: 5px; }\n    .input__icon:last-child {\n      margin-left: 0;\n      margin-right: 10px; }\n    .input__icon:first-child {\n      margin-left: 10px;\n      margin-right: 0; }\n  .input__field {\n    display: inline-block;\n    height: 18px;\n    min-width: 0;\n    flex-grow: 1;\n    margin: 0;\n    padding: 6px 5px 4px 5px;\n    line-height: 12px;\n    border-radius: 3px;\n    border-width: 0;\n    background-color: white;\n    color: black;\n    font-size: 12px;\n    outline: none; }\n@-moz-document url-prefix() {\n  .input__field {\n    height: 15px;\n    padding-bottom: 7px; } }\n    .input__field:first-child {\n      padding-left: 10px; }\n    .input__field:last-child {\n      padding-right: 10px; }\n  .input__field-appendix {\n    display: inline-block;\n    margin: 0;\n    height: 18px;\n    padding: 8px 2px 3px 2px;\n    border-radius: 3px;\n    font-size: 12px;\n    pointer-events: none; }\n@-moz-document url-prefix() {\n  .input__field-appendix {\n    line-height: 12px; } }\n  .input__inner {\n    display: flex;\n    flex-direction: row; }\n  .input__tooltip {\n    position: absolute;\n    left: calc(100% + 8px);\n    z-index: 400;\n    display: table;\n    min-width: 180px;\n    padding: 10px;\n    border-radius: 3px;\n    background-color: white;\n    -webkit-box-shadow: 0 0 50px -5px #676767;\n    -moz-box-shadow: 0 0 50px -5px #676767;\n    box-shadow: 0 0 50px -5px #676767;\n    pointer-events: none; }\n    .input__tooltip::before {\n      position: absolute;\n      top: calc(50% - 4px);\n      left: -6px;\n      content: \"\";\n      border-style: solid;\n      border-width: 4px 6px 4px 0;\n      border-color: transparent white transparent transparent; }\n  .input__tooltip-title {\n    display: table-row;\n    max-width: 30px;\n    font-size: 12px;\n    color: black; }\n  .input__tooltip-help {\n    display: table-row;\n    font-size: 9px;\n    color: #A9A9A9; }\n\n.select {\n  transition: box-shadow 0.2s ease 0s;\n  position: relative;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  height: 28px;\n  min-width: fit-content;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px; }\n  .select:focus-within {\n    z-index: 300;\n    border-color: lightblue;\n    -webkit-box-shadow: 0 0 50px -12px lightblue;\n    -moz-box-shadow: 0 0 50px -12px lightblue;\n    box-shadow: 0 0 50px -12px lightblue; }\n  .select :-moz-focusring {\n    color: transparent;\n    text-shadow: 0 0 0 #000; }\n  .select::after {\n    position: absolute;\n    top: 8px;\n    right: 3px;\n    z-index: 201;\n    pointer-events: none;\n    content: \"\"; }\n  .select_stretched {\n    width: 100%; }\n  .select_status_error {\n    border-color: #FF1100; }\n    .select_status_error:focus-within {\n      border-color: #FF1100; }\n  .select__field {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    display: inline-block;\n    flex-grow: 1;\n    height: 28px;\n    line-height: 28px;\n    padding: 1px 22px 0 10px;\n    font-size: 12px;\n    background-color: white;\n    color: black;\n    border-radius: 3px;\n    border-width: 0; }\n@-moz-document url-prefix() {\n  .select__field {\n    padding-top: 0; } }\n    .select__field:focus {\n      outline: none;\n      border: none; }\n  .select__chosen-icon {\n    margin-left: 10px; }\n\n.field-group {\n  transition: box-shadow 0.2s ease 0s;\n  display: flex;\n  flex-direction: row;\n  align-content: stretch;\n  justify-content: stretch;\n  height: 30px; }\n  .field-group:focus-within {\n    box-shadow: 0 0 50px -12px lightblue; }\n    .field-group:focus-within .field-group__field:not([class*=\"status_error\"]) {\n      border-color: lightblue; }\n  .field-group__field {\n    flex-grow: 1;\n    height: 28px;\n    margin: 0;\n    border-radius: 0;\n    border-right-width: 0;\n    border-left-width: 1px; }\n    .field-group__field:focus-within {\n      box-shadow: none; }\n    .field-group__field:first-child {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px; }\n    .field-group__field:last-child {\n      border-right-width: 1px;\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px; }\n    .field-group__field_stretched_1 {\n      flex-grow: 1; }\n    .field-group__field_stretched_2 {\n      flex-grow: 2; }\n    .field-group__field_stretched_3 {\n      flex-grow: 3; }\n    .field-group__field_stretched_4 {\n      flex-grow: 4; }\n    .field-group__field_stretched_5 {\n      flex-grow: 5; }\n    .field-group__field_stretched_6 {\n      flex-grow: 6; }\n    .field-group__field_stretched_7 {\n      flex-grow: 7; }\n    .field-group__field_stretched_8 {\n      flex-grow: 8; }\n    .field-group__field_stretched_9 {\n      flex-grow: 9; }\n    .field-group__field_stretched_10 {\n      flex-grow: 10; }\n    .field-group__field_stretched_11 {\n      flex-grow: 11; }\n    .field-group__field_stretched_12 {\n      flex-grow: 12; }\n\n.sm-icons-list {\n  display: flex;\n  flex-direction: row;\n  justify-content: center; }\n  .sm-icons-list__icon-bg {\n    -webkit-box-shadow: 0 2px 0 0 #F5F5F5;\n    -moz-box-shadow: 0 2px 0 0 #F5F5F5;\n    box-shadow: 0 2px 0 0 #F5F5F5;\n    margin: 0 2px; }\n\n.pagination {\n  width: 50%;\n  margin: 20px auto;\n  text-align: center; }\n  .pagination__link {\n    padding: 3px 10px;\n    height: 30px;\n    border: #a74604 solid 1px;\n    border-right: none;\n    background-color: white;\n    color: #1b0c29;\n    cursor: pointer;\n    font-weight: bold; }\n    .pagination__link:focus {\n      outline: none; }\n    .pagination__link:not(.pagination__link_current) {\n      background-color: #fb6a06;\n      color: white;\n      transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n      background-color: #fb6a06;\n      color: white; }\n      .pagination__link:not(.pagination__link_current) .pagination__icon {\n        transition: background-color 0.5s ease 0s;\n        background-color: white; }\n      .pagination__link:not(.pagination__link_current):hover:not(.pagination_disabled) {\n        transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n        background-color: #994002;\n        color: white; }\n        .pagination__link:not(.pagination__link_current):hover:not(.pagination_disabled) .pagination__icon {\n          transition: background-color 0.5s ease 0s;\n          background-color: white; }\n      .pagination__link:not(.pagination__link_current):active:not(.pagination_disabled) {\n        transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n        background-color: #702f02;\n        color: white; }\n        .pagination__link:not(.pagination__link_current):active:not(.pagination_disabled) .pagination__icon {\n          transition: background-color 0.2s ease 0s;\n          background-color: white; }\n    .pagination__link:hover:not(.pagination__link_current) {\n      color: #6614b0;\n      cursor: pointer; }\n    .pagination__link_first {\n      border-bottom-left-radius: 3px;\n      border-top-left-radius: 3px; }\n    .pagination__link_last {\n      border-bottom-right-radius: 3px;\n      border-top-right-radius: 3px;\n      border-right: #a74604 solid 1px; }\n    .pagination__link_current {\n      background-color: white;\n      color: #fb6a06;\n      cursor: auto; }\n\n.authors {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  margin-top: 4%;\n  padding: 5%;\n  border-radius: 8px;\n  background-color: rgba(255, 255, 255, 0.5); }\n  .authors__description {\n    text-align: center;\n    font-size: 20px; }\n  .authors__header {\n    font-size: 40px;\n    font-weight: bold; }\n  .authors__img {\n    height: 300px;\n    width: 300px;\n    border: 1px solid #E0E0E0;\n    border-radius: 100%; }\n  .authors__item {\n    width: 400px;\n    margin: 0 40px 40px;\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n  .authors__items {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: center;\n    align-items: center;\n    margin-top: 80px; }\n  .authors__title {\n    text-align: center;\n    font-size: 30px;\n    margin: 10px 0 0; }\n  .authors__subtitle {\n    text-align: center;\n    font-size: 16px;\n    margin: 0 0 10px;\n    color: #A9A9A9; }\n  .authors__close-popup {\n    position: absolute;\n    top: 10px;\n    right: 10px; }\n\n.header {\n  display: flex;\n  align-self: stretch;\n  justify-self: flex-start;\n  align-items: center;\n  height: 4em;\n  min-height: 4em;\n  padding-left: 5%;\n  background-color: #fb6a06; }\n  .header_main {\n    margin: 0 8px 24px; }\n  .header__title {\n    margin: 0 0 0 4px;\n    padding: 0;\n    font-size: 3em;\n    font-weight: bolder;\n    color: white; }\n    .header__title:hover {\n      text-decoration: none; }\n  .header__link {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: center; }\n    .header__link:hover {\n      text-decoration: none; }\n\n.login-form__remember-me-label, .login-form__forgot-password-link {\n  font-size: 12px; }\n.login-form__remember-me-label {\n  margin-left: 4px; }\n.login-form__double-btn {\n  margin-top: 10px; }\n.login-form__sumbit-btn {\n  margin-right: 4px;\n  flex-grow: 1; }\n.login-form__cancel-btn {\n  flex-grow: 0; }\n\n.login-popup {\n  padding: 0;\n  margin: auto 0;\n  max-width: 300px; }\n  .login-popup__hr {\n    margin: 16px -16px; }\n  .login-popup__continue-with-text {\n    margin: 8px 0;\n    font-size: 9px;\n    text-align: center;\n    font-weight: bold;\n    color: #A9A9A9; }\n  .login-popup__signup-link {\n    font-size: 12px;\n    text-align: center;\n    font-weight: bold; }\n\n.menu {\n  margin: 4% auto 0 auto;\n  width: 60%;\n  height: 90%;\n  min-width: fit-content;\n  max-width: 600px;\n  border: 0;\n  border-radius: 3px; }\n  .menu__link {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n    height: 100%; }\n    .menu__link:hover {\n      text-decoration: none; }\n  .menu__item {\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin-bottom: 4%;\n    height: 4.5rem;\n    background-color: #fb6a06;\n    color: white;\n    border-radius: 5px;\n    box-shadow: 0 0 20px rgba(0, 0, 0, 0.71); }\n  .menu__dropdown-btn {\n    position: absolute;\n    top: 20px;\n    right: 10px; }\n  .menu__text {\n    width: 85%;\n    text-align: center;\n    font-size: 2rem;\n    font-weight: bold;\n    color: white; }\n  .menu__icon-bg {\n    width: 15%;\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0; }\n\n.profile-info {\n  display: table;\n  border-collapse: collapse;\n  border-spacing: 10px;\n  padding: 20px; }\n  .profile-info__item {\n    display: table-row;\n    height: 40px;\n    white-space: nowrap;\n    border-bottom: 1px solid #E0E0E0; }\n  .profile-info .profile-info__item-name, .profile-info .profile-info__item-value {\n    display: table-cell;\n    vertical-align: middle; }\n  .profile-info__item-name {\n    font-weight: bold; }\n  .profile-info__item-value {\n    padding-left: 40px; }\n\n.profile-popup {\n  align-items: center;\n  max-width: 400px; }\n  .profile-popup_main {\n    margin-top: 4%; }\n  .profile-popup__profile-info {\n    max-width: fit-content;\n    margin: 20px auto 10px; }\n  .profile-popup__profile-icon {\n    display: flex;\n    justify-content: center;\n    width: 140px;\n    height: 140px;\n    margin: 0 auto;\n    overflow: hidden;\n    object-fit: cover;\n    border-radius: 100%; }\n  .profile-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    margin: 0 auto;\n    padding: 0 40px; }\n    .profile-popup__double-btn_center {\n      flex-direction: row;\n      justify-content: center; }\n  .profile-popup__btn {\n    width: 140px;\n    margin: 0 4px; }\n    .profile-popup__btn:first-child {\n      margin-left: 0; }\n    .profile-popup__btn:last-child {\n      margin-right: 0; }\n\n.scoreboard {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start;\n  min-height: fit-content;\n  margin-top: 4%;\n  padding: 2%;\n  border-radius: 7px;\n  background-color: white; }\n  .scoreboard__items {\n    max-width: 600px;\n    min-width: 450px; }\n  .scoreboard__item {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    height: 60px;\n    border-bottom: 1px solid #fb6a06; }\n    .scoreboard__item_place_first, .scoreboard__item_place_second, .scoreboard__item_place_third {\n      font-size: 20px;\n      font-weight: bold; }\n      .scoreboard__item_place_first .scoreboard__link, .scoreboard__item_place_second .scoreboard__link, .scoreboard__item_place_third .scoreboard__link {\n        position: relative; }\n        .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n          position: absolute;\n          top: -25px;\n          width: 40px;\n          height: 40px;\n          content: \"\"; }\n    .scoreboard__item_place_first .scoreboard__link::before {\n      background-color: #FFD700; }\n    .scoreboard__item_place_second .scoreboard__link::before {\n      background-color: #C0C0C0; }\n    .scoreboard__item_place_third .scoreboard__link::before {\n      background-color: #CD7F32; }\n  .scoreboard__user-data {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: flex-start; }\n  .scoreboard__link {\n    display: flex;\n    flex-direction: row;\n    align-items: center; }\n    .scoreboard__link:hover {\n      text-decoration: black; }\n  .scoreboard__avatar {\n    display: inline-block;\n    height: 40px;\n    width: 40px;\n    margin-right: 10px;\n    border-radius: 100%;\n    vertical-align: middle;\n    line-height: 40px; }\n  .scoreboard__place {\n    display: inline-block;\n    margin-right: 10px;\n    width: 20px; }\n  .scoreboard__data-field {\n    display: flex;\n    align-items: center; }\n  .scoreboard__username {\n    padding-left: 10px;\n    color: black; }\n\n.signup-popup {\n  -webkit-align-self: center;\n  align-self: center;\n  padding: 0;\n  max-width: 450px; }\n  .signup-popup_main {\n    margin: 4% 0 0 0; }\n  .signup-popup__hr {\n    margin: 12px -16px 12px -16px; }\n  .signup-popup__explanation-text {\n    margin: 8px 0;\n    font-size: 12px;\n    color: #A9A9A9; }\n  .signup-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    align-content: flex-start; }\n  .signup-popup__signup-btn {\n    margin-right: 4px; }\n  .signup-popup__cancel-btn {\n    margin-left: 4px; }\n\n.signup-form__date-select:last-child {\n  margin-right: 0; }\n.signup-form__form-group {\n  margin: 8px 0; }\n\n.update-profile-popup {\n  max-width: 250px;\n  border: 1px #a74604 solid; }\n  .update-profile-popup__hr {\n    margin: 16px -15px 16px -15px; }\n  .update-profile-popup__title {\n    margin: 0 0 16px 0; }\n  .update-profile-popup__continue-with-text {\n    margin: 8px 0;\n    font-size: 9px;\n    text-align: center;\n    color: #A9A9A9;\n    font-weight: bold; }\n  .update-profile-popup__signup-link {\n    font-size: 12px;\n    text-align: center;\n    font-weight: bold; }\n  .update-profile-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    align-content: flex-start; }\n  .update-profile-popup__update-btn {\n    margin-right: 4px; }\n  .update-profile-popup__cancel-btn {\n    margin-left: 4px; }\n\n.not-found-page {\n  width: 55%;\n  margin: auto auto;\n  border-radius: 8px;\n  background-color: rgba(255, 255, 255, 0.28);\n  padding: 20px; }\n  .not-found-page__link {\n    font-size: 1.5rem;\n    font-weight: bold;\n    text-decoration: underline;\n    color: black; }\n  .not-found-page__text {\n    font-weight: bold; }\n    .not-found-page__text_main {\n      font-size: 4rem;\n      color: black; }\n    .not-found-page__text_additional {\n      margin-bottom: 4%;\n      font-size: 1.5rem;\n      color: #1c1c1c; }\n\n.offline-msg {\n  background: rgba(102, 102, 102, 0.5);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0; }\n  .offline-msg__window {\n    width: 300px;\n    height: 70px;\n    text-align: center;\n    padding: 15px;\n    border: 3px solid black;\n    border-radius: 10px;\n    color: #fb6a06;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    margin: auto;\n    background: #fff; }\n  .offline-msg__btn {\n    display: inline-block;\n    border: 1px solid #fb6a06;\n    color: #fb6a06;\n    padding: 0 12px;\n    margin: 10px;\n    border-radius: 5px;\n    text-decoration: none;\n    background: #f2f2f2;\n    font-size: 14pt;\n    cursor: pointer; }\n    .offline-msg__btn:hover {\n      background: #e6e6ff; }\n", ""]);
+exports.push([module.i, "html, body, #application, #main {\n  margin: 0;\n  height: 100%;\n  width: 100%;\n  font-family: Helvetica, Arial, sans-serif; }\n\nbody {\n  background: #424242 url(" + ___CSS_LOADER_URL___0___ + ");\n  background-size: 100%; }\n\n#application, #main {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\na {\n  color: #005BD1;\n  text-decoration: none;\n  cursor: pointer; }\n  a:hover {\n    text-decoration: underline; }\n  a:focus {\n    outline: none; }\n\nlabel {\n  cursor: pointer; }\n\n.title, .profile-popup__title {\n  display: block;\n  text-align: center;\n  font-size: 24px;\n  font-weight: bold; }\n  .title_size_large {\n    font-size: 28px; }\n\n.hr {\n  display: block;\n  height: 0;\n  padding: 0;\n  border: 0;\n  border-top: 1px solid #E0E0E0; }\n  .hr_inline {\n    margin: 0; }\n\n.login-popup, .profile-popup, .signup-popup, .update-profile-popup {\n  position: relative;\n  z-index: 100;\n  width: 50%;\n  min-width: fit-content;\n  min-width: -moz-max-content;\n  background-color: white;\n  border-radius: 5px; }\n  .login-popup__close-popup, .update-profile-popup__close-popup {\n    position: absolute;\n    top: 11px;\n    right: 8px; }\n  .login-popup__content, .profile-popup__content, .signup-popup__content, .game-over__content {\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 18px 15px 15px 15px;\n    border: 1px #E0E0E0 solid;\n    border-top: 0;\n    border-bottom-left-radius: 3px;\n    border-bottom-right-radius: 3px; }\n  .login-popup__title, .profile-popup__title, .signup-popup__title {\n    padding: 10px;\n    border-top-right-radius: 3px;\n    border-top-left-radius: 3px;\n    background-color: #fb6a06;\n    color: white; }\n\n.icon, .checkbox:checked::before, .select::after, .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n  display: inline-block;\n  -webkit-mask-size: contain;\n  mask-size: contain;\n  -webkit-mask-repeat: no-repeat;\n  mask-repeat: no-repeat;\n  height: 14px;\n  width: 14px; }\n  .icon_size_small, .checkbox_size_small::before, .sm-icons-list__icon {\n    height: 12px;\n    width: 12px; }\n  .icon_size_large, .checkbox_size_large::before {\n    height: 20px;\n    width: 20px; }\n  .icon_size_xlarge {\n    height: 24px;\n    width: 24px; }\n  .icon_size_xxlarge {\n    height: 32px;\n    width: 32px; }\n  .icon_size_xxxlarge {\n    height: 40px;\n    width: 40px; }\n  .icon_size_fit {\n    height: 60%;\n    width: 60%; }\n  .icon_size_header-fit {\n    height: 2.5em;\n    width: 2.5em; }\n  .icon_color_green {\n    background-color: #2e7d32; }\n  .icon_color_orange {\n    background-color: #FD9E0B; }\n  .icon_color_white, .checkbox:checked::before, .sm-icons-list__icon {\n    background-color: white; }\n  .icon_color_black, .select::after {\n    background-color: black; }\n  .icon_color_muted {\n    background-color: #A9A9A9; }\n  .icon_color_muted-light {\n    background-color: #F7F7F7; }\n  .icon_type_cross {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___1___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___1___ + "); }\n  .icon_type_eye {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___2___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___2___ + "); }\n  .icon_type_vk {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___3___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___3___ + "); }\n  .icon_type_fb {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___4___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___4___ + "); }\n  .icon_type_ok {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___5___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___5___ + "); }\n  .icon_type_hexagon {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___6___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___6___ + "); }\n  .icon_type_users {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___7___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___7___ + "); }\n  .icon_type_user {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___8___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___8___ + "); }\n  .icon_type_key {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___9___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___9___ + "); }\n  .icon_type_gamepad {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___10___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___10___ + "); }\n  .icon_type_signin {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___11___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___11___ + "); }\n  .icon_type_signout {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___12___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___12___ + "); }\n  .icon_type_dropdown, .select::after {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___13___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___13___ + "); }\n  .icon_type_useredit {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___14___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___14___ + "); }\n  .icon_type_delete {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___15___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___15___ + "); }\n  .icon_type_crown, .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___16___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___16___ + "); }\n  .icon_type_back {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___17___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___17___ + "); }\n  .icon_type_ru {\n    background-image: url(" + ___CSS_LOADER_URL___18___ + ");\n    background-repeat: no-repeat;\n    background-size: 100%;\n    background-position: 0 25%; }\n  .icon_btn {\n    cursor: pointer; }\n\n.icon-bg {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  width: 20px;\n  border-radius: 4px;\n  border: 1px solid #E0E0E0; }\n  .icon-bg_shape_round {\n    border-radius: 100%; }\n  .icon-bg_color_green {\n    background-color: #2e7d32; }\n  .icon-bg_color_white {\n    background-color: white; }\n  .icon-bg_color_black {\n    background-color: black; }\n  .icon-bg_color_muted {\n    background-color: #A9A9A9; }\n  .icon-bg_color_dark-gray {\n    background-color: #393939; }\n  .icon-bg_color_muted-light {\n    background-color: #F7F7F7; }\n  .icon-bg_color_vk {\n    background-color: #4A76A8; }\n  .icon-bg_color_fb {\n    background-color: #3B5998; }\n  .icon-bg_color_ok {\n    background-color: #EE8208; }\n  .icon-bg_size_large {\n    height: 24px;\n    width: 24px; }\n  .icon-bg_size_xlarge {\n    height: 28px;\n    width: 28px; }\n  .icon-bg_size_xxlarge {\n    height: 36px;\n    width: 36px; }\n  .icon-bg_size_xxxlarge {\n    height: 50px;\n    width: 50px; }\n  .icon-bg_size_tall, .sm-icons-list__icon-bg {\n    height: 30px;\n    width: 24px; }\n  .icon-bg_size_full {\n    height: 100%;\n    width: 100%; }\n  .icon-bg_btn, .sm-icons-list__icon-bg {\n    cursor: pointer;\n    transition: box-shadow 0.2s ease 0s; }\n    .icon-bg_btn:hover, .sm-icons-list__icon-bg:hover {\n      -webkit-box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue;\n      -moz-box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue;\n      box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue; }\n  .icon-bg_borderless {\n    border: none; }\n\n.btn, .file-input__label, .result-redirect__btn {\n  height: 32px;\n  padding: 0 15px;\n  font-size: 16px;\n  line-height: 16px;\n  border: 1px solid #a74604;\n  border-radius: 3px;\n  -webkit-box-shadow: 0 2px #F5F5F5;\n  -moz-box-shadow: 0 2px #F5F5F5;\n  box-shadow: 0 2px #F5F5F5;\n  transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n  background-color: #fb6a06;\n  color: white;\n  cursor: pointer;\n  font-weight: bold; }\n  .btn .btn__icon, .file-input__label .btn__icon, .result-redirect__btn .btn__icon {\n    transition: background-color 0.5s ease 0s;\n    background-color: white; }\n  .btn:hover:not(.btn_disabled), .file-input__label:hover:not(.btn_disabled), .result-redirect__btn:hover:not(.btn_disabled) {\n    transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n    background-color: #a74604;\n    color: white; }\n    .btn:hover:not(.btn_disabled) .btn__icon, .file-input__label:hover:not(.btn_disabled) .btn__icon, .result-redirect__btn:hover:not(.btn_disabled) .btn__icon {\n      transition: background-color 0.5s ease 0s;\n      background-color: white; }\n  .btn:active:not(.btn_disabled), .file-input__label:active:not(.btn_disabled), .result-redirect__btn:active:not(.btn_disabled) {\n    transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n    background-color: #7f3503;\n    color: white; }\n    .btn:active:not(.btn_disabled) .btn__icon, .file-input__label:active:not(.btn_disabled) .btn__icon, .result-redirect__btn:active:not(.btn_disabled) .btn__icon {\n      transition: background-color 0.2s ease 0s;\n      background-color: white; }\n  .btn::-moz-focus-inner, .file-input__label::-moz-focus-inner, .result-redirect__btn::-moz-focus-inner {\n    border: 0; }\n  .btn:focus, .file-input__label:focus, .result-redirect__btn:focus {\n    outline: none; }\n  .btn_size_large {\n    height: 40px; }\n    .btn_size_large .btn__text {\n      line-height: 20px; }\n  .btn_color_muted {\n    border-color: #E0E0E0;\n    transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n    background-color: #F7F7F7;\n    color: #A9A9A9; }\n    .btn_color_muted .btn__icon {\n      transition: background-color 0.5s ease 0s;\n      background-color: #A9A9A9; }\n    .btn_color_muted:hover:not(.btn_disabled) {\n      transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n      background-color: #c4c4c4;\n      color: #767676; }\n      .btn_color_muted:hover:not(.btn_disabled) .btn__icon {\n        transition: background-color 0.5s ease 0s;\n        background-color: #767676; }\n    .btn_color_muted:active:not(.btn_disabled) {\n      transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n      background-color: #b0b0b0;\n      color: #434343; }\n      .btn_color_muted:active:not(.btn_disabled) .btn__icon {\n        transition: background-color 0.2s ease 0s;\n        background-color: #434343; }\n  .btn_disabled {\n    opacity: 0.6;\n    cursor: not-allowed; }\n  .btn__inner {\n    display: flex;\n    flex-direction: row;\n    align-content: center;\n    justify-content: center; }\n  .btn__text {\n    margin: auto 0;\n    font-size: 16px;\n    line-height: 16px;\n    padding-top: 1px; }\n@-moz-document url-prefix() {\n  .btn__text {\n    padding-top: 0; } }\n    .btn__text_normal {\n      color: black;\n      font-weight: normal; }\n  .btn__icon {\n    margin: auto 8px auto 0; }\n\n.checkbox {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  position: relative;\n  top: -3px;\n  vertical-align: bottom;\n  z-index: 200;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  height: 14px;\n  width: 14px;\n  margin: 0;\n  border-radius: 3px;\n  cursor: pointer;\n  background-color: #fb6a06; }\n  .checkbox:checked::before {\n    content: \"\";\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___19___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___19___ + "); }\n  .checkbox:focus {\n    outline: none; }\n  .checkbox_size_small {\n    width: 12px;\n    height: 12px; }\n    .checkbox_size_small::before {\n      margin-bottom: 0; }\n  .checkbox_size_large {\n    width: 16px;\n    height: 16px; }\n\n.form-group {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  padding: 3px 0; }\n  .form-group:last-of-type {\n    padding-bottom: 0; }\n  .form-group_align_space-between {\n    flex-direction: row;\n    justify-content: space-between; }\n  .form-group_align_center {\n    flex-direction: row;\n    justify-content: center; }\n  .form-group_align_stretch {\n    flex-direction: row;\n    justify-content: stretch; }\n    .form-group_align_stretch .form-group__field {\n      flex-grow: 1; }\n  .form-group_size_inline {\n    padding: 0; }\n  .form-group_size_large {\n    padding-bottom: 10px; }\n  .form-group__help-text {\n    font-size: 12px;\n    margin-top: 4px; }\n    .form-group__help-text_type_error {\n      color: #FF1100; }\n    .form-group__help-text_hidden {\n      display: none;\n      margin-top: 0; }\n  .form-group__title {\n    display: block;\n    font-size: 14px;\n    font-weight: bold;\n    text-align: center; }\n    .form-group__title_align_left {\n      text-align: left; }\n\n.file-input {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  height: 28px;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px; }\n  .file-input__label {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    flex-grow: 0;\n    height: 30px;\n    margin: -1px;\n    border: none;\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n    border-top-left-radius: inherit;\n    border-bottom-left-radius: inherit;\n    box-shadow: none; }\n  .file-input__field {\n    width: 0.1px;\n    height: 0.1px;\n    opacity: 0;\n    overflow: hidden;\n    position: absolute;\n    z-index: -1; }\n  .file-input__info {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    min-width: 130px;\n    overflow: hidden;\n    flex-grow: 1;\n    white-space: nowrap;\n    padding: 0 15px;\n    font-size: 12px; }\n\n.input {\n  position: relative;\n  z-index: 200;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  min-width: fit-content;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px;\n  transition: box-shadow 0.2s ease 0s;\n  border-width: 1px; }\n  .input:focus-within {\n    z-index: 300;\n    border-color: lightblue;\n    -webkit-box-shadow: 0 0 50px -12px lightblue;\n    -moz-box-shadow: 0 0 50px -12px lightblue;\n    box-shadow: 0 0 50px -12px lightblue; }\n  .input_status_error {\n    border-color: #FF1100; }\n  .input__icon {\n    margin-left: 5px;\n    margin-right: 5px; }\n    .input__icon:last-child {\n      margin-left: 0;\n      margin-right: 10px; }\n    .input__icon:first-child {\n      margin-left: 10px;\n      margin-right: 0; }\n  .input__field {\n    display: inline-block;\n    height: 18px;\n    min-width: 0;\n    flex-grow: 1;\n    margin: 0;\n    padding: 6px 5px 4px 5px;\n    line-height: 12px;\n    border-radius: 3px;\n    border-width: 0;\n    background-color: white;\n    color: black;\n    font-size: 12px;\n    outline: none; }\n@-moz-document url-prefix() {\n  .input__field {\n    height: 15px;\n    padding-bottom: 7px; } }\n    .input__field:first-child {\n      padding-left: 10px; }\n    .input__field:last-child {\n      padding-right: 10px; }\n  .input__field-appendix {\n    display: inline-block;\n    margin: 0;\n    height: 18px;\n    padding: 8px 2px 3px 2px;\n    border-radius: 3px;\n    font-size: 12px;\n    pointer-events: none; }\n@-moz-document url-prefix() {\n  .input__field-appendix {\n    line-height: 12px; } }\n  .input__inner {\n    display: flex;\n    flex-direction: row; }\n  .input__tooltip {\n    position: absolute;\n    left: calc(100% + 8px);\n    z-index: 400;\n    display: table;\n    min-width: 180px;\n    padding: 10px;\n    border-radius: 3px;\n    background-color: white;\n    -webkit-box-shadow: 0 0 50px -5px #676767;\n    -moz-box-shadow: 0 0 50px -5px #676767;\n    box-shadow: 0 0 50px -5px #676767;\n    pointer-events: none; }\n    .input__tooltip::before {\n      position: absolute;\n      top: calc(50% - 4px);\n      left: -6px;\n      content: \"\";\n      border-style: solid;\n      border-width: 4px 6px 4px 0;\n      border-color: transparent white transparent transparent; }\n  .input__tooltip-title {\n    display: table-row;\n    max-width: 30px;\n    font-size: 12px;\n    color: black; }\n  .input__tooltip-help {\n    display: table-row;\n    font-size: 9px;\n    color: #A9A9A9; }\n\n.select {\n  transition: box-shadow 0.2s ease 0s;\n  position: relative;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  height: 28px;\n  min-width: fit-content;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px; }\n  .select:focus-within {\n    z-index: 300;\n    border-color: lightblue;\n    -webkit-box-shadow: 0 0 50px -12px lightblue;\n    -moz-box-shadow: 0 0 50px -12px lightblue;\n    box-shadow: 0 0 50px -12px lightblue; }\n  .select :-moz-focusring {\n    color: transparent;\n    text-shadow: 0 0 0 #000; }\n  .select::after {\n    position: absolute;\n    top: 8px;\n    right: 3px;\n    z-index: 201;\n    pointer-events: none;\n    content: \"\"; }\n  .select_stretched {\n    width: 100%; }\n  .select_status_error {\n    border-color: #FF1100; }\n    .select_status_error:focus-within {\n      border-color: #FF1100; }\n  .select__field {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    display: inline-block;\n    flex-grow: 1;\n    height: 28px;\n    line-height: 28px;\n    padding: 1px 22px 0 10px;\n    font-size: 12px;\n    background-color: white;\n    color: black;\n    border-radius: 3px;\n    border-width: 0; }\n@-moz-document url-prefix() {\n  .select__field {\n    padding-top: 0; } }\n    .select__field:focus {\n      outline: none;\n      border: none; }\n  .select__chosen-icon {\n    margin-left: 10px; }\n\n.field-group {\n  transition: box-shadow 0.2s ease 0s;\n  display: flex;\n  flex-direction: row;\n  align-content: stretch;\n  justify-content: stretch;\n  height: 30px; }\n  .field-group:focus-within {\n    box-shadow: 0 0 50px -12px lightblue; }\n    .field-group:focus-within .field-group__field:not([class*=\"status_error\"]) {\n      border-color: lightblue; }\n  .field-group__field {\n    flex-grow: 1;\n    height: 28px;\n    margin: 0;\n    border-radius: 0;\n    border-right-width: 0;\n    border-left-width: 1px; }\n    .field-group__field:focus-within {\n      box-shadow: none; }\n    .field-group__field:first-child {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px; }\n    .field-group__field:last-child {\n      border-right-width: 1px;\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px; }\n    .field-group__field_stretched_1 {\n      flex-grow: 1; }\n    .field-group__field_stretched_2 {\n      flex-grow: 2; }\n    .field-group__field_stretched_3 {\n      flex-grow: 3; }\n    .field-group__field_stretched_4 {\n      flex-grow: 4; }\n    .field-group__field_stretched_5 {\n      flex-grow: 5; }\n    .field-group__field_stretched_6 {\n      flex-grow: 6; }\n    .field-group__field_stretched_7 {\n      flex-grow: 7; }\n    .field-group__field_stretched_8 {\n      flex-grow: 8; }\n    .field-group__field_stretched_9 {\n      flex-grow: 9; }\n    .field-group__field_stretched_10 {\n      flex-grow: 10; }\n    .field-group__field_stretched_11 {\n      flex-grow: 11; }\n    .field-group__field_stretched_12 {\n      flex-grow: 12; }\n\n.sm-icons-list {\n  display: flex;\n  flex-direction: row;\n  justify-content: center; }\n  .sm-icons-list__icon-bg {\n    -webkit-box-shadow: 0 2px 0 0 #F5F5F5;\n    -moz-box-shadow: 0 2px 0 0 #F5F5F5;\n    box-shadow: 0 2px 0 0 #F5F5F5;\n    margin: 0 2px; }\n\n.pagination {\n  width: 50%;\n  margin: 20px auto;\n  text-align: center; }\n  .pagination__link {\n    padding: 3px 10px;\n    height: 30px;\n    border: #a74604 solid 1px;\n    border-right: none;\n    background-color: white;\n    color: #1b0c29;\n    cursor: pointer;\n    font-weight: bold; }\n    .pagination__link:focus {\n      outline: none; }\n    .pagination__link:not(.pagination__link_current) {\n      background-color: #fb6a06;\n      color: white;\n      transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n      background-color: #fb6a06;\n      color: white; }\n      .pagination__link:not(.pagination__link_current) .pagination__icon {\n        transition: background-color 0.5s ease 0s;\n        background-color: white; }\n      .pagination__link:not(.pagination__link_current):hover:not(.pagination_disabled) {\n        transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n        background-color: #994002;\n        color: white; }\n        .pagination__link:not(.pagination__link_current):hover:not(.pagination_disabled) .pagination__icon {\n          transition: background-color 0.5s ease 0s;\n          background-color: white; }\n      .pagination__link:not(.pagination__link_current):active:not(.pagination_disabled) {\n        transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n        background-color: #702f02;\n        color: white; }\n        .pagination__link:not(.pagination__link_current):active:not(.pagination_disabled) .pagination__icon {\n          transition: background-color 0.2s ease 0s;\n          background-color: white; }\n    .pagination__link:hover:not(.pagination__link_current) {\n      color: #6614b0;\n      cursor: pointer; }\n    .pagination__link_first {\n      border-bottom-left-radius: 3px;\n      border-top-left-radius: 3px; }\n    .pagination__link_last {\n      border-bottom-right-radius: 3px;\n      border-top-right-radius: 3px;\n      border-right: #a74604 solid 1px; }\n    .pagination__link_current {\n      background-color: white;\n      color: #fb6a06;\n      cursor: auto; }\n\n.authors {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  margin-top: 4%;\n  padding: 5%;\n  border-radius: 8px;\n  background-color: rgba(255, 255, 255, 0.5); }\n  .authors__description {\n    text-align: center;\n    font-size: 20px; }\n  .authors__header {\n    font-size: 40px;\n    font-weight: bold; }\n  .authors__img {\n    height: 300px;\n    width: 300px;\n    border: 1px solid #E0E0E0;\n    border-radius: 100%; }\n  .authors__item {\n    width: 400px;\n    margin: 0 40px 40px;\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n  .authors__items {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: center;\n    align-items: center;\n    margin-top: 80px; }\n  .authors__title {\n    text-align: center;\n    font-size: 30px;\n    margin: 10px 0 0; }\n  .authors__subtitle {\n    text-align: center;\n    font-size: 16px;\n    margin: 0 0 10px;\n    color: #A9A9A9; }\n  .authors__close-popup {\n    position: absolute;\n    top: 10px;\n    right: 10px; }\n\n.header {\n  display: flex;\n  align-self: stretch;\n  justify-self: flex-start;\n  align-items: center;\n  height: 4em;\n  min-height: 4em;\n  padding-left: 5%;\n  background-color: #fb6a06; }\n  .header_main {\n    margin: 0 8px 24px; }\n  .header__title {\n    margin: 0 0 0 4px;\n    padding: 0;\n    font-size: 3em;\n    font-weight: bolder;\n    color: white; }\n    .header__title:hover {\n      text-decoration: none; }\n  .header__link {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: center; }\n    .header__link:hover {\n      text-decoration: none; }\n\n.login-form__remember-me-label, .login-form__forgot-password-link {\n  font-size: 12px; }\n.login-form__remember-me-label {\n  margin-left: 4px; }\n.login-form__double-btn {\n  margin-top: 10px; }\n.login-form__sumbit-btn {\n  margin-right: 4px;\n  flex-grow: 1; }\n.login-form__cancel-btn {\n  flex-grow: 0; }\n\n.login-popup {\n  padding: 0;\n  margin: auto 0;\n  max-width: 300px; }\n  .login-popup__hr {\n    margin: 16px -16px; }\n  .login-popup__continue-with-text {\n    margin: 8px 0;\n    font-size: 9px;\n    text-align: center;\n    font-weight: bold;\n    color: #A9A9A9; }\n  .login-popup__signup-link {\n    font-size: 12px;\n    text-align: center;\n    font-weight: bold; }\n\n.menu {\n  margin: 4% auto 0 auto;\n  width: 60%;\n  height: 90%;\n  min-width: fit-content;\n  max-width: 600px;\n  border: 0;\n  border-radius: 3px; }\n  .menu__link {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n    height: 100%; }\n    .menu__link:hover {\n      text-decoration: none; }\n  .menu__item {\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin-bottom: 4%;\n    height: 4.5rem;\n    background-color: #fb6a06;\n    color: white;\n    border-radius: 5px;\n    box-shadow: 0 0 20px rgba(0, 0, 0, 0.71); }\n  .menu__dropdown-btn {\n    position: absolute;\n    top: 20px;\n    right: 10px; }\n  .menu__text {\n    width: 85%;\n    text-align: center;\n    font-size: 2rem;\n    font-weight: bold;\n    color: white; }\n  .menu__icon-bg {\n    width: 15%;\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0; }\n\n.profile-info {\n  display: table;\n  border-collapse: collapse;\n  border-spacing: 10px;\n  padding: 20px; }\n  .profile-info__item {\n    display: table-row;\n    height: 40px;\n    white-space: nowrap;\n    border-bottom: 1px solid #E0E0E0; }\n  .profile-info .profile-info__item-name, .profile-info .profile-info__item-value {\n    display: table-cell;\n    vertical-align: middle; }\n  .profile-info__item-name {\n    font-weight: bold; }\n  .profile-info__item-value {\n    padding-left: 40px; }\n\n.profile-popup {\n  align-items: center;\n  max-width: 400px; }\n  .profile-popup_main {\n    margin-top: 4%; }\n  .profile-popup__profile-info {\n    max-width: fit-content;\n    margin: 20px auto 10px; }\n  .profile-popup__profile-icon {\n    display: flex;\n    justify-content: center;\n    width: 140px;\n    height: 140px;\n    margin: 0 auto;\n    overflow: hidden;\n    object-fit: cover;\n    border-radius: 100%; }\n  .profile-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    margin: 0 auto;\n    padding: 0 40px; }\n    .profile-popup__double-btn_center {\n      flex-direction: row;\n      justify-content: center; }\n  .profile-popup__btn {\n    width: 140px;\n    margin: 0 4px; }\n    .profile-popup__btn:first-child {\n      margin-left: 0; }\n    .profile-popup__btn:last-child {\n      margin-right: 0; }\n\n.scoreboard {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start;\n  min-height: fit-content;\n  margin-top: 4%;\n  padding: 2%;\n  border-radius: 7px;\n  background-color: white; }\n  .scoreboard__items {\n    max-width: 600px;\n    min-width: 450px; }\n  .scoreboard__item {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    height: 60px;\n    border-bottom: 1px solid #fb6a06; }\n    .scoreboard__item_place_first, .scoreboard__item_place_second, .scoreboard__item_place_third {\n      font-size: 20px;\n      font-weight: bold; }\n      .scoreboard__item_place_first .scoreboard__link, .scoreboard__item_place_second .scoreboard__link, .scoreboard__item_place_third .scoreboard__link {\n        position: relative; }\n        .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n          position: absolute;\n          top: -25px;\n          width: 40px;\n          height: 40px;\n          content: \"\"; }\n    .scoreboard__item_place_first .scoreboard__link::before {\n      background-color: #FFD700; }\n    .scoreboard__item_place_second .scoreboard__link::before {\n      background-color: #C0C0C0; }\n    .scoreboard__item_place_third .scoreboard__link::before {\n      background-color: #CD7F32; }\n  .scoreboard__user-data {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: flex-start; }\n  .scoreboard__link {\n    display: flex;\n    flex-direction: row;\n    align-items: center; }\n    .scoreboard__link:hover {\n      text-decoration: black; }\n  .scoreboard__avatar {\n    display: inline-block;\n    height: 40px;\n    width: 40px;\n    margin-right: 10px;\n    border-radius: 100%;\n    vertical-align: middle;\n    line-height: 40px; }\n  .scoreboard__place {\n    display: inline-block;\n    margin-right: 10px;\n    width: 20px; }\n  .scoreboard__data-field {\n    display: flex;\n    align-items: center; }\n  .scoreboard__username {\n    padding-left: 10px;\n    color: black; }\n\n.signup-popup {\n  -webkit-align-self: center;\n  align-self: center;\n  padding: 0;\n  max-width: 450px; }\n  .signup-popup_main {\n    margin: 4% 0 0 0; }\n  .signup-popup__hr {\n    margin: 12px -16px 12px -16px; }\n  .signup-popup__explanation-text {\n    margin: 8px 0;\n    font-size: 12px;\n    color: #A9A9A9; }\n  .signup-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    align-content: flex-start; }\n  .signup-popup__signup-btn {\n    margin-right: 4px; }\n  .signup-popup__cancel-btn {\n    margin-left: 4px; }\n\n.signup-form__date-select:last-child {\n  margin-right: 0; }\n.signup-form__form-group {\n  margin: 8px 0; }\n\n.update-profile-popup {\n  max-width: 250px;\n  border: 1px #a74604 solid; }\n  .update-profile-popup__hr {\n    margin: 16px -15px 16px -15px; }\n  .update-profile-popup__title {\n    margin: 0 0 16px 0; }\n  .update-profile-popup__continue-with-text {\n    margin: 8px 0;\n    font-size: 9px;\n    text-align: center;\n    color: #A9A9A9;\n    font-weight: bold; }\n  .update-profile-popup__signup-link {\n    font-size: 12px;\n    text-align: center;\n    font-weight: bold; }\n  .update-profile-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    align-content: flex-start; }\n  .update-profile-popup__update-btn {\n    margin-right: 4px; }\n  .update-profile-popup__cancel-btn {\n    margin-left: 4px; }\n\n.not-found-page {\n  width: 55%;\n  margin: auto auto;\n  border-radius: 8px;\n  background-color: rgba(255, 255, 255, 0.28);\n  padding: 20px; }\n  .not-found-page__link {\n    font-size: 1.5rem;\n    font-weight: bold;\n    text-decoration: underline;\n    color: black; }\n  .not-found-page__text {\n    font-weight: bold; }\n    .not-found-page__text_main {\n      font-size: 4rem;\n      color: black; }\n    .not-found-page__text_additional {\n      margin-bottom: 4%;\n      font-size: 1.5rem;\n      color: #1c1c1c; }\n\n.game-over {\n  position: relative;\n  width: 42rem;\n  align-items: center;\n  margin: auto 0;\n  background-color: rgba(226, 216, 216, 0.6);\n  border-radius: 5px;\n  max-width: 56rem; }\n  .game-over_multi {\n    width: 56rem; }\n  .game-over__column {\n    display: inline-block;\n    width: 33.33%;\n    vertical-align: top; }\n  .game-over__title {\n    display: block;\n    text-align: center;\n    font-size: 45px;\n    font-weight: bold;\n    margin-top: 4%; }\n  .game-over_main {\n    margin-top: 4%; }\n  .game-over__profile-info {\n    max-width: fit-content;\n    margin: 20px auto 10px; }\n  .game-over__profile-icon {\n    display: flex;\n    justify-content: center;\n    width: 140px;\n    height: 140px;\n    margin: 0 auto;\n    overflow: hidden;\n    object-fit: cover;\n    border-radius: 100%; }\n  .game-over__btn {\n    width: 140px;\n    margin: 0 4px; }\n    .game-over__btn:first-child {\n      margin-left: 0; }\n    .game-over__btn:last-child {\n      margin-right: 0; }\n\n.result-time {\n  margin-left: auto;\n  margin-right: auto;\n  width: 12rem;\n  border: 4px solid #0e100f;\n  border-radius: 10px;\n  margin-top: 1rem; }\n  .result-time__title {\n    text-align: center;\n    font-size: 24px;\n    font-weight: lighter;\n    color: black; }\n  .result-time__seconds {\n    font-weight: bold;\n    text-align: center;\n    font-size: 50px; }\n\n.game-info {\n  align-items: center;\n  margin: auto 0; }\n  .game-info_single {\n    padding-top: 3rem; }\n  .game-info_main {\n    display: block;\n    padding-top: 9rem; }\n    .game-info_main_title {\n      margin-bottom: 2rem; }\n  .game-info__one-btn {\n    position: absolute;\n    bottom: 0;\n    top: 38%;\n    left: 50%;\n    transform: translate(-50%, 70%); }\n  .game-info__avatar {\n    border-radius: 8rem;\n    width: 185px;\n    margin-left: auto;\n    margin-right: auto;\n    display: block; }\n  .game-info__nickname {\n    text-align: center;\n    font-weight: bold;\n    font-family: sans-serif;\n    font-size: 45px; }\n  .game-info__item {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 1rem 1rem 0rem 1rem;\n    font-family: Helvetica, sans-serif;\n    font-weight: normal; }\n    .game-info__item-name {\n      font-size: 25px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      padding-right: 10px; }\n    .game-info__item-value {\n      font-size: 35px;\n      font-weight: bold;\n      padding-left: 10px; }\n\n.result-redirect {\n  padding: 1rem;\n  font-family: Helvetica, sans-serif;\n  font-weight: normal;\n  position: relative;\n  bottom: 0;\n  margin-left: auto;\n  margin-right: auto;\n  width: 33rem; }\n  .result-redirect__item_center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 1rem;\n    font-family: Helvetica, sans-serif;\n    font-weight: normal; }\n  .result-redirect__btn {\n    display: block;\n    width: 33rem;\n    position: relative;\n    top: 50%;\n    left: 50%;\n    margin-right: -50%;\n    transform: translate(-50%, 0%);\n    border: 1px solid #a3653bde;\n    -webkit-box-shadow: 0 2px #977575a6;\n    -moz-box-shadow: 0 2px #977575a6;\n    box-shadow: 0 2px #977575a6;\n    height: 55px;\n    width: -moz-available;\n    width: -webkit-fill-available;\n    width: 33rem; }\n  .result-redirect__center {\n    margin-left: auto;\n    margin-right: auto;\n    width: 18rem;\n    padding-top: 1rem; }\n  .result-redirect__link {\n    text-align: center;\n    color: #282222cc;\n    font-weight: bold;\n    font-size: 25px;\n    text-decoration: underline; }\n  .result-redirect__one-btn {\n    position: absolute;\n    bottom: 0;\n    top: 38%;\n    left: 50%;\n    transform: translate(-50%, 70%); }\n  .result-redirect__text {\n    font-size: 25px; }\n\n.game-msg {\n  padding-top: 1rem;\n  font-size: 45px;\n  font-weight: bold; }\n  .game-msg_center {\n    text-align: center; }\n\n.offline-msg {\n  background: rgba(102, 102, 102, 0.5);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0; }\n  .offline-msg__window {\n    width: 300px;\n    height: 70px;\n    text-align: center;\n    padding: 15px;\n    border: 3px solid black;\n    border-radius: 10px;\n    color: #fb6a06;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    margin: auto;\n    background: #fff; }\n  .offline-msg__btn {\n    display: inline-block;\n    border: 1px solid #fb6a06;\n    color: #fb6a06;\n    padding: 0 12px;\n    margin: 10px;\n    border-radius: 5px;\n    text-decoration: none;\n    background: #f2f2f2;\n    font-size: 14pt;\n    cursor: pointer; }\n    .offline-msg__btn:hover {\n      background: #e6e6ff; }\n", ""]);
 
 
 
@@ -3360,6 +3360,28 @@ function getSingleCookie(name) {
           'id': `help_${ctx['for']}`
         })
       });
+      block('game-info').elem('item')({
+        content: (node, ctx) => [{
+          elem: 'item-name',
+          content: ctx.name
+        }, {
+          elem: 'item-value',
+          content: ctx.value
+        }]
+      });
+      block('game-info').elem('avatar')({
+        tag: 'img'
+      });
+      block('game-info').elem('line')({
+        tag: 'hr'
+      });
+      block('game-info').match((node, ctx) => !ctx.content && ctx.userInfo)({
+        content: (node, ctx) => ctx.userInfo.map(elt => ({
+          elem: 'item',
+          name: elt[0],
+          value: elt[1] || '-'
+        }))
+      });
       block('*').match((node, ctx) => ctx.wrappedInside)({
         addMix: (node, ctx) => ({
           block: ctx.wrappedInside,
@@ -3368,6 +3390,9 @@ function getSingleCookie(name) {
         })
       }); // not needed
 
+      block('hexagons')({
+        tag: 'canvas'
+      });
       block('icon')({
         tag: (node, ctx) => ctx.tag || 'i'
       }); // not needed
@@ -3586,6 +3611,21 @@ function getSingleCookie(name) {
               icon: 'back',
               btnText: 'Назад'
             }]
+          }]
+        }]
+      });
+      block('result-redirect').elem('btn')({
+        tag: 'button'
+      });
+      block('result-redirect').elem('link')({
+        tag: 'a  '
+      });
+      block('result-redirect').elem('btn').match((node, ctx) => !ctx.content && ctx.btnText)({
+        content: (node, ctx) => [{
+          elem: 'inner',
+          content: [{
+            elem: 'text',
+            content: ctx.btnText
           }]
         }]
       });
@@ -5694,6 +5734,28 @@ function getSingleCookie(name) {
           'id': `help_${ctx['for']}`
         })
       });
+      block('game-info').elem('item')({
+        content: (node, ctx) => [{
+          elem: 'item-name',
+          content: ctx.name
+        }, {
+          elem: 'item-value',
+          content: ctx.value
+        }]
+      });
+      block('game-info').elem('avatar')({
+        tag: 'img'
+      });
+      block('game-info').elem('line')({
+        tag: 'hr'
+      });
+      block('game-info').match((node, ctx) => !ctx.content && ctx.userInfo)({
+        content: (node, ctx) => ctx.userInfo.map(elt => ({
+          elem: 'item',
+          name: elt[0],
+          value: elt[1] || '-'
+        }))
+      });
       block('*').match((node, ctx) => ctx.wrappedInside)({
         addMix: (node, ctx) => ({
           block: ctx.wrappedInside,
@@ -5702,6 +5764,9 @@ function getSingleCookie(name) {
         })
       }); // not needed
 
+      block('hexagons')({
+        tag: 'canvas'
+      });
       block('icon')({
         tag: (node, ctx) => ctx.tag || 'i'
       }); // not needed
@@ -5923,6 +5988,21 @@ function getSingleCookie(name) {
           }]
         }]
       });
+      block('result-redirect').elem('btn')({
+        tag: 'button'
+      });
+      block('result-redirect').elem('link')({
+        tag: 'a  '
+      });
+      block('result-redirect').elem('btn').match((node, ctx) => !ctx.content && ctx.btnText)({
+        content: (node, ctx) => [{
+          elem: 'inner',
+          content: [{
+            elem: 'text',
+            content: ctx.btnText
+          }]
+        }]
+      });
       block('scoreboard').elem('username')({
         tag: 'span'
       });
@@ -6111,6 +6191,116 @@ class AuthorsController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_0__
 
 /***/ }),
 
+/***/ "./static/public/js/controllers/game-controller.js":
+/*!*********************************************************!*\
+  !*** ./static/public/js/controllers/game-controller.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameController; });
+/* harmony import */ var _game_mods_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/mods.js */ "./static/public/js/game/mods.js");
+/* harmony import */ var _game_game_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game/game.js */ "./static/public/js/game/game.js");
+/* harmony import */ var _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/game-view.js */ "./static/public/js/views/game-view.js");
+/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
+ // import NotificationController from '../controllers/notification-controller.js';
+
+
+
+
+
+
+/**
+ * The main class GameController
+ */
+
+class GameController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"] {
+  /**
+   * Init game object
+   * @param {HTMLElement} parent
+   */
+  constructor(parent) {
+    super(parent);
+    this.view = new _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
+    this.game = null;
+    this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_4__["default"]; // this.notify = NotificationController.Instance;
+
+    this.bus.on('CLOSE_GAME', function () {
+      if (this.active) {
+        this.router.open('/');
+      }
+    }.bind(this));
+  }
+  /**
+   * Destructor
+   */
+
+
+  destructor() {
+    super.destructor();
+    this.game.destroy();
+  }
+  /**
+   * Choose and make action
+   * @param {Object} serverData
+   */
+
+
+  static selectAction(serverData) {
+    switch (serverData) {
+      case 'event':
+        {
+          // handel event
+          break;
+        }
+
+      case 'other event':
+        {
+          // handel other event
+          break;
+        }
+
+      case 'other event too':
+        {
+          // handel other event too
+          break;
+        }
+
+      default:
+        {// handel default event
+        }
+    }
+  }
+  /**
+   * Create game logic
+   */
+
+
+  action() {
+    // init event listeners
+    // while WebSocket.connect
+    // while (this.model.run()) {
+    //   const angel = this.model.getAngel();
+    //   this.notify.sendAngel(angel);
+    // }
+    // this.endView.render(this.model.result());
+    let mode = '';
+
+    if (false) {} else {
+      mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
+    }
+
+    this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](mode, this.view);
+    this.game.start();
+  }
+
+}
+
+/***/ }),
+
 /***/ "./static/public/js/controllers/game-menu-controller.js":
 /*!**************************************************************!*\
   !*** ./static/public/js/controllers/game-menu-controller.js ***!
@@ -6139,6 +6329,92 @@ class GameMenuController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_0_
   constructor(parent) {
     super(parent, true);
     this.view = new _views_game_menu_view_js__WEBPACK_IMPORTED_MODULE_1__["default"](parent);
+  }
+  /**
+   * Create action
+   */
+
+
+  action() {
+    this.view.render();
+  }
+
+}
+;
+
+/***/ }),
+
+/***/ "./static/public/js/controllers/game-over-controller.js":
+/*!**************************************************************!*\
+  !*** ./static/public/js/controllers/game-over-controller.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameOverController; });
+/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
+/* harmony import */ var _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/game-over-single-view.js */ "./static/public/js/views/game-over-single-view.js");
+
+
+
+
+/**
+ * @class GameMenuController
+ */
+
+class GameOverController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  /**
+   * Construct obj
+   * @param {HTMLElement} parent
+   */
+  constructor(parent) {
+    super(parent);
+    this.view = new _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_1__["default"](parent);
+  }
+  /**
+   * Create action
+   */
+
+
+  action() {
+    this.view.render();
+  }
+
+}
+;
+
+/***/ }),
+
+/***/ "./static/public/js/controllers/game-over-mlt-controller.js":
+/*!******************************************************************!*\
+  !*** ./static/public/js/controllers/game-over-mlt-controller.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameOverMltController; });
+/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
+/* harmony import */ var _views_game_over_mlt_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/game-over-mlt-view.js */ "./static/public/js/views/game-over-mlt-view.js");
+
+
+
+
+/**
+ * @class GameMenuController
+ */
+
+class GameOverMltController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  /**
+   * Construct obj
+   * @param {HTMLElement} parent
+   */
+  constructor(parent) {
+    super(parent);
+    this.view = new _views_game_over_mlt_view_js__WEBPACK_IMPORTED_MODULE_1__["default"](parent);
   }
   /**
    * Create action
@@ -6348,7 +6624,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_user_service_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../models/user-service.js */ "./static/public/js/models/user-service.js");
 
 
- // import MenuModel from '../models/menu-model.js';
 
 
 
@@ -7180,6 +7455,74 @@ class View {
 
 /***/ }),
 
+/***/ "./static/public/js/event-bus.js":
+/*!***************************************!*\
+  !*** ./static/public/js/event-bus.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Event bus
+ */
+class Bus {
+  /**
+   * Event bus constructor
+   */
+  constructor() {
+    this.listeners = {};
+  }
+  /**
+   * Add event
+   * @param {String} event
+   * @param {Function} listener
+   * @return {Bus}
+   */
+
+
+  on(event, listener) {
+    (this.listeners[event] || (this.listeners[event] = [])).push(listener);
+    return this;
+  }
+  /**
+   * Remove listener
+   * @param {String} event
+   * @param {Function} listener
+   * @return {Bus}
+   */
+
+
+  off(event, listener) {
+    if (listener) {
+      this.listeners[event] = (this.listeners[event] || []).filter(l => l !== listener);
+    } else {
+      this.listeners[event] = [];
+    }
+
+    return this;
+  }
+  /**
+   * Produce event
+   * @param {String} event
+   * @param {Object} data
+   * @return {Bus}
+   */
+
+
+  emit(event, data) {
+    (this.listeners[event] || (this.listeners[event] = [])).forEach(l => l(data));
+    return this;
+  }
+
+}
+
+const bus = new Bus();
+/* harmony default export */ __webpack_exports__["default"] = (bus);
+
+/***/ }),
+
 /***/ "./static/public/js/file-input.js":
 /*!****************************************!*\
   !*** ./static/public/js/file-input.js ***!
@@ -7200,9 +7543,9 @@ const BLOCK = 'file-input';
  */
 
 function previewFile() {
-  let preview = document.querySelector('img');
-  let file = document.querySelector('input[type=file]').files[0];
-  let reader = new FileReader();
+  const preview = document.querySelector('img');
+  const file = document.querySelector('input[type=file]').files[0];
+  const reader = new FileReader();
 
   reader.onloadend = function () {
     preview.src = reader.result;
@@ -7211,7 +7554,7 @@ function previewFile() {
   if (file) {
     reader.readAsDataURL(file);
   } else {
-    preview.src = "";
+    preview.src = '';
   }
 }
 /**
@@ -7236,10 +7579,9 @@ function initFileInputs() {
 
     field.onchange = e => {
       if (e.srcElement.id === 'updateForm_avatar') {
-        previewFile(e.target);
+        previewFile();
       }
 
-      ;
       const elt = e.target || e.srcElement;
 
       if (elt.files && elt.files.length > 0) {
@@ -7285,6 +7627,920 @@ function getBase64(file) {
 
 /***/ }),
 
+/***/ "./static/public/js/game/controllers.js":
+/*!**********************************************!*\
+  !*** ./static/public/js/game/controllers.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameControllers; });
+/**
+ * @class GameControllers
+ */
+class GameControllers {
+  /**
+   * Constructor
+   */
+  constructor() {
+    this.previous = {};
+    this.keys = [];
+    this._onPress = this._keyHandler.bind(this, 'press');
+    this._onUp = this._keyHandler.bind(this, 'up');
+  }
+  /**
+   * Начинаем слушать события клавиатуры
+   */
+
+
+  start() {
+    document.addEventListener('keydown', this._onPress);
+    document.addEventListener('keyup', this._onUp);
+  }
+  /**
+   * Прекращаем слушать события клавиатуры
+   */
+
+
+  destroy() {
+    document.removeEventListener('keydown', this._onPress);
+    document.removeEventListener('keyup', this._onUp);
+  }
+  /**
+   * Нажата ли клавиша?
+   * @param  {string}  key
+   * @return {boolean}
+   */
+
+
+  is(key) {
+    return this.keys[key];
+  }
+  /**
+   * Обработчик события
+   * @param  {string} type
+   * @param  {MouseEvent} event
+   */
+
+
+  _keyHandler(type, event) {
+    if (event.type.toLowerCase() === 'keydown') {
+      this.keys.push(event.key);
+    }
+  }
+  /**
+   * Получить клавиши, нажатые с момента прошлого запроса
+   * @return {*}
+   */
+
+
+  diff() {
+    // let allkeys = [];
+    // allkeys.push.apply(allkeys, Object.keys(this.previous));
+    // allkeys.push.apply(allkeys, Object.keys(this.keys));
+    // allkeys = allkeys.map((k) => k.toLowerCase());
+    // // allkeys = allkeys.filter((key, pos, all) => {
+    // //   return all.indexOf(key, pos + 1) === -1;
+    // // });
+    // console.log(allkeys)
+    //
+    // const clicked = allkeys.reduce((res, key) => {
+    //   res[key] = !this.previous[key] && this.keys[key];
+    //   return res;
+    // }, {});
+    //
+    // this.previous = Object.assign({}, this.keys);
+    const newKeys = this.keys;
+    this.keys = [];
+    return newKeys;
+  }
+
+}
+
+/***/ }),
+
+/***/ "./static/public/js/game/core/core.js":
+/*!********************************************!*\
+  !*** ./static/public/js/game/core/core.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameCore; });
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./events.js */ "./static/public/js/game/core/events.js");
+
+
+const KEYS = {
+  LEFT: ['a', 'A', 'ф', 'Ф', 'ArrowLeft'],
+  RIGHT: ['d', 'D', 'в', 'В', 'ArrowRight']
+};
+/**
+ * Base class for all game cores
+ */
+
+class GameCore {
+  /**
+   *
+   * @param controller
+   * @param scene
+   */
+  constructor(controller, scene) {
+    this.controller = controller;
+    this.scene = scene;
+    this.onGameStarted = this.onGameStarted.bind(this);
+    this.onGameFinished = this.onGameFinished.bind(this);
+    this.onControllsPressed = this.onControllsPressed.bind(this);
+    this.onGameStateChanged = this.onGameStateChanged.bind(this);
+    this.controllersLoopIntervalId = null;
+  }
+  /**
+   *
+   */
+
+
+  start() {
+    _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].START_GAME, this.onGameStarted);
+    _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].FINISH_GAME, this.onGameFinished);
+    _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, this.onControllsPressed);
+    _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].GAME_STATE_CHANGED, this.onGameStateChanged);
+    const controller = this.controller;
+    this.controllersLoopIntervalId = setInterval(() => {
+      const actions = controller.diff(); // if (Object.keys(actions).some((k) => actions[k])) {
+
+      if (actions.length > 0) {
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, actions);
+      }
+    }, 50);
+  }
+  /**
+   *
+   */
+
+
+  destroy() {
+    clearInterval(this.controllersLoopIntervalId);
+    _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].START_GAME, this.onGameStarted);
+    _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].FINISH_GAME, this.onGameFinished);
+    _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, this.onControllsPressed);
+    _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].GAME_STATE_CHANGED, this.onGameStateChanged);
+    this.controller.destroy();
+    this.scene.stop();
+  }
+  /**
+   *
+   * @param evt
+   */
+
+
+  onControllsPressed(evt) {
+    throw new Error('This method must be overridden');
+  }
+  /**
+   *
+   * @param evt
+   */
+
+
+  onGameStarted(evt) {
+    throw new Error('This method must be overridden');
+  }
+  /**
+   *
+   * @param evt
+   */
+
+
+  onGameFinished(evt) {
+    throw new Error('This method must be overridden');
+  }
+  /**
+   *
+   * @param evt
+   */
+
+
+  onGameStateChanged(evt) {
+    throw new Error('This method must be overridden');
+  }
+  /**
+   *
+   * @param name
+   * @param data
+   * @return {boolean}
+   * @private
+   */
+
+
+  _pressed(name, data) {
+    return KEYS[name].some(k => data.toLowerCase() === k.toLowerCase());
+  }
+
+}
+;
+
+/***/ }),
+
+/***/ "./static/public/js/game/core/events.js":
+/*!**********************************************!*\
+  !*** ./static/public/js/game/core/events.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const EVENTS = {
+  START_GAME: 'START_GAME',
+  FINISH_GAME: 'FINISH_GAME',
+  CONTROLS_PRESSED: 'CONTROLS_PRESSED',
+  GAME_STATE_CHANGED: 'GAME_STATE_CHANGED'
+};
+/* harmony default export */ __webpack_exports__["default"] = (EVENTS);
+
+/***/ }),
+
+/***/ "./static/public/js/game/core/geometry.js":
+/*!************************************************!*\
+  !*** ./static/public/js/game/core/geometry.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Geometry; });
+/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./settings.js */ "./static/public/js/game/core/settings.js");
+
+const sqrt3 = 1.7320508075688772;
+/**
+ * @class Geometry
+ */
+
+class Geometry {
+  /**
+   * Check collision of hexagon and cursor
+   * @param {Object} hexagon
+   * @param {{x: number, y: number}} cursor
+   * @return {boolean}
+   */
+  static checkHexagonCollision(hexagon, cursor) {
+    const lines = this.convertHexagonToLines(hexagon);
+    let isCollide = false;
+    console.log(hexagon, lines);
+    lines.forEach(line => {
+      line = this.rotateLine(line.first, line.second, hexagon.angle);
+      console.log(cursor, line.first, line.second);
+
+      if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
+        isCollide = true;
+      }
+    });
+    return isCollide;
+  }
+  /**
+   * Convert hexagon object to array of lines
+   * @param {object} hexagon
+   * @return {Array} array of lines
+   */
+
+
+  static convertHexagonToLines(hexagon) {
+    const lines = [];
+
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].top)) {
+      lines.push({
+        first: {
+          x: -hexagon.side / 2,
+          y: hexagon.side * sqrt3 / 2
+        },
+        second: {
+          x: hexagon.side / 2,
+          y: hexagon.side * sqrt3 / 2
+        }
+      });
+    }
+
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topRight)) {
+      lines.push({
+        first: {
+          x: hexagon.side / 2,
+          y: hexagon.side * sqrt3 / 2
+        },
+        second: {
+          x: hexagon.side,
+          y: 0
+        }
+      });
+    }
+
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomRight)) {
+      lines.push({
+        first: {
+          x: hexagon.side,
+          y: 0
+        },
+        second: {
+          x: hexagon.side / 2,
+          y: -hexagon.side * sqrt3 / 2
+        }
+      });
+    }
+
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottom)) {
+      lines.push({
+        first: {
+          x: hexagon.side / 2,
+          y: -hexagon.side * sqrt3 / 2
+        },
+        second: {
+          x: -hexagon.side / 2,
+          y: -hexagon.side * sqrt3 / 2
+        }
+      });
+    }
+
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomLeft)) {
+      lines.push({
+        first: {
+          x: -hexagon.side / 2,
+          y: -hexagon.side * sqrt3 / 2
+        },
+        second: {
+          x: -hexagon.side,
+          y: 0
+        }
+      });
+    }
+
+    if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topLeft)) {
+      lines.push({
+        first: {
+          x: -hexagon.side,
+          y: 0
+        },
+        second: {
+          x: -hexagon.side / 2,
+          y: hexagon.side * sqrt3 / 2
+        }
+      });
+    }
+
+    return lines;
+  }
+  /**
+   * Check collision of cursor and line
+   * @param {{x: number, y: number}} dot0
+   * @param {{x: number, y: number}} dot1
+   * @param {{x: number, y: number}} cursor
+   * @return {boolean}
+   * @private
+   */
+
+
+  static _lineAndCursorCollision(dot0, dot1, cursor) {
+    const eps = 1e-10;
+    const d0 = {
+      x: dot0.x - cursor.x,
+      y: dot0.y - cursor.y
+    };
+    const d1 = {
+      x: dot1.x - dot0.x,
+      y: dot1.y - dot0.y
+    };
+    const a = d1.x * d1.x + d1.y * d1.y;
+    const k = d0.x * d1.x + d0.y * d1.y;
+    const c = d0.x * d0.x + d0.y * d0.y - 225; // CURSOR.height * CURSOR.height;
+
+    const disc = k * k - a * c;
+
+    if (disc < 0) {
+      return false;
+    } else if (Math.abs(disc) < eps) {
+      const t = -k / a;
+      return t > -eps && t < 1 + eps;
+    } else {
+      let t1 = (-k + Math.sqrt(disc)) / a;
+      let t2 = (-k - Math.sqrt(disc)) / a;
+
+      if (t1 > t2) {
+        const t = t1;
+        t1 = t2;
+        t2 = t;
+      }
+
+      return !(t1 >= 0 - eps && t2 <= 1 + eps) && t2 > eps && t1 < 1 - eps;
+    }
+  }
+  /**
+   * Rotate line on angle
+   * @param {{x: number, y: number}} dot0
+   * @param {{x: number, y: number}} dot1
+   * @param {number} angle
+   * @return {{first: *, second: *}}
+   */
+
+
+  static rotateLine(dot0, dot1, angle) {
+    dot0 = this.rotateDot(dot0, angle);
+    dot1 = this.rotateDot(dot1, angle);
+    return {
+      first: dot0,
+      second: dot1
+    };
+  }
+  /**
+   * Rotate dot on angle
+   * @param {{x: number, y: number}} dot
+   * @param {number} angle
+   * @return {{x: number, y: number}}
+   */
+
+
+  static rotateDot(dot, angle) {
+    const newX = dot.x * Math.cos(angle) - dot.y * Math.sin(angle);
+    dot.y = dot.x * Math.sin(angle) + dot.y * Math.cos(angle);
+    dot.x = newX;
+    return dot;
+  }
+  /**
+   * Get coords of cursor center
+   * @param {number} cursorAngle
+   * @return {{x: number, y: number}}
+   */
+
+
+  static cursorAngleToDot(cursorAngle) {
+    return {
+      x: _settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].radius * Math.cos(cursorAngle),
+      y: _settings_js__WEBPACK_IMPORTED_MODULE_0__["CURSOR"].radius * Math.sin(cursorAngle)
+    };
+  }
+
+}
+
+/***/ }),
+
+/***/ "./static/public/js/game/core/offline-core.js":
+/*!****************************************************!*\
+  !*** ./static/public/js/game/core/offline-core.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OfflineGame; });
+/* harmony import */ var _core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core.js */ "./static/public/js/game/core/core.js");
+/* harmony import */ var _geometry_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./geometry.js */ "./static/public/js/game/core/geometry.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./events.js */ "./static/public/js/game/core/events.js");
+/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings.js */ "./static/public/js/game/core/settings.js");
+
+
+
+
+
+const mask2 = 1;
+const mask5 = 31;
+/**
+ * Offline game core class
+ */
+
+class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  /**
+   * Constructor
+   * @param {object} controller
+   * @param {object} scene
+   */
+  constructor(controller, scene) {
+    super(controller, scene);
+    this.scene = scene;
+    this.state = {};
+    this.gameloop = this.gameloop.bind(this);
+    this.gameloopRequestId = null;
+    this.lastFrame = 0;
+  }
+  /**
+   * Start game
+   */
+
+
+  start() {
+    super.start();
+    this.state = {
+      hexagons: [],
+      cursorAngle: Math.PI / 2
+    };
+    this.state.hexagons = Array.from(new Array(3), function (_, position) {
+      return {
+        side: 700 + 250 * position,
+        sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
+        angle: Math.floor(Math.random() * 2 * Math.PI)
+      };
+    });
+    setTimeout(function () {
+      _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].START_GAME, this.state);
+    }.bind(this));
+  }
+  /**
+   * GameController loop action
+   * @param {number} now
+   */
+
+
+  gameloop(now) {
+    const delay = now - this.lastFrame;
+    this.lastFrame = now;
+    this.state.hexagons = this.state.hexagons.map(function (hexagon) {
+      hexagon.side -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].speed * delay;
+      hexagon.angle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].rotatingSpeed * delay;
+      return hexagon;
+    });
+
+    for (let i = 0; i < this.state.hexagons.length; i++) {
+      if (this.state.hexagons[i].side < _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].minSize) {
+        const newHexagon = {
+          side: 1000,
+          sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
+          angle: Math.floor(Math.random() * 2 * Math.PI)
+        };
+        this.state.hexagons[i] = newHexagon;
+      }
+    }
+
+    _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].GAME_STATE_CHANGED, this.state);
+    const cursor = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].cursorAngleToDot(this.state.cursorAngle);
+
+    for (let i = 0; i < this.state.hexagons.length; i++) {
+      const condition = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].checkHexagonCollision(this.state.hexagons[i], cursor);
+
+      if (condition) {
+        console.log(this.state.hexagons[i], cursor);
+        setTimeout(function () {
+          alert('finish'); // for debug
+
+          _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
+        }); // return;
+      }
+    }
+
+    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+  }
+  /**
+   * Control pressed event
+   * @param {object} evt
+   */
+
+
+  onControllsPressed(evt) {
+    evt.forEach(btn => {
+      if (this._pressed('LEFT', btn)) {
+        this.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+      } else if (this._pressed('RIGHT', btn)) {
+        this.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+      }
+    });
+  }
+  /**
+   * Start game event
+   * @param {object} evt
+   */
+
+
+  onGameStarted(evt) {
+    this.controller.start();
+    this.scene.render(evt);
+    this.scene.start();
+    this.lastFrame = performance.now();
+    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+  }
+  /**
+   * Finish game event
+   * @param {object} evt
+   */
+
+
+  onGameFinished(evt) {
+    cancelAnimationFrame(this.gameloopRequestId);
+    this.scene.stop();
+  }
+  /**
+   * State change game event
+   * @param {object} evt
+   */
+
+
+  onGameStateChanged(evt) {
+    this.scene.update(evt);
+  }
+
+}
+
+/***/ }),
+
+/***/ "./static/public/js/game/core/settings.js":
+/*!************************************************!*\
+  !*** ./static/public/js/game/core/settings.js ***!
+  \************************************************/
+/*! exports provided: CURSOR, HEXAGON, MASKS */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CURSOR", function() { return CURSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HEXAGON", function() { return HEXAGON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MASKS", function() { return MASKS; });
+const CURSOR = {
+  radius: 100,
+  height: 15,
+  rotatingSpeed: Math.PI / 20
+};
+const HEXAGON = {
+  minSize: 100,
+  width: 10,
+  speed: 0.2,
+  rotatingSpeed: Math.PI / 4000
+};
+const MASKS = {
+  top: 1,
+  topRight: 2,
+  bottomRight: 4,
+  bottom: 8,
+  bottomLeft: 16,
+  topLeft: 32
+};
+
+/***/ }),
+
+/***/ "./static/public/js/game/game.js":
+/*!***************************************!*\
+  !*** ./static/public/js/game/game.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Game; });
+/* harmony import */ var _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/offline-core.js */ "./static/public/js/game/core/offline-core.js");
+/* harmony import */ var _controllers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controllers.js */ "./static/public/js/game/controllers.js");
+/* harmony import */ var _mods_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mods.js */ "./static/public/js/game/mods.js");
+
+
+
+/**
+ *
+ */
+
+class Game {
+  /**
+   * GameController class constructor
+   * @param {Object} mode
+   * @param {View} view
+   */
+  constructor(mode, view) {
+    let GameConstructor = null;
+
+    switch (mode) {
+      case _mods_js__WEBPACK_IMPORTED_MODULE_2__["default"].ONLINE:
+        {
+          // TODO add online
+          GameConstructor = _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__["default"];
+          break;
+        }
+
+      case _mods_js__WEBPACK_IMPORTED_MODULE_2__["default"].OFFLINE:
+        {
+          GameConstructor = _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__["default"];
+          break;
+        }
+
+      default:
+        throw new Error('Invalid game mode ' + mode);
+    } // this.gameScene = new GameScene(canvas); TODO
+
+
+    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    this.gameCore = new GameConstructor(this.gameControllers, view);
+  }
+  /**
+   * Start game
+   */
+
+
+  start() {
+    this.gameCore.start();
+  }
+  /**
+   * GameController destructor
+   */
+
+
+  destroy() {
+    this.gameCore.destroy();
+  }
+
+}
+
+/***/ }),
+
+/***/ "./static/public/js/game/mods.js":
+/*!***************************************!*\
+  !*** ./static/public/js/game/mods.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const GAME_MODES = {
+  ONLINE: 'ONLINE',
+  OFFLINE: 'OFFLINE'
+};
+/* harmony default export */ __webpack_exports__["default"] = (GAME_MODES);
+
+/***/ }),
+
+/***/ "./static/public/js/graphics/arrow.js":
+/*!********************************************!*\
+  !*** ./static/public/js/graphics/arrow.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserArrow; });
+
+/**
+ * @class UserArrow
+ */
+
+class UserArrow {
+  /**
+   * Construct user arrow element in canvas
+   * @param {Object} ctx
+   * @param {Number} base
+   * @param {Number} height
+   * @param {Number} side
+   * @param {string} color
+   */
+  constructor(ctx, base, height, side, color) {
+    this.ctx = ctx;
+    this.color = color;
+    this.currentAngle = 0;
+    side /= 1.5;
+    this.radius = side + height;
+    this.lineRadius = Math.sqrt(base * base / 4 + side * side);
+    this.alpha = Math.asin(base / 2 / this.lineRadius);
+  }
+  /**
+   * Draw arrow
+   * @param {Number} angle - local angle
+   */
+
+
+  draw(angle = 0) {
+    this.currentAngle = -angle;
+    const vx = Math.cos(this.currentAngle) * this.radius;
+    const vy = Math.sin(this.currentAngle) * this.radius;
+    const x1 = Math.cos(this.currentAngle + this.alpha) * this.lineRadius;
+    const y1 = Math.sin(this.currentAngle + this.alpha) * this.lineRadius;
+    const x2 = Math.cos(this.currentAngle - this.alpha) * this.lineRadius;
+    const y2 = Math.sin(this.currentAngle - this.alpha) * this.lineRadius;
+    this.ctx.fillStyle = this.color;
+    this.ctx.beginPath();
+    this.ctx.moveTo(vx, vy);
+    this.ctx.lineTo(x1, y1);
+    this.ctx.lineTo(x2, y2);
+    this.ctx.closePath();
+    this.ctx.fill();
+  }
+
+}
+
+/***/ }),
+
+/***/ "./static/public/js/graphics/hexagon.js":
+/*!**********************************************!*\
+  !*** ./static/public/js/graphics/hexagon.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Hexagon; });
+
+
+const FALL_SPEED = 1;
+const FALL_SIZE = 5;
+/**
+ * @class Hexagon
+ */
+
+class Hexagon {
+  /**
+   * Create Hexagon in canvas
+   * @param {Object} ctx
+   * @param {Number} side
+   * @param {Number} lineWidth
+   * @param {Number} emptySides
+   * @param {string} color
+   * @param {Number} angle
+   */
+  constructor(ctx, side, lineWidth, emptySides, color, angle) {
+    this.side = side;
+    this.currentSide = side;
+    this.ctx = ctx;
+    this.sidesMask = emptySides;
+    this.lineWidth = lineWidth;
+    this.currentAngle = angle;
+    this.emptySides = new Array(6);
+    this.color = color;
+
+    this._parseMask();
+  }
+  /**
+   * Set parameters for new hexagon
+   * @param {Number} emptySides
+   * @param {string} color
+   */
+
+
+  setNewParameters(emptySides, color) {
+    this.currentSide = this.side;
+    this.sidesMask = emptySides;
+    this.emptySides = [];
+    this.color = color;
+
+    this._parseMask();
+  }
+  /**
+   * Parses mask from server or client to detect blank sides.
+   * @private
+   */
+
+
+  _parseMask() {
+    let copyNum = this.sidesMask;
+
+    for (let i = 0; i < 6 && copyNum; ++i) {
+      this.emptySides[i] = copyNum & 1; // console.log(copyNum);
+
+      copyNum >>= 1;
+    }
+  }
+  /**
+   * Reduces the sides size
+   */
+
+
+  fallDown() {
+    this.currentSide -= FALL_SPEED * FALL_SIZE;
+  }
+  /**
+   * Draw hexagon
+   */
+
+
+  draw() {
+    this.ctx.beginPath();
+    this.ctx.lineWidth = this.lineWidth;
+    this.ctx.strokeStyle = this.color; // let x = -this.currentSide / 2 * Math.sin(this.currentAngle);
+    // let y = this.currentSide / 2 * Math.cos(this.currentAngle);
+    // this.ctx.moveTo(x, y);
+
+    for (let i = 1; i < 7; ++i) {
+      const localAngle = 2 * Math.PI / 6 * (i - 2) - this.currentAngle;
+      const x = this.currentSide / 2 * Math.cos(localAngle);
+      const y = this.currentSide / 2 * Math.sin(localAngle);
+
+      if (this.emptySides[i - 1] || i - 2 >= 0 && this.emptySides[i - 1]) {
+        this.ctx.moveTo(x, y);
+      } else {
+        this.ctx.lineTo(x, y);
+      }
+    }
+
+    this.ctx.restore();
+
+    if (!this.sidesMask) {
+      this.ctx.closePath();
+    }
+
+    this.ctx.stroke();
+  }
+
+}
+
+/***/ }),
+
 /***/ "./static/public/js/main.js":
 /*!**********************************!*\
   !*** ./static/public/js/main.js ***!
@@ -7306,13 +8562,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./controllers/logout-controller.js */ "./static/public/js/controllers/logout-controller.js");
 /* harmony import */ var _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./controllers/update-controller.js */ "./static/public/js/controllers/update-controller.js");
 /* harmony import */ var _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./controllers/game-menu-controller.js */ "./static/public/js/controllers/game-menu-controller.js");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../css/style.css */ "./static/public/css/style.css");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _controllers_game_over_controller_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./controllers/game-over-controller.js */ "./static/public/js/controllers/game-over-controller.js");
+/* harmony import */ var _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./controllers/game-over-mlt-controller.js */ "./static/public/js/controllers/game-over-mlt-controller.js");
+/* harmony import */ var _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./controllers/game-controller.js */ "./static/public/js/controllers/game-controller.js");
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../css/style.css */ "./static/public/css/style.css");
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_15__);
 
 
 __webpack_require__(/*! ./bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js");
 
 __webpack_require__(/*! ./bundle.bemtree.js */ "./static/public/js/bundle.bemtree.js");
+
+
+
 
 
 
@@ -7336,7 +8598,7 @@ if ('serviceWorker' in navigator) {
 
 application.insertAdjacentHTML('beforeend', '<div id="main"></div>');
 const main = document.getElementById('main');
-const router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
+const router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_14__["default"](main)).addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
 router.start();
 
 /***/ }),
@@ -8171,6 +9433,441 @@ class GameMenuView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"]
       }]
     }];
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  }
+
+}
+
+/***/ }),
+
+/***/ "./static/public/js/views/game-over-mlt-view.js":
+/*!******************************************************!*\
+  !*** ./static/public/js/views/game-over-mlt-view.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameOverMultiClass; });
+/* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+
+
+
+/**
+ * @class GameOverMultiClass
+ */
+
+class GameOverMultiClass extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  /**
+   * Construct game over page
+   * @param {HTMLElement} parent
+   */
+  constructor(parent) {
+    super(parent);
+  }
+  /**
+   * render page
+   */
+
+
+  render() {
+    const template = [{
+      block: 'game-over',
+      mods: {
+        multi: true
+      },
+      content: [{
+        elem: 'title',
+        wrappedInside: 'game-over-popup',
+        content: ['Результаты']
+      }, {
+        elem: 'column',
+        content: [{
+          block: 'game-info',
+          content: [{
+            elem: 'avatar',
+            attrs: {
+              src: '/images/user.png'
+            }
+          }, {
+            elem: 'nickname',
+            content: ['USER1']
+          }, {
+            elem: 'item',
+            value: '10:50'
+          }, {
+            elem: 'line'
+          }, {
+            elem: 'item',
+            value: '6,72'
+          }, {
+            elem: 'line'
+          }]
+        }]
+      }, {
+        elem: 'column',
+        mods: {
+          'top': true
+        },
+        content: [{
+          block: 'result-time',
+          title: 'Время',
+          content: [{
+            elem: 'seconds',
+            content: ['64:45']
+          }, {
+            elem: 'title',
+            content: ['Время']
+          }]
+        }, {
+          block: 'game-info',
+          mods: {
+            main: true
+          },
+          content: [{
+            mix: {
+              'block': 'game-info_main_title'
+            },
+            elem: 'item',
+            name: 'Лучшее время'
+          }, {
+            elem: 'item',
+            name: 'Начисленные очки'
+          }]
+        }]
+      }, {
+        elem: 'column',
+        content: [{
+          block: 'game-info',
+          content: [{
+            elem: 'avatar',
+            attrs: {
+              src: '/images/user.png'
+            }
+          }, {
+            elem: 'nickname',
+            content: ['USER2']
+          }, {
+            elem: 'item',
+            value: '11:50'
+          }, {
+            elem: 'line'
+          }, {
+            elem: 'item',
+            value: '6,72'
+          }, {
+            elem: 'line'
+          }]
+        }]
+      }, {
+        block: 'game-msg',
+        mods: {
+          'center': true
+        },
+        content: ['ВЫ ПРОИГРАЛИ']
+      }, {
+        block: 'result-redirect',
+        content: [{
+          elem: 'btn',
+          mods: {
+            'center': true
+          },
+          btnText: 'СЫГРАТЬ ЕЩЕ РАЗ'
+        }, {
+          elem: 'center',
+          content: {
+            elem: 'link',
+            attrs: {
+              'href': '#',
+              'data-link-type': '/'
+            },
+            content: 'Выйти в главное меню'
+          }
+        }]
+      }]
+    }];
+    this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  }
+
+}
+;
+
+/***/ }),
+
+/***/ "./static/public/js/views/game-over-single-view.js":
+/*!*********************************************************!*\
+  !*** ./static/public/js/views/game-over-single-view.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameOverSingleClass; });
+/* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+
+
+
+/**
+ * @class GameOverSingleClass
+ */
+
+class GameOverSingleClass extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  /**
+   * Construct game over page
+   * @param {HTMLElement} parent
+   */
+  constructor(parent) {
+    super(parent);
+  }
+  /**
+   * render page
+   */
+
+
+  render() {
+    const template = [{
+      block: 'game-over',
+      content: [{
+        elem: 'title',
+        wrappedInside: 'game-over-popup',
+        content: ['Результаты']
+      }, {
+        block: 'result-time',
+        title: 'Время',
+        content: [{
+          elem: 'title',
+          content: ['Время']
+        }, {
+          elem: 'seconds',
+          content: ['64:45']
+        }]
+      }, {
+        block: 'game-info',
+        mods: {
+          'single': true
+        },
+        content: [{
+          elem: 'item',
+          name: 'Лучшее время',
+          value: '10:50'
+        }, {
+          elem: 'line'
+        }, {
+          elem: 'item',
+          name: 'Счет',
+          value: '6,72'
+        }, {
+          elem: 'line'
+        }]
+      }, {
+        block: 'game-msg',
+        mods: {
+          'center': true
+        },
+        content: ['Новый рекорд!']
+      }, {
+        block: 'result-redirect',
+        content: [{
+          elem: 'btn',
+          mods: {
+            'center': true
+          },
+          btnText: 'СЫГРАТЬ ЕЩЕ РАЗ'
+        }, {
+          elem: 'center',
+          content: {
+            elem: 'link',
+            attrs: {
+              'href': '#',
+              'data-link-type': '/'
+            },
+            content: 'Выйти в главное меню'
+          }
+        }]
+      }]
+    }];
+    this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  }
+
+}
+;
+
+/***/ }),
+
+/***/ "./static/public/js/views/game-view.js":
+/*!*********************************************!*\
+  !*** ./static/public/js/views/game-view.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameView; });
+/* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+/* harmony import */ var _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../graphics/hexagon.js */ "./static/public/js/graphics/hexagon.js");
+/* harmony import */ var _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../graphics/arrow.js */ "./static/public/js/graphics/arrow.js");
+/* harmony import */ var _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../game/core/settings.js */ "./static/public/js/game/core/settings.js");
+
+
+
+
+
+
+
+const bemhtml = __webpack_require__(/*! ../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+
+const MIN_SIZE = 100;
+const color = '#ff4d00';
+/**
+ * @class GameView
+ */
+
+class GameView extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  /**
+   * @param {HTMLElement}parent
+   */
+  constructor(parent) {
+    super(parent);
+    this.lastFrameTime = 0;
+  }
+  /**
+   * Render GameController
+   * @param {Object} state with info about hexagons
+   */
+
+
+  render(state) {
+    const localData = {
+      seconds: '12:38',
+      score: 36,
+      record: '38:09'
+    };
+    const draw = [{
+      block: 'game',
+      mods: {
+        main: true
+      },
+      content: [{
+        block: 'current',
+        content: [{
+          elem: 'item',
+          name: 'Время',
+          value: localData.seconds
+        }, {
+          elem: 'item',
+          name: 'Счет',
+          value: localData.score
+        }, {
+          elem: 'item',
+          name: 'Рекорд',
+          value: localData.record
+        }]
+      }, {
+        block: 'hexagons',
+        attrs: {
+          id: 'game-canvas',
+          width: 1000,
+          height: 800
+        }
+      }]
+    }];
+    this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw)); // this.canvas = document.createElement('canvas');
+
+    this.canvas = document.getElementById('game-canvas'); // this.canvas.width = 800;
+    // this.canvas.height = 600;
+    // document.body.appendChild(this.canvas); // добавляем canvas в DOM
+    // console.log(this.canvas);
+
+    this.ctx = this.canvas.getContext('2d');
+    this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
+
+    state.hexagons.forEach(hexagon => {
+      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, hexagon.side, 10, hexagon.sides, color, hexagon.angle));
+    });
+    this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 20, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].height, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].radius, '#fff');
+    this.baseHex = new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, 100, 10, 0, color, 0);
+  }
+  /**
+   * Render new scene
+   * @param {number} now
+   */
+
+
+  renderScene(now) {
+    const delay = now - this.lastFrameTime; // use for time mb
+
+    this.lastFrameTime = now;
+    this.ctx.fillStyle = '#000';
+    this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+    this.arrow.draw(this.cursorAngle);
+    this.hexagons.forEach(hexagon => {
+      hexagon.draw();
+    });
+    this.baseHex.draw();
+    this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+    this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
+  }
+  /**
+   * Update state
+   * @param {Object} state
+   */
+
+
+  update(state) {
+    this.hexagons = [];
+    state.hexagons.forEach(hexagon => {
+      this.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, hexagon.side, 10, hexagon.sides, color, hexagon.angle));
+    });
+    this.cursorAngle = state.cursorAngle;
+    this.arrow.currentAngle = state.cursorAngle; // если не заработает
+    // this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
+  }
+  /**
+   * Rotate all canvas
+   * @param {Number} direction, value: 1 or -1
+   * @private
+   */
+
+
+  _rotate(direction) {
+    // TODO: can be more properly cleaned. added to the to-do list
+    ctx.clearRect(-100, -100, this.canvas.width * 1.5, this.canvas.height * 2);
+    ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+    this.baseHex.draw();
+    this.arrow.draw(0);
+
+    if (this.hexagon.currentSide >= MIN_SIZE) {
+      this.hexagon.draw();
+    } else {
+      this.hexagon.setNewParameters(0, '#ff4d00');
+    }
+
+    ctx.rotate(Math.PI / 180 * 2);
+    ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+  }
+  /**
+   *
+   */
+
+
+  start() {
+    this.lastFrameTime = performance.now();
+    this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
+  }
+  /**
+   *
+   */
+
+
+  stop() {
+    if (this.requestFrameId) {
+      window.cancelAnimationFrame(this.requestFrameId);
+      this.requestFrameId = null;
+    } // this.scene.clear(); TODO
+
   }
 
 }
@@ -9494,7 +11191,7 @@ function template(user) {
     content: [{
       block: 'title',
       wrappedInside: 'profile-popup',
-      content: ['Обновление провиля']
+      content: ['Обновление профиля']
     }, {
       elem: 'content',
       content: [{
@@ -9516,6 +11213,13 @@ function template(user) {
           block: 'profile-info',
           wrappedInside: 'profile-popup',
           fields: [{
+            name: 'Аватар',
+            novalidate: true,
+            value: {
+              block: 'file-input',
+              fieldName: 'avatar'
+            }
+          }, {
             name: 'Имя',
             fieldName: 'firstName',
             fieldAttrs: {
@@ -9565,13 +11269,6 @@ function template(user) {
               block: 'field-group',
               content: date
             }]
-          }, {
-            name: 'Аватар',
-            novalidate: true,
-            value: {
-              block: 'file-input',
-              fieldName: 'avatar'
-            }
           }, {
             name: 'Новый пароль',
             fieldName: 'password',
@@ -9633,8 +11330,6 @@ function setSelectedGender(user, gender) {
   if (user.gender !== '') {
     const options = gender.options;
     options.forEach(option => {
-      console.log(option, user.gender);
-
       if (option.value === user.gender) {
         option.selected = true;
       }
@@ -9657,8 +11352,8 @@ function setSelectedDate(user, date) {
         option.selected = true;
       }
     });
-    const mounthOptions = date[1].options;
-    mounthOptions.forEach(option => {
+    const monthOptions = date[1].options;
+    monthOptions.forEach(option => {
       if (option.value === +userDate[1]) {
         option.selected = true;
       }

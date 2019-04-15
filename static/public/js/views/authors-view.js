@@ -23,8 +23,10 @@ export default class AuthorsView extends View {
     Array.from(data).forEach((author) => {
       const {name, devInfo, img, description} = author;
       bemAuthors.push({
-        name, devInfo,
-        img: settings.imgPath + img, description,
+        name,
+        devInfo,
+        img: settings.imgPath + img,
+        description,
       });
     });
 

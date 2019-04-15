@@ -85,10 +85,11 @@ export default function template(user) {
       {
         block: 'title',
         wrappedInside: 'profile-popup',
-        content: ['Обновление провиля'],
+        content: ['Обновление профиля'],
       },
       {
-        elem: 'content', content: [
+        elem: 'content',
+        content: [
           {
             elem: 'profile-icon',
             attrs: {
@@ -107,6 +108,14 @@ export default function template(user) {
                 block: 'profile-info',
                 wrappedInside: 'profile-popup',
                 fields: [
+                  {
+                    name: 'Аватар',
+                    novalidate: true,
+                    value: {
+                      block: 'file-input',
+                      fieldName: 'avatar',
+                    },
+                  },
                   {
                     name: 'Имя',
                     fieldName: 'firstName',
@@ -164,14 +173,6 @@ export default function template(user) {
                         content: date,
                       },
                     ],
-                  },
-                  {
-                    name: 'Аватар',
-                    novalidate: true,
-                    value: {
-                      block: 'file-input',
-                      fieldName: 'avatar',
-                    },
                   },
                   {
                     name: 'Новый пароль',
@@ -235,7 +236,6 @@ function setSelectedGender(user, gender) {
   if (user.gender !== '') {
     const options = gender.options;
     options.forEach((option) => {
-      console.log(option, user.gender);
       if (option.value === user.gender) {
         option.selected = true;
       }
@@ -259,8 +259,8 @@ function setSelectedDate(user, date) {
       }
     });
 
-    const mounthOptions = date[1].options;
-    mounthOptions.forEach((option) => {
+    const monthOptions = date[1].options;
+    monthOptions.forEach((option) => {
       if (option.value === +userDate[1]) {
         option.selected = true;
       }

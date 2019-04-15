@@ -14,6 +14,9 @@ import LoginController from './controllers/login-controller.js';
 import LogoutController from './controllers/logout-controller.js';
 import UpdateController from './controllers/update-controller.js';
 import GameMenuController from './controllers/game-menu-controller.js';
+import GameOverController from './controllers/game-over-controller.js';
+import GameOverMltController from './controllers/game-over-mlt-controller.js';
+import GameController from './controllers/game-controller.js';
 import '../css/style.css';
 
 const application = document.getElementById('application');
@@ -36,6 +39,8 @@ const router = new Router(settings.home, application)
     .addRoute('exit', new LogoutController(main))
     .addRoute('authors', new AuthorsController(main))
     .addRoute('profile/update', new UpdateController(main))
+    .addRoute('single', new GameController(main))
+    .addRoute('multi', new GameOverMltController(main))
     .addRoute('play', new GameMenuController(main));
 
 router.start();
