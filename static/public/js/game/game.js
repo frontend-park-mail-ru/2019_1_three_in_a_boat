@@ -30,7 +30,6 @@ export default class Game {
 
     // this.gameScene = new GameScene(canvas); TODO
     this.gameControllers = new GameControllers();
-    // this.gameScene = new GameScene(ctx);
     this.gameCore = new GameConstructor(this.gameControllers, view);
   }
 

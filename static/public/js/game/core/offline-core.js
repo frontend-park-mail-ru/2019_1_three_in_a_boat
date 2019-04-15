@@ -55,7 +55,6 @@ export default class OfflineGame extends GameCore {
   gameloop(now) {
     const delay = now - this.lastFrame;
     this.lastFrame = now;
-
     this.state.hexagons = this.state.hexagons
         .map(function(hexagon) {
           hexagon.side -= HEXAGON.speed * delay;

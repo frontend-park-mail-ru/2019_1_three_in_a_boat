@@ -1,12 +1,12 @@
 export const CURSOR = {
   radius: 100,
-  height: 40,
+  height: 15,
 };
 
 export const HEXAGON = {
   minSize: 20,
   width: 10,
-  speed: 4,
+  speed: 20,
   rotatingSpeed: Math.PI / 90,
 };
 

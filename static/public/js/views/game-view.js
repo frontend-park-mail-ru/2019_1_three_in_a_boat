@@ -3,6 +3,7 @@
 import View from '../core/view.js';
 import Hexagon from '../graphics/hexagon.js';
 import UserArrow from '../graphics/arrow.js';
+import {CURSOR} from '../game/core/settings.js';
 const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 const MIN_SIZE = 100;
@@ -80,7 +81,7 @@ export default class GameView extends View {
           new Hexagon(this.ctx, hexagon.side, 10, hexagon.sides, color, 0)
       );
     });
-    this.arrow = new UserArrow(this.ctx, 50, 50, 100, '#fff');
+    this.arrow = new UserArrow(this.ctx, 20, CURSOR.height, CURSOR.radius, '#fff');
     this.baseHex = new Hexagon(this.ctx, 100, 10, 0, color, 0);
   }
 
@@ -99,7 +100,7 @@ export default class GameView extends View {
     });
     this.baseHex.draw();
     this.arrow.draw(this.cursorAngle);
-    ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+    this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
 
     this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
   }
@@ -110,14 +111,16 @@ export default class GameView extends View {
    */
   update(state) {
     this.hexagons = [];
+    console.log(state.hexagons);
     state.hexagons.forEach((hexagon) => {
       this.hexagons.push(
-          new Hexagon(this.ctx, 10, hexagon.side, hexagon.sides, color, 0)
+          new Hexagon(this.ctx, hexagon.side, 10, hexagon.sides, color, 0)
       );
     });
 
     this.cursorAngle = state.cursorAngle;
-    this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
+    // this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
+    this.arrow.currentAngle = state.cursorAngle;
   }
 
   /**
