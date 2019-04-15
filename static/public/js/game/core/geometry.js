@@ -131,13 +131,13 @@ export default class Geometry {
       y: dot0.y - cursor.y,
     };
     const d1 = {
-      x: dot1.x - cursor.x,
-      y: dot1.y - cursor.y,
+      x: dot1.x - dot0.x,
+      y: dot1.y - dot0.y,
     };
 
     const a = d1.x * d1.x + d1.y * d1.y;
     const k = d0.x * d1.x + d0.y * d1.y;
-    const c = d0.x * d0.x + d0.y * d0.y - CURSOR.height * CURSOR.height;
+    const c = d0.x * d0.x + d0.y * d0.y - 225; // CURSOR.height * CURSOR.height;
     const disc = k * k - a * c;
 
     if (disc < 0) {

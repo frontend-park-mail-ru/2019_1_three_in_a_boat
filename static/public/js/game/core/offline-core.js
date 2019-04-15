@@ -12,9 +12,9 @@ const mask5 = 31;
  */
 export default class OfflineGame extends GameCore {
   /**
-   *
-   * @param controller
-   * @param scene
+   * Constructor
+   * @param {object} controller
+   * @param {object} scene
    */
   constructor(controller, scene) {
     super(controller, scene);
@@ -37,9 +37,9 @@ export default class OfflineGame extends GameCore {
 
     this.state.hexagons = Array.from(new Array(3), function(_, position) {
       return {
-        side: 700 + 200 * position,
+        side: 700 + 250 * position,
         sides: Math.floor(Math.random() * 2) === 1? mask2: mask5,
-        angle: 0, // Math.floor(Math.random() * 2 * Math.PI),
+        angle: Math.floor(Math.random() * 2 * Math.PI),
       };
     });
 
@@ -58,16 +58,16 @@ export default class OfflineGame extends GameCore {
     this.state.hexagons = this.state.hexagons
         .map(function(hexagon) {
           hexagon.side -= HEXAGON.speed * delay;
-          hexagon.angle += 0; // HEXAGON.rotatingSpeed * delay;
+          hexagon.angle += HEXAGON.rotatingSpeed * delay;
           return hexagon;
         });
 
     for (let i = 0; i < this.state.hexagons.length; i++) {
       if (this.state.hexagons[i].side < HEXAGON.minSize) {
         const newHexagon = {
-          side: 700,
+          side: 1000,
           sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
-          angle: 0, // Math.floor(Math.random() * 2 * Math.PI),
+          angle: Math.floor(Math.random() * 2 * Math.PI),
         };
         this.state.hexagons[i] = newHexagon;
       }
@@ -85,7 +85,7 @@ export default class OfflineGame extends GameCore {
       if (condition) {
         console.log(this.state.hexagons[i], cursor);
         setTimeout(function() {
-          alert('finish');
+          alert('finish'); // for debug
           bus.emit(events.FINISH_GAME);
         });
         // return;
@@ -96,8 +96,8 @@ export default class OfflineGame extends GameCore {
   }
 
   /**
-   *
-   * @param evt
+   * Control pressed event
+   * @param {object} evt
    */
   onControllsPressed(evt) {
     evt.forEach((btn) => {
@@ -110,8 +110,8 @@ export default class OfflineGame extends GameCore {
   }
 
   /**
-   *
-   * @param evt
+   * Start game event
+   * @param {object} evt
    */
   onGameStarted(evt) {
     this.controller.start();
@@ -123,8 +123,8 @@ export default class OfflineGame extends GameCore {
   }
 
   /**
-   *
-   * @param evt
+   * Finish game event
+   * @param {object} evt
    */
   onGameFinished(evt) {
     cancelAnimationFrame(this.gameloopRequestId);
@@ -132,8 +132,8 @@ export default class OfflineGame extends GameCore {
   }
 
   /**
-   *
-   * @param evt
+   * State change game event
+   * @param {object} evt
    */
   onGameStateChanged(evt) {
     this.scene.update(evt);
