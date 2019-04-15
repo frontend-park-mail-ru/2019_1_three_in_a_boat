@@ -135,13 +135,14 @@ export default class Geometry {
       y: dot1.y - dot0.y,
     };
 
-    const r = 15;
+    const r = 10;
 
     const a = d1.x * d1.x + d1.y * d1.y;
     const k = d0.x * d1.x + d0.y * d1.y;
     const c = d0.x * d0.x + d0.y * d0.y - r * r; // CURSOR.height * CURSOR.height;
     const disc = k * k - a * c;
 
+    // return disc >= eps;
     if (disc < 0) {
       return false;
     } else if (Math.abs(disc) < eps) {
@@ -156,7 +157,7 @@ export default class Geometry {
         t2 = t;
       }
 
-      return !(t1 >= 0 - eps && t2 <= 1 + eps) && (t2 > eps && t1 < 1 - eps);
+      return !(t2 < eps || t1 > 1 - eps);
     }
   }
 
@@ -183,7 +184,6 @@ export default class Geometry {
    * @return {{x: number, y: number}}
    */
   static rotateDot(dot, angle) {
-    // angle = -angle;
     const newX = dot.x * Math.cos(angle) - dot.y * Math.sin(angle);
     dot.y = dot.x * Math.sin(angle) + dot.y * Math.cos(angle);
     dot.x = newX;

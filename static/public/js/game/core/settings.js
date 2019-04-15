@@ -5,7 +5,7 @@ export const CURSOR = {
 };
 
 export const HEXAGON = {
-  minSize: 100,
+  minSize: 40,
   width: 10,
   speed: 0.2,
   rotatingSpeed: Math.PI / 4000,
