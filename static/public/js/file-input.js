@@ -3,6 +3,23 @@
 const BLOCK = 'file-input';
 
 /**
+ * Show the selected image from users data before sending it to the server
+ */
+export function previewFile() {
+  const preview = document.querySelector('img');
+  const file = document.querySelector('input[type=file]').files[0];
+  const reader = new FileReader();
+  reader.onloadend = function() {
+    preview.src = reader.result;
+  };
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = '';
+  }
+}
+
+/**
  * Set handler for file inputs changes
  */
 export function initFileInputs() {
@@ -19,21 +36,24 @@ export function initFileInputs() {
       }
     }
     field.onchange = (e) => {
+      if (e.srcElement.id === 'updateForm_avatar') {
+        previewFile();
+      }
       const elt = e.target || e.srcElement;
       if (elt.files && elt.files.length > 0) {
         if (elt.files.length === 1) {
           let fileName = elt.files[0].name;
           fileName = fileName.length > 20 ?
-            fileName.substr(0, 17) + '...' : fileName;
+              fileName.substr(0, 17) + '...' : fileName;
           info.textContent = fileName;
         } else {
           if (elt.getAttribute('multiple') !== null) {
-            console.log(elt.files);
-            const filesInfoText = elt.files.length % 100 >= 5 && elt.files.length <= 20 ?
-              'файлов' : (elt.files.length % 10 === 1 ? 'файл' :
-                (elt.files.length % 10 <= 4 ? 'файла' : 'файлов'));
+            const filesInfoText = elt.files.length % 100 >= 5 &&
+                elt.files.length <= 20 ?
+                    'файлов' : (elt.files.length % 10 === 1 ? 'файл' :
+                    (elt.files.length % 10 <= 4 ? 'файла' : 'файлов'));
             info.textContent =
-              `${elt.files.length} ${filesInfoText}`;
+                `${elt.files.length} ${filesInfoText}`;
           } // else do nothing (?)
         }
       }

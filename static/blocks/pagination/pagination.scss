@@ -8,7 +8,7 @@
   &__link {
     padding: 3px 10px;
     height: 30px;
-    border: $border-color solid 1px;
+    border: $primary-color-dark solid 1px;
     border-right: none;
     background-color: white;
     color: #1b0c29;
@@ -16,18 +16,19 @@
     cursor: pointer;
     font-weight: bold;
 
-    &:hover:not(&_current) {
-      color: #6614b0;
-      cursor: pointer;
-    }
     &:focus {
       outline: none;
     }
 
     &:not(&_current) {
-      background-color: $main-color;
+      background-color: $primary-color;
       color: white;
-      @include btn-color($block, $main-color, white);;
+      @include btn-color($block, $primary-color, white);
+    }
+
+    &:hover:not(&_current) {
+      color: #6614b0;
+      cursor: pointer;
     }
 
     &_first {
@@ -38,12 +39,13 @@
     &_last {
       border-bottom-right-radius: 3px;
       border-top-right-radius: 3px;
-      border-right: $border-color solid 1px;
+      border-right: $primary-color-dark solid 1px;
     }
 
     &_current {
       background-color: white;
-      color: black;
+      color: $primary-color;
+      //border-color: $primary-color;
       cursor: auto;
     }
   }

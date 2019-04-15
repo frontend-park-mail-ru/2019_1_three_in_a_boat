@@ -6,25 +6,33 @@
 
   max-width: 400px;
 
-  border: 1px solid $border-color;
-
   &__title {
-    margin-bottom: 8px;
+    @extend .title;
+    @extend %popup__title;
+  }
+
+  &__content {
+    @extend %popup__content;
   }
 
   &_main {
-    margin-top: 8px;
+    margin-top: 4%;
   }
 
   &__profile-info {
     max-width: fit-content;
-    margin: 20px 0 10px;
+    margin: 20px auto 10px;
   }
 
   &__profile-icon {
-    height: 120px;
-    width: 120px;
-    border: 1px solid $border-color;
+    display: flex;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+
+    overflow: hidden;
+    object-fit: cover;
     border-radius: 100%;
   }
 

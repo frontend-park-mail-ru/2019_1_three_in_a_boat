@@ -1,18 +1,21 @@
 /**
- *
+ * The class implements methods for calling communicating with the server API
  */
-class AjaxModule {
+export default class ajax {
   /**
-   *
-   * @param callback
-   * @param method
-   * @param path
-   * @param body
-   * @param mode
+   * @param {string} method HTTP Method to use
+   * @param {string} path Path to send the query to
+   * @param {Object} body Body of the query (will be serialized as json)
+   * @param {string} mode cors/no-cors/*same-origin, see fetch docs
+   * @return {Promise} Promise for the HTTP request
    * @private
    */
-  _ajax({callback, method, path, body, mode='cors'}) {
+  static _ajax({method, path, body, mode = 'cors'}) {
     const headers = new Headers();
+    const csrfToken = getSingleCookie('csrf');
+    if (csrfToken) {
+      headers.append('X-CSRF-Token', csrfToken);
+    }
     if (body) {
       headers.append('Content-Type', 'application/json; charset=utf-8');
       body = JSON.stringify(body);
@@ -27,35 +30,45 @@ class AjaxModule {
   }
 
   /**
-   *
-   * @param callback
-   * @param path
-   * @param body
+   * @param {string} path Path to send the query to
+   * @param {Object} body Body of the query (will be serialized as json)
+   * @return {Promise} Promise for the HTTP request
    */
-  doGet({callback = () => {}, path = '/', body = null}) {
-    return this._ajax({callback, path, body, method: 'GET'});
+  static doGet({path = '/', body = null}) {
+    return this._ajax({path, body, method: 'GET'});
   }
 
   /**
-   *
-   * @param callback
-   * @param path
-   * @param body
+   * @param {string} path Path to send the query to
+   * @param {Object} body Body of the query (will be serialized as json)
+   * @return {Promise} Promise for the HTTP request
    */
-  doPost({callback = () => {}, path = '/', body = null}) {
-    return this._ajax({callback, path, body, method: 'POST'});
+  static doPost({path = '/', body = null}) {
+    return this._ajax({path, body, method: 'POST'});
   }
 
   /**
-   *
-   * @param callback
-   * @param path
-   * @param body
+   * @param {string} path Path to send the query to
+   * @param {Object} body Body of the query (will be serialized as json)
+   * @return {Promise} Promise for the HTTP request
    */
-  doPut({callback = () => {}, path = '/', body = null}) {
-    return this._ajax({callback, path, body, method: 'PUT'});
+  static doPut({path = '/', body = null}) {
+    return this._ajax({path, body, method: 'PUT'});
   }
 }
 
-const ajax = new AjaxModule();
-export default ajax;
+/**
+ * Retrieves a single cookie from document.cookie. If the cookie is unset,
+ * returns undefined.
+ * @param {string} name The name of the cookie
+ * @return {string} The value of the cookie. Undefined if not found.
+ */
+function getSingleCookie(name) {
+  const cookies = ('; ' + document.cookie).split('; ' + name + '=');
+  if (cookies.length === 2) {
+    const cookieValue = cookies.pop();
+    const endOfCookieValue = cookieValue.indexOf(';');
+    return cookieValue.substring(
+        0, endOfCookieValue !== -1 ? endOfCookieValue : undefined);
+  }
+}

@@ -1,30 +1,30 @@
 .menu {
   $block: &;
-  $menu-item-height: 55px;
+  $menu-item-height: 4.5rem;
 
+  margin: 4% auto 0 auto;
   width: 60%;
+  height: 90%;
   min-width: fit-content;
   max-width: 600px;
-  margin: 0 auto;
 
+  border: 0;
   border-radius: 3px;
   // border takes up space, making colored elements leaves blank pixels
   // so I use a shadow-border
-  @include shadow(0 0 0 1px $border-color, $shadow-outline);
-
-  &__title {
-    margin:0;
-    padding: 15px;
-    text-align: left;
-  }
 
   &__link {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
 
-    color: black;
+    width: 100%;
+    height: 100%;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   &__item {
@@ -32,14 +32,14 @@
 
     display: flex;
     align-items: center;
+    margin-bottom: 4%;
 
     height: $menu-item-height;
-    padding: 0 15px 0 20px;
+    background-color: $primary-color;
+    color: $primary-color-text;
 
-    &:last-child {
-      border-bottom-right-radius: 3px;
-      border-bottom-left-radius: 3px;
-    }
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.71);
   }
 
   &__dropdown-btn {
@@ -48,20 +48,18 @@
     right: 10px;
   }
 
+  &__text {
+    width: 85%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+
+    color: $primary-color-text;
+  }
+
   &__icon-bg {
-    margin-right: 12px;
+    width: 15%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
-
-  &__items {
-    &_color_white-whitesmoke-chain {
-      // there's probably a better way, but I couldn't find it :<
-      #{$block}__item:nth-of-type(even) {
-        background-color: whitesmoke;
-      }
-      #{$block}__item:nth-of-type(odd) {
-        background-color: white;
-      }
-    }
-  }
-
 }

@@ -11,7 +11,7 @@ $eye-icon: $icons-path + "/show.svg";
 $fb-icon: $icons-path + "/fb.svg";
 $gamepad-icon: $icons-path + "/game1.svg";
 $key-icon: $icons-path + "/access.svg";
-$mailru-icon: $icons-path + "/mailru.svg";
+$hexagon-icon: $icons-path + "/hexagon.svg";
 $ok-icon: $icons-path + "/ok.svg";
 $ru-png: $icons-path + "/ru.png";
 $signin-icon: $icons-path + "/sign_in.svg";
@@ -21,13 +21,16 @@ $users-icon: $icons-path + "/users.svg";
 $user-icon: $icons-path + "/user.svg";
 $vk-icon: $icons-path + "/vk.svg";
 $crown-icon: $icons-path + "/crown.svg";
+$back_icon: $icons-path + "/arrow_previous.svg";
 
 $icon-size: 14px, 14px;
 $icon-sizes: (small: (12px, 12px),
                    large: (20px, 20px),
                    xlarge: (24px, 24px),
                    xxlarge: (32px, 32px),
-                   xxxlarge: (40px, 40px));
+                   xxxlarge: (40px, 40px),
+                   fit: (60%, 60%),
+                   header-fit: (2.5em, 2.5em));
 
 
 @function get-icon-span-height($size) {
@@ -64,7 +67,7 @@ $icon-sizes: (small: (12px, 12px),
 
     &_color {
         &_green {
-            background-color: $green;
+            background-color: $secondary-color;
         }
         &_orange {
             background-color: $orange;
@@ -98,8 +101,8 @@ $icon-sizes: (small: (12px, 12px),
         &_ok {
             @include mask-image($ok-icon);
         }
-        &_mailru {
-            @include mask-image($mailru-icon);
+        &_hexagon {
+            @include mask-image($hexagon-icon);
         }
         &_users {
             @include mask-image($users-icon);
@@ -130,6 +133,9 @@ $icon-sizes: (small: (12px, 12px),
         }
         &_crown{
             @include mask-image($crown-icon);
+        }
+        &_back{
+            @include mask-image($back_icon);
         }
         &_ru {
             background-image: url($ru-png);

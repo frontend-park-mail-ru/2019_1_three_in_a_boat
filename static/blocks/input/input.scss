@@ -154,9 +154,11 @@ $input-border-radius: 3px;
     font-size: $smaller-font-size;
     color: $muted-color-dark;
   }
-}
 
-.input {
-  // preference over input__field in case an input has both types
   border-width: 1px;
 }
+
+//.input {
+//  // preference over input__field in case an input has both types
+//  border-width: 1px;
+//}

@@ -1,21 +1,19 @@
-html, body, #application {
+html, body, #application, #main {
   margin: 0;
   height: 100%;
   width: 100%;
   font-family: $font-stack;
-  background-color: $body-color;
 }
 
-#application {
+body {
+  background: #424242 url("../../public/images/hexagon.jpg");
+  background-size: 100%;
+}
+
+#application, #main {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  &_color {
-    &_dark {
-      background-color: $body-color-dark;
-    }
-  }
 }
 
 a {
