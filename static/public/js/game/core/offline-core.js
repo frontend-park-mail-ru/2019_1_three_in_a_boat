@@ -96,13 +96,24 @@ export default class OfflineGame extends GameCore {
    * @param {object} evt
    */
   onControllsPressed(evt) {
-    evt.forEach((btn) => {
-      if (this._pressed('LEFT', btn)) {
-        this.state.cursorAngle += CURSOR.rotatingSpeed;
-      } else if (this._pressed('RIGHT', btn)) {
-        this.state.cursorAngle -= CURSOR.rotatingSpeed;
-      }
-    });
+    if (!this.controllersLoopIntervalId) {
+      this.controllersLoopIntervalId = setInterval(() => {
+        if (this._pressed('LEFT', evt)) {
+          this.state.cursorAngle += CURSOR.rotatingSpeed;
+        } else if (this._pressed('RIGHT', evt)) {
+          this.state.cursorAngle -= CURSOR.rotatingSpeed;
+        }
+      }, 50);
+    }
+  }
+
+  /**
+   * Control unpressed event
+   * @param {object} evt
+   */
+  onControllsUnpressed(evt) {
+    clearInterval(this.controllersLoopIntervalId);
+    this.controllersLoopIntervalId = undefined;
   }
 
   /**
@@ -132,6 +143,9 @@ export default class OfflineGame extends GameCore {
   destroy() {
     super.destroy();
     cancelAnimationFrame(this.gameloopRequestId);
+    if (this.controllersLoopIntervalId) {
+      clearInterval(this.controllersLoopIntervalId);
+    }
     this.scene.stop();
   }
 

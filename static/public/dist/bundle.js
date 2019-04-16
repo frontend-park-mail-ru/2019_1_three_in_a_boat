@@ -8625,15 +8625,20 @@ function getBase64(file) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameControllers; });
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _core_events_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core/events.js */ "./static/public/js/game/core/events.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+
+
 /**
  * @class GameControllers
  */
+
 var GameControllers =
 /*#__PURE__*/
 function () {
@@ -8643,7 +8648,6 @@ function () {
   function GameControllers() {
     _classCallCheck(this, GameControllers);
 
-    this.previous = {};
     this.keys = [];
     this._onPress = this._keyHandler.bind(this, 'press');
     this._onUp = this._keyHandler.bind(this, 'up');
@@ -8670,17 +8674,6 @@ function () {
       document.removeEventListener('keyup', this._onUp);
     }
     /**
-     * Нажата ли клавиша?
-     * @param  {string}  key
-     * @return {boolean}
-     */
-
-  }, {
-    key: "is",
-    value: function is(key) {
-      return this.keys[key];
-    }
-    /**
      * Обработчик события
      * @param  {string} type
      * @param  {MouseEvent} event
@@ -8690,20 +8683,12 @@ function () {
     key: "_keyHandler",
     value: function _keyHandler(type, event) {
       if (event.type.toLowerCase() === 'keydown') {
-        this.keys.push(event.key);
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, event.key);
       }
-    }
-    /**
-     * Получить клавиши, нажатые с момента прошлого запроса
-     * @return {*}
-     */
 
-  }, {
-    key: "diff",
-    value: function diff() {
-      var newKeys = this.keys;
-      this.keys = [];
-      return newKeys;
+      if (event.type.toLowerCase() === 'keyup') {
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, event.key);
+      }
     }
   }]);
 
@@ -8758,8 +8743,8 @@ function () {
     this.onGameStarted = this.onGameStarted.bind(this);
     this.onGameFinished = this.onGameFinished.bind(this);
     this.onControllsPressed = this.onControllsPressed.bind(this);
+    this.onControllsUnpressed = this.onControllsUnpressed.bind(this);
     this.onGameStateChanged = this.onGameStateChanged.bind(this);
-    this.controllersLoopIntervalId = null;
   }
   /**
    *
@@ -8772,15 +8757,8 @@ function () {
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].START_GAME, this.onGameStarted);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].FINISH_GAME, this.onGameFinished);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, this.onControllsPressed);
+      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, this.onControllsUnpressed);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].GAME_STATE_CHANGED, this.onGameStateChanged);
-      var controller = this.controller;
-      this.controllersLoopIntervalId = setInterval(function () {
-        var actions = controller.diff(); // if (Object.keys(actions).some((k) => actions[k])) {
-
-        if (actions.length > 0) {
-          _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, actions);
-        }
-      }, 50);
     }
     /**
      *
@@ -8789,10 +8767,10 @@ function () {
   }, {
     key: "destroy",
     value: function destroy() {
-      clearInterval(this.controllersLoopIntervalId);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].START_GAME, this.onGameStarted);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].FINISH_GAME, this.onGameFinished);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, this.onControllsPressed);
+      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, this.onControllsUnpressed);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].GAME_STATE_CHANGED, this.onGameStateChanged);
       this.controller.destroy();
       this.scene.stop();
@@ -8805,6 +8783,16 @@ function () {
   }, {
     key: "onControllsPressed",
     value: function onControllsPressed(evt) {
+      throw new Error('This method must be overridden');
+    }
+    /**
+     *
+     * @param evt
+     */
+
+  }, {
+    key: "onControllsUnpressed",
+    value: function onControllsUnpressed(evt) {
       throw new Error('This method must be overridden');
     }
     /**
@@ -8875,6 +8863,7 @@ var EVENTS = {
   START_GAME: 'START_GAME',
   FINISH_GAME: 'FINISH_GAME',
   CONTROLS_PRESSED: 'CONTROLS_PRESSED',
+  CONTROLS_UNPRESSED: 'CONTROLS_UNPRESSED',
   GAME_STATE_CHANGED: 'GAME_STATE_CHANGED'
 };
 /* harmony default export */ __webpack_exports__["default"] = (EVENTS);
@@ -9275,13 +9264,26 @@ function (_GameCore) {
     value: function onControllsPressed(evt) {
       var _this2 = this;
 
-      evt.forEach(function (btn) {
-        if (_this2._pressed('LEFT', btn)) {
-          _this2.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
-        } else if (_this2._pressed('RIGHT', btn)) {
-          _this2.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
-        }
-      });
+      if (!this.controllersLoopIntervalId) {
+        this.controllersLoopIntervalId = setInterval(function () {
+          if (_this2._pressed('LEFT', evt)) {
+            _this2.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+          } else if (_this2._pressed('RIGHT', evt)) {
+            _this2.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+          }
+        }, 50);
+      }
+    }
+    /**
+     * Control unpressed event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onControllsUnpressed",
+    value: function onControllsUnpressed(evt) {
+      clearInterval(this.controllersLoopIntervalId);
+      this.controllersLoopIntervalId = undefined;
     }
     /**
      * Start game event
@@ -9317,6 +9319,11 @@ function (_GameCore) {
       _get(_getPrototypeOf(OfflineGame.prototype), "destroy", this).call(this);
 
       cancelAnimationFrame(this.gameloopRequestId);
+
+      if (this.controllersLoopIntervalId) {
+        clearInterval(this.controllersLoopIntervalId);
+      }
+
       this.scene.stop();
     }
     /**
@@ -9353,7 +9360,7 @@ __webpack_require__.r(__webpack_exports__);
 var CURSOR = {
   radius: 100,
   height: 15,
-  rotatingSpeed: Math.PI / 12
+  rotatingSpeed: Math.PI / 21
 };
 var HEXAGON = {
   minSize: 40,

@@ -1,3 +1,6 @@
+import bus from '../event-bus.js';
+import events from './core/events.js';
+
 /**
  * @class GameControllers
  */
@@ -6,7 +9,6 @@ export default class GameControllers {
    * Constructor
    */
   constructor() {
-    this.previous = {};
     this.keys = [];
 
     this._onPress = this._keyHandler.bind(this, 'press');
@@ -30,32 +32,16 @@ export default class GameControllers {
   }
 
   /**
-   * Нажата ли клавиша?
-   * @param  {string}  key
-   * @return {boolean}
-   */
-  is(key) {
-    return this.keys[key];
-  }
-
-  /**
    * Обработчик события
    * @param  {string} type
    * @param  {MouseEvent} event
    */
   _keyHandler(type, event) {
     if (event.type.toLowerCase() === 'keydown') {
-      this.keys.push(event.key);
+      bus.emit(events.CONTROLS_PRESSED, event.key);
     }
-  }
-
-  /**
-   * Получить клавиши, нажатые с момента прошлого запроса
-   * @return {*}
-   */
-  diff() {
-    const newKeys = this.keys;
-    this.keys = [];
-    return newKeys;
+    if (event.type.toLowerCase() === 'keyup') {
+      bus.emit(events.CONTROLS_UNPRESSED, event.key);
+    }
   }
 }
