@@ -77,9 +77,10 @@ export default class GameController extends Controller {
     }
 
     this.bus.on(events.FINISH_GAME, () => {
-      window.history.pushState({}, '', 'single/results');
-      window.history.pushState({}, '', 'single/results');
+      window.history.pushState({}, '', '/single/results');
+      window.history.pushState({}, '', '/single/results');
       window.history.back();
+      this.destructor();
     });
 
     this.game = new Game(mode, this.view);

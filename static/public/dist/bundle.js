@@ -6290,9 +6290,10 @@ class GameController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_3__["d
     }
 
     this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].FINISH_GAME, () => {
-      window.history.pushState({}, '', 'single/results');
-      window.history.pushState({}, '', 'single/results');
+      window.history.pushState({}, '', '/single/results');
+      window.history.pushState({}, '', '/single/results');
       window.history.back();
+      this.destructor();
     });
     this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](mode, this.view);
     this.game.start();
@@ -7698,21 +7699,6 @@ class GameControllers {
 
 
   diff() {
-    // let allkeys = [];
-    // allkeys.push.apply(allkeys, Object.keys(this.previous));
-    // allkeys.push.apply(allkeys, Object.keys(this.keys));
-    // allkeys = allkeys.map((k) => k.toLowerCase());
-    // // allkeys = allkeys.filter((key, pos, all) => {
-    // //   return all.indexOf(key, pos + 1) === -1;
-    // // });
-    // console.log(allkeys)
-    //
-    // const clicked = allkeys.reduce((res, key) => {
-    //   res[key] = !this.previous[key] && this.keys[key];
-    //   return res;
-    // }, {});
-    //
-    // this.previous = Object.assign({}, this.keys);
     const newKeys = this.keys;
     this.keys = [];
     return newKeys;
@@ -8181,12 +8167,7 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
       const condition = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].checkHexagonCollision(this.state.hexagons[i], cursor);
 
       if (condition) {
-        console.log(this.state.hexagons[i], cursor);
-        setTimeout(function () {
-          alert('finish'); // for debug
-
-          _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
-        });
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
         return;
       }
     }
@@ -8228,6 +8209,15 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
 
 
   onGameFinished(evt) {
+    this.destroy();
+  }
+  /**
+   * Destructor
+   */
+
+
+  destroy() {
+    super.destroy();
     cancelAnimationFrame(this.gameloopRequestId);
     this.scene.stop();
   }
@@ -8501,8 +8491,7 @@ class Hexagon {
     let copyNum = this.sidesMask;
 
     for (let i = 0; i < 6 && copyNum; ++i) {
-      this.emptySides[i] = copyNum & 1; // console.log(copyNum);
-
+      this.emptySides[i] = copyNum & 1;
       copyNum >>= 1;
     }
   }
@@ -8531,7 +8520,6 @@ class Hexagon {
       sides: this.sidesMask,
       angle: this.currentAngle
     });
-    console.log(this.side);
 
     for (let i = 0; i < lines.length; ++i) {
       const line = _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__["default"].rotateLine(lines[i].first, lines[i].second, this.currentAngle);
@@ -9472,9 +9460,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+const bemhtml = __webpack_require__(/*! ../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
 /**
  * @class GameOverMultiClass
  */
+
 
 class GameOverMultiClass extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   /**

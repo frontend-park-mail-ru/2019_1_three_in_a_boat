@@ -51,7 +51,6 @@ export default class Hexagon {
     let copyNum = this.sidesMask;
     for (let i = 0; i < 6 && copyNum; ++i) {
       this.emptySides[i] = (copyNum & 1);
-      // console.log(copyNum);
       copyNum >>= 1;
     }
   }
@@ -78,7 +77,6 @@ export default class Hexagon {
       sides: this.sidesMask,
       angle: this.currentAngle,
     });
-    console.log(this.side);
 
     for (let i = 0; i < lines.length; ++i) {
       const line = Geometry.rotateLine(

@@ -125,22 +125,42 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./static/public/js/settings/config.js":
+/*!*********************************************!*\
+  !*** ./static/public/js/settings/config.js ***!
+  \*********************************************/
+/*! exports provided: settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+const settings = {
+  home: 'http://127.0.0.1:8080',
+  url: 'http://127.0.0.1:3000',
+  imgPath: '/img/'
+};
+
+/***/ }),
+
 /***/ "./static/public/js/sw.js":
 /*!********************************!*\
   !*** ./static/public/js/sw.js ***!
   \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {const CACHE_NAME = 'hexagon_cash';
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./settings/config.js */ "./static/public/js/settings/config.js");
+
+const CACHE_NAME = 'hexagon_cash';
 const {
   assets
 } = global.serviceWorkerOption;
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => {
     return cache.addAll([...assets, './']);
-  }).then(() => {
-    console.log('Cached assets: main', [...assets, './']);
   }).catch(error => {
     console.error(error);
     throw error;
@@ -150,6 +170,26 @@ self.addEventListener('fetch', event => {
   event.respondWith(caches.match(event.request).then(cachedResponse => {
     if (!navigator.onLine && cachedResponse) {
       return cachedResponse;
+    }
+
+    if (!navigator.onLine && !cachedResponse) {
+      const url = new URL(event.request.url);
+      const apiUrl = new URL(event.request.url);
+      const isPage = url.pathname.indexOf('.') === -1;
+      const isApiReq = url.host === apiUrl.host;
+      console.log(url.host, _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url);
+
+      if (!isApiReq && isPage) {
+        const newUrl = event.request.url.replace(url.pathname, '/');
+        const newReq = new Request(newUrl);
+        return caches.match(newReq).then(cachedResponse => {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+
+          return fetch(event.request);
+        });
+      }
     }
 
     return fetch(event.request);

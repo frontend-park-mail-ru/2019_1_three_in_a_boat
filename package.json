@@ -12,8 +12,6 @@
     "start": "PORT=8080 node run-local.js"
   },
   "dependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
     "bem-xjst": "^8.9.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",

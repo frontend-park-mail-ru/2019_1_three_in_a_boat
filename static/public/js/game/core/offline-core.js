@@ -83,11 +83,7 @@ export default class OfflineGame extends GameCore {
       );
 
       if (condition) {
-        console.log(this.state.hexagons[i], cursor);
-        setTimeout(function() {
-          alert('finish'); // for debug
-          bus.emit(events.FINISH_GAME);
-        });
+        bus.emit(events.FINISH_GAME);
         return;
       }
     }
@@ -127,6 +123,14 @@ export default class OfflineGame extends GameCore {
    * @param {object} evt
    */
   onGameFinished(evt) {
+    this.destroy();
+  }
+
+  /**
+   * Destructor
+   */
+  destroy() {
+    super.destroy();
     cancelAnimationFrame(this.gameloopRequestId);
     this.scene.stop();
   }

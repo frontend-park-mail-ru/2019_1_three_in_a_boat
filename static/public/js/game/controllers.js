@@ -54,21 +54,6 @@ export default class GameControllers {
    * @return {*}
    */
   diff() {
-    // let allkeys = [];
-    // allkeys.push.apply(allkeys, Object.keys(this.previous));
-    // allkeys.push.apply(allkeys, Object.keys(this.keys));
-    // allkeys = allkeys.map((k) => k.toLowerCase());
-    // // allkeys = allkeys.filter((key, pos, all) => {
-    // //   return all.indexOf(key, pos + 1) === -1;
-    // // });
-    // console.log(allkeys)
-    //
-    // const clicked = allkeys.reduce((res, key) => {
-    //   res[key] = !this.previous[key] && this.keys[key];
-    //   return res;
-    // }, {});
-    //
-    // this.previous = Object.assign({}, this.keys);
     const newKeys = this.keys;
     this.keys = [];
     return newKeys;
