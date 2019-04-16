@@ -26,6 +26,10 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.ico$/,
+        loader: 'file-loader?name=[name].[ext]',
+      },
+      {
         test: /\.(img|jpeg|jpg|png)$/,
         use: [
           'file-loader',

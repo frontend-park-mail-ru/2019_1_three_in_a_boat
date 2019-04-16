@@ -898,6 +898,17 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5v
 
 /***/ }),
 
+/***/ "./static/public/icons/favicon.ico":
+/*!*****************************************!*\
+  !*** ./static/public/icons/favicon.ico ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "favicon.ico";
+
+/***/ }),
+
 /***/ "./static/public/icons/fb.svg":
 /*!************************************!*\
   !*** ./static/public/icons/fb.svg ***!
@@ -8579,6 +8590,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js");
 
 __webpack_require__(/*! ./bundle.bemtree.js */ "./static/public/js/bundle.bemtree.js");
+
+__webpack_require__(/*! ../icons/favicon.ico */ "./static/public/icons/favicon.ico");
 
 
 
