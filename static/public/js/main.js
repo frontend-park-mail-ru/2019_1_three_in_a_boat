@@ -40,6 +40,7 @@ const router = new Router(settings.home, application)
     .addRoute('authors', new AuthorsController(main))
     .addRoute('profile/update', new UpdateController(main))
     .addRoute('single', new GameController(main))
+    .addRoute('single/results', new GameOverController(main))
     .addRoute('multi', new GameOverMltController(main))
     .addRoute('play', new GameMenuController(main));
 

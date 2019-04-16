@@ -78,6 +78,7 @@ export default class Hexagon {
       sides: this.sidesMask,
       angle: this.currentAngle,
     });
+    console.log(this.side);
 
     for (let i = 0; i < lines.length; ++i) {
       const line = Geometry.rotateLine(

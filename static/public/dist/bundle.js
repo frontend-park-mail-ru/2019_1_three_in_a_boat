@@ -6205,8 +6205,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _game_game_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game/game.js */ "./static/public/js/game/game.js");
 /* harmony import */ var _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/game-view.js */ "./static/public/js/views/game-view.js");
 /* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
-/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
  // import NotificationController from '../controllers/notification-controller.js';
+
 
 
 
@@ -6226,13 +6228,7 @@ class GameController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_3__["d
     super(parent);
     this.view = new _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
     this.game = null;
-    this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_4__["default"]; // this.notify = NotificationController.Instance;
-
-    this.bus.on('CLOSE_GAME', function () {
-      if (this.active) {
-        this.router.open('/');
-      }
-    }.bind(this));
+    this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_5__["default"]; // this.notify = NotificationController.Instance;
   }
   /**
    * Destructor
@@ -6293,6 +6289,11 @@ class GameController extends _core_controller_js__WEBPACK_IMPORTED_MODULE_3__["d
       mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
     }
 
+    this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].FINISH_GAME, () => {
+      window.history.pushState({}, '', 'single/results');
+      window.history.pushState({}, '', 'single/results');
+      window.history.back();
+    });
     this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](mode, this.view);
     this.game.start();
   }
@@ -8138,7 +8139,7 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     };
     this.state.hexagons = Array.from(new Array(3), function (_, position) {
       return {
-        side: 400 + 100 * position,
+        side: 400 + 300 * position,
         sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
         angle: Math.floor(Math.random() * 2 * Math.PI)
       };
@@ -8165,7 +8166,7 @@ class OfflineGame extends _core_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
     for (let i = 0; i < this.state.hexagons.length; i++) {
       if (this.state.hexagons[i].side < _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].minSize) {
         const newHexagon = {
-          side: 400,
+          side: 1100,
           sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
           angle: Math.floor(Math.random() * 2 * Math.PI)
         };
@@ -8259,13 +8260,13 @@ __webpack_require__.r(__webpack_exports__);
 const CURSOR = {
   radius: 100,
   height: 15,
-  rotatingSpeed: Math.PI / 20
+  rotatingSpeed: Math.PI / 12
 };
 const HEXAGON = {
   minSize: 40,
   width: 10,
   speed: 0.2,
-  rotatingSpeed: Math.PI / 4000
+  rotatingSpeed: Math.PI / 5000
 };
 const MASKS = {
   top: 1,
@@ -8323,8 +8324,7 @@ class Game {
 
       default:
         throw new Error('Invalid game mode ' + mode);
-    } // this.gameScene = new GameScene(canvas); TODO
-
+    }
 
     this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
     this.gameCore = new GameConstructor(this.gameControllers, view);
@@ -8423,7 +8423,7 @@ class UserArrow {
     this.ctx.lineTo(x1, y1);
     this.ctx.lineTo(x2, y2);
     this.ctx.closePath();
-    this.ctx.fill(); //
+    this.ctx.fill(); // it was used for debugging
     // const dot = Geometry.cursorAngleToDot(-this.currentAngle);
     // this.ctx.beginPath();
     // this.ctx.arc(dot.x, dot.y, 10, 0, 2 * Math.PI);
@@ -8531,6 +8531,7 @@ class Hexagon {
       sides: this.sidesMask,
       angle: this.currentAngle
     });
+    console.log(this.side);
 
     for (let i = 0; i < lines.length; ++i) {
       const line = _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__["default"].rotateLine(lines[i].first, lines[i].second, this.currentAngle);
@@ -8616,7 +8617,7 @@ if ('serviceWorker' in navigator) {
 
 application.insertAdjacentHTML('beforeend', '<div id="main"></div>');
 const main = document.getElementById('main');
-const router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_14__["default"](main)).addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
+const router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_14__["default"](main)).addRoute('single/results', new _controllers_game_over_controller_js__WEBPACK_IMPORTED_MODULE_12__["default"](main)).addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
 router.start();
 
 /***/ }),
@@ -9626,9 +9627,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+const bemhtml = __webpack_require__(/*! ../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
 /**
  * @class GameOverSingleClass
  */
+
 
 class GameOverSingleClass extends _core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   /**

@@ -37,7 +37,7 @@ export default class OfflineGame extends GameCore {
 
     this.state.hexagons = Array.from(new Array(3), function(_, position) {
       return {
-        side: 400 + 100 * position,
+        side: 400 + 300 * position,
         sides: Math.floor(Math.random() * 2) === 1? mask2: mask5,
         angle: Math.floor(Math.random() * 2 * Math.PI),
       };
@@ -65,7 +65,7 @@ export default class OfflineGame extends GameCore {
     for (let i = 0; i < this.state.hexagons.length; i++) {
       if (this.state.hexagons[i].side < HEXAGON.minSize) {
         const newHexagon = {
-          side: 400,
+          side: 1100,
           sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
           angle: Math.floor(Math.random() * 2 * Math.PI),
         };
