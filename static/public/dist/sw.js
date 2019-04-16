@@ -136,7 +136,7 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-const settings = {
+var settings = {
   home: 'http://127.0.0.1:8080',
   url: 'http://127.0.0.1:3000',
   imgPath: '/img/'
@@ -154,36 +154,42 @@ const settings = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./settings/config.js */ "./static/public/js/settings/config.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-const CACHE_NAME = 'hexagon_cash';
-const {
-  assets
-} = global.serviceWorkerOption;
-self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => {
-    return cache.addAll([...assets, './']);
-  }).catch(error => {
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+
+var CACHE_NAME = 'hexagon_cash';
+var assets = global.serviceWorkerOption.assets;
+self.addEventListener('install', function (event) {
+  event.waitUntil(caches.open(CACHE_NAME).then(function (cache) {
+    return cache.addAll([].concat(_toConsumableArray(assets), ['./']));
+  })["catch"](function (error) {
     console.error(error);
     throw error;
   }));
 });
-self.addEventListener('fetch', event => {
-  event.respondWith(caches.match(event.request).then(cachedResponse => {
+self.addEventListener('fetch', function (event) {
+  event.respondWith(caches.match(event.request).then(function (cachedResponse) {
     if (!navigator.onLine && cachedResponse) {
       return cachedResponse;
     }
 
     if (!navigator.onLine && !cachedResponse) {
-      const url = new URL(event.request.url);
-      const apiUrl = new URL(event.request.url);
-      const isPage = url.pathname.indexOf('.') === -1;
-      const isApiReq = url.host === apiUrl.host;
+      var url = new URL(event.request.url);
+      var apiUrl = new URL(event.request.url);
+      var isPage = url.pathname.indexOf('.') === -1;
+      var isApiReq = url.host === apiUrl.host;
       console.log(url.host, _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url);
 
       if (!isApiReq && isPage) {
-        const newUrl = event.request.url.replace(url.pathname, '/');
-        const newReq = new Request(newUrl);
-        return caches.match(newReq).then(cachedResponse => {
+        var newUrl = event.request.url.replace(url.pathname, '/');
+        var newReq = new Request(newUrl);
+        return caches.match(newReq).then(function (cachedResponse) {
           if (cachedResponse) {
             return cachedResponse;
           }
