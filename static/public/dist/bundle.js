@@ -8357,17 +8357,19 @@ function () {
       if (!newController) {
         newController = new _controllers_not_found_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
       } // comment this to work offline
-      // if (!navigator.onLine && newController.isRequiredOnline) {
-      //   if (!this.currentController) {
-      //     window.history.pushState({}, '', '/');
-      //     window.history.pushState({}, '', '/');
-      //     window.history.back();
-      //   } else {
-      //     showMessage(this.currentController.parent);
-      //   }
-      //   return;
-      // }
 
+
+      if (!navigator.onLine && newController.isRequiredOnline) {
+        if (!this.currentController) {
+          window.history.pushState({}, '', '/');
+          window.history.pushState({}, '', '/');
+          window.history.back();
+        } else {
+          Object(_views_offline_messagebox_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.currentController.parent);
+        }
+
+        return;
+      }
 
       if (this.currentController) {
         this.currentController.destructor();
