@@ -1,5 +1,6 @@
 var serviceWorkerOption = {
   "assets": [
+    "/favicon.ico",
     "/0d31ef75adef220e73f0cb93a84a7422.png",
     "/b1a81f232c0cec19ed63b2c7f24e56e9.jpg",
     "/bundle.js"
@@ -125,31 +126,77 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./static/public/js/settings/config.js":
+/*!*********************************************!*\
+  !*** ./static/public/js/settings/config.js ***!
+  \*********************************************/
+/*! exports provided: settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+var settings = {
+  home: 'http://127.0.0.1:8080',
+  url: 'http://127.0.0.1:3000',
+  imgPath: '/img/'
+};
+
+/***/ }),
+
 /***/ "./static/public/js/sw.js":
 /*!********************************!*\
   !*** ./static/public/js/sw.js ***!
   \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {const CACHE_NAME = 'hexagon_cash';
-const {
-  assets
-} = global.serviceWorkerOption;
-self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => {
-    return cache.addAll([...assets, './']);
-  }).then(() => {
-    console.log('Cached assets: main', [...assets, './']);
-  }).catch(error => {
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./settings/config.js */ "./static/public/js/settings/config.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+
+var CACHE_NAME = 'hexagon_cash';
+var assets = global.serviceWorkerOption.assets;
+self.addEventListener('install', function (event) {
+  event.waitUntil(caches.open(CACHE_NAME).then(function (cache) {
+    return cache.addAll([].concat(_toConsumableArray(assets), ['./']));
+  })["catch"](function (error) {
     console.error(error);
     throw error;
   }));
 });
-self.addEventListener('fetch', event => {
-  event.respondWith(caches.match(event.request).then(cachedResponse => {
+self.addEventListener('fetch', function (event) {
+  event.respondWith(caches.match(event.request).then(function (cachedResponse) {
     if (!navigator.onLine && cachedResponse) {
       return cachedResponse;
+    }
+
+    if (!navigator.onLine && !cachedResponse) {
+      var url = new URL(event.request.url);
+      var apiUrl = new URL(event.request.url);
+      var isPage = url.pathname.indexOf('.') === -1;
+      var isApiReq = url.host === apiUrl.host;
+      console.log(url.host, _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url);
+
+      if (!isApiReq && isPage) {
+        var newUrl = event.request.url.replace(url.pathname, '/');
+        var newReq = new Request(newUrl);
+        return caches.match(newReq).then(function (cachedResponse) {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+
+          return fetch(event.request);
+        });
+      }
     }
 
     return fetch(event.request);

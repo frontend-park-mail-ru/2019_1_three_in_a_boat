@@ -85,7 +85,7 @@ export default class GameView extends View {
     this.arrow = new UserArrow(
         this.ctx, 20, CURSOR.height, CURSOR.radius, '#fff'
     );
-    this.baseHex = new Hexagon(this.ctx, 100, 10, 0, color, 0);
+    this.baseHex = new Hexagon(this.ctx, 40, 10, 0, color, 0);
   }
 
   /**

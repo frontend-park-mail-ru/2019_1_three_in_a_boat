@@ -23,7 +23,14 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env'],
+        },
         exclude: /node_modules/,
+      },
+      {
+        test: /\.ico$/,
+        loader: 'file-loader?name=[name].[ext]',
       },
       {
         test: /\.(img|jpeg|jpg|png)$/,

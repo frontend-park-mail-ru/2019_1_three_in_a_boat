@@ -51,7 +51,6 @@ export default class Hexagon {
     let copyNum = this.sidesMask;
     for (let i = 0; i < 6 && copyNum; ++i) {
       this.emptySides[i] = (copyNum & 1);
-      // console.log(copyNum);
       copyNum >>= 1;
     }
   }

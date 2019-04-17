@@ -1,6 +1,7 @@
 'use strict';
 
 import View from '../core/view.js';
+const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 /**
  * @class GameOverSingleClass
@@ -18,7 +19,6 @@ export default class GameOverSingleClass extends View {
    * render page
    */
   render() {
-
     const template = [
       {
         block: 'game-over',
@@ -67,7 +67,7 @@ export default class GameOverSingleClass extends View {
           {
             block: 'game-msg',
             mods: {'center': true},
-            content: ['Новый рекорд!']
+            content: ['Новый рекорд!'],
           },
           {
             block: 'result-redirect',

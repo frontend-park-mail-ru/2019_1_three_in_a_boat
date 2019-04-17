@@ -1,14 +1,14 @@
 export const CURSOR = {
   radius: 100,
   height: 15,
-  rotatingSpeed: Math.PI / 20,
+  rotatingSpeed: Math.PI / 21,
 };
 
 export const HEXAGON = {
-  minSize: 100,
+  minSize: 40,
   width: 10,
   speed: 0.2,
-  rotatingSpeed: Math.PI / 4000,
+  rotatingSpeed: Math.PI / 5000,
 };
 
 export const MASKS = {
