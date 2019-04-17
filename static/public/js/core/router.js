@@ -44,16 +44,16 @@ export default class Router {
       newController = new NotFoundController();
     }
     // comment this to work offline
-    if (!navigator.onLine && newController.isRequiredOnline) {
-      if (!this.currentController) {
-        window.history.pushState({}, '', '/');
-        window.history.pushState({}, '', '/');
-        window.history.back();
-      } else {
-        showMessage(this.currentController.parent);
-      }
-      return;
-    }
+    // if (!navigator.onLine && newController.isRequiredOnline) {
+    //   if (!this.currentController) {
+    //     window.history.pushState({}, '', '/');
+    //     window.history.pushState({}, '', '/');
+    //     window.history.back();
+    //   } else {
+    //     showMessage(this.currentController.parent);
+    //   }
+    //   return;
+    // }
     if (this.currentController) {
       this.currentController.destructor();
     }

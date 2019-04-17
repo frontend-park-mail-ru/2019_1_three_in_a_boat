@@ -139,6 +139,7 @@ __webpack_require__.r(__webpack_exports__);
 var settings = {
   home: 'http://127.0.0.1:8080',
   url: 'http://127.0.0.1:3000',
+  wsUrl: 'ws://127.0.0.1:3000',
   imgPath: '/img/'
 };
 
@@ -181,10 +182,9 @@ self.addEventListener('fetch', function (event) {
 
     if (!navigator.onLine && !cachedResponse) {
       var url = new URL(event.request.url);
-      var apiUrl = new URL(event.request.url);
+      var apiUrl = new URL(_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url);
       var isPage = url.pathname.indexOf('.') === -1;
       var isApiReq = url.host === apiUrl.host;
-      console.log(url.host, _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url);
 
       if (!isApiReq && isPage) {
         var newUrl = event.request.url.replace(url.pathname, '/');

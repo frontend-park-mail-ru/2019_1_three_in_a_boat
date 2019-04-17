@@ -1,4 +1,5 @@
 import OfflineGame from './core/offline-core.js';
+import OnlineSingleGame from './core/online-single-core.js';
 import GameControllers from './controllers.js';
 import GAME_MODES from './mods.js';
 
@@ -15,8 +16,7 @@ export default class Game {
     let GameConstructor = null;
     switch (mode) {
       case GAME_MODES.ONLINE: {
-        // TODO add online
-        GameConstructor = OfflineGame;
+        GameConstructor = OnlineSingleGame;
         break;
       }
       case GAME_MODES.OFFLINE: {

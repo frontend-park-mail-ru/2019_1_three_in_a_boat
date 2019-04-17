@@ -6585,7 +6585,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
 /* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
 /* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
- // import NotificationController from '../controllers/notification-controller.js';
+
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -6636,8 +6636,7 @@ function (_Controller) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GameController).call(this, parent));
     _this.view = new _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
     _this.game = null;
-    _this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_5__["default"]; // this.notify = NotificationController.Instance;
-
+    _this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_5__["default"];
     return _this;
   }
   /**
@@ -6653,31 +6652,20 @@ function (_Controller) {
       this.game.destroy();
     }
     /**
-     * Choose and make action
-     * @param {Object} serverData
+     * Create game logic
      */
 
   }, {
     key: "action",
-
-    /**
-     * Create game logic
-     */
     value: function action() {
       var _this2 = this;
 
-      // init event listeners
-      // while WebSocket.connect
-      // while (this.model.run()) {
-      //   const angel = this.model.getAngel();
-      //   this.notify.sendAngel(angel);
-      // }
-      // this.endView.render(this.model.result());
       var mode = '';
 
-      if (false) {} else {
-        mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
-      }
+      if (true) {
+        // TODO replace it in future
+        mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].ONLINE;
+      } else {}
 
       this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].FINISH_GAME, function () {
         window.history.pushState({}, '', '/single/results');
@@ -6688,33 +6676,6 @@ function (_Controller) {
       });
       this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](mode, this.view);
       this.game.start();
-    }
-  }], [{
-    key: "selectAction",
-    value: function selectAction(serverData) {
-      switch (serverData) {
-        case 'event':
-          {
-            // handel event
-            break;
-          }
-
-        case 'other event':
-          {
-            // handel other event
-            break;
-          }
-
-        case 'other event too':
-          {
-            // handel other event too
-            break;
-          }
-
-        default:
-          {// handel default event
-          }
-      }
     }
   }]);
 
@@ -7382,6 +7343,123 @@ function (_Controller) {
 
 
 ;
+
+/***/ }),
+
+/***/ "./static/public/js/controllers/notification-controller.js":
+/*!*****************************************************************!*\
+  !*** ./static/public/js/controllers/notification-controller.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NotificationController; });
+/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var SERVER_ADDRESS = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].wsUrl; // 'ws://localhost:3000/ws';
+
+/**
+ * The singleton class for sending and receiving messages from server
+ * @class NotificationController
+ */
+
+var NotificationController =
+/*#__PURE__*/
+function () {
+  /**
+   * Constructor
+   * @param {string} path
+   * @param {function} onMsg
+   */
+  function NotificationController(path, onMsg) {
+    var _this = this;
+
+    _classCallCheck(this, NotificationController);
+
+    var Socket = 'MozWebSocket' in window ? MozWebSocket : WebSocket;
+    this.ws = new Socket(SERVER_ADDRESS + path);
+
+    this.ws.onerror = function (event) {
+      console.log('WebSocket ERROR: ' + JSON.stringify(event, null, 4));
+
+      _this._makeNotify('WebSocket ERROR: ' + JSON.stringify(event, null, 4));
+    };
+
+    this.ws.onclose = function (event) {
+      _this.onDisconnected('Client disconnected.');
+    };
+
+    this.ws.onopen = function () {
+      console.log('ws success connected');
+      _this.ws.onmessage = onMsg;
+    };
+  }
+  /**
+   * Disconnection handler
+   * @param {string} discMsg
+   */
+
+
+  _createClass(NotificationController, [{
+    key: "onDisconnected",
+    value: function onDisconnected(discMsg) {
+      this._makeNotify(discMsg);
+    }
+    /**
+     * Send angel to server
+     * @param {*} data
+     */
+
+  }, {
+    key: "sendData",
+    value: function sendData(data) {
+      this.ws.send(data);
+    }
+    /**
+     * Says the client information about connection
+     * @param {string} data
+     * @private
+     */
+
+  }, {
+    key: "_makeNotify",
+    value: function _makeNotify() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'error';
+
+      if (!'Notification' in window) {
+        console.error('haven`t Notification in window');
+        return;
+      }
+
+      if (Notification.permission === 'granted') {
+        new Notification(data);
+        return;
+      }
+
+      if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(function (permission) {
+          if (permission === 'granted') {
+            new Notification(data);
+          }
+        });
+      }
+    }
+  }]);
+
+  return NotificationController;
+}();
+
+
 
 /***/ }),
 
@@ -8269,19 +8347,17 @@ function () {
       if (!newController) {
         newController = new _controllers_not_found_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
       } // comment this to work offline
+      // if (!navigator.onLine && newController.isRequiredOnline) {
+      //   if (!this.currentController) {
+      //     window.history.pushState({}, '', '/');
+      //     window.history.pushState({}, '', '/');
+      //     window.history.back();
+      //   } else {
+      //     showMessage(this.currentController.parent);
+      //   }
+      //   return;
+      // }
 
-
-      if (!navigator.onLine && newController.isRequiredOnline) {
-        if (!this.currentController) {
-          window.history.pushState({}, '', '/');
-          window.history.pushState({}, '', '/');
-          window.history.back();
-        } else {
-          Object(_views_offline_messagebox_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.currentController.parent);
-        }
-
-        return;
-      }
 
       if (this.currentController) {
         this.currentController.destructor();
@@ -8913,13 +8989,14 @@ function () {
       var _this = this;
 
       var lines = this.convertHexagonToLines(hexagon);
-      var isCollide = false; // console.log(hexagon, lines);
-
+      var isCollide = false;
       lines.forEach(function (line) {
-        line = _this.rotateLine(line.first, line.second, hexagon.angle); // console.log(cursor, line.first, line.second);
+        if (line) {
+          line = _this.rotateLine(line.first, line.second, hexagon.angle);
 
-        if (_this._lineAndCursorCollision(line.first, line.second, cursor)) {
-          isCollide = true;
+          if (_this._lineAndCursorCollision(line.first, line.second, cursor)) {
+            isCollide = true;
+          }
         }
       });
       return isCollide;
@@ -8946,6 +9023,8 @@ function () {
             y: hexagon.side * sqrt3 / 2
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topRight)) {
@@ -8959,6 +9038,8 @@ function () {
             y: 0
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomRight)) {
@@ -8972,6 +9053,8 @@ function () {
             y: -hexagon.side * sqrt3 / 2
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottom)) {
@@ -8985,6 +9068,8 @@ function () {
             y: -hexagon.side * sqrt3 / 2
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomLeft)) {
@@ -8998,6 +9083,8 @@ function () {
             y: 0
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topLeft)) {
@@ -9011,6 +9098,8 @@ function () {
             y: hexagon.side * sqrt3 / 2
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       return lines;
@@ -9159,8 +9248,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var mask2 = 1;
-var mask5 = 31;
+var mask2 = 9;
+var mask5 = 18;
 /**
  * Offline game core class
  */
@@ -9345,6 +9434,212 @@ function (_GameCore) {
 
 /***/ }),
 
+/***/ "./static/public/js/game/core/online-single-core.js":
+/*!**********************************************************!*\
+  !*** ./static/public/js/game/core/online-single-core.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OfflineGame; });
+/* harmony import */ var _core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core.js */ "./static/public/js/game/core/core.js");
+/* harmony import */ var _geometry_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./geometry.js */ "./static/public/js/game/core/geometry.js");
+/* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./events.js */ "./static/public/js/game/core/events.js");
+/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./settings.js */ "./static/public/js/game/core/settings.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+/**
+ * Offline game core class
+ */
+
+var OfflineGame =
+/*#__PURE__*/
+function (_GameCore) {
+  _inherits(OfflineGame, _GameCore);
+
+  /**
+   * Constructor
+   * @param {object} controller
+   * @param {object} scene
+   */
+  function OfflineGame(controller, scene) {
+    var _this;
+
+    _classCallCheck(this, OfflineGame);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(OfflineGame).call(this, controller, scene));
+    _this.scene = scene;
+    _this.state = {};
+    _this.gameloop = _this.gameloop.bind(_assertThisInitialized(_this));
+    _this.lastFrame = 0;
+    _this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_2__["default"]('/play', _this.gameloop.bind(_assertThisInitialized(_this)));
+    return _this;
+  }
+  /**
+   * Start game
+   */
+
+
+  _createClass(OfflineGame, [{
+    key: "start",
+    value: function start() {
+      _get(_getPrototypeOf(OfflineGame.prototype), "start", this).call(this);
+
+      this.state = {
+        hexagons: [],
+        cursorAngle: Math.PI / 2
+      };
+      setTimeout(function () {
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_3__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].START_GAME, this.state);
+      }.bind(this));
+    }
+    /**
+     * GameController loop action
+     * @param {object} message
+     */
+
+  }, {
+    key: "gameloop",
+    value: function gameloop(message) {
+      var _this2 = this;
+
+      var data = JSON.parse(message.data);
+      console.log(message);
+
+      if (data.hexes) {
+        this.state.score = data.score;
+        this.state.hexagons = data.hexes;
+        this.state.hexagons.forEach(function (_, position) {
+          _this2.state.hexagons[position].sides = _this2.state.hexagons[position].sidesMask;
+        });
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_3__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].GAME_STATE_CHANGED, this.state);
+      }
+
+      if (data.over) {
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_3__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].FINISH_GAME);
+      }
+    }
+    /**
+     * Control pressed event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onControllsPressed",
+    value: function onControllsPressed(evt) {
+      var _this3 = this;
+
+      if (!this.controllersLoopIntervalId) {
+        this.controllersLoopIntervalId = setInterval(function () {
+          if (_this3._pressed('LEFT', evt)) {
+            _this3.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_5__["CURSOR"].rotatingSpeed;
+          } else if (_this3._pressed('RIGHT', evt)) {
+            _this3.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_5__["CURSOR"].rotatingSpeed;
+          }
+
+          _this3.ws.sendData({
+            angle: _this3.state.cursorAngle
+          });
+        }, 50);
+      }
+    }
+    /**
+     * Control unpressed event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onControllsUnpressed",
+    value: function onControllsUnpressed(evt) {
+      clearInterval(this.controllersLoopIntervalId);
+      this.controllersLoopIntervalId = undefined;
+    }
+    /**
+     * Start game event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onGameStarted",
+    value: function onGameStarted(evt) {
+      this.controller.start();
+      this.scene.render(evt);
+      this.scene.start();
+    }
+    /**
+     * Finish game event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onGameFinished",
+    value: function onGameFinished(evt) {
+      this.destroy();
+    }
+    /**
+     * Destructor
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      _get(_getPrototypeOf(OfflineGame.prototype), "destroy", this).call(this);
+
+      if (this.controllersLoopIntervalId) {
+        clearInterval(this.controllersLoopIntervalId);
+      }
+
+      this.scene.stop();
+    }
+    /**
+     * State change game event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onGameStateChanged",
+    value: function onGameStateChanged(evt) {
+      this.scene.update(evt);
+    }
+  }]);
+
+  return OfflineGame;
+}(_core_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+
+/***/ }),
+
 /***/ "./static/public/js/game/core/settings.js":
 /*!************************************************!*\
   !*** ./static/public/js/game/core/settings.js ***!
@@ -9390,13 +9685,15 @@ var MASKS = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Game; });
 /* harmony import */ var _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/offline-core.js */ "./static/public/js/game/core/offline-core.js");
-/* harmony import */ var _controllers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controllers.js */ "./static/public/js/game/controllers.js");
-/* harmony import */ var _mods_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mods.js */ "./static/public/js/game/mods.js");
+/* harmony import */ var _core_online_single_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core/online-single-core.js */ "./static/public/js/game/core/online-single-core.js");
+/* harmony import */ var _controllers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controllers.js */ "./static/public/js/game/controllers.js");
+/* harmony import */ var _mods_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mods.js */ "./static/public/js/game/mods.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -9419,14 +9716,13 @@ function () {
     var GameConstructor = null;
 
     switch (mode) {
-      case _mods_js__WEBPACK_IMPORTED_MODULE_2__["default"].ONLINE:
+      case _mods_js__WEBPACK_IMPORTED_MODULE_3__["default"].ONLINE:
         {
-          // TODO add online
-          GameConstructor = _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__["default"];
+          GameConstructor = _core_online_single_core_js__WEBPACK_IMPORTED_MODULE_1__["default"];
           break;
         }
 
-      case _mods_js__WEBPACK_IMPORTED_MODULE_2__["default"].OFFLINE:
+      case _mods_js__WEBPACK_IMPORTED_MODULE_3__["default"].OFFLINE:
         {
           GameConstructor = _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__["default"];
           break;
@@ -9436,7 +9732,7 @@ function () {
         throw new Error('Invalid game mode ' + mode);
     }
 
-    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
     this.gameCore = new GameConstructor(this.gameControllers, view);
   }
   /**
@@ -9668,6 +9964,8 @@ function () {
   }, {
     key: "draw",
     value: function draw() {
+      var _this = this;
+
       this.ctx.beginPath();
       this.ctx.lineWidth = this.lineWidth;
       this.ctx.strokeStyle = this.color; // let x = -this.currentSide / 2 * Math.sin(this.currentAngle);
@@ -9679,18 +9977,23 @@ function () {
         sides: this.sidesMask,
         angle: this.currentAngle
       });
+      lines.forEach(function (_, pos) {
+        if (lines[pos]) {
+          lines[pos] = _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__["default"].rotateLine(lines[pos].first, lines[pos].second, _this.currentAngle);
+        }
+      });
 
       for (var i = 0; i < lines.length; ++i) {
-        var line = _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__["default"].rotateLine(lines[i].first, lines[i].second, this.currentAngle);
+        var line = lines[i];
 
-        if (i === 0) {
-          this.ctx.moveTo(line.first.x, line.first.y);
-        } else {
-          this.ctx.lineTo(line.first.x, line.first.y);
-        }
+        if (line) {
+          if (i === 0) {
+            this.ctx.moveTo(line.first.x, line.first.y);
+          }
 
-        if (i === lines.length - 1) {
           this.ctx.lineTo(line.second.x, line.second.y);
+        } else if (i < lines.length - 1 && lines[i + 1]) {
+          this.ctx.moveTo(lines[i + 1].first.x, lines[i + 1].first.y);
         }
       }
 
@@ -10205,6 +10508,7 @@ __webpack_require__.r(__webpack_exports__);
 var settings = {
   home: 'http://127.0.0.1:8080',
   url: 'http://127.0.0.1:3000',
+  wsUrl: 'ws://127.0.0.1:3000',
   imgPath: '/img/'
 };
 
