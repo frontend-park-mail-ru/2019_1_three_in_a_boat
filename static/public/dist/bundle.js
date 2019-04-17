@@ -6662,10 +6662,11 @@ function (_Controller) {
 
       var mode = '';
 
-      if (true) {
-        // TODO replace it in future
+      if (navigator.onLine) {
         mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].ONLINE;
-      } else {}
+      } else {
+        mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
+      }
 
       this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].FINISH_GAME, function () {
         window.history.pushState({}, '', '/single/results');
@@ -7424,6 +7425,15 @@ function () {
     key: "sendData",
     value: function sendData(data) {
       this.ws.send(data);
+    }
+    /**
+     * Close connection
+     */
+
+  }, {
+    key: "close",
+    value: function close() {
+      this.ws.close();
     }
     /**
      * Says the client information about connection
@@ -9445,11 +9455,10 @@ function (_GameCore) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OfflineGame; });
 /* harmony import */ var _core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core.js */ "./static/public/js/game/core/core.js");
-/* harmony import */ var _geometry_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./geometry.js */ "./static/public/js/game/core/geometry.js");
-/* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
-/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../event-bus.js */ "./static/public/js/event-bus.js");
-/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./events.js */ "./static/public/js/game/core/events.js");
-/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./settings.js */ "./static/public/js/game/core/settings.js");
+/* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./events.js */ "./static/public/js/game/core/events.js");
+/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings.js */ "./static/public/js/game/core/settings.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9471,7 +9480,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -9502,7 +9510,7 @@ function (_GameCore) {
     _this.state = {};
     _this.gameloop = _this.gameloop.bind(_assertThisInitialized(_this));
     _this.lastFrame = 0;
-    _this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_2__["default"]('/play', _this.gameloop.bind(_assertThisInitialized(_this)));
+    _this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__["default"]('/play', _this.gameloop.bind(_assertThisInitialized(_this)));
     return _this;
   }
   /**
@@ -9520,7 +9528,7 @@ function (_GameCore) {
         cursorAngle: Math.PI / 2
       };
       setTimeout(function () {
-        _event_bus_js__WEBPACK_IMPORTED_MODULE_3__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].START_GAME, this.state);
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].START_GAME, this.state);
       }.bind(this));
     }
     /**
@@ -9534,7 +9542,6 @@ function (_GameCore) {
       var _this2 = this;
 
       var data = JSON.parse(message.data);
-      console.log(message);
 
       if (data.hexes) {
         this.state.score = data.score;
@@ -9542,11 +9549,11 @@ function (_GameCore) {
         this.state.hexagons.forEach(function (_, position) {
           _this2.state.hexagons[position].sides = _this2.state.hexagons[position].sidesMask;
         });
-        _event_bus_js__WEBPACK_IMPORTED_MODULE_3__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].GAME_STATE_CHANGED, this.state);
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].GAME_STATE_CHANGED, this.state);
       }
 
       if (data.over) {
-        _event_bus_js__WEBPACK_IMPORTED_MODULE_3__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].FINISH_GAME);
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
       }
     }
     /**
@@ -9562,14 +9569,14 @@ function (_GameCore) {
       if (!this.controllersLoopIntervalId) {
         this.controllersLoopIntervalId = setInterval(function () {
           if (_this3._pressed('LEFT', evt)) {
-            _this3.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_5__["CURSOR"].rotatingSpeed;
+            _this3.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
           } else if (_this3._pressed('RIGHT', evt)) {
-            _this3.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_5__["CURSOR"].rotatingSpeed;
+            _this3.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
           }
 
-          _this3.ws.sendData({
+          _this3.ws.sendData(JSON.stringify({
             angle: _this3.state.cursorAngle
-          });
+          }));
         }, 50);
       }
     }
@@ -9619,6 +9626,7 @@ function (_GameCore) {
         clearInterval(this.controllersLoopIntervalId);
       }
 
+      this.ws.close();
       this.scene.stop();
     }
     /**

@@ -1,5 +1,4 @@
 import GameCore from './core.js';
-import Geometry from './geometry.js';
 import WebSocketController from '../../controllers/notification-controller.js';
 import bus from '../../event-bus.js';
 import events from './events.js';
@@ -44,7 +43,7 @@ export default class OfflineGame extends GameCore {
    */
   gameloop(message) {
     const data = JSON.parse(message.data);
-    console.log(message);
+
     if (data.hexes) {
       this.state.score = data.score;
       this.state.hexagons = data.hexes;
@@ -72,7 +71,7 @@ export default class OfflineGame extends GameCore {
         } else if (this._pressed('RIGHT', evt)) {
           this.state.cursorAngle -= CURSOR.rotatingSpeed;
         }
-        this.ws.sendData({angle: this.state.cursorAngle});
+        this.ws.sendData(JSON.stringify({angle: this.state.cursorAngle}));
       }, 50);
     }
   }
@@ -112,6 +111,7 @@ export default class OfflineGame extends GameCore {
     if (this.controllersLoopIntervalId) {
       clearInterval(this.controllersLoopIntervalId);
     }
+    this.ws.close();
     this.scene.stop();
   }
 

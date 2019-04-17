@@ -51,6 +51,13 @@ export default class NotificationController {
   }
 
   /**
+   * Close connection
+   */
+  close() {
+    this.ws.close();
+  }
+
+  /**
    * Says the client information about connection
    * @param {string} data
    * @private

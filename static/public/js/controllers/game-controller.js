@@ -35,7 +35,7 @@ export default class GameController extends Controller {
    */
   action() {
     let mode = '';
-    if (true) { // TODO replace it in future
+    if (navigator.onLine) {
       mode = GAME_MODES.ONLINE;
     } else {
       mode = GAME_MODES.OFFLINE;
