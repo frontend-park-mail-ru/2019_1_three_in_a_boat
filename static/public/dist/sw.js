@@ -139,7 +139,7 @@ __webpack_require__.r(__webpack_exports__);
 var settings = {
   home: 'http://127.0.0.1:8080',
   url: 'http://127.0.0.1:3000',
-  imgPath: '/img/'
+  imgPath: 'https://hexagon-game.s3.eu-north-1.amazonaws.com/img/'
 };
 
 /***/ }),
