@@ -6678,7 +6678,7 @@ function (_Controller) {
 
         _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].getData().then(function (user) {
           if (user) {
-            state.highScore = user.highScore === null ? 0 : user.highScore;
+            state.highScore = user.highScore === null || !user.highScore ? 0 : user.highScore;
 
             if (state.highScore < state.score) {
               _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].updateScore(state.score);
@@ -11343,6 +11343,10 @@ function (_View) {
   _createClass(GameOverSingleClass, [{
     key: "render",
     value: function render(state, mode) {
+      if (state.highScore === null) {
+        state.highScore = 0;
+      }
+
       var record = state.score > state.highScore;
       var template = [{
         block: 'game-over',
@@ -11365,7 +11369,7 @@ function (_View) {
           mods: {
             'single': true
           },
-          content: [mode === _game_mods_js__WEBPACK_IMPORTED_MODULE_1__["default"].OFFLINE || !state.highScore ? {} : {
+          content: [mode === _game_mods_js__WEBPACK_IMPORTED_MODULE_1__["default"].OFFLINE || state.highScore === undefined ? {} : {
             elem: 'item',
             name: 'Лучший счет',
             value: state.highScore

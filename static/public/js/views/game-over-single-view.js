@@ -22,6 +22,9 @@ export default class GameOverSingleClass extends View {
    * @param {string} mode - Game mode
    */
   render(state, mode) {
+    if (state.highScore === null) {
+      state.highScore = 0;
+    }
     const record = state.score > state.highScore;
 
     const template = [
@@ -51,11 +54,12 @@ export default class GameOverSingleClass extends View {
             block: 'game-info',
             mods: {'single': true},
             content: [
-              mode === GAME_MODES.OFFLINE || !state.highScore? {}: {
-                elem: 'item',
-                name: 'Лучший счет',
-                value: state.highScore,
-              },
+              mode === GAME_MODES.OFFLINE || state.highScore === undefined ?
+                {}: {
+                  elem: 'item',
+                  name: 'Лучший счет',
+                  value: state.highScore,
+                },
               {
                 elem: 'line',
               },

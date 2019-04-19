@@ -49,7 +49,8 @@ export default class GameController extends Controller {
       UserService.getData().then(
           (user) => {
             if (user) {
-              state.highScore = user.highScore === null? 0: user.highScore;
+              state.highScore = user.highScore === null || !user.highScore? 0:
+                user.highScore;
               if (state.highScore < state.score) {
                 UserService.updateScore(state.score);
               }
