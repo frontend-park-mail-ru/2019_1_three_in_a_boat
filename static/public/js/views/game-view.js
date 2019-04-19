@@ -92,21 +92,21 @@ export default class GameView extends View {
       );
     });
     this.arrow = new UserArrow(
-        this.ctx, 20, CURSOR.height, CURSOR.radius, '#fff'
+        this.ctx, 25, CURSOR.height, CURSOR.radius, '#fff'
     );
     this.baseHex = new Hexagon(this.ctx, 40, 10, 0, color, 0);
     this.scoreTitle = new CanvasText(
         this.ctx, 35, '#FFF', '#000', 'SCORE', 1
     );
     this.scoreOut = new CanvasText(
-        this.ctx, 70, '#FFF', '#000', 0, 1
+        this.ctx, 70, '#FFF', '#000', state.score, 1
     );
-    this.recordTitle = new CanvasText(
-        this.ctx, 35, '#FFF', '#000', 'RECORD', -1
-    );
-    this.recordOut = new CanvasText(
-        this.ctx, 70, '#FFF', '#000', state.record, -1
-    );
+    // this.recordTitle = new CanvasText(
+    //     this.ctx, 35, '#FFF', '#000', 'RECORD', -1
+    // );
+    // this.recordOut = new CanvasText(
+    //     this.ctx, 70, '#FFF', '#000', state.highScore, -1
+    // );
     this.timeOut = new CanvasText(
         this.ctx, 70, '#FFF', '#000', '00:00', 0
     );
@@ -131,10 +131,10 @@ export default class GameView extends View {
     this.timeOut.setParameters(this.currentTime);
     this.timeOut.draw();
     this.scoreTitle.draw();
-    this.recordTitle.draw();
+    // this.recordTitle.draw();
     this.scoreOut.setParameters(this.currentScore);
     this.scoreOut.draw();
-    this.recordOut.draw();
+    // this.recordOut.draw();
     this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
   }
 

@@ -1,11 +1,8 @@
 import GameCore from './core.js';
-import Geometry from './geometry.js';
+import WebSocketController from '../../controllers/notification-controller.js';
 import bus from '../../event-bus.js';
 import events from './events.js';
-import {CURSOR, HEXAGON} from './settings.js';
-
-const mask2 = 4;
-const mask5 = 22;
+import {CURSOR} from './settings.js';
 
 /**
  * Offline game core class
@@ -21,8 +18,7 @@ export default class OfflineGame extends GameCore {
     this.scene = scene;
     this.state = {};
     this.gameLoop = this.gameLoop.bind(this);
-    this.gameloopRequestId = null;
-    this.lastFrame = 0;
+    this.ws = new WebSocketController('/play', this.gameLoop.bind(this));
   }
 
   /**
@@ -37,14 +33,7 @@ export default class OfflineGame extends GameCore {
       time: 0,
     };
 
-    this.state.hexagons = Array.from(new Array(3), function(_, position) {
-      return {
-        side: 400 + 300 * position,
-        sides: Math.floor(Math.random() * 2) === 1? mask2: mask5,
-        angle: Math.floor(Math.random() * 2 * Math.PI),
-      };
-    });
-
+    this.time = performance.now();
     setTimeout(function() {
       bus.emit(events.START_GAME, this.state);
     }.bind(this));
@@ -52,47 +41,30 @@ export default class OfflineGame extends GameCore {
 
   /**
    * GameController loop action
-   * @param {number} now
+   * @param {object} message
    */
-  gameLoop(now) {
-    const delay = now - this.lastFrame;
-    this.state.time += delay / 1000;
+  gameLoop(message) {
+    let data;
+    try { // TODO get game id here
+      data = JSON.parse(message.data);
+    } catch (e) {
+      return;
+    }
+    this.state.time = (performance.now() - this.time) / 1000;
 
-    this.lastFrame = now;
-    this.state.hexagons = this.state.hexagons
-        .map(function(hexagon) {
-          hexagon.side -= HEXAGON.speed * delay;
-          hexagon.angle += HEXAGON.rotatingSpeed * delay;
-          return hexagon;
-        });
-
-    for (let i = 0; i < this.state.hexagons.length; i++) {
-      if (this.state.hexagons[i].side < HEXAGON.minSize) {
-        this.state.hexagons[i] = {
-          side: 1100,
-          sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
-          angle: Math.floor(Math.random() * 2 * Math.PI),
-        };
-        this.state.score += 10;
-      }
+    if (data.hexes) {
+      this.state.score = data.score;
+      this.state.hexagons = data.hexes;
+      this.state.hexagons.forEach((_, position) => {
+        this.state.hexagons[position].sides =
+          this.state.hexagons[position].sidesMask;
+      });
+      bus.emit(events.GAME_STATE_CHANGED, this.state);
     }
 
-    bus.emit(events.GAME_STATE_CHANGED, this.state);
-
-    const cursor = Geometry.cursorAngleToDot(this.state.cursorAngle);
-
-    for (let i = 0; i < this.state.hexagons.length; i++) {
-      const condition = Geometry.checkHexagonCollision(
-          this.state.hexagons[i], cursor
-      );
-
-      if (condition) {
-        bus.emit(events.FINISH_GAME, this.state);
-        return;
-      }
+    if (data.over) {
+      bus.emit(events.FINISH_GAME, this.state);
     }
-
-    this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
   }
 
   /**
@@ -107,6 +79,7 @@ export default class OfflineGame extends GameCore {
         } else if (this._pressed('RIGHT', evt)) {
           this.state.cursorAngle -= CURSOR.rotatingSpeed;
         }
+        this.ws.sendData(JSON.stringify({angle: this.state.cursorAngle}));
       }, 50);
     }
   }
@@ -128,9 +101,6 @@ export default class OfflineGame extends GameCore {
     this.controller.start();
     this.scene.render(evt);
     this.scene.start();
-
-    this.lastFrame = performance.now();
-    this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
   }
 
   /**
@@ -146,10 +116,10 @@ export default class OfflineGame extends GameCore {
    */
   destroy() {
     super.destroy();
-    cancelAnimationFrame(this.gameloopRequestId);
     if (this.controllersLoopIntervalId) {
       clearInterval(this.controllersLoopIntervalId);
     }
+    this.ws.close();
     this.scene.stop();
   }
 

@@ -28,10 +28,9 @@ self.addEventListener('fetch', (event) => {
 
             if (!navigator.onLine && !cachedResponse) {
               const url = new URL(event.request.url);
-              const apiUrl = new URL(event.request.url);
+              const apiUrl = new URL(settings.url);
               const isPage = url.pathname.indexOf('.') === -1;
               const isApiReq = url.host === apiUrl.host;
-              console.log(url.host, settings.url);
               if (!isApiReq && isPage) {
                 const newUrl = event.request.url.replace(url.pathname, '/');
                 const newReq = new Request(newUrl);

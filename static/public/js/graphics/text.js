@@ -27,11 +27,15 @@ export default class CanvasText {
 
   /**
    * Update text and background
-   * @param {string} text - new text
+   * @param {string|Number} text - new text
    * @param {string} background - new background color
    */
   setParameters(text, background = undefined) {
-    this.text = text;
+    if (Number.isFinite(text) && this.simplePos === 0) {
+      this.text = text.toFixed(2);
+    } else {
+      this.text = text;
+    }
     if (background !== undefined) {
       this.background = background;
     }
@@ -41,7 +45,7 @@ export default class CanvasText {
    * Draw text in canvas
    */
   draw() {
-    this.ctx.font = `${TEXT_SIZE}pt  Anurati, cursive`;
+    this.ctx.font = `${TEXT_SIZE}pt  'Russo One', sans-serif, cursive`;
     const textWidth = this.ctx.measureText(this.text).width;
     this.ctx.fillStyle = this.background;
     let x = 0;

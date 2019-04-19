@@ -78,17 +78,23 @@ export default class Hexagon {
       angle: this.currentAngle,
     });
 
-    for (let i = 0; i < lines.length; ++i) {
-      const line = Geometry.rotateLine(
-          lines[i].first, lines[i].second, this.currentAngle
-      );
-      if (i === 0) {
-        this.ctx.moveTo(line.first.x, line.first.y);
-      } else {
-        this.ctx.lineTo(line.first.x, line.first.y);
+    lines.forEach((_, pos) => {
+      if (lines[pos]) {
+        lines[pos] = Geometry.rotateLine(
+            lines[pos].first, lines[pos].second, this.currentAngle
+        );
       }
-      if (i === lines.length - 1) {
+    });
+
+    for (let i = 0; i < lines.length; ++i) {
+      const line = lines[i];
+      if (line) {
+        if (i === 0) {
+          this.ctx.moveTo(line.first.x, line.first.y);
+        }
         this.ctx.lineTo(line.second.x, line.second.y);
+      } else if (i < lines.length - 1 && lines[i + 1]) {
+        this.ctx.moveTo(lines[i + 1].first.x, lines[i + 1].first.y);
       }
     }
 

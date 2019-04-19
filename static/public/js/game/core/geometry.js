@@ -15,12 +15,12 @@ export default class Geometry {
   static checkHexagonCollision(hexagon, cursor) {
     const lines = this.convertHexagonToLines(hexagon);
     let isCollide = false;
-    // console.log(hexagon, lines);
     lines.forEach((line) => {
-      line = this.rotateLine(line.first, line.second, hexagon.angle);
-      // console.log(cursor, line.first, line.second);
-      if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
-        isCollide = true;
+      if (line) {
+        line = this.rotateLine(line.first, line.second, hexagon.angle);
+        if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
+          isCollide = true;
+        }
       }
     });
 
@@ -46,6 +46,8 @@ export default class Geometry {
           y: hexagon.side * sqrt3 / 2,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.topRight)) {
@@ -59,6 +61,8 @@ export default class Geometry {
           y: 0,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.bottomRight)) {
@@ -72,6 +76,8 @@ export default class Geometry {
           y: -hexagon.side * sqrt3 / 2,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.bottom)) {
@@ -85,6 +91,8 @@ export default class Geometry {
           y: -hexagon.side * sqrt3 / 2,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.bottomLeft)) {
@@ -98,6 +106,8 @@ export default class Geometry {
           y: 0,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.topLeft)) {
@@ -111,6 +121,8 @@ export default class Geometry {
           y: hexagon.side * sqrt3 / 2,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     return lines;
