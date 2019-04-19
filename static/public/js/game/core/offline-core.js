@@ -2,10 +2,10 @@ import GameCore from './core.js';
 import Geometry from './geometry.js';
 import bus from '../../event-bus.js';
 import events from './events.js';
-import {HEXAGON, CURSOR} from './settings.js';
+import {CURSOR, HEXAGON} from './settings.js';
 
-const mask2 = 9;
-const mask5 = 18;
+const mask2 = 4;
+const mask5 = 22;
 
 /**
  * Offline game core class
@@ -20,7 +20,7 @@ export default class OfflineGame extends GameCore {
     super(controller, scene);
     this.scene = scene;
     this.state = {};
-    this.gameloop = this.gameloop.bind(this);
+    this.gameLoop = this.gameLoop.bind(this);
     this.gameloopRequestId = null;
     this.lastFrame = 0;
   }
@@ -33,6 +33,8 @@ export default class OfflineGame extends GameCore {
     this.state = {
       hexagons: [],
       cursorAngle: Math.PI / 2,
+      score: 0,
+      time: 0,
     };
 
     this.state.hexagons = Array.from(new Array(3), function(_, position) {
@@ -52,8 +54,10 @@ export default class OfflineGame extends GameCore {
    * GameController loop action
    * @param {number} now
    */
-  gameloop(now) {
+  gameLoop(now) {
     const delay = now - this.lastFrame;
+    this.state.time += delay / 1000;
+
     this.lastFrame = now;
     this.state.hexagons = this.state.hexagons
         .map(function(hexagon) {
@@ -64,12 +68,12 @@ export default class OfflineGame extends GameCore {
 
     for (let i = 0; i < this.state.hexagons.length; i++) {
       if (this.state.hexagons[i].side < HEXAGON.minSize) {
-        const newHexagon = {
+        this.state.hexagons[i] = {
           side: 1100,
           sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
           angle: Math.floor(Math.random() * 2 * Math.PI),
         };
-        this.state.hexagons[i] = newHexagon;
+        this.state.score += 10;
       }
     }
 
@@ -83,12 +87,12 @@ export default class OfflineGame extends GameCore {
       );
 
       if (condition) {
-        bus.emit(events.FINISH_GAME);
+        bus.emit(events.FINISH_GAME, this.state);
         return;
       }
     }
 
-    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+    this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
   }
 
   /**
@@ -126,7 +130,7 @@ export default class OfflineGame extends GameCore {
     this.scene.start();
 
     this.lastFrame = performance.now();
-    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+    this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
   }
 
   /**

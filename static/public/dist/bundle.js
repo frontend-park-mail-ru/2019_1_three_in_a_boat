@@ -6582,9 +6582,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _game_mods_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/mods.js */ "./static/public/js/game/mods.js");
 /* harmony import */ var _game_game_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game/game.js */ "./static/public/js/game/game.js");
 /* harmony import */ var _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/game-view.js */ "./static/public/js/views/game-view.js");
-/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
-/* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
-/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/game-over-single-view.js */ "./static/public/js/views/game-over-single-view.js");
+/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
+/* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../models/user-service.js */ "./static/public/js/models/user-service.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6615,6 +6617,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 /**
  * The main class GameController
  */
@@ -6633,10 +6637,11 @@ function (_Controller) {
 
     _classCallCheck(this, GameController);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameController).call(this, parent));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameController).call(this, parent, false));
     _this.view = new _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
+    _this.resultView = new _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_3__["default"](parent);
     _this.game = null;
-    _this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_5__["default"];
+    _this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_6__["default"];
     return _this;
   }
   /**
@@ -6668,20 +6673,61 @@ function (_Controller) {
         mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
       }
 
-      this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].FINISH_GAME, function () {
-        window.history.pushState({}, '', '/single/results');
-        window.history.pushState({}, '', '/single/results');
-        window.history.back();
-
+      this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_5__["default"].FINISH_GAME, function (state) {
         _this2.destructor();
+
+        _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].getData().then(function (user) {
+          if (user) {
+            state.highScore = user.highScore === null ? 0 : user.highScore;
+
+            if (state.highScore < state.score) {
+              _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].updateScore(state.score);
+            }
+          }
+
+          _this2.destructor();
+
+          _this2.resultView.render(state, mode);
+
+          _this2._initResultView();
+        }, function (error) {
+          console.log(error);
+        });
       });
       this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](mode, this.view);
       this.game.start();
     }
+    /**
+     * Init result view
+     * Add event listeners
+     * @private
+     */
+
+  }, {
+    key: "_initResultView",
+    value: function _initResultView() {
+      var _this3 = this;
+
+      var btn = document.getElementsByClassName('result-redirect__btn')[0];
+
+      var handler = function handler() {
+        _this3.resultView.parent.innerHTML = '';
+        window.history.pushState({}, '', '/single');
+        window.history.pushState({}, '', '/single');
+        window.history.back();
+      };
+
+      btn.addEventListener('click', handler);
+      this.events.push({
+        item: btn,
+        type: 'click',
+        handler: handler
+      });
+    }
   }]);
 
   return GameController;
-}(_core_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"]);
+}(_core_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
 
 
 
@@ -6756,82 +6802,6 @@ function (_Controller) {
   }]);
 
   return GameMenuController;
-}(_core_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-;
-
-/***/ }),
-
-/***/ "./static/public/js/controllers/game-over-controller.js":
-/*!**************************************************************!*\
-  !*** ./static/public/js/controllers/game-over-controller.js ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameOverController; });
-/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
-/* harmony import */ var _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/game-over-single-view.js */ "./static/public/js/views/game-over-single-view.js");
-
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-/**
- * @class GameMenuController
- */
-
-var GameOverController =
-/*#__PURE__*/
-function (_Controller) {
-  _inherits(GameOverController, _Controller);
-
-  /**
-   * Construct obj
-   * @param {HTMLElement} parent
-   */
-  function GameOverController(parent) {
-    var _this;
-
-    _classCallCheck(this, GameOverController);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameOverController).call(this, parent));
-    _this.view = new _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_1__["default"](parent);
-    return _this;
-  }
-  /**
-   * Create action
-   */
-
-
-  _createClass(GameOverController, [{
-    key: "action",
-    value: function action() {
-      this.view.render();
-    }
-  }]);
-
-  return GameOverController;
 }(_core_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
@@ -6973,7 +6943,6 @@ function (_Controller) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(LoginController).call(this, parent, true));
     _this.view = new _views_login_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
-    _this.events = [];
     return _this;
   }
   /**
@@ -8357,19 +8326,17 @@ function () {
       if (!newController) {
         newController = new _controllers_not_found_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
       } // comment this to work offline
+      // if (!navigator.onLine && newController.isRequiredOnline) {
+      //   if (!this.currentController) {
+      //     window.history.pushState({}, '', '/');
+      //     window.history.pushState({}, '', '/');
+      //     window.history.back();
+      //   } else {
+      //     showMessage(this.currentController.parent);
+      //   }
+      //   return;
+      // }
 
-
-      if (!navigator.onLine && newController.isRequiredOnline) {
-        if (!this.currentController) {
-          window.history.pushState({}, '', '/');
-          window.history.pushState({}, '', '/');
-          window.history.back();
-        } else {
-          Object(_views_offline_messagebox_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.currentController.parent);
-        }
-
-        return;
-      }
 
       if (this.currentController) {
         this.currentController.destructor();
@@ -9260,8 +9227,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var mask2 = 9;
-var mask5 = 18;
+var mask2 = 4;
+var mask5 = 22;
 /**
  * Offline game core class
  */
@@ -9284,7 +9251,7 @@ function (_GameCore) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(OfflineGame).call(this, controller, scene));
     _this.scene = scene;
     _this.state = {};
-    _this.gameloop = _this.gameloop.bind(_assertThisInitialized(_this));
+    _this.gameLoop = _this.gameLoop.bind(_assertThisInitialized(_this));
     _this.gameloopRequestId = null;
     _this.lastFrame = 0;
     return _this;
@@ -9301,7 +9268,9 @@ function (_GameCore) {
 
       this.state = {
         hexagons: [],
-        cursorAngle: Math.PI / 2
+        cursorAngle: Math.PI / 2,
+        score: 0,
+        time: 0
       };
       this.state.hexagons = Array.from(new Array(3), function (_, position) {
         return {
@@ -9320,9 +9289,10 @@ function (_GameCore) {
      */
 
   }, {
-    key: "gameloop",
-    value: function gameloop(now) {
+    key: "gameLoop",
+    value: function gameLoop(now) {
       var delay = now - this.lastFrame;
+      this.state.time += delay / 1000;
       this.lastFrame = now;
       this.state.hexagons = this.state.hexagons.map(function (hexagon) {
         hexagon.side -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].speed * delay;
@@ -9332,12 +9302,12 @@ function (_GameCore) {
 
       for (var i = 0; i < this.state.hexagons.length; i++) {
         if (this.state.hexagons[i].side < _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].minSize) {
-          var newHexagon = {
+          this.state.hexagons[i] = {
             side: 1100,
             sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
             angle: Math.floor(Math.random() * 2 * Math.PI)
           };
-          this.state.hexagons[i] = newHexagon;
+          this.state.score += 10;
         }
       }
 
@@ -9348,12 +9318,12 @@ function (_GameCore) {
         var condition = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].checkHexagonCollision(this.state.hexagons[_i], cursor);
 
         if (condition) {
-          _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
+          _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME, this.state);
           return;
         }
       }
 
-      this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+      this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
     }
     /**
      * Control pressed event
@@ -9398,7 +9368,7 @@ function (_GameCore) {
       this.scene.render(evt);
       this.scene.start();
       this.lastFrame = performance.now();
-      this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+      this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
     }
     /**
      * Finish game event
@@ -9510,9 +9480,8 @@ function (_GameCore) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(OfflineGame).call(this, controller, scene));
     _this.scene = scene;
     _this.state = {};
-    _this.gameloop = _this.gameloop.bind(_assertThisInitialized(_this));
-    _this.lastFrame = 0;
-    _this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__["default"]('/play', _this.gameloop.bind(_assertThisInitialized(_this)));
+    _this.gameLoop = _this.gameLoop.bind(_assertThisInitialized(_this));
+    _this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__["default"]('/play', _this.gameLoop.bind(_assertThisInitialized(_this)));
     return _this;
   }
   /**
@@ -9527,8 +9496,11 @@ function (_GameCore) {
 
       this.state = {
         hexagons: [],
-        cursorAngle: Math.PI / 2
+        cursorAngle: Math.PI / 2,
+        score: 0,
+        time: 0
       };
+      this.time = performance.now();
       setTimeout(function () {
         _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].START_GAME, this.state);
       }.bind(this));
@@ -9539,11 +9511,20 @@ function (_GameCore) {
      */
 
   }, {
-    key: "gameloop",
-    value: function gameloop(message) {
+    key: "gameLoop",
+    value: function gameLoop(message) {
       var _this2 = this;
 
-      var data = JSON.parse(message.data);
+      var data;
+
+      try {
+        // TODO get game id here
+        data = JSON.parse(message.data);
+      } catch (e) {
+        return;
+      }
+
+      this.state.time = (performance.now() - this.time) / 1000;
 
       if (data.hexes) {
         this.state.score = data.score;
@@ -9555,7 +9536,7 @@ function (_GameCore) {
       }
 
       if (data.over) {
-        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME, this.state);
       }
     }
     /**
@@ -10045,11 +10026,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./controllers/logout-controller.js */ "./static/public/js/controllers/logout-controller.js");
 /* harmony import */ var _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./controllers/update-controller.js */ "./static/public/js/controllers/update-controller.js");
 /* harmony import */ var _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./controllers/game-menu-controller.js */ "./static/public/js/controllers/game-menu-controller.js");
-/* harmony import */ var _controllers_game_over_controller_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./controllers/game-over-controller.js */ "./static/public/js/controllers/game-over-controller.js");
-/* harmony import */ var _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./controllers/game-over-mlt-controller.js */ "./static/public/js/controllers/game-over-mlt-controller.js");
-/* harmony import */ var _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./controllers/game-controller.js */ "./static/public/js/controllers/game-controller.js");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../css/style.css */ "./static/public/css/style.css");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./controllers/game-over-mlt-controller.js */ "./static/public/js/controllers/game-over-mlt-controller.js");
+/* harmony import */ var _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./controllers/game-controller.js */ "./static/public/js/controllers/game-controller.js");
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../css/style.css */ "./static/public/css/style.css");
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_14__);
 
 
 __webpack_require__(/*! ./bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js");
@@ -10057,7 +10037,6 @@ __webpack_require__(/*! ./bundle.bemhtml.js */ "./static/public/js/bundle.bemhtm
 __webpack_require__(/*! ./bundle.bemtree.js */ "./static/public/js/bundle.bemtree.js");
 
 __webpack_require__(/*! ../icons/favicon.ico */ "./static/public/icons/favicon.ico");
-
 
 
 
@@ -10083,7 +10062,8 @@ if ('serviceWorker' in navigator) {
 
 application.insertAdjacentHTML('beforeend', '<div id="main"></div>');
 var main = document.getElementById('main');
-var router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_14__["default"](main)).addRoute('single/results', new _controllers_game_over_controller_js__WEBPACK_IMPORTED_MODULE_12__["default"](main)).addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
+var router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)) // .addRoute('single/results', new GameOverController(main))
+.addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_12__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
 router.start();
 
 /***/ }),
@@ -10442,6 +10422,18 @@ function (_Model) {
             throw new Error(error);
           });
         });
+      }
+    }
+    /**
+     * Update user score in local data
+     * @param {number} score
+     */
+
+  }, {
+    key: "updateScore",
+    value: function updateScore(score) {
+      if (this.user && this.user.highScore < score) {
+        this.user.highScore = score;
       }
     }
   }]);
@@ -11284,6 +11276,7 @@ function (_View) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameOverSingleClass; });
 /* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+/* harmony import */ var _game_mods_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game/mods.js */ "./static/public/js/game/mods.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -11303,6 +11296,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -11328,12 +11322,15 @@ function (_View) {
   }
   /**
    * render page
+   * @param {object} state - Game state
+   * @param {string} mode - Game mode
    */
 
 
   _createClass(GameOverSingleClass, [{
     key: "render",
-    value: function render() {
+    value: function render(state, mode) {
+      var record = state.score > state.highScore;
       var template = [{
         block: 'game-over',
         content: [{
@@ -11348,33 +11345,33 @@ function (_View) {
             content: ['Время']
           }, {
             elem: 'seconds',
-            content: ['64:45']
+            content: [this._convertTime(state.time)]
           }]
         }, {
           block: 'game-info',
           mods: {
             'single': true
           },
-          content: [{
+          content: [mode === _game_mods_js__WEBPACK_IMPORTED_MODULE_1__["default"].OFFLINE || !state.highScore ? {} : {
             elem: 'item',
-            name: 'Лучшее время',
-            value: '10:50'
+            name: 'Лучший счет',
+            value: state.highScore
           }, {
             elem: 'line'
           }, {
             elem: 'item',
             name: 'Счет',
-            value: '6,72'
+            value: state.score
           }, {
             elem: 'line'
           }]
-        }, {
+        }, record ? {
           block: 'game-msg',
           mods: {
             'center': true
           },
           content: ['Новый рекорд!']
-        }, {
+        } : {}, {
           block: 'result-redirect',
           content: [{
             elem: 'btn',
@@ -11396,6 +11393,18 @@ function (_View) {
         }]
       }];
       this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+    }
+    /**
+     * Convert time to string
+     * @param {number} time
+     * @return {string}
+     * @private
+     */
+
+  }, {
+    key: "_convertTime",
+    value: function _convertTime(time) {
+      return time.toFixed(2).toString();
     }
   }]);
 
@@ -11529,7 +11538,7 @@ function (_View) {
       state.hexagons.forEach(function (hexagon) {
         _this2.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](_this2.ctx, hexagon.side, 10, hexagon.sides, color, hexagon.angle));
       });
-      this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 20, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].height, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].radius, '#fff');
+      this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 25, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].height, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_3__["CURSOR"].radius, '#fff');
       this.baseHex = new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, 40, 10, 0, color, 0);
     }
     /**

@@ -1,6 +1,7 @@
 'use strict';
 
 import View from '../core/view.js';
+import GAME_MODES from '../game/mods.js';
 const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 /**
@@ -17,8 +18,12 @@ export default class GameOverSingleClass extends View {
 
   /**
    * render page
+   * @param {object} state - Game state
+   * @param {string} mode - Game mode
    */
-  render() {
+  render(state, mode) {
+    const record = state.score > state.highScore;
+
     const template = [
       {
         block: 'game-over',
@@ -38,7 +43,7 @@ export default class GameOverSingleClass extends View {
               },
               {
                 elem: 'seconds',
-                content: ['64:45'],
+                content: [this._convertTime(state.time)],
               },
             ],
           },
@@ -46,10 +51,10 @@ export default class GameOverSingleClass extends View {
             block: 'game-info',
             mods: {'single': true},
             content: [
-              {
+              mode === GAME_MODES.OFFLINE || !state.highScore? {}: {
                 elem: 'item',
-                name: 'Лучшее время',
-                value: '10:50',
+                name: 'Лучший счет',
+                value: state.highScore,
               },
               {
                 elem: 'line',
@@ -57,18 +62,18 @@ export default class GameOverSingleClass extends View {
               {
                 elem: 'item',
                 name: 'Счет',
-                value: '6,72',
+                value: state.score,
               },
               {
                 elem: 'line',
               },
             ],
           },
-          {
+          record? {
             block: 'game-msg',
             mods: {'center': true},
             content: ['Новый рекорд!'],
-          },
+          }: {},
           {
             block: 'result-redirect',
             content: [
@@ -90,6 +95,17 @@ export default class GameOverSingleClass extends View {
         ],
       },
     ];
+
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  }
+
+  /**
+   * Convert time to string
+   * @param {number} time
+   * @return {string}
+   * @private
+   */
+  _convertTime(time) {
+    return time.toFixed(2).toString();
   }
 };

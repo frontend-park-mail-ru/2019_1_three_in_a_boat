@@ -17,9 +17,8 @@ export default class OfflineGame extends GameCore {
     super(controller, scene);
     this.scene = scene;
     this.state = {};
-    this.gameloop = this.gameloop.bind(this);
-    this.lastFrame = 0;
-    this.ws = new WebSocketController('/play', this.gameloop.bind(this));
+    this.gameLoop = this.gameLoop.bind(this);
+    this.ws = new WebSocketController('/play', this.gameLoop.bind(this));
   }
 
   /**
@@ -30,8 +29,11 @@ export default class OfflineGame extends GameCore {
     this.state = {
       hexagons: [],
       cursorAngle: Math.PI / 2,
+      score: 0,
+      time: 0,
     };
 
+    this.time = performance.now();
     setTimeout(function() {
       bus.emit(events.START_GAME, this.state);
     }.bind(this));
@@ -41,8 +43,14 @@ export default class OfflineGame extends GameCore {
    * GameController loop action
    * @param {object} message
    */
-  gameloop(message) {
-    const data = JSON.parse(message.data);
+  gameLoop(message) {
+    let data;
+    try { // TODO get game id here
+      data = JSON.parse(message.data);
+    } catch (e) {
+      return;
+    }
+    this.state.time = (performance.now() - this.time) / 1000;
 
     if (data.hexes) {
       this.state.score = data.score;
@@ -55,7 +63,7 @@ export default class OfflineGame extends GameCore {
     }
 
     if (data.over) {
-      bus.emit(events.FINISH_GAME);
+      bus.emit(events.FINISH_GAME, this.state);
     }
   }
 
