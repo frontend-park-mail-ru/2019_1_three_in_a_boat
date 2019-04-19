@@ -8699,13 +8699,14 @@ var GameControllers =
 function () {
   /**
    * Constructor
+   * @param {object} view
    */
-  function GameControllers() {
+  function GameControllers(view) {
     _classCallCheck(this, GameControllers);
 
     this.keys = [];
-    this._onPress = this._keyHandler.bind(this, 'press');
-    this._onUp = this._keyHandler.bind(this, 'up');
+    this.view = view;
+    this.keyHandler = this._keyHandler.bind(this);
   }
   /**
    * Начинаем слушать события клавиатуры
@@ -8715,8 +8716,10 @@ function () {
   _createClass(GameControllers, [{
     key: "start",
     value: function start() {
-      document.addEventListener('keydown', this._onPress);
-      document.addEventListener('keyup', this._onUp);
+      document.addEventListener('keydown', this.keyHandler);
+      document.addEventListener('keyup', this.keyHandler);
+      document.addEventListener('touchstart', this.keyHandler, false);
+      document.addEventListener('touchend', this.keyHandler, false);
     }
     /**
      * Прекращаем слушать события клавиатуры
@@ -8725,24 +8728,33 @@ function () {
   }, {
     key: "destroy",
     value: function destroy() {
-      document.removeEventListener('keydown', this._onPress);
-      document.removeEventListener('keyup', this._onUp);
+      document.removeEventListener('keydown', this.keyHandler);
+      document.removeEventListener('keyup', this.keyHandler);
+      document.removeEventListener('touchstart', this.keyHandler, false);
+      document.removeEventListener('touchend', this.keyHandler, false);
     }
     /**
      * Обработчик события
-     * @param  {string} type
-     * @param  {MouseEvent} event
+     * @param  {Event} event
      */
 
   }, {
     key: "_keyHandler",
-    value: function _keyHandler(type, event) {
+    value: function _keyHandler(event) {
       if (event.type.toLowerCase() === 'keydown') {
         _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, event.key);
-      }
-
-      if (event.type.toLowerCase() === 'keyup') {
+      } else if (event.type.toLowerCase() === 'keyup') {
         _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, event.key);
+      } else if (event.type.toLowerCase() === 'touchstart') {
+        var touch = event.changedTouches[0];
+
+        if (touch.pageX < this.view.canvas.width / 2) {
+          _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, 'ArrowLeft');
+        } else {
+          _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, 'ArrowRight');
+        }
+      } else if (event.type.toLowerCase() === 'touchend') {
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, {});
       }
     }
   }]);
@@ -9723,7 +9735,7 @@ function () {
         throw new Error('Invalid game mode ' + mode);
     }
 
-    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_2__["default"](view);
     this.gameCore = new GameConstructor(this.gameControllers, view);
   }
   /**
@@ -10062,8 +10074,7 @@ if ('serviceWorker' in navigator) {
 
 application.insertAdjacentHTML('beforeend', '<div id="main"></div>');
 var main = document.getElementById('main');
-var router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)) // .addRoute('single/results', new GameOverController(main))
-.addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_12__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
+var router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)).addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_12__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
 router.start();
 
 /***/ }),

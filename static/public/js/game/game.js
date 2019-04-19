@@ -27,7 +27,7 @@ export default class Game {
         throw new Error('Invalid game mode ' + mode);
     }
 
-    this.gameControllers = new GameControllers();
+    this.gameControllers = new GameControllers(view);
     this.gameCore = new GameConstructor(this.gameControllers, view);
   }
 
