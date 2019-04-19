@@ -69,6 +69,9 @@ export function initFileInputs() {
 export function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
+    if (!file) {
+      return resolve(undefined);
+    }
     reader.readAsDataURL(file);
     reader.onload = () => {
       let encoded = reader.result.replace(/^data:(.*;base64,)?/, '');

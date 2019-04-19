@@ -59,7 +59,9 @@ export default class UpdateController extends Controller {
     const body = this._getFromProfileForm(event);
     getBase64(body.img).then(
         (result) => {
-          body.img = result;
+          if (result) {
+            body.img = result;
+          }
           return UserService.updateData(event.target, body, this.user.uid);
         },
         () => UserService.updateData(event.target, body, this.user.uid)

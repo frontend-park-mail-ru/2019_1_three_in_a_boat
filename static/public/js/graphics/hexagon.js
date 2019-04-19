@@ -1,5 +1,7 @@
 'use strict';
 
+import Geometry from '../game/core/geometry.js';
+
 const FALL_SPEED = 1;
 const FALL_SIZE = 5;
 
@@ -49,7 +51,6 @@ export default class Hexagon {
     let copyNum = this.sidesMask;
     for (let i = 0; i < 6 && copyNum; ++i) {
       this.emptySides[i] = (copyNum & 1);
-      // console.log(copyNum);
       copyNum >>= 1;
     }
   }
@@ -71,16 +72,26 @@ export default class Hexagon {
     // let x = -this.currentSide / 2 * Math.sin(this.currentAngle);
     // let y = this.currentSide / 2 * Math.cos(this.currentAngle);
     // this.ctx.moveTo(x, y);
-    for (let i = 1; i < 7; ++i) {
-      const localAngle = (2 * Math.PI) / 6 * (i - 2) - this.currentAngle;
-      const x = this.currentSide / 2 * Math.cos(localAngle);
-      const y = this.currentSide / 2 * Math.sin(localAngle);
-      if (this.emptySides[i - 1] || (i - 2 >= 0 && this.emptySides[i - 1])) {
-        this.ctx.moveTo(x, y);
+    const lines = Geometry.convertHexagonToLines({
+      side: this.side,
+      sides: this.sidesMask,
+      angle: this.currentAngle,
+    });
+
+    for (let i = 0; i < lines.length; ++i) {
+      const line = Geometry.rotateLine(
+          lines[i].first, lines[i].second, this.currentAngle
+      );
+      if (i === 0) {
+        this.ctx.moveTo(line.first.x, line.first.y);
       } else {
-        this.ctx.lineTo(x, y);
+        this.ctx.lineTo(line.first.x, line.first.y);
+      }
+      if (i === lines.length - 1) {
+        this.ctx.lineTo(line.second.x, line.second.y);
       }
     }
+
     this.ctx.restore();
     if (!this.sidesMask) {
       this.ctx.closePath();

@@ -22,9 +22,8 @@ export default class GameCore {
     this.onGameStarted = this.onGameStarted.bind(this);
     this.onGameFinished = this.onGameFinished.bind(this);
     this.onControllsPressed = this.onControllsPressed.bind(this);
+    this.onControllsUnpressed = this.onControllsUnpressed.bind(this);
     this.onGameStateChanged = this.onGameStateChanged.bind(this);
-
-    this.controllersLoopIntervalId = null;
   }
 
   /**
@@ -34,27 +33,18 @@ export default class GameCore {
     bus.on(events.START_GAME, this.onGameStarted);
     bus.on(events.FINISH_GAME, this.onGameFinished);
     bus.on(events.CONTROLS_PRESSED, this.onControllsPressed);
+    bus.on(events.CONTROLS_UNPRESSED, this.onControllsUnpressed);
     bus.on(events.GAME_STATE_CHANGED, this.onGameStateChanged);
-
-    const controller = this.controller;
-    this.controllersLoopIntervalId = setInterval(() => {
-      const actions = controller.diff();
-
-      // if (Object.keys(actions).some((k) => actions[k])) {
-      if (actions.length > 0) {
-        bus.emit(events.CONTROLS_PRESSED, actions);
-      }
-    }, 50);
   }
 
   /**
    *
    */
   destroy() {
-    clearInterval(this.controllersLoopIntervalId);
     bus.off(events.START_GAME, this.onGameStarted);
     bus.off(events.FINISH_GAME, this.onGameFinished);
     bus.off(events.CONTROLS_PRESSED, this.onControllsPressed);
+    bus.off(events.CONTROLS_UNPRESSED, this.onControllsUnpressed);
     bus.off(events.GAME_STATE_CHANGED, this.onGameStateChanged);
 
     this.controller.destroy();
@@ -66,6 +56,14 @@ export default class GameCore {
    * @param evt
    */
   onControllsPressed(evt) {
+    throw new Error('This method must be overridden');
+  }
+
+  /**
+   *
+   * @param evt
+   */
+  onControllsUnpressed(evt) {
     throw new Error('This method must be overridden');
   }
 

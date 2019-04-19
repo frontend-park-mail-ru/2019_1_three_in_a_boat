@@ -1,4 +1,7 @@
 'use strict';
+
+import Geometry from '../game/core/geometry.js';
+
 /**
  * @class UserArrow
  */
@@ -41,5 +44,10 @@ export default class UserArrow {
     this.ctx.lineTo(x2, y2);
     this.ctx.closePath();
     this.ctx.fill();
+    // it was used for debugging
+    // const dot = Geometry.cursorAngleToDot(-this.currentAngle);
+    // this.ctx.beginPath();
+    // this.ctx.arc(dot.x, dot.y, 10, 0, 2 * Math.PI);
+    // this.ctx.fill();
   }
 }
