@@ -3,7 +3,7 @@ block('file-input').elem('field')({
   addAttrs: (node) => ({
     id: node.formId + '_' + node.fieldName,
     name: node.fieldName,
-    type: 'file'
+    type: 'file',
   }),
 });
 
@@ -27,9 +27,9 @@ block('file-input').match((node, ctx) => !ctx.content)({
       content: [ctx.emptyText || '(файл не выбран)']
     },
     {
-      elem: 'field'
-    }
-  ]
+      elem: 'field',
+    },
+  ],
 });
 
 block('file-input')({
