@@ -6582,10 +6582,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _game_mods_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/mods.js */ "./static/public/js/game/mods.js");
 /* harmony import */ var _game_game_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game/game.js */ "./static/public/js/game/game.js");
 /* harmony import */ var _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/game-view.js */ "./static/public/js/views/game-view.js");
-/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
-/* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
-/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
- // import NotificationController from '../controllers/notification-controller.js';
+/* harmony import */ var _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/game-over-single-view.js */ "./static/public/js/views/game-over-single-view.js");
+/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
+/* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../models/user-service.js */ "./static/public/js/models/user-service.js");
+
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -6615,6 +6617,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 /**
  * The main class GameController
  */
@@ -6633,11 +6637,11 @@ function (_Controller) {
 
     _classCallCheck(this, GameController);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameController).call(this, parent));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameController).call(this, parent, false));
     _this.view = new _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
+    _this.resultView = new _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_3__["default"](parent);
     _this.game = null;
-    _this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_5__["default"]; // this.notify = NotificationController.Instance;
-
+    _this.bus = _event_bus_js__WEBPACK_IMPORTED_MODULE_6__["default"];
     return _this;
   }
   /**
@@ -6653,73 +6657,77 @@ function (_Controller) {
       this.game.destroy();
     }
     /**
-     * Choose and make action
-     * @param {Object} serverData
+     * Create game logic
      */
 
   }, {
     key: "action",
-
-    /**
-     * Create game logic
-     */
     value: function action() {
       var _this2 = this;
 
-      // init event listeners
-      // while WebSocket.connect
-      // while (this.model.run()) {
-      //   const angel = this.model.getAngel();
-      //   this.notify.sendAngel(angel);
-      // }
-      // this.endView.render(this.model.result());
       var mode = '';
 
-      if (false) {} else {
+      if (navigator.onLine) {
+        mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].ONLINE;
+      } else {
         mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
       }
 
-      this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].FINISH_GAME, function () {
-        window.history.pushState({}, '', '/single/results');
-        window.history.pushState({}, '', '/single/results');
-        window.history.back();
-
+      this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_5__["default"].FINISH_GAME, function (state) {
         _this2.destructor();
+
+        _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].getData().then(function (user) {
+          if (user) {
+            state.highScore = user.highScore === null ? 0 : user.highScore;
+
+            if (state.highScore < state.score) {
+              _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].updateScore(state.score);
+            }
+          }
+
+          _this2.destructor();
+
+          _this2.resultView.render(state, mode);
+
+          _this2._initResultView();
+        }, function (error) {
+          console.log(error);
+        });
       });
       this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](mode, this.view);
       this.game.start();
     }
-  }], [{
-    key: "selectAction",
-    value: function selectAction(serverData) {
-      switch (serverData) {
-        case 'event':
-          {
-            // handel event
-            break;
-          }
+    /**
+     * Init result view
+     * Add event listeners
+     * @private
+     */
 
-        case 'other event':
-          {
-            // handel other event
-            break;
-          }
+  }, {
+    key: "_initResultView",
+    value: function _initResultView() {
+      var _this3 = this;
 
-        case 'other event too':
-          {
-            // handel other event too
-            break;
-          }
+      var btn = document.getElementsByClassName('result-redirect__btn')[0];
 
-        default:
-          {// handel default event
-          }
-      }
+      var handler = function handler() {
+        _this3.resultView.parent.innerHTML = '';
+        window.history.pushState({}, '', '/single');
+        window.history.pushState({}, '', '/single');
+        window.history.back();
+      };
+
+      btn.addEventListener('click', handler);
+      this.events.push({
+        item: btn,
+        type: 'click',
+        handler: handler
+      });
     }
   }]);
 
   return GameController;
-}(_core_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"]);
+}(_core_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
 
 
 
@@ -6794,82 +6802,6 @@ function (_Controller) {
   }]);
 
   return GameMenuController;
-}(_core_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-;
-
-/***/ }),
-
-/***/ "./static/public/js/controllers/game-over-controller.js":
-/*!**************************************************************!*\
-  !*** ./static/public/js/controllers/game-over-controller.js ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameOverController; });
-/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
-/* harmony import */ var _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/game-over-single-view.js */ "./static/public/js/views/game-over-single-view.js");
-
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-/**
- * @class GameMenuController
- */
-
-var GameOverController =
-/*#__PURE__*/
-function (_Controller) {
-  _inherits(GameOverController, _Controller);
-
-  /**
-   * Construct obj
-   * @param {HTMLElement} parent
-   */
-  function GameOverController(parent) {
-    var _this;
-
-    _classCallCheck(this, GameOverController);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameOverController).call(this, parent));
-    _this.view = new _views_game_over_single_view_js__WEBPACK_IMPORTED_MODULE_1__["default"](parent);
-    return _this;
-  }
-  /**
-   * Create action
-   */
-
-
-  _createClass(GameOverController, [{
-    key: "action",
-    value: function action() {
-      this.view.render();
-    }
-  }]);
-
-  return GameOverController;
 }(_core_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
@@ -7011,7 +6943,6 @@ function (_Controller) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(LoginController).call(this, parent, true));
     _this.view = new _views_login_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
-    _this.events = [];
     return _this;
   }
   /**
@@ -7382,6 +7313,132 @@ function (_Controller) {
 
 
 ;
+
+/***/ }),
+
+/***/ "./static/public/js/controllers/notification-controller.js":
+/*!*****************************************************************!*\
+  !*** ./static/public/js/controllers/notification-controller.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NotificationController; });
+/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var SERVER_ADDRESS = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].wsUrl; // 'ws://localhost:3000/ws';
+
+/**
+ * The singleton class for sending and receiving messages from server
+ * @class NotificationController
+ */
+
+var NotificationController =
+/*#__PURE__*/
+function () {
+  /**
+   * Constructor
+   * @param {string} path
+   * @param {function} onMsg
+   */
+  function NotificationController(path, onMsg) {
+    var _this = this;
+
+    _classCallCheck(this, NotificationController);
+
+    var Socket = 'MozWebSocket' in window ? MozWebSocket : WebSocket;
+    this.ws = new Socket(SERVER_ADDRESS + path);
+
+    this.ws.onerror = function (event) {
+      console.log('WebSocket ERROR: ' + JSON.stringify(event, null, 4));
+
+      _this._makeNotify('WebSocket ERROR: ' + JSON.stringify(event, null, 4));
+    };
+
+    this.ws.onclose = function (event) {
+      _this.onDisconnected('Client disconnected.');
+    };
+
+    this.ws.onopen = function () {
+      console.log('ws success connected');
+      _this.ws.onmessage = onMsg;
+    };
+  }
+  /**
+   * Disconnection handler
+   * @param {string} discMsg
+   */
+
+
+  _createClass(NotificationController, [{
+    key: "onDisconnected",
+    value: function onDisconnected(discMsg) {
+      this._makeNotify(discMsg);
+    }
+    /**
+     * Send angel to server
+     * @param {*} data
+     */
+
+  }, {
+    key: "sendData",
+    value: function sendData(data) {
+      this.ws.send(data);
+    }
+    /**
+     * Close connection
+     */
+
+  }, {
+    key: "close",
+    value: function close() {
+      this.ws.close();
+    }
+    /**
+     * Says the client information about connection
+     * @param {string} data
+     * @private
+     */
+
+  }, {
+    key: "_makeNotify",
+    value: function _makeNotify() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'error';
+
+      if (!'Notification' in window) {
+        console.error('haven`t Notification in window');
+        return;
+      }
+
+      if (Notification.permission === 'granted') {
+        new Notification(data);
+        return;
+      }
+
+      if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(function (permission) {
+          if (permission === 'granted') {
+            new Notification(data);
+          }
+        });
+      }
+    }
+  }]);
+
+  return NotificationController;
+}();
+
+
 
 /***/ }),
 
@@ -7995,7 +8052,10 @@ function (_Controller) {
       var body = this._getFromProfileForm(event);
 
       Object(_file_input_js__WEBPACK_IMPORTED_MODULE_4__["getBase64"])(body.img).then(function (result) {
-        body.img = result;
+        if (result) {
+          body.img = result;
+        }
+
         return _models_user_service_js__WEBPACK_IMPORTED_MODULE_2__["default"].updateData(event.target, body, _this3.user.uid);
       }, function () {
         return _models_user_service_js__WEBPACK_IMPORTED_MODULE_2__["default"].updateData(event.target, body, _this3.user.uid);
@@ -8595,6 +8655,11 @@ function initFileInputs() {
 function getBase64(file) {
   return new Promise(function (resolve, reject) {
     var reader = new FileReader();
+
+    if (!file) {
+      return resolve(undefined);
+    }
+
     reader.readAsDataURL(file);
 
     reader.onload = function () {
@@ -8644,13 +8709,14 @@ var GameControllers =
 function () {
   /**
    * Constructor
+   * @param {object} view
    */
-  function GameControllers() {
+  function GameControllers(view) {
     _classCallCheck(this, GameControllers);
 
     this.keys = [];
-    this._onPress = this._keyHandler.bind(this, 'press');
-    this._onUp = this._keyHandler.bind(this, 'up');
+    this.view = view;
+    this.keyHandler = this._keyHandler.bind(this);
   }
   /**
    * Начинаем слушать события клавиатуры
@@ -8660,8 +8726,10 @@ function () {
   _createClass(GameControllers, [{
     key: "start",
     value: function start() {
-      document.addEventListener('keydown', this._onPress);
-      document.addEventListener('keyup', this._onUp);
+      document.addEventListener('keydown', this.keyHandler);
+      document.addEventListener('keyup', this.keyHandler);
+      document.addEventListener('touchstart', this.keyHandler, false);
+      document.addEventListener('touchend', this.keyHandler, false);
     }
     /**
      * Прекращаем слушать события клавиатуры
@@ -8670,24 +8738,33 @@ function () {
   }, {
     key: "destroy",
     value: function destroy() {
-      document.removeEventListener('keydown', this._onPress);
-      document.removeEventListener('keyup', this._onUp);
+      document.removeEventListener('keydown', this.keyHandler);
+      document.removeEventListener('keyup', this.keyHandler);
+      document.removeEventListener('touchstart', this.keyHandler, false);
+      document.removeEventListener('touchend', this.keyHandler, false);
     }
     /**
      * Обработчик события
-     * @param  {string} type
-     * @param  {MouseEvent} event
+     * @param  {Event} event
      */
 
   }, {
     key: "_keyHandler",
-    value: function _keyHandler(type, event) {
+    value: function _keyHandler(event) {
       if (event.type.toLowerCase() === 'keydown') {
         _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, event.key);
-      }
-
-      if (event.type.toLowerCase() === 'keyup') {
+      } else if (event.type.toLowerCase() === 'keyup') {
         _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, event.key);
+      } else if (event.type.toLowerCase() === 'touchstart') {
+        var touch = event.changedTouches[0];
+
+        if (touch.pageX < this.view.canvas.width / 2) {
+          _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, 'ArrowLeft');
+        } else {
+          _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, 'ArrowRight');
+        }
+      } else if (event.type.toLowerCase() === 'touchend') {
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].emit(_core_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, {});
       }
     }
   }]);
@@ -8913,13 +8990,14 @@ function () {
       var _this = this;
 
       var lines = this.convertHexagonToLines(hexagon);
-      var isCollide = false; // console.log(hexagon, lines);
-
+      var isCollide = false;
       lines.forEach(function (line) {
-        line = _this.rotateLine(line.first, line.second, hexagon.angle); // console.log(cursor, line.first, line.second);
+        if (line) {
+          line = _this.rotateLine(line.first, line.second, hexagon.angle);
 
-        if (_this._lineAndCursorCollision(line.first, line.second, cursor)) {
-          isCollide = true;
+          if (_this._lineAndCursorCollision(line.first, line.second, cursor)) {
+            isCollide = true;
+          }
         }
       });
       return isCollide;
@@ -8946,6 +9024,8 @@ function () {
             y: hexagon.side * sqrt3 / 2
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topRight)) {
@@ -8959,6 +9039,8 @@ function () {
             y: 0
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomRight)) {
@@ -8972,6 +9054,8 @@ function () {
             y: -hexagon.side * sqrt3 / 2
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottom)) {
@@ -8985,6 +9069,8 @@ function () {
             y: -hexagon.side * sqrt3 / 2
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].bottomLeft)) {
@@ -8998,6 +9084,8 @@ function () {
             y: 0
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       if (!(hexagon.sides & _settings_js__WEBPACK_IMPORTED_MODULE_0__["MASKS"].topLeft)) {
@@ -9011,6 +9099,8 @@ function () {
             y: hexagon.side * sqrt3 / 2
           }
         });
+      } else {
+        lines.push(undefined);
       }
 
       return lines;
@@ -9159,8 +9249,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var mask2 = 1;
-var mask5 = 31;
+var mask2 = 4;
+var mask5 = 22;
 /**
  * Offline game core class
  */
@@ -9183,7 +9273,7 @@ function (_GameCore) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(OfflineGame).call(this, controller, scene));
     _this.scene = scene;
     _this.state = {};
-    _this.gameloop = _this.gameloop.bind(_assertThisInitialized(_this));
+    _this.gameLoop = _this.gameLoop.bind(_assertThisInitialized(_this));
     _this.gameloopRequestId = null;
     _this.lastFrame = 0;
     return _this;
@@ -9200,7 +9290,9 @@ function (_GameCore) {
 
       this.state = {
         hexagons: [],
-        cursorAngle: Math.PI / 2
+        cursorAngle: Math.PI / 2,
+        score: 0,
+        time: 0
       };
       this.state.hexagons = Array.from(new Array(3), function (_, position) {
         return {
@@ -9219,9 +9311,10 @@ function (_GameCore) {
      */
 
   }, {
-    key: "gameloop",
-    value: function gameloop(now) {
+    key: "gameLoop",
+    value: function gameLoop(now) {
       var delay = now - this.lastFrame;
+      this.state.time += delay / 1000;
       this.lastFrame = now;
       this.state.hexagons = this.state.hexagons.map(function (hexagon) {
         hexagon.side -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].speed * delay;
@@ -9231,12 +9324,12 @@ function (_GameCore) {
 
       for (var i = 0; i < this.state.hexagons.length; i++) {
         if (this.state.hexagons[i].side < _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].minSize) {
-          var newHexagon = {
+          this.state.hexagons[i] = {
             side: 1100,
             sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
             angle: Math.floor(Math.random() * 2 * Math.PI)
           };
-          this.state.hexagons[i] = newHexagon;
+          this.state.score += 10;
         }
       }
 
@@ -9247,12 +9340,12 @@ function (_GameCore) {
         var condition = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].checkHexagonCollision(this.state.hexagons[_i], cursor);
 
         if (condition) {
-          _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME);
+          _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME, this.state);
           return;
         }
       }
 
-      this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+      this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
     }
     /**
      * Control pressed event
@@ -9297,7 +9390,7 @@ function (_GameCore) {
       this.scene.render(evt);
       this.scene.start();
       this.lastFrame = performance.now();
-      this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+      this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
     }
     /**
      * Finish game event
@@ -9324,6 +9417,221 @@ function (_GameCore) {
         clearInterval(this.controllersLoopIntervalId);
       }
 
+      this.scene.stop();
+    }
+    /**
+     * State change game event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onGameStateChanged",
+    value: function onGameStateChanged(evt) {
+      this.scene.update(evt);
+    }
+  }]);
+
+  return OfflineGame;
+}(_core_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./static/public/js/game/core/online-single-core.js":
+/*!**********************************************************!*\
+  !*** ./static/public/js/game/core/online-single-core.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OfflineGame; });
+/* harmony import */ var _core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core.js */ "./static/public/js/game/core/core.js");
+/* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./events.js */ "./static/public/js/game/core/events.js");
+/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings.js */ "./static/public/js/game/core/settings.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+/**
+ * Offline game core class
+ */
+
+var OfflineGame =
+/*#__PURE__*/
+function (_GameCore) {
+  _inherits(OfflineGame, _GameCore);
+
+  /**
+   * Constructor
+   * @param {object} controller
+   * @param {object} scene
+   */
+  function OfflineGame(controller, scene) {
+    var _this;
+
+    _classCallCheck(this, OfflineGame);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(OfflineGame).call(this, controller, scene));
+    _this.scene = scene;
+    _this.state = {};
+    _this.gameLoop = _this.gameLoop.bind(_assertThisInitialized(_this));
+    _this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__["default"]('/play', _this.gameLoop.bind(_assertThisInitialized(_this)));
+    return _this;
+  }
+  /**
+   * Start game
+   */
+
+
+  _createClass(OfflineGame, [{
+    key: "start",
+    value: function start() {
+      _get(_getPrototypeOf(OfflineGame.prototype), "start", this).call(this);
+
+      this.state = {
+        hexagons: [],
+        cursorAngle: Math.PI / 2,
+        score: 0,
+        time: 0
+      };
+      this.time = performance.now();
+      setTimeout(function () {
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].START_GAME, this.state);
+      }.bind(this));
+    }
+    /**
+     * GameController loop action
+     * @param {object} message
+     */
+
+  }, {
+    key: "gameLoop",
+    value: function gameLoop(message) {
+      var _this2 = this;
+
+      var data;
+
+      try {
+        // TODO get game id here
+        data = JSON.parse(message.data);
+      } catch (e) {
+        return;
+      }
+
+      this.state.time = (performance.now() - this.time) / 1000;
+
+      if (data.hexes) {
+        this.state.score = data.score;
+        this.state.hexagons = data.hexes;
+        this.state.hexagons.forEach(function (_, position) {
+          _this2.state.hexagons[position].sides = _this2.state.hexagons[position].sidesMask;
+        });
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].GAME_STATE_CHANGED, this.state);
+      }
+
+      if (data.over) {
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME, this.state);
+      }
+    }
+    /**
+     * Control pressed event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onControllsPressed",
+    value: function onControllsPressed(evt) {
+      var _this3 = this;
+
+      if (!this.controllersLoopIntervalId) {
+        this.controllersLoopIntervalId = setInterval(function () {
+          if (_this3._pressed('LEFT', evt)) {
+            _this3.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+          } else if (_this3._pressed('RIGHT', evt)) {
+            _this3.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+          }
+
+          _this3.ws.sendData(JSON.stringify({
+            angle: _this3.state.cursorAngle
+          }));
+        }, 50);
+      }
+    }
+    /**
+     * Control unpressed event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onControllsUnpressed",
+    value: function onControllsUnpressed(evt) {
+      clearInterval(this.controllersLoopIntervalId);
+      this.controllersLoopIntervalId = undefined;
+    }
+    /**
+     * Start game event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onGameStarted",
+    value: function onGameStarted(evt) {
+      this.controller.start();
+      this.scene.render(evt);
+      this.scene.start();
+    }
+    /**
+     * Finish game event
+     * @param {object} evt
+     */
+
+  }, {
+    key: "onGameFinished",
+    value: function onGameFinished(evt) {
+      this.destroy();
+    }
+    /**
+     * Destructor
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      _get(_getPrototypeOf(OfflineGame.prototype), "destroy", this).call(this);
+
+      if (this.controllersLoopIntervalId) {
+        clearInterval(this.controllersLoopIntervalId);
+      }
+
+      this.ws.close();
       this.scene.stop();
     }
     /**
@@ -9390,13 +9698,15 @@ var MASKS = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Game; });
 /* harmony import */ var _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/offline-core.js */ "./static/public/js/game/core/offline-core.js");
-/* harmony import */ var _controllers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controllers.js */ "./static/public/js/game/controllers.js");
-/* harmony import */ var _mods_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mods.js */ "./static/public/js/game/mods.js");
+/* harmony import */ var _core_online_single_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core/online-single-core.js */ "./static/public/js/game/core/online-single-core.js");
+/* harmony import */ var _controllers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controllers.js */ "./static/public/js/game/controllers.js");
+/* harmony import */ var _mods_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mods.js */ "./static/public/js/game/mods.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -9419,14 +9729,13 @@ function () {
     var GameConstructor = null;
 
     switch (mode) {
-      case _mods_js__WEBPACK_IMPORTED_MODULE_2__["default"].ONLINE:
+      case _mods_js__WEBPACK_IMPORTED_MODULE_3__["default"].ONLINE:
         {
-          // TODO add online
-          GameConstructor = _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__["default"];
+          GameConstructor = _core_online_single_core_js__WEBPACK_IMPORTED_MODULE_1__["default"];
           break;
         }
 
-      case _mods_js__WEBPACK_IMPORTED_MODULE_2__["default"].OFFLINE:
+      case _mods_js__WEBPACK_IMPORTED_MODULE_3__["default"].OFFLINE:
         {
           GameConstructor = _core_offline_core_js__WEBPACK_IMPORTED_MODULE_0__["default"];
           break;
@@ -9436,7 +9745,7 @@ function () {
         throw new Error('Invalid game mode ' + mode);
     }
 
-    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    this.gameControllers = new _controllers_js__WEBPACK_IMPORTED_MODULE_2__["default"](view);
     this.gameCore = new GameConstructor(this.gameControllers, view);
   }
   /**
@@ -9668,6 +9977,8 @@ function () {
   }, {
     key: "draw",
     value: function draw() {
+      var _this = this;
+
       this.ctx.beginPath();
       this.ctx.lineWidth = this.lineWidth;
       this.ctx.strokeStyle = this.color; // let x = -this.currentSide / 2 * Math.sin(this.currentAngle);
@@ -9679,18 +9990,23 @@ function () {
         sides: this.sidesMask,
         angle: this.currentAngle
       });
+      lines.forEach(function (_, pos) {
+        if (lines[pos]) {
+          lines[pos] = _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__["default"].rotateLine(lines[pos].first, lines[pos].second, _this.currentAngle);
+        }
+      });
 
       for (var i = 0; i < lines.length; ++i) {
-        var line = _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__["default"].rotateLine(lines[i].first, lines[i].second, this.currentAngle);
+        var line = lines[i];
 
-        if (i === 0) {
-          this.ctx.moveTo(line.first.x, line.first.y);
-        } else {
-          this.ctx.lineTo(line.first.x, line.first.y);
-        }
+        if (line) {
+          if (i === 0) {
+            this.ctx.moveTo(line.first.x, line.first.y);
+          }
 
-        if (i === lines.length - 1) {
           this.ctx.lineTo(line.second.x, line.second.y);
+        } else if (i < lines.length - 1 && lines[i + 1]) {
+          this.ctx.moveTo(lines[i + 1].first.x, lines[i + 1].first.y);
         }
       }
 
@@ -9732,11 +10048,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./controllers/logout-controller.js */ "./static/public/js/controllers/logout-controller.js");
 /* harmony import */ var _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./controllers/update-controller.js */ "./static/public/js/controllers/update-controller.js");
 /* harmony import */ var _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./controllers/game-menu-controller.js */ "./static/public/js/controllers/game-menu-controller.js");
-/* harmony import */ var _controllers_game_over_controller_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./controllers/game-over-controller.js */ "./static/public/js/controllers/game-over-controller.js");
-/* harmony import */ var _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./controllers/game-over-mlt-controller.js */ "./static/public/js/controllers/game-over-mlt-controller.js");
-/* harmony import */ var _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./controllers/game-controller.js */ "./static/public/js/controllers/game-controller.js");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../css/style.css */ "./static/public/css/style.css");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./controllers/game-over-mlt-controller.js */ "./static/public/js/controllers/game-over-mlt-controller.js");
+/* harmony import */ var _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./controllers/game-controller.js */ "./static/public/js/controllers/game-controller.js");
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../css/style.css */ "./static/public/css/style.css");
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_14__);
 
 
 __webpack_require__(/*! ./bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js");
@@ -9744,7 +10059,6 @@ __webpack_require__(/*! ./bundle.bemhtml.js */ "./static/public/js/bundle.bemhtm
 __webpack_require__(/*! ./bundle.bemtree.js */ "./static/public/js/bundle.bemtree.js");
 
 __webpack_require__(/*! ../icons/favicon.ico */ "./static/public/icons/favicon.ico");
-
 
 
 
@@ -9770,7 +10084,7 @@ if ('serviceWorker' in navigator) {
 
 application.insertAdjacentHTML('beforeend', '<div id="main"></div>');
 var main = document.getElementById('main');
-var router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_14__["default"](main)).addRoute('single/results', new _controllers_game_over_controller_js__WEBPACK_IMPORTED_MODULE_12__["default"](main)).addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
+var router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)).addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_12__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
 router.start();
 
 /***/ }),
@@ -9838,8 +10152,7 @@ function (_Model) {
         path: _settings_config_js__WEBPACK_IMPORTED_MODULE_1__["settings"].url + '/authors'
       }).then(function (response) {
         if (response.status > 499) {
-          alert('Server error');
-          return;
+          throw new Error('Server error');
         }
 
         return response.json().then(function (data) {
@@ -9939,8 +10252,7 @@ function (_Model) {
         path: _settings_config_js__WEBPACK_IMPORTED_MODULE_2__["settings"].url + '/'
       }).then(function (response) {
         if (response.status > 499) {
-          alert('Server error');
-          return;
+          return undefined; // TODO show message here
         }
 
         return response.json().then(function (data) {
@@ -9982,8 +10294,7 @@ function (_Model) {
         body: body
       }).then(function (response) {
         if (response.status > 499) {
-          alert('Server error');
-          return;
+          throw new Error('Server error');
         }
 
         return response.json().then(function (data) {
@@ -10008,8 +10319,7 @@ function (_Model) {
         path: path
       }).then(function (response) {
         if (response.status > 499) {
-          alert('Server error');
-          return;
+          throw new Error('Server error');
         }
 
         _this3.user = undefined;
@@ -10037,8 +10347,7 @@ function (_Model) {
         body: body
       }).then(function (response) {
         if (response.status > 499) {
-          alert('Server error');
-          return;
+          throw new Error('Server error');
         }
 
         return response.json().then(function (data) {
@@ -10065,8 +10374,7 @@ function (_Model) {
         path: url
       }).then(function (response) {
         if (response.status > 499) {
-          alert('Server error');
-          return;
+          throw new Error('Server error');
         }
 
         return response.json().then(function (data) {
@@ -10095,8 +10403,7 @@ function (_Model) {
           path: path
         }).then(function (response) {
           if (response.status > 499) {
-            alert('Server error');
-            return;
+            throw new Error('Server error');
           }
 
           return response.json().then(function (data) {
@@ -10117,8 +10424,7 @@ function (_Model) {
           path: _settings_config_js__WEBPACK_IMPORTED_MODULE_2__["settings"].url + '/'
         }).then(function (response) {
           if (response.status > 499) {
-            alert('Server error');
-            return;
+            throw new Error('Server error');
           }
 
           return response.json().then(function (data) {
@@ -10129,6 +10435,18 @@ function (_Model) {
             throw new Error(error);
           });
         });
+      }
+    }
+    /**
+     * Update user score in local data
+     * @param {number} score
+     */
+
+  }, {
+    key: "updateScore",
+    value: function updateScore(score) {
+      if (this.user && this.user.highScore < score) {
+        this.user.highScore = score;
       }
     }
   }]);
@@ -10205,7 +10523,8 @@ __webpack_require__.r(__webpack_exports__);
 var settings = {
   home: 'http://127.0.0.1:8080',
   url: 'http://127.0.0.1:3000',
-  imgPath: '/img/'
+  imgPath: 'https://hexagon-game.s3.eu-north-1.amazonaws.com/img/',
+  wsUrl: 'ws://127.0.0.1:3000'
 };
 
 /***/ }),
@@ -10970,6 +11289,7 @@ function (_View) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameOverSingleClass; });
 /* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+/* harmony import */ var _game_mods_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game/mods.js */ "./static/public/js/game/mods.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -10989,6 +11309,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -11014,12 +11335,15 @@ function (_View) {
   }
   /**
    * render page
+   * @param {object} state - Game state
+   * @param {string} mode - Game mode
    */
 
 
   _createClass(GameOverSingleClass, [{
     key: "render",
-    value: function render() {
+    value: function render(state, mode) {
+      var record = state.score > state.highScore;
       var template = [{
         block: 'game-over',
         content: [{
@@ -11034,33 +11358,33 @@ function (_View) {
             content: ['Время']
           }, {
             elem: 'seconds',
-            content: ['64:45']
+            content: [this._convertTime(state.time)]
           }]
         }, {
           block: 'game-info',
           mods: {
             'single': true
           },
-          content: [{
+          content: [mode === _game_mods_js__WEBPACK_IMPORTED_MODULE_1__["default"].OFFLINE || !state.highScore ? {} : {
             elem: 'item',
-            name: 'Лучшее время',
-            value: '10:50'
+            name: 'Лучший счет',
+            value: state.highScore
           }, {
             elem: 'line'
           }, {
             elem: 'item',
             name: 'Счет',
-            value: '6,72'
+            value: state.score
           }, {
             elem: 'line'
           }]
-        }, {
+        }, record ? {
           block: 'game-msg',
           mods: {
             'center': true
           },
           content: ['Новый рекорд!']
-        }, {
+        } : {}, {
           block: 'result-redirect',
           content: [{
             elem: 'btn',
@@ -11082,6 +11406,18 @@ function (_View) {
         }]
       }];
       this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+    }
+    /**
+     * Convert time to string
+     * @param {number} time
+     * @return {string}
+     * @private
+     */
+
+  }, {
+    key: "_convertTime",
+    value: function _convertTime(time) {
+      return time.toFixed(2).toString();
     }
   }]);
 

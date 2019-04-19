@@ -190,4 +190,14 @@ export default class UserService extends Model {
       });
     }
   }
+
+  /**
+   * Update user score in local data
+   * @param {number} score
+   */
+  static updateScore(score) {
+    if (this.user && this.user.highScore < score) {
+      this.user.highScore = score;
+    }
+  }
 };
