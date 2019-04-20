@@ -22,6 +22,7 @@ export default class GameView extends View {
     this.currentScore = 0;
     this.currentTime = 0;
     this.lastFrameTime = 0;
+    this.cursorCircleAngle = 0;
   }
 
   /**
@@ -29,7 +30,6 @@ export default class GameView extends View {
    * @param {Object} state with info about hexagons
    */
   render(state) {
-    const localData = {seconds: '12:38', score: 36, record: '38:09'};
     const draw = [
       {
         block: 'game',
@@ -55,16 +55,10 @@ export default class GameView extends View {
 
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
 
-    // this.canvas = document.createElement('canvas');
     this.canvas = document.getElementById('game-canvas');
-    // this.canvas.width = 800;
-    // this.canvas.height = 600;
-
-    // document.body.appendChild(this.canvas); // добавляем canvas в DOM
-    // console.log(this.canvas);
     this.ctx = this.canvas.getContext('2d');
 
-    this.hexagons = []; // new Hexagon(this.ctx, 600, 10, 9, '#ff4d00');
+    this.hexagons = [];
     state.hexagons.forEach((hexagon) => {
       this.hexagons.push(
           new Hexagon(this.ctx, hexagon.side, 10,
@@ -81,12 +75,6 @@ export default class GameView extends View {
     this.scoreOut = new CanvasText(
         this.ctx, 70, '#FFF', '#000', state.score, 1
     );
-    // this.recordTitle = new CanvasText(
-    //     this.ctx, 35, '#FFF', '#000', 'RECORD', -1
-    // );
-    // this.recordOut = new CanvasText(
-    //     this.ctx, 70, '#FFF', '#000', state.highScore, -1
-    // );
     this.timeOut = new CanvasText(
         this.ctx, 70, '#FFF', '#000', '00:00', 0
     );
@@ -97,24 +85,25 @@ export default class GameView extends View {
    * @param {number} now
    */
   renderScene(now) {
-    const delay = now - this.lastFrameTime; // use for time mb
     this.lastFrameTime = now;
     this.ctx.fillStyle = '#000';
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-    this.arrow.draw(this.cursorAngle);
+    console.log(this.cursorAngle, this.cursorAngle + this.cursorCircleAngle);
+    this.arrow.draw(this.cursorAngle - this.cursorCircleAngle);
+
     this.hexagons.forEach((hexagon) => {
       hexagon.draw();
     });
     this.baseHex.draw();
     this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+
     this.timeOut.setParameters(this.currentTime);
     this.timeOut.draw();
     this.scoreTitle.draw();
-    // this.recordTitle.draw();
     this.scoreOut.setParameters(this.currentScore);
     this.scoreOut.draw();
-    // this.recordOut.draw();
+
     this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
   }
 
@@ -132,11 +121,9 @@ export default class GameView extends View {
     });
 
     this.cursorAngle = state.cursorAngle;
-    this.arrow.currentAngle = state.cursorAngle;
+    this.cursorCircleAngle = state.cursorCircleAngle;
     this.currentScore = state.score;
     this.currentTime = state.time;
-    // если не заработает
-    // this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
   }
 
   /**
@@ -175,7 +162,5 @@ export default class GameView extends View {
       window.cancelAnimationFrame(this.requestFrameId);
       this.requestFrameId = null;
     }
-
-    // this.scene.clear(); TODO
   }
 }

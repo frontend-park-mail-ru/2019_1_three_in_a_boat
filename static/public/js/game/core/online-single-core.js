@@ -31,6 +31,7 @@ export default class OfflineGame extends GameCore {
       cursorAngle: Math.PI / 2,
       score: 0,
       time: 0,
+      cursorCircleAngle: 0,
     };
 
     this.time = performance.now();
@@ -50,9 +51,11 @@ export default class OfflineGame extends GameCore {
     } catch (e) {
       return;
     }
+    console.log(data);
     this.state.time = (performance.now() - this.time) / 1000;
 
     if (data.hexes) {
+      this.state.cursorCircleAngle = data.cursorCircleAngle;
       this.state.score = data.score;
       this.state.hexagons = data.hexes;
       this.state.hexagons.forEach((_, position) => {
