@@ -13,16 +13,10 @@ export function parseUser(user) {
     null: '',
   };
 
-  const {email, username: nickname, uid: id} = user;
-  let {firstName, lastName, gender, birthDate: date, img} = user;
-
-  firstName = firstName !== null ? firstName : '';
-  lastName = lastName !== null ? lastName : '';
+  const {email, username: nickname, highScore, uid: id} = user;
+  let {gender, img} = user;
   gender = gender !== null ? genderToStr[gender] : '';
-  date = date !== null ? date.split('-').join('.') : '';
+  img = settings.imgPath + img;
 
-  return {
-    firstName, lastName, gender, date, email, nickname, id,
-    img: settings.imgPath + img,
-  };
+  return {gender, email, nickname, id, img, highScore};
 }

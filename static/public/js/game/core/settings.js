@@ -1,7 +1,7 @@
 export const CURSOR = {
   radius: 100,
   height: 15,
-  rotatingSpeed: Math.PI / 21,
+  rotatingSpeed: Math.PI / 12,
 };
 
 export const HEXAGON = {
