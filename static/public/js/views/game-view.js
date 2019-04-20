@@ -3,6 +3,7 @@
 import View from '../core/view.js';
 import Hexagon from '../graphics/hexagon.js';
 import UserArrow from '../graphics/arrow.js';
+import CanvasText from '../graphics/text.js';
 import {CURSOR} from '../game/core/settings.js';
 const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
@@ -18,6 +19,8 @@ export default class GameView extends View {
    */
   constructor(parent) {
     super(parent);
+    this.currentScore = 0;
+    this.currentTime = 0;
     this.lastFrameTime = 0;
   }
 
@@ -33,32 +36,18 @@ export default class GameView extends View {
         mods: {main: true},
         content: [
           {
-            block: 'current',
+            block: 'hexagons',
+            mods: {main: true},
             content: [
               {
-                elem: 'item',
-                name: 'Время',
-                value: localData.seconds,
-              },
-              {
-                elem: 'item',
-                name: 'Счет',
-                value: localData.score,
-              },
-              {
-                elem: 'item',
-                name: 'Рекорд',
-                value: localData.record,
+                elem: 'game',
+                attrs: {
+                  id: 'game-canvas',
+                  width: 950,
+                  height: 800,
+                },
               },
             ],
-          },
-          {
-            block: 'hexagons',
-            attrs: {
-              id: 'game-canvas',
-              width: 1000,
-              height: 800,
-            },
           },
         ],
       },
@@ -83,9 +72,24 @@ export default class GameView extends View {
       );
     });
     this.arrow = new UserArrow(
-        this.ctx, 20, CURSOR.height, CURSOR.radius, '#fff'
+        this.ctx, 25, CURSOR.height, CURSOR.radius, '#fff'
     );
     this.baseHex = new Hexagon(this.ctx, 40, 10, 0, color, 0);
+    this.scoreTitle = new CanvasText(
+        this.ctx, 35, '#FFF', '#000', 'SCORE', 1
+    );
+    this.scoreOut = new CanvasText(
+        this.ctx, 70, '#FFF', '#000', state.score, 1
+    );
+    // this.recordTitle = new CanvasText(
+    //     this.ctx, 35, '#FFF', '#000', 'RECORD', -1
+    // );
+    // this.recordOut = new CanvasText(
+    //     this.ctx, 70, '#FFF', '#000', state.highScore, -1
+    // );
+    this.timeOut = new CanvasText(
+        this.ctx, 70, '#FFF', '#000', '00:00', 0
+    );
   }
 
   /**
@@ -104,7 +108,13 @@ export default class GameView extends View {
     });
     this.baseHex.draw();
     this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
-
+    this.timeOut.setParameters(this.currentTime);
+    this.timeOut.draw();
+    this.scoreTitle.draw();
+    // this.recordTitle.draw();
+    this.scoreOut.setParameters(this.currentScore);
+    this.scoreOut.draw();
+    // this.recordOut.draw();
     this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
   }
 
@@ -123,6 +133,8 @@ export default class GameView extends View {
 
     this.cursorAngle = state.cursorAngle;
     this.arrow.currentAngle = state.cursorAngle;
+    this.currentScore = state.score;
+    this.currentTime = state.time;
     // если не заработает
     // this.arrow = new UserArrow(this.ctx, 50, 50, 90, '#fff');
   }
