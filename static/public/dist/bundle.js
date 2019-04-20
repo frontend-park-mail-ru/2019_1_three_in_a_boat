@@ -7868,15 +7868,8 @@ function (_Controller) {
     key: "_getFromSignUp",
     value: function _getFromSignUp(event) {
       var form = document.getElementById('signup-form');
-      var name = form['signup-form_firstName'].value;
-      var lastName = form['signup-form_lastName'].value;
       var email = form['signup-form_email'].value;
       var userName = form['signup-form_username'].value;
-      var selectField = document.getElementsByTagName('select');
-      var day = selectField['signup-form_selectDay'].value;
-      var month = selectField['signup-form_selectMonth'].value;
-      var year = selectField['signup-form_selectYear'].value;
-      var date = "".concat(day, "-").concat(month, "-").concat(year);
       var password = form['signup-form_password'].value;
       return {
         userName: userName,
@@ -9572,7 +9565,6 @@ function (_GameCore) {
         return;
       }
 
-      console.log(data);
       this.state.time = (performance.now() - this.time) / 1000;
 
       if (data.hexes) {
@@ -10629,25 +10621,19 @@ function parseUser(user) {
   };
   var email = user.email,
       nickname = user.username,
+      highScore = user.highScore,
       id = user.uid;
-  var firstName = user.firstName,
-      lastName = user.lastName,
-      gender = user.gender,
-      date = user.birthDate,
+  var gender = user.gender,
       img = user.img;
-  firstName = firstName !== null ? firstName : '';
-  lastName = lastName !== null ? lastName : '';
   gender = gender !== null ? genderToStr[gender] : '';
-  date = date !== null ? date.split('-').join('.') : '';
+  img = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].imgPath + img;
   return {
-    firstName: firstName,
-    lastName: lastName,
     gender: gender,
-    date: date,
     email: email,
     nickname: nickname,
     id: id,
-    img: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].imgPath + img
+    img: img,
+    highScore: highScore
   };
 }
 
@@ -11701,7 +11687,6 @@ function (_View) {
       this.ctx.fillStyle = '#000';
       this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-      console.log(this.cursorAngle, this.cursorAngle + this.cursorCircleAngle);
       this.arrow.draw(this.cursorAngle - this.cursorCircleAngle);
       this.hexagons.forEach(function (hexagon) {
         hexagon.draw();
@@ -12455,7 +12440,7 @@ function (_View) {
         title: 'Профиль',
         img: profile.img.startsWith(_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].imgPath) ? profile.img : _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].imgPath + profile.img,
         allowEdit: user.isCurrent,
-        info: [['Никнейм', profile.nickname || profile.username], ['Имя', profile.firstName], ['Фамилия', profile.lastName], ['Email', profile.email], ['Дата рождения', profile.date], ['Пол', profile.gender]]
+        info: [['Никнейм', profile.nickname || profile.username], ['Email', profile.email], ['Счет', profile.highScore], ['Пол', profile.gender]]
       }];
       this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
     }
@@ -12925,52 +12910,6 @@ var template = function template() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-var months = [{
-  content: 'Январь',
-  value: 1
-}, {
-  content: 'Февраль',
-  value: 2
-}, {
-  content: 'Март',
-  value: 3
-}, {
-  content: 'Апрель',
-  value: 4
-}, {
-  content: 'Май',
-  value: 5
-}, {
-  content: 'Июнь',
-  value: 6
-}, {
-  content: 'Июль',
-  value: 7
-}, {
-  content: 'Август',
-  value: 8
-}, {
-  content: 'Сентябрь',
-  value: 9
-}, {
-  content: 'Октябрь',
-  value: 10
-}, {
-  content: 'Ноябрь',
-  value: 11
-}, {
-  content: 'Декабрь',
-  value: 12
-}];
-
 var template = function template() {
   return [{
     block: 'signup-popup',
@@ -13001,43 +12940,6 @@ var template = function template() {
         content: [{
           block: 'signup-form',
           content: [{
-            block: 'form-group',
-            content: [{
-              block: 'input',
-              fieldName: 'firstName',
-              fieldAttrs: {
-                type: 'text',
-                placeholder: 'Имя',
-                checkable: true,
-                checkType: 'name'
-              }
-            }, {
-              elem: 'help-text',
-              elemMods: {
-                hidden: true
-              },
-              "for": 'firstName'
-            }]
-          }, {
-            block: 'form-group',
-            content: [{
-              block: 'input',
-              fieldName: 'lastName',
-              fieldAttrs: {
-                type: 'text',
-                placeholder: 'Фамилия',
-                checkable: true,
-                checkType: 'lastName'
-              }
-            }, {
-              block: 'form-group',
-              elem: 'help-text',
-              elemMods: {
-                hidden: true
-              },
-              "for": 'lastName'
-            }]
-          }, {
             block: 'form-group',
             content: [{
               block: 'input',
@@ -13076,60 +12978,6 @@ var template = function template() {
                 hidden: true
               },
               "for": 'username'
-            }]
-          }, {
-            block: 'form-group',
-            content: [{
-              elem: 'title',
-              elemMods: {
-                align: 'left'
-              },
-              content: ['Дата рождения']
-            }, {
-              block: 'form-group',
-              mods: {
-                align: 'stretch'
-              },
-              content: {
-                block: 'field-group',
-                content: [{
-                  block: 'select',
-                  fieldName: 'selectDay',
-                  options: [{
-                    content: 'День',
-                    value: 0,
-                    selected: true
-                  }].concat(_toConsumableArray(Array(30).keys()).map(function (num) {
-                    return {
-                      content: num + 1,
-                      value: num + 1
-                    };
-                  }))
-                }, {
-                  block: 'select',
-                  fieldName: 'selectMonth',
-                  wrappedInside: 'signup-form',
-                  options: [{
-                    content: 'Месяц',
-                    value: 0,
-                    selected: true
-                  }].concat(months)
-                }, {
-                  block: 'select',
-                  fieldName: 'selectYear',
-                  wrappedInside: 'signup-form',
-                  options: [{
-                    content: 'Год',
-                    value: 0,
-                    selected: true
-                  }].concat(_toConsumableArray(Array(119).keys()).map(function (num) {
-                    return {
-                      content: num + 1900,
-                      value: num + 1900
-                    };
-                  }).reverse())
-                }]
-              }
             }]
           }, {
             block: 'form-group',
@@ -13240,76 +13088,7 @@ var template = function template() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return template; });
 /* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../settings/config.js */ "./static/public/js/settings/config.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-
-var yearOptions = [{
-  content: 'Год',
-  value: 0,
-  selected: true
-}].concat(_toConsumableArray(Array(119).keys()).map(function (num) {
-  return {
-    content: num + 1900,
-    value: num + 1900
-  };
-}).reverse());
-var monthOptions = [{
-  content: 'Месяц',
-  value: 0,
-  selected: true
-}, {
-  content: 'Январь',
-  value: 1
-}, {
-  content: 'Февраль',
-  value: 2
-}, {
-  content: 'Март',
-  value: 3
-}, {
-  content: 'Апрель',
-  value: 4
-}, {
-  content: 'Май',
-  value: 5
-}, {
-  content: 'Июнь',
-  value: 6
-}, {
-  content: 'Июль',
-  value: 7
-}, {
-  content: 'Август',
-  value: 8
-}, {
-  content: 'Сентябрь',
-  value: 9
-}, {
-  content: 'Октябрь',
-  value: 10
-}, {
-  content: 'Ноябрь',
-  value: 11
-}, {
-  content: 'Декабрь',
-  value: 12
-}];
-var dayOptions = [{
-  content: 'День',
-  value: 0,
-  selected: true
-}].concat(_toConsumableArray(Array(30).keys()).map(function (num) {
-  return {
-    content: num + 1,
-    value: num + 1
-  };
-}));
 /**
  * Get template of the profile's update page for user
  * @param {Object} user
@@ -13317,29 +13096,6 @@ var dayOptions = [{
  */
 
 function template(user) {
-  var date = [{
-    block: 'select',
-    fieldName: 'selectDay',
-    attrs: {
-      id: 'signup__selectDay'
-    },
-    options: dayOptions
-  }, {
-    block: 'select',
-    fieldName: 'selectMonth',
-    attrs: {
-      id: 'signup__selectMonth'
-    },
-    options: monthOptions
-  }, {
-    block: 'select',
-    fieldName: 'selectYear',
-    attrs: {
-      id: 'signup__selectYear'
-    },
-    options: yearOptions
-  }];
-  setSelectedDate(user, date);
   var gender = {
     block: 'select',
     fieldName: 'selectMale',
@@ -13395,24 +13151,6 @@ function template(user) {
               fieldName: 'avatar'
             }
           }, {
-            name: 'Имя',
-            fieldName: 'firstName',
-            fieldAttrs: {
-              placeholder: 'Иван',
-              value: user.firstName,
-              checkable: true,
-              checkType: 'name'
-            }
-          }, {
-            name: 'Фамилия',
-            fieldName: 'lastName',
-            fieldAttrs: {
-              placeholder: 'Иванов',
-              value: user.lastName,
-              checkable: true,
-              checkType: 'lastName'
-            }
-          }, {
             name: 'Email',
             fieldName: 'email',
             fieldAttrs: {
@@ -13437,13 +13175,6 @@ function template(user) {
             name: 'Пол',
             novalidate: true,
             value: gender
-          }, {
-            name: 'Дата рождения',
-            novalidate: true,
-            value: [{
-              block: 'field-group',
-              content: date
-            }]
           }, {
             name: 'Новый пароль',
             fieldName: 'password',
@@ -13506,41 +13237,6 @@ function setSelectedGender(user, gender) {
     var options = gender.options;
     options.forEach(function (option) {
       if (option.value === user.gender) {
-        option.selected = true;
-      }
-    });
-  }
-}
-/**
- * Set selected date
- * @param {Object} user
- * @param {Array} date
- */
-
-
-function setSelectedDate(user, date) {
-  if (user.birthDate !== '' && user.birthDate !== null) {
-    var userDate = user.birthDate.split('.');
-    var _dayOptions = date[0].options;
-
-    _dayOptions.forEach(function (option) {
-      if (option.content === +userDate[0]) {
-        option.selected = true;
-      }
-    });
-
-    var _monthOptions = date[1].options;
-
-    _monthOptions.forEach(function (option) {
-      if (option.value === +userDate[1]) {
-        option.selected = true;
-      }
-    });
-
-    var _yearOptions = date[2].options;
-
-    _yearOptions.forEach(function (option) {
-      if (option.content === +userDate[2]) {
         option.selected = true;
       }
     });

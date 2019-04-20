@@ -51,7 +51,6 @@ export default class OfflineGame extends GameCore {
     } catch (e) {
       return;
     }
-    console.log(data);
     this.state.time = (performance.now() - this.time) / 1000;
 
     if (data.hexes) {

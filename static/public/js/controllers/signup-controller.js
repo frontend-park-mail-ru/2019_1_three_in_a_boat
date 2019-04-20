@@ -26,17 +26,8 @@ export default class SignUpController extends Controller {
   _getFromSignUp(event) {
     const form = document.getElementById('signup-form');
 
-    const name = form['signup-form_firstName'].value;
-    const lastName = form['signup-form_lastName'].value;
     const email = form['signup-form_email'].value;
     const userName = form['signup-form_username'].value;
-
-    const selectField = document.getElementsByTagName('select');
-    const day = selectField['signup-form_selectDay'].value;
-    const month = selectField['signup-form_selectMonth'].value;
-    const year = selectField['signup-form_selectYear'].value;
-    const date = `${day}-${month}-${year}`;
-
     const password = form['signup-form_password'].value;
 
     return {userName, password, name, lastName, email, date};

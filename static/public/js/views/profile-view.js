@@ -32,10 +32,8 @@ export default class ProfileView extends View {
       allowEdit: user.isCurrent,
       info: [
         ['Никнейм', profile.nickname || profile.username],
-        ['Имя', profile.firstName],
-        ['Фамилия', profile.lastName],
         ['Email', profile.email],
-        ['Дата рождения', profile.date],
+        ['Счет', profile.highScore],
         ['Пол', profile.gender],
       ],
     }];
