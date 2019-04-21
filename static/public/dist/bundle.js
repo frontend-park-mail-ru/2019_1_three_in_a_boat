@@ -7351,7 +7351,10 @@ function (_Controller) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NotificationController; });
-/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
+/* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
+/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
+/* harmony import */ var _views_components_disconnect_messagebox_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/components/disconnect-messagebox.js */ "./static/public/js/views/components/disconnect-messagebox.js");
+/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7361,7 +7364,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-var SERVER_ADDRESS = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].wsUrl; // 'ws://localhost:3000/ws';
+
+
+
+var SERVER_ADDRESS = _settings_config_js__WEBPACK_IMPORTED_MODULE_3__["settings"].wsUrl; // 'ws://localhost:3000/ws';
 
 /**
  * The singleton class for sending and receiving messages from server
@@ -7375,9 +7381,12 @@ function () {
    * Constructor
    * @param {string} path
    * @param {function} onMsg
+   * @param {function} onClose
    */
   function NotificationController(path, onMsg) {
     var _this = this;
+
+    var onClose = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
     _classCallCheck(this, NotificationController);
 
@@ -7386,36 +7395,23 @@ function () {
 
     this.ws.onerror = function (event) {
       console.log('WebSocket ERROR: ' + JSON.stringify(event, null, 4));
-
-      _this._makeNotify('WebSocket ERROR: ' + JSON.stringify(event, null, 4));
     };
 
-    this.ws.onclose = function (event) {
-      _this.onDisconnected('Client disconnected.');
+    this.ws.onclose = function () {
+      onClose();
     };
 
     this.ws.onopen = function () {
-      console.log('ws success connected');
       _this.ws.onmessage = onMsg;
     };
   }
   /**
-   * Disconnection handler
-   * @param {string} discMsg
+   * Send angel to server
+   * @param {*} data
    */
 
 
   _createClass(NotificationController, [{
-    key: "onDisconnected",
-    value: function onDisconnected(discMsg) {
-      this._makeNotify(discMsg);
-    }
-    /**
-     * Send angel to server
-     * @param {*} data
-     */
-
-  }, {
     key: "sendData",
     value: function sendData(data) {
       this.ws.send(data);
@@ -7640,7 +7636,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
 /* harmony import */ var _models_user_service_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/user-service.js */ "./static/public/js/models/user-service.js");
 /* harmony import */ var _views_scoreboard_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/scoreboard-view.js */ "./static/public/js/views/scoreboard-view.js");
-/* harmony import */ var _views_pagination_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/pagination.js */ "./static/public/js/views/pagination.js");
+/* harmony import */ var _views_components_pagination_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/components/pagination.js */ "./static/public/js/views/components/pagination.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7704,9 +7700,9 @@ function (_Controller) {
 
         _this2._configureEvents();
 
-        var paginator = new _views_pagination_js__WEBPACK_IMPORTED_MODULE_3__["default"](_this2.parent);
+        var paginator = new _views_components_pagination_js__WEBPACK_IMPORTED_MODULE_3__["default"](_this2.parent);
         paginator.render(data.data.page + 1, data.data.nPages + 1);
-        _views_pagination_js__WEBPACK_IMPORTED_MODULE_3__["default"].setPaginationLinks(_this2.events, _this2._pagesLinkHandler);
+        _views_components_pagination_js__WEBPACK_IMPORTED_MODULE_3__["default"].setPaginationLinks(_this2.events, _this2._pagesLinkHandler);
       }, function (error) {
         return console.log(error);
       }); // TODO show 5** err mb
@@ -8285,7 +8281,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Router; });
 /* harmony import */ var _controllers_not_found_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controllers/not-found-controller.js */ "./static/public/js/controllers/not-found-controller.js");
-/* harmony import */ var _views_offline_messagebox_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/offline-messagebox.js */ "./static/public/js/views/offline-messagebox.js");
+/* harmony import */ var _views_components_offline_messagebox_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/components/offline-messagebox.js */ "./static/public/js/views/components/offline-messagebox.js");
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8355,7 +8351,7 @@ function () {
           window.history.pushState({}, '', '/');
           window.history.back();
         } else {
-          Object(_views_offline_messagebox_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.currentController.parent);
+          Object(_views_components_offline_messagebox_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.currentController.parent);
         }
 
         return;
@@ -8837,8 +8833,8 @@ function () {
     this.scene = scene;
     this.onGameStarted = this.onGameStarted.bind(this);
     this.onGameFinished = this.onGameFinished.bind(this);
-    this.onControllsPressed = this.onControllsPressed.bind(this);
-    this.onControllsUnpressed = this.onControllsUnpressed.bind(this);
+    this.onControlsPressed = this.onControlsPressed.bind(this);
+    this.onControlsUnpressed = this.onControlsUnpressed.bind(this);
     this.onGameStateChanged = this.onGameStateChanged.bind(this);
   }
   /**
@@ -8851,8 +8847,8 @@ function () {
     value: function start() {
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].START_GAME, this.onGameStarted);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].FINISH_GAME, this.onGameFinished);
-      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, this.onControllsPressed);
-      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, this.onControllsUnpressed);
+      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, this.onControlsPressed);
+      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, this.onControlsUnpressed);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].on(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].GAME_STATE_CHANGED, this.onGameStateChanged);
     }
     /**
@@ -8864,8 +8860,8 @@ function () {
     value: function destroy() {
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].START_GAME, this.onGameStarted);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].FINISH_GAME, this.onGameFinished);
-      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, this.onControllsPressed);
-      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, this.onControllsUnpressed);
+      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_PRESSED, this.onControlsPressed);
+      _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].CONTROLS_UNPRESSED, this.onControlsUnpressed);
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].off(_events_js__WEBPACK_IMPORTED_MODULE_1__["default"].GAME_STATE_CHANGED, this.onGameStateChanged);
       this.controller.destroy();
       this.scene.stop();
@@ -8876,8 +8872,8 @@ function () {
      */
 
   }, {
-    key: "onControllsPressed",
-    value: function onControllsPressed(evt) {
+    key: "onControlsPressed",
+    value: function onControlsPressed(evt) {
       throw new Error('This method must be overridden');
     }
     /**
@@ -8886,8 +8882,8 @@ function () {
      */
 
   }, {
-    key: "onControllsUnpressed",
-    value: function onControllsUnpressed(evt) {
+    key: "onControlsUnpressed",
+    value: function onControlsUnpressed(evt) {
       throw new Error('This method must be overridden');
     }
     /**
@@ -9371,8 +9367,8 @@ function (_GameCore) {
      */
 
   }, {
-    key: "onControllsPressed",
-    value: function onControllsPressed(evt) {
+    key: "onControlsPressed",
+    value: function onControlsPressed(evt) {
       var _this2 = this;
 
       if (!this.controllersLoopIntervalId) {
@@ -9391,8 +9387,8 @@ function (_GameCore) {
      */
 
   }, {
-    key: "onControllsUnpressed",
-    value: function onControllsUnpressed(evt) {
+    key: "onControlsUnpressed",
+    value: function onControlsUnpressed(evt) {
       clearInterval(this.controllersLoopIntervalId);
       this.controllersLoopIntervalId = undefined;
     }
@@ -9469,8 +9465,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core.js */ "./static/public/js/game/core/core.js");
 /* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
 /* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../event-bus.js */ "./static/public/js/event-bus.js");
-/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./events.js */ "./static/public/js/game/core/events.js");
-/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings.js */ "./static/public/js/game/core/settings.js");
+/* harmony import */ var _views_components_disconnect_messagebox_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../views/components/disconnect-messagebox.js */ "./static/public/js/views/components/disconnect-messagebox.js");
+/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./events.js */ "./static/public/js/game/core/events.js");
+/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./settings.js */ "./static/public/js/game/core/settings.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9492,6 +9489,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -9521,7 +9519,9 @@ function (_GameCore) {
     _this.scene = scene;
     _this.state = {};
     _this.gameLoop = _this.gameLoop.bind(_assertThisInitialized(_this));
-    _this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__["default"]('/play', _this.gameLoop.bind(_assertThisInitialized(_this)));
+
+    _this._initWebSocket();
+
     return _this;
   }
   /**
@@ -9542,8 +9542,9 @@ function (_GameCore) {
         cursorCircleAngle: 0
       };
       this.time = performance.now();
+      this.finished = false;
       setTimeout(function () {
-        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].START_GAME, this.state);
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].START_GAME, this.state);
       }.bind(this));
     }
     /**
@@ -9574,11 +9575,11 @@ function (_GameCore) {
         this.state.hexagons.forEach(function (_, position) {
           _this2.state.hexagons[position].sides = _this2.state.hexagons[position].sidesMask;
         });
-        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].GAME_STATE_CHANGED, this.state);
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].GAME_STATE_CHANGED, this.state);
       }
 
       if (data.over) {
-        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].FINISH_GAME, this.state);
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_4__["default"].FINISH_GAME, this.state);
       }
     }
     /**
@@ -9587,16 +9588,16 @@ function (_GameCore) {
      */
 
   }, {
-    key: "onControllsPressed",
-    value: function onControllsPressed(evt) {
+    key: "onControlsPressed",
+    value: function onControlsPressed(evt) {
       var _this3 = this;
 
       if (!this.controllersLoopIntervalId) {
         this.controllersLoopIntervalId = setInterval(function () {
           if (_this3._pressed('LEFT', evt)) {
-            _this3.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+            _this3.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_5__["CURSOR"].rotatingSpeed;
           } else if (_this3._pressed('RIGHT', evt)) {
-            _this3.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+            _this3.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_5__["CURSOR"].rotatingSpeed;
           }
 
           _this3.ws.sendData(JSON.stringify({
@@ -9611,8 +9612,8 @@ function (_GameCore) {
      */
 
   }, {
-    key: "onControllsUnpressed",
-    value: function onControllsUnpressed(evt) {
+    key: "onControlsUnpressed",
+    value: function onControlsUnpressed(evt) {
       clearInterval(this.controllersLoopIntervalId);
       this.controllersLoopIntervalId = undefined;
     }
@@ -9636,6 +9637,7 @@ function (_GameCore) {
   }, {
     key: "onGameFinished",
     value: function onGameFinished(evt) {
+      this.finished = true;
       this.destroy();
     }
     /**
@@ -9663,6 +9665,28 @@ function (_GameCore) {
     key: "onGameStateChanged",
     value: function onGameStateChanged(evt) {
       this.scene.update(evt);
+    }
+    /**
+     * Handle websocket disconnect
+     * @private
+     */
+
+  }, {
+    key: "_webSocketDisconnectHandler",
+    value: function _webSocketDisconnectHandler() {
+      if (!this.finished) {
+        Object(_views_components_disconnect_messagebox_js__WEBPACK_IMPORTED_MODULE_3__["default"])(this.scene.parent);
+      }
+    }
+    /**
+     * Init web socket handlers
+     * @private
+     */
+
+  }, {
+    key: "_initWebSocket",
+    value: function _initWebSocket() {
+      this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__["default"]('/play', this.gameLoop.bind(this), this._webSocketDisconnectHandler.bind(this));
     }
   }]);
 
@@ -10172,7 +10196,7 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./settings/config.js */ "./static/public/js/settings/config.js");
-/* harmony import */ var _views_header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/header.js */ "./static/public/js/views/header.js");
+/* harmony import */ var _views_components_header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/components/header.js */ "./static/public/js/views/components/header.js");
 /* harmony import */ var _core_router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core/router.js */ "./static/public/js/core/router.js");
 /* harmony import */ var _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controllers/menu-controller.js */ "./static/public/js/controllers/menu-controller.js");
 /* harmony import */ var _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./controllers/authors-controller.js */ "./static/public/js/controllers/authors-controller.js");
@@ -10211,7 +10235,7 @@ __webpack_require__(/*! ../icons/favicon.ico */ "./static/public/icons/favicon.i
 
 
 var application = document.getElementById('application');
-Object(_views_header_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
+Object(_views_components_header_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js');
@@ -11128,6 +11152,369 @@ function (_View) {
 
 /***/ }),
 
+/***/ "./static/public/js/views/components/disconnect-messagebox.js":
+/*!********************************************************************!*\
+  !*** ./static/public/js/views/components/disconnect-messagebox.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return showMessage; });
+
+
+var bemhtml = __webpack_require__(/*! ../../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+/**
+ * Render message about using online feature without internet
+ * @param {HTMLElement} parent
+ * @param {boolean} reconnect - is reconnect allowed
+ * @param {string} recPage - page to reconnect
+ */
+
+
+function showMessage(parent) {
+  var reconnect = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var recPage = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var template = [{
+    block: 'offline-msg',
+    content: {
+      elem: 'window',
+      content: [{
+        elem: 'text',
+        content: 'Соединение с сервером разорвано'
+      }, !reconnect ? {} : {
+        elem: 'btn',
+        attrs: {
+          'href': '#'
+        },
+        tag: 'a',
+        content: 'Переподключиться'
+      }, {
+        elem: 'btn',
+        attrs: {
+          'href': '#'
+        },
+        tag: 'a',
+        content: 'В меню'
+      }]
+    }
+  }];
+  parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  var buttons = parent.getElementsByClassName('offline-msg__btn');
+  var menuBtn = reconnect ? buttons[1] : buttons[0];
+
+  menuBtn.onclick = function () {
+    var offlineMsg = parent.getElementsByClassName('offline-msg')[0];
+    parent.removeChild(offlineMsg);
+    window.history.pushState({}, '', '/');
+    window.history.pushState({}, '', '/');
+    window.history.back();
+  };
+
+  if (reconnect) {
+    var recBtn = buttons[0];
+
+    recBtn.onclick = function () {
+      var offlineMsg = parent.getElementsByClassName('offline-msg')[0];
+      parent.removeChild(offlineMsg);
+      window.history.pushState({}, '', recPage);
+      window.history.pushState({}, '', recPage);
+      window.history.back();
+    };
+  }
+}
+
+/***/ }),
+
+/***/ "./static/public/js/views/components/header.js":
+/*!*****************************************************!*\
+  !*** ./static/public/js/views/components/header.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createHeader; });
+var bemhtml = __webpack_require__(/*! ../../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+/**
+ * Create page header
+ */
+
+
+function createHeader() {
+  var header = {
+    block: 'header',
+    mods: {
+      'main': true
+    },
+    content: [{
+      block: 'icon',
+      mods: {
+        color: 'white',
+        size: 'header-fit',
+        type: 'hexagon'
+      }
+    }, {
+      elem: 'title',
+      tag: 'a',
+      attrs: {
+        'data-link-type': '/'
+      },
+      content: ['HEXAGON']
+    }]
+  };
+  var application = document.getElementById('application');
+  application.insertAdjacentHTML('beforeend', '<div class="header"></div>');
+  var headerDiv = document.getElementsByClassName('header')[0];
+  headerDiv.insertAdjacentHTML('beforeend', bemhtml.apply(header));
+}
+
+/***/ }),
+
+/***/ "./static/public/js/views/components/offline-messagebox.js":
+/*!*****************************************************************!*\
+  !*** ./static/public/js/views/components/offline-messagebox.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return showMessage; });
+
+
+var bemhtml = __webpack_require__(/*! ../../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+/**
+ * Render message about using online feature without internet
+ * @param {HTMLElement} parent
+ */
+
+
+function showMessage(parent) {
+  var template = [{
+    block: 'offline-msg',
+    content: {
+      elem: 'window',
+      content: [{
+        elem: 'text',
+        content: 'Мы не можем сделать для вас это ' + 'без интернет-соединения :С'
+      }, {
+        elem: 'btn',
+        attrs: {
+          'href': '#'
+        },
+        tag: 'a',
+        content: 'Назад'
+      }]
+    }
+  }];
+  parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  var btn = parent.getElementsByClassName('offline-msg__btn')[0];
+
+  btn.onclick = function () {
+    var offlineMsg = parent.getElementsByClassName('offline-msg')[0];
+    parent.removeChild(offlineMsg);
+    window.history.back();
+  };
+}
+
+/***/ }),
+
+/***/ "./static/public/js/views/components/pagination.js":
+/*!*********************************************************!*\
+  !*** ./static/public/js/views/components/pagination.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Paginator; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var bemhtml = __webpack_require__(/*! ../../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+/**
+ * @class Paginator
+ */
+
+
+var Paginator =
+/*#__PURE__*/
+function () {
+  /**
+   * @param {HTMLElement} parent
+   */
+  function Paginator(parent) {
+    _classCallCheck(this, Paginator);
+
+    this.parent = parent;
+  }
+  /**
+   * Get array of the pages, which are showed in pagination
+   * @param {int} currPage number of the current page
+   * @param {int} pagesNumber number of he pages
+   * @return {Array} array of elements of pagination
+   * @private
+   */
+
+
+  _createClass(Paginator, [{
+    key: "_getNumeration",
+    value: function _getNumeration(currPage, pagesNumber) {
+      var numbers = [{
+        content: 'Назад',
+        attrs: {
+          value: currPage - 1
+        }
+      }, {
+        content: 1,
+        attrs: {
+          value: 1
+        }
+      }];
+
+      if (pagesNumber >= 2) {
+        numbers.push({
+          content: 2,
+          attrs: {
+            value: 2
+          }
+        });
+      }
+
+      if (currPage > 5) {
+        numbers.push({
+          content: '...',
+          attrs: {
+            value: 1
+          }
+        });
+      }
+
+      for (var i = currPage - 2; i <= currPage + 2 && i <= pagesNumber; i++) {
+        if (i > 2) {
+          numbers.push({
+            content: i,
+            attrs: {
+              value: i
+            }
+          });
+        }
+      }
+
+      if (currPage + 2 < pagesNumber - 2) {
+        numbers.push({
+          content: '...',
+          attrs: {
+            value: 1
+          }
+        }, {
+          content: pagesNumber - 1,
+          attrs: {
+            value: pagesNumber - 1
+          }
+        }, {
+          content: pagesNumber,
+          attrs: {
+            value: pagesNumber
+          }
+        });
+      } else if (currPage + 2 < pagesNumber - 1) {
+        numbers.push({
+          content: pagesNumber - 1,
+          attrs: {
+            value: pagesNumber - 1
+          }
+        }, {
+          content: pagesNumber,
+          attrs: {
+            value: pagesNumber
+          }
+        });
+      } else if (currPage + 2 < pagesNumber) {
+        numbers.push({
+          content: pagesNumber,
+          attrs: {
+            value: pagesNumber
+          }
+        });
+      }
+
+      numbers.push({
+        content: 'Вперед',
+        attrs: {
+          value: currPage < pagesNumber ? currPage + 1 : -1
+        }
+      });
+      return numbers;
+    }
+    /**
+     * Create pagination
+     * @param {int} currPage number of the current page
+     * @param {int} pagesNumber number of he pages
+     */
+
+  }, {
+    key: "render",
+    value: function render(currPage, pagesNumber) {
+      var template = [{
+        block: 'pagination',
+        content: []
+      }];
+
+      var numbers = this._getNumeration(currPage, pagesNumber);
+
+      numbers.forEach(function (number) {
+        number.elem = 'link';
+
+        if (number.attrs.value === currPage || number.attrs.value < 1) {
+          number.elemMods = {
+            current: true
+          };
+        }
+
+        template[0].content.push(number);
+      });
+      this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+    }
+    /**
+     * Add event listener for each pagination item
+     * @param {Array} events
+     * @param {function} handler
+     */
+
+  }], [{
+    key: "setPaginationLinks",
+    value: function setPaginationLinks(events, handler) {
+      var pagLinks = document.getElementsByClassName('pagination__link');
+      Array.from(pagLinks).forEach(function (link) {
+        if (Number(link.value) < 1) {
+          return;
+        }
+
+        link.addEventListener('click', handler);
+        events.push({
+          item: link,
+          type: 'click',
+          handler: handler
+        });
+      });
+    }
+  }]);
+
+  return Paginator;
+}();
+
+
+
+/***/ }),
+
 /***/ "./static/public/js/views/game-menu-view.js":
 /*!**************************************************!*\
   !*** ./static/public/js/views/game-menu-view.js ***!
@@ -11774,52 +12161,6 @@ function (_View) {
 
 /***/ }),
 
-/***/ "./static/public/js/views/header.js":
-/*!******************************************!*\
-  !*** ./static/public/js/views/header.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createHeader; });
-var bemhtml = __webpack_require__(/*! ../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
-/**
- * Create page header
- */
-
-
-function createHeader() {
-  var header = {
-    block: 'header',
-    mods: {
-      'main': true
-    },
-    content: [{
-      block: 'icon',
-      mods: {
-        color: 'white',
-        size: 'header-fit',
-        type: 'hexagon'
-      }
-    }, {
-      elem: 'title',
-      tag: 'a',
-      attrs: {
-        'data-link-type': '/'
-      },
-      content: ['HEXAGON']
-    }]
-  };
-  var application = document.getElementById('application');
-  application.insertAdjacentHTML('beforeend', '<div class="header"></div>');
-  var headerDiv = document.getElementsByClassName('header')[0];
-  headerDiv.insertAdjacentHTML('beforeend', bemhtml.apply(header));
-}
-
-/***/ }),
-
 /***/ "./static/public/js/views/login-view.js":
 /*!**********************************************!*\
   !*** ./static/public/js/views/login-view.js ***!
@@ -12031,55 +12372,6 @@ function (_View) {
 
 /***/ }),
 
-/***/ "./static/public/js/views/offline-messagebox.js":
-/*!******************************************************!*\
-  !*** ./static/public/js/views/offline-messagebox.js ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return showMessage; });
-
-
-var bemhtml = __webpack_require__(/*! ../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
-/**
- * Render message about using online feature without internet
- * @param {HTMLElement} parent
- */
-
-
-function showMessage(parent) {
-  var template = [{
-    block: 'offline-msg',
-    content: {
-      elem: 'window',
-      content: [{
-        elem: 'text',
-        content: 'Мы не можем сделать для вас это ' + 'без интернет-соединения :С'
-      }, {
-        elem: 'btn',
-        attrs: {
-          'href': '#'
-        },
-        tag: 'a',
-        content: 'Назад'
-      }]
-    }
-  }];
-  parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-  var btn = parent.getElementsByClassName('offline-msg__btn')[0];
-
-  btn.onclick = function () {
-    var offlineMsg = parent.getElementsByClassName('offline-msg')[0];
-    parent.removeChild(offlineMsg);
-    window.history.back();
-  };
-}
-
-/***/ }),
-
 /***/ "./static/public/js/views/page-not-found-view.js":
 /*!*******************************************************!*\
   !*** ./static/public/js/views/page-not-found-view.js ***!
@@ -12169,199 +12461,6 @@ function (_View) {
 
   return PageNotFoundView;
 }(_core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-
-/***/ }),
-
-/***/ "./static/public/js/views/pagination.js":
-/*!**********************************************!*\
-  !*** ./static/public/js/views/pagination.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Paginator; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var bemhtml = __webpack_require__(/*! ../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
-/**
- * @class Paginator
- */
-
-
-var Paginator =
-/*#__PURE__*/
-function () {
-  /**
-   * @param {HTMLElement} parent
-   */
-  function Paginator(parent) {
-    _classCallCheck(this, Paginator);
-
-    this.parent = parent;
-  }
-  /**
-   * Get array of the pages, which are showed in pagination
-   * @param {int} currPage number of the current page
-   * @param {int} pagesNumber number of he pages
-   * @return {Array} array of elements of pagination
-   * @private
-   */
-
-
-  _createClass(Paginator, [{
-    key: "_getNumeration",
-    value: function _getNumeration(currPage, pagesNumber) {
-      var numbers = [{
-        content: 'Назад',
-        attrs: {
-          value: currPage - 1
-        }
-      }, {
-        content: 1,
-        attrs: {
-          value: 1
-        }
-      }];
-
-      if (pagesNumber >= 2) {
-        numbers.push({
-          content: 2,
-          attrs: {
-            value: 2
-          }
-        });
-      }
-
-      if (currPage > 5) {
-        numbers.push({
-          content: '...',
-          attrs: {
-            value: 1
-          }
-        });
-      }
-
-      for (var i = currPage - 2; i <= currPage + 2 && i <= pagesNumber; i++) {
-        if (i > 2) {
-          numbers.push({
-            content: i,
-            attrs: {
-              value: i
-            }
-          });
-        }
-      }
-
-      if (currPage + 2 < pagesNumber - 2) {
-        numbers.push({
-          content: '...',
-          attrs: {
-            value: 1
-          }
-        }, {
-          content: pagesNumber - 1,
-          attrs: {
-            value: pagesNumber - 1
-          }
-        }, {
-          content: pagesNumber,
-          attrs: {
-            value: pagesNumber
-          }
-        });
-      } else if (currPage + 2 < pagesNumber - 1) {
-        numbers.push({
-          content: pagesNumber - 1,
-          attrs: {
-            value: pagesNumber - 1
-          }
-        }, {
-          content: pagesNumber,
-          attrs: {
-            value: pagesNumber
-          }
-        });
-      } else if (currPage + 2 < pagesNumber) {
-        numbers.push({
-          content: pagesNumber,
-          attrs: {
-            value: pagesNumber
-          }
-        });
-      }
-
-      numbers.push({
-        content: 'Вперед',
-        attrs: {
-          value: currPage < pagesNumber ? currPage + 1 : -1
-        }
-      });
-      return numbers;
-    }
-    /**
-     * Create pagination
-     * @param {int} currPage number of the current page
-     * @param {int} pagesNumber number of he pages
-     */
-
-  }, {
-    key: "render",
-    value: function render(currPage, pagesNumber) {
-      var template = [{
-        block: 'pagination',
-        content: []
-      }];
-
-      var numbers = this._getNumeration(currPage, pagesNumber);
-
-      numbers.forEach(function (number) {
-        number.elem = 'link';
-
-        if (number.attrs.value === currPage || number.attrs.value < 1) {
-          number.elemMods = {
-            current: true
-          };
-        }
-
-        template[0].content.push(number);
-      });
-      this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-    }
-    /**
-     * Add event listener for each pagination item
-     * @param {Array} events
-     * @param {function} handler
-     */
-
-  }], [{
-    key: "setPaginationLinks",
-    value: function setPaginationLinks(events, handler) {
-      var pagLinks = document.getElementsByClassName('pagination__link');
-      Array.from(pagLinks).forEach(function (link) {
-        if (Number(link.value) < 1) {
-          return;
-        }
-
-        link.addEventListener('click', handler);
-        events.push({
-          item: link,
-          type: 'click',
-          handler: handler
-        });
-      });
-    }
-  }]);
-
-  return Paginator;
-}();
 
 
 

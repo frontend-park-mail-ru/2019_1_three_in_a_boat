@@ -1,6 +1,6 @@
 'use strict';
 
-const bemhtml = require('../bundle.bemhtml.js').bemhtml;
+const bemhtml = require('../../bundle.bemhtml.js').bemhtml;
 
 /**
  * Render message about using online feature without internet

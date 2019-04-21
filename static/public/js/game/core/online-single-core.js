@@ -1,6 +1,7 @@
 import GameCore from './core.js';
 import WebSocketController from '../../controllers/notification-controller.js';
 import bus from '../../event-bus.js';
+import showMessage from '../../views/components/disconnect-messagebox.js';
 import events from './events.js';
 import {CURSOR} from './settings.js';
 
@@ -18,7 +19,7 @@ export default class OfflineGame extends GameCore {
     this.scene = scene;
     this.state = {};
     this.gameLoop = this.gameLoop.bind(this);
-    this.ws = new WebSocketController('/play', this.gameLoop.bind(this));
+    this._initWebSocket();
   }
 
   /**
@@ -35,6 +36,7 @@ export default class OfflineGame extends GameCore {
     };
 
     this.time = performance.now();
+    this.finished = false;
     setTimeout(function() {
       bus.emit(events.START_GAME, this.state);
     }.bind(this));
@@ -73,7 +75,7 @@ export default class OfflineGame extends GameCore {
    * Control pressed event
    * @param {object} evt
    */
-  onControllsPressed(evt) {
+  onControlsPressed(evt) {
     if (!this.controllersLoopIntervalId) {
       this.controllersLoopIntervalId = setInterval(() => {
         if (this._pressed('LEFT', evt)) {
@@ -90,7 +92,7 @@ export default class OfflineGame extends GameCore {
    * Control unpressed event
    * @param {object} evt
    */
-  onControllsUnpressed(evt) {
+  onControlsUnpressed(evt) {
     clearInterval(this.controllersLoopIntervalId);
     this.controllersLoopIntervalId = undefined;
   }
@@ -110,6 +112,7 @@ export default class OfflineGame extends GameCore {
    * @param {object} evt
    */
   onGameFinished(evt) {
+    this.finished = true;
     this.destroy();
   }
 
@@ -131,5 +134,24 @@ export default class OfflineGame extends GameCore {
    */
   onGameStateChanged(evt) {
     this.scene.update(evt);
+  }
+
+  /**
+   * Handle websocket disconnect
+   * @private
+   */
+  _webSocketDisconnectHandler() {
+    if (!this.finished) {
+      showMessage(this.scene.parent);
+    }
+  }
+
+  /**
+   * Init web socket handlers
+   * @private
+   */
+  _initWebSocket() {
+    this.ws = new WebSocketController('/play', this.gameLoop.bind(this),
+        this._webSocketDisconnectHandler.bind(this));
   }
 }

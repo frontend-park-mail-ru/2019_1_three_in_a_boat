@@ -21,8 +21,8 @@ export default class GameCore {
 
     this.onGameStarted = this.onGameStarted.bind(this);
     this.onGameFinished = this.onGameFinished.bind(this);
-    this.onControllsPressed = this.onControllsPressed.bind(this);
-    this.onControllsUnpressed = this.onControllsUnpressed.bind(this);
+    this.onControlsPressed = this.onControlsPressed.bind(this);
+    this.onControlsUnpressed = this.onControlsUnpressed.bind(this);
     this.onGameStateChanged = this.onGameStateChanged.bind(this);
   }
 
@@ -32,8 +32,8 @@ export default class GameCore {
   start() {
     bus.on(events.START_GAME, this.onGameStarted);
     bus.on(events.FINISH_GAME, this.onGameFinished);
-    bus.on(events.CONTROLS_PRESSED, this.onControllsPressed);
-    bus.on(events.CONTROLS_UNPRESSED, this.onControllsUnpressed);
+    bus.on(events.CONTROLS_PRESSED, this.onControlsPressed);
+    bus.on(events.CONTROLS_UNPRESSED, this.onControlsUnpressed);
     bus.on(events.GAME_STATE_CHANGED, this.onGameStateChanged);
   }
 
@@ -43,8 +43,8 @@ export default class GameCore {
   destroy() {
     bus.off(events.START_GAME, this.onGameStarted);
     bus.off(events.FINISH_GAME, this.onGameFinished);
-    bus.off(events.CONTROLS_PRESSED, this.onControllsPressed);
-    bus.off(events.CONTROLS_UNPRESSED, this.onControllsUnpressed);
+    bus.off(events.CONTROLS_PRESSED, this.onControlsPressed);
+    bus.off(events.CONTROLS_UNPRESSED, this.onControlsUnpressed);
     bus.off(events.GAME_STATE_CHANGED, this.onGameStateChanged);
 
     this.controller.destroy();
@@ -55,7 +55,7 @@ export default class GameCore {
    *
    * @param evt
    */
-  onControllsPressed(evt) {
+  onControlsPressed(evt) {
     throw new Error('This method must be overridden');
   }
 
@@ -63,7 +63,7 @@ export default class GameCore {
    *
    * @param evt
    */
-  onControllsUnpressed(evt) {
+  onControlsUnpressed(evt) {
     throw new Error('This method must be overridden');
   }
 

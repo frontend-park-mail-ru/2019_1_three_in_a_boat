@@ -99,7 +99,7 @@ export default class OfflineGame extends GameCore {
    * Control pressed event
    * @param {object} evt
    */
-  onControllsPressed(evt) {
+  onControlsPressed(evt) {
     if (!this.controllersLoopIntervalId) {
       this.controllersLoopIntervalId = setInterval(() => {
         if (this._pressed('LEFT', evt)) {
@@ -115,7 +115,7 @@ export default class OfflineGame extends GameCore {
    * Control unpressed event
    * @param {object} evt
    */
-  onControllsUnpressed(evt) {
+  onControlsUnpressed(evt) {
     clearInterval(this.controllersLoopIntervalId);
     this.controllersLoopIntervalId = undefined;
   }
