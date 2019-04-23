@@ -161,5 +161,9 @@ export default class GameView extends View {
       window.cancelAnimationFrame(this.requestFrameId);
       this.requestFrameId = null;
     }
+
+    // document.querySelector('meta[name="viewport"]')
+    //     .setAttribute('content',
+    //         'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
   }
 }

@@ -137,7 +137,7 @@ const template = () => [
                       elem: 'inner',
                       content: {
                         elem: 'text',
-                        content: 'Зарегестироророваться',
+                        content: 'Зарегестироваться',
                       },
                     }],
                   },

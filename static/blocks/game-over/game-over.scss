@@ -3,13 +3,23 @@
 .game-over {
   $block: &;
   position: relative;
-  width: 42rem;
   align-items: center;
   margin: auto 0;
   background-color: rgba(226, 216, 216, 0.6);
   border-radius: 5px;
   max-width: 56rem;
 
+  @media screen and (orientation: landscape) {
+    width: 42rem;
+  }
+  @media screen and (orientation: portrait) {
+    width: 90%;
+  }
+  @media screen and (orientation: landscape) and (max-width: 700px){
+    width: 60%;
+    font-size: 25px;
+    margin-top: 2%;
+  }
 
   &_multi {
     width: 56rem;
@@ -25,8 +35,12 @@
     display: block;
     text-align: center;
     font-size: 45px;
-    font-weight: bold;
     margin-top: 4%;
+    @media screen and (orientation: landscape) and (max-width: 700px){
+      font-size: 30px;
+      margin-top: 2%;
+    }
+    font-weight: bold;
   }
 
   &__content {
@@ -35,11 +49,17 @@
 
   &_main {
     margin-top: 4%;
+    @media screen and (orientation: landscape) and (max-width: 700px){
+      margin-top: 2%;
+    }
   }
 
   &__profile-info {
     max-width: fit-content;
     margin: 20px auto 10px;
+    @media screen and (orientation: landscape) and (max-width: 700px){
+      margin: 10px auto 5px;
+    }
   }
 
   &__profile-icon {

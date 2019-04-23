@@ -12,11 +12,17 @@
     font-size: 24px;
     font-weight: lighter;
     color: black;
+    @media screen and (orientation: landscape) and (max-width: 700px){
+      font-size: 20px;
+    }
   }
 
   &__seconds {
     font-weight: bold;
     text-align: center;
     font-size: 50px;
+    @media screen and (orientation: landscape) and (max-width: 700px){
+      font-size: 30px;
+    }
   }
 }

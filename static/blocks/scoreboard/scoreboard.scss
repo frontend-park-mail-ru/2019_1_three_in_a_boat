@@ -7,19 +7,29 @@
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
   
   min-height: fit-content; // for chrome
   margin-top: 4%;
-  padding: 2%;
 
   border-radius: $border-radius;
   background-color: white;
 
+  @media screen and (orientation: landscape) {
+    align-items: center;
+    padding: 2%;
+  }
+
+  @media screen and (orientation: portrait) {
+    width: 90%;
+    padding: 4%;
+  }
+
   &__items {
-    max-width: 600px;
-    min-width: 450px;
+    @media screen and (orientation: landscape) {
+      max-width: 600px;
+      min-width: 450px;
+    }
   }
 
   &__item {

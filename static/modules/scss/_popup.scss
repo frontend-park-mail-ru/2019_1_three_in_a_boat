@@ -8,8 +8,10 @@ $popup-left-padding: 15px;
   z-index: $z-index-popup;
 
   width: 50%;
-  min-width: fit-content;
-  min-width: -moz-max-content;
+  @media screen and (orientation: landscape) {
+    min-width: fit-content;
+    min-width: -moz-max-content;
+  }
 
   background-color: white;
   border-radius: 5px;
