@@ -6692,9 +6692,7 @@ function (_Controller) {
 
       var mode = '';
 
-      if (navigator.onLine) {
-        mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].ONLINE;
-      } else {
+      if (false) {} else {
         mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
       }
 
@@ -9306,8 +9304,12 @@ function (_GameCore) {
         hexagons: [],
         cursorAngle: Math.PI / 2,
         score: 0,
-        time: 0
+        time: 0,
+        cursorCircleAngle: 0,
+        clockWise: true
       };
+      this.tick = 0;
+      this.hexagonsSpeed = _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].speed;
       this.state.hexagons = Array.from(new Array(3), function (_, position) {
         return {
           side: 400 + 300 * position,
@@ -9327,19 +9329,46 @@ function (_GameCore) {
   }, {
     key: "gameLoop",
     value: function gameLoop(now) {
+      var _this2 = this;
+
       var delay = now - this.lastFrame;
       this.state.time += delay / 1000;
       this.lastFrame = now;
+      ++this.tick;
+      var difficultyIncrement = 1 + 1e-2 * 0.02 * this.tick;
+
+      if (difficultyIncrement > 2.3) {
+        difficultyIncrement = 2.3;
+      }
+
+      var ticksSinceRotation = this.tick % Math.round(15 * 25);
+
+      if (ticksSinceRotation === 0) {
+        this.state.clockWise = !this.state.clockWise;
+      }
+
+      var ticksToRotation = Math.min(ticksSinceRotation, Math.abs(ticksSinceRotation - 15 * 0.02));
+      var rotationAmplitude = Math.min(1, Math.max(0.5, 3 * ticksToRotation / 15 * 0.02));
+      var rotationDirection = 1.0;
+
+      if (!this.state.clockWise) {
+        rotationDirection = -1;
+      }
+
+      var angleIncrement = rotationAmplitude * rotationDirection;
+      angleIncrement *= Math.PI / 3 * 0.015 * difficultyIncrement;
+      this.state.cursorCircleAngle += angleIncrement;
+      this.hexagonsSpeed += 0.00005 * difficultyIncrement;
       this.state.hexagons = this.state.hexagons.map(function (hexagon) {
-        hexagon.side -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].speed * delay;
-        hexagon.angle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].rotatingSpeed * delay;
+        hexagon.side -= _this2.hexagonsSpeed * delay;
+        hexagon.angle += angleIncrement;
         return hexagon;
       });
 
       for (var i = 0; i < this.state.hexagons.length; i++) {
         if (this.state.hexagons[i].side < _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].minSize) {
           this.state.hexagons[i] = {
-            side: 1100,
+            side: 900,
             sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
             angle: Math.floor(Math.random() * 2 * Math.PI)
           };
@@ -9348,7 +9377,7 @@ function (_GameCore) {
       }
 
       _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].GAME_STATE_CHANGED, this.state);
-      var cursor = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].cursorAngleToDot(this.state.cursorAngle);
+      var cursor = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].cursorAngleToDot(this.state.cursorAngle - this.state.cursorCircleAngle);
 
       for (var _i = 0; _i < this.state.hexagons.length; _i++) {
         var condition = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].checkHexagonCollision(this.state.hexagons[_i], cursor);
@@ -9369,14 +9398,16 @@ function (_GameCore) {
   }, {
     key: "onControlsPressed",
     value: function onControlsPressed(evt) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (!this.controllersLoopIntervalId) {
         this.controllersLoopIntervalId = setInterval(function () {
-          if (_this2._pressed('LEFT', evt)) {
-            _this2.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
-          } else if (_this2._pressed('RIGHT', evt)) {
-            _this2.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+          var speed = _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+
+          if (_this3._pressed('LEFT', evt)) {
+            _this3.state.cursorAngle += speed;
+          } else if (_this3._pressed('RIGHT', evt)) {
+            _this3.state.cursorAngle -= speed;
           }
         }, 50);
       }
