@@ -7869,9 +7869,7 @@ function (_Controller) {
         userName: userName,
         password: password,
         name: name,
-        lastName: lastName,
-        email: email,
-        date: date
+        email: email
       };
     }
     /**
@@ -8103,24 +8101,18 @@ function (_Controller) {
     key: "_getFromProfileForm",
     value: function _getFromProfileForm(event) {
       var form = event.target;
-      var firstName = form['updateForm_firstName'].value;
-      var lastName = form['updateForm_lastName'].value;
       var email = form['updateForm_email'].value;
       var selectField = document.getElementsByTagName('select');
       var userName = form['updateForm_username'].value;
-      var day = selectField['updateForm_selectDay'].value;
-      var month = selectField['updateForm_selectMonth'].value;
-      var year = selectField['updateForm_selectYear'].value;
       var gender = selectField['updateForm_selectMale'].value;
-      var date = "".concat(day, "-").concat(month, "-").concat(year);
       var password = form['updateForm_password'].value;
       var img = form['updateForm_avatar'].files[0];
       return {
-        name: firstName,
-        lastName: lastName,
+        name: null,
+        lastName: null,
         userName: userName,
         email: email,
-        date: date,
+        date: null,
         gender: gender,
         password: password,
         img: img
