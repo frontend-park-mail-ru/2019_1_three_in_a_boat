@@ -1,7 +1,5 @@
 'use strict';
 
-import Geometry from '../game/core/geometry.js';
-
 /**
  * @class UserArrow
  */

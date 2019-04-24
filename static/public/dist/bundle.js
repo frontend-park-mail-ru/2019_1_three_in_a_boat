@@ -6692,7 +6692,7 @@ function (_Controller) {
 
       var mode = '';
 
-      if (!navigator.onLine) {
+      if (navigator.onLine) {
         mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].ONLINE;
       } else {
         mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
@@ -9306,8 +9306,12 @@ function (_GameCore) {
         hexagons: [],
         cursorAngle: Math.PI / 2,
         score: 0,
-        time: 0
+        time: 0,
+        cursorCircleAngle: 0,
+        clockWise: true
       };
+      this.tick = 0;
+      this.hexagonsSpeed = _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].speed;
       this.state.hexagons = Array.from(new Array(3), function (_, position) {
         return {
           side: 400 + 300 * position,
@@ -9327,12 +9331,39 @@ function (_GameCore) {
   }, {
     key: "gameLoop",
     value: function gameLoop(now) {
+      var _this2 = this;
+
       var delay = now - this.lastFrame;
       this.state.time += delay / 1000;
       this.lastFrame = now;
+      ++this.tick;
+      var difficultyIncrement = 1 + 1e-2 * 0.02 * this.tick;
+
+      if (difficultyIncrement > 2) {
+        difficultyIncrement = 2;
+      }
+
+      var ticksSinceRotation = this.tick % Math.round(15 * 25);
+
+      if (ticksSinceRotation === 0) {
+        this.state.clockWise = !this.state.clockWise;
+      }
+
+      var ticksToRotation = Math.min(ticksSinceRotation, Math.abs(ticksSinceRotation - 15 * 0.02));
+      var rotationAmplitude = Math.min(1, Math.max(0.5, 3 * ticksToRotation / 15 * 0.02));
+      var rotationDirection = 1.0;
+
+      if (!this.state.clockWise) {
+        rotationDirection = -1;
+      }
+
+      var angleIncrement = rotationAmplitude * rotationDirection;
+      angleIncrement *= Math.PI / 3 * 0.025 * difficultyIncrement;
+      this.state.cursorCircleAngle += angleIncrement;
+      this.hexagonsSpeed += 0.0001 * difficultyIncrement;
       this.state.hexagons = this.state.hexagons.map(function (hexagon) {
-        hexagon.side -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].speed * delay;
-        hexagon.angle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].rotatingSpeed * delay;
+        hexagon.side -= _this2.hexagonsSpeed * delay;
+        hexagon.angle += angleIncrement;
         return hexagon;
       });
 
@@ -9348,7 +9379,7 @@ function (_GameCore) {
       }
 
       _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].GAME_STATE_CHANGED, this.state);
-      var cursor = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].cursorAngleToDot(this.state.cursorAngle);
+      var cursor = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].cursorAngleToDot(this.state.cursorAngle - this.state.cursorCircleAngle);
 
       for (var _i = 0; _i < this.state.hexagons.length; _i++) {
         var condition = _geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"].checkHexagonCollision(this.state.hexagons[_i], cursor);
@@ -9369,14 +9400,16 @@ function (_GameCore) {
   }, {
     key: "onControlsPressed",
     value: function onControlsPressed(evt) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (!this.controllersLoopIntervalId) {
         this.controllersLoopIntervalId = setInterval(function () {
-          if (_this2._pressed('LEFT', evt)) {
-            _this2.state.cursorAngle += _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
-          } else if (_this2._pressed('RIGHT', evt)) {
-            _this2.state.cursorAngle -= _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+          var speed = _settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].rotatingSpeed;
+
+          if (_this3._pressed('LEFT', evt)) {
+            _this3.state.cursorAngle += speed;
+          } else if (_this3._pressed('RIGHT', evt)) {
+            _this3.state.cursorAngle -= speed;
           }
         }, 50);
       }
@@ -9847,19 +9880,16 @@ var GAME_MODES = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserArrow; });
-/* harmony import */ var _game_core_geometry_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/core/geometry.js */ "./static/public/js/game/core/geometry.js");
 
+/**
+ * @class UserArrow
+ */
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-/**
- * @class UserArrow
- */
 
 var UserArrow =
 /*#__PURE__*/
@@ -10052,9 +10082,8 @@ function () {
         } else if (i < lines.length - 1 && lines[i + 1]) {
           this.ctx.moveTo(lines[i + 1].first.x, lines[i + 1].first.y);
         }
-      }
+      } // this.ctx.restore();
 
-      this.ctx.restore();
 
       if (!this.sidesMask) {
         this.ctx.closePath();
@@ -12150,10 +12179,7 @@ function (_View) {
       if (this.requestFrameId) {
         window.cancelAnimationFrame(this.requestFrameId);
         this.requestFrameId = null;
-      } // document.querySelector('meta[name="viewport"]')
-      //     .setAttribute('content',
-      //         'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
-
+      }
     }
   }]);
 

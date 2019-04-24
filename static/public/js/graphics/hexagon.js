@@ -98,7 +98,7 @@ export default class Hexagon {
       }
     }
 
-    this.ctx.restore();
+    // this.ctx.restore();
     if (!this.sidesMask) {
       this.ctx.closePath();
     }

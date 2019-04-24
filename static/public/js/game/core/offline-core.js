@@ -35,7 +35,11 @@ export default class OfflineGame extends GameCore {
       cursorAngle: Math.PI / 2,
       score: 0,
       time: 0,
+      cursorCircleAngle: 0,
+      clockWise: true,
     };
+    this.tick = 0;
+    this.hexagonsSpeed = HEXAGON.speed;
 
     this.state.hexagons = Array.from(new Array(3), function(_, position) {
       return {
@@ -59,10 +63,34 @@ export default class OfflineGame extends GameCore {
     this.state.time += delay / 1000;
 
     this.lastFrame = now;
+    ++this.tick;
+    let difficultyIncrement = 1 + 1e-2 * 0.02 * this.tick;
+    if (difficultyIncrement > 2) {
+      difficultyIncrement = 2;
+    }
+
+    const ticksSinceRotation = this.tick % Math.round(15 * 25);
+    if (ticksSinceRotation === 0) {
+      this.state.clockWise = !this.state.clockWise;
+    }
+
+    const ticksToRotation = Math.min(ticksSinceRotation,
+        Math.abs(ticksSinceRotation - 15 * 0.02));
+    const rotationAmplitude = Math.min(1,
+        Math.max(0.5, 3 * ticksToRotation / 15 * 0.02));
+
+    let rotationDirection = 1.0;
+    if (!this.state.clockWise) {
+      rotationDirection = -1;
+    }
+    let angleIncrement = rotationAmplitude * rotationDirection;
+    angleIncrement *= Math.PI / 3 * 0.025 * difficultyIncrement;
+    this.state.cursorCircleAngle += angleIncrement;
+    this.hexagonsSpeed += 0.0001 * difficultyIncrement;
     this.state.hexagons = this.state.hexagons
-        .map(function(hexagon) {
-          hexagon.side -= HEXAGON.speed * delay;
-          hexagon.angle += HEXAGON.rotatingSpeed * delay;
+        .map((hexagon) => {
+          hexagon.side -= this.hexagonsSpeed * delay;
+          hexagon.angle += angleIncrement;
           return hexagon;
         });
 
@@ -79,7 +107,8 @@ export default class OfflineGame extends GameCore {
 
     bus.emit(events.GAME_STATE_CHANGED, this.state);
 
-    const cursor = Geometry.cursorAngleToDot(this.state.cursorAngle);
+    const cursor = Geometry.cursorAngleToDot(
+        this.state.cursorAngle - this.state.cursorCircleAngle);
 
     for (let i = 0; i < this.state.hexagons.length; i++) {
       const condition = Geometry.checkHexagonCollision(
@@ -102,10 +131,11 @@ export default class OfflineGame extends GameCore {
   onControlsPressed(evt) {
     if (!this.controllersLoopIntervalId) {
       this.controllersLoopIntervalId = setInterval(() => {
+        const speed = CURSOR.rotatingSpeed;
         if (this._pressed('LEFT', evt)) {
-          this.state.cursorAngle += CURSOR.rotatingSpeed;
+          this.state.cursorAngle += speed;
         } else if (this._pressed('RIGHT', evt)) {
-          this.state.cursorAngle -= CURSOR.rotatingSpeed;
+          this.state.cursorAngle -= speed;
         }
       }, 50);
     }
