@@ -93,19 +93,13 @@ export default class UpdateController extends Controller {
    */
   _getFromProfileForm(event) {
     const form = event.target;
-    const firstName = form['updateForm_firstName'].value;
-    const lastName = form['updateForm_lastName'].value;
     const email = form['updateForm_email'].value;
     const selectField = document.getElementsByTagName('select');
     const userName = form['updateForm_username'].value;
-    const day = selectField['updateForm_selectDay'].value;
-    const month = selectField['updateForm_selectMonth'].value;
-    const year = selectField['updateForm_selectYear'].value;
     const gender = selectField['updateForm_selectMale'].value;
-    const date = `${day}-${month}-${year}`;
     const password = form['updateForm_password'].value;
     const img = form['updateForm_avatar'].files[0];
-    return {name: firstName, lastName, userName, email,
-      date, gender, password, img};
+    return {name: null, lastName: null, userName, email,
+      date: null, gender, password, img};
   }
 };

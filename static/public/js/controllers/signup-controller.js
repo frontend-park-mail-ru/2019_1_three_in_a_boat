@@ -30,7 +30,7 @@ export default class SignUpController extends Controller {
     const userName = form['signup-form_username'].value;
     const password = form['signup-form_password'].value;
 
-    return {userName, password, name, lastName, email, date};
+    return {userName, password, name, email};
   }
   /**
    * Call 'sign up' rendering func and add event listeners
