@@ -6692,9 +6692,7 @@ function (_Controller) {
 
       var mode = '';
 
-      if (navigator.onLine) {
-        mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].ONLINE;
-      } else {
+      if (false) {} else {
         mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
       }
 
@@ -9343,8 +9341,8 @@ function (_GameCore) {
       ++this.tick;
       var difficultyIncrement = 1 + 1e-2 * 0.02 * this.tick;
 
-      if (difficultyIncrement > 2) {
-        difficultyIncrement = 2;
+      if (difficultyIncrement > 2.3) {
+        difficultyIncrement = 2.3;
       }
 
       var ticksSinceRotation = this.tick % Math.round(15 * 25);
@@ -9362,9 +9360,9 @@ function (_GameCore) {
       }
 
       var angleIncrement = rotationAmplitude * rotationDirection;
-      angleIncrement *= Math.PI / 3 * 0.025 * difficultyIncrement;
+      angleIncrement *= Math.PI / 3 * 0.015 * difficultyIncrement;
       this.state.cursorCircleAngle += angleIncrement;
-      this.hexagonsSpeed += 0.0001 * difficultyIncrement;
+      this.hexagonsSpeed += 0.00005 * difficultyIncrement;
       this.state.hexagons = this.state.hexagons.map(function (hexagon) {
         hexagon.side -= _this2.hexagonsSpeed * delay;
         hexagon.angle += angleIncrement;
@@ -9374,7 +9372,7 @@ function (_GameCore) {
       for (var i = 0; i < this.state.hexagons.length; i++) {
         if (this.state.hexagons[i].side < _settings_js__WEBPACK_IMPORTED_MODULE_4__["HEXAGON"].minSize) {
           this.state.hexagons[i] = {
-            side: 1100,
+            side: 900,
             sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
             angle: Math.floor(Math.random() * 2 * Math.PI)
           };
