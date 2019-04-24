@@ -3,6 +3,12 @@
   padding-top: 1rem;
   font-size: 45px;
   font-weight: bold;
+  @media screen and (max-width: 800px)  {
+    font-size: 34px;
+  }
+  @media screen and (max-width: 900px) and (orientation: landscape) {
+    font-size: 25px;
+  }
 
   &_center {
     text-align: center;

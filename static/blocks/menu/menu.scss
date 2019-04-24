@@ -18,6 +18,10 @@
     margin: 8% auto 0 auto;
     width: 80%;
   }
+  @media screen and (orientation: portrait) and (max-width: 500px) {
+    margin: 8% auto 0 auto;
+    width: 90%;
+  }
 
   border: 0;
   border-radius: 3px;
