@@ -1,7 +1,8 @@
 .menu {
   $block: &;
   $menu-item-height: 4.5rem;
-  $mobile-menu-item-height: 2.8rem;
+  $menu-portrait-item-height: 4rem;
+  $mobile-menu-item-height: 2.5rem;
 
   width: 60%;
   height: 90%;
@@ -16,6 +17,10 @@
   @media screen and (orientation: portrait) {
     margin: 8% auto 0 auto;
     width: 80%;
+  }
+  @media screen and (orientation: portrait) and (max-width: 500px) {
+    margin: 8% auto 0 auto;
+    width: 90%;
   }
 
   border: 0;
@@ -45,6 +50,9 @@
     margin-bottom: 4%;
 
     height: $menu-item-height;
+    @media screen and (orientation: portrait) {
+      height: $menu-portrait-item-height;
+    }
     @media screen and (orientation: landscape) and (max-width: 700px) {
       height: $mobile-menu-item-height;
     }
@@ -74,5 +82,9 @@
     width: 15%;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+
+    @media screen and (orientation: portrait) {
+      width: 24%;
+    }
   }
 }

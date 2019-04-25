@@ -23,12 +23,30 @@
 
   &_multi {
     width: 56rem;
+    @media screen and (max-width: 900px) and (orientation: portrait) {
+      margin-top: 2%;
+      width: 95%;
+    }
+
+    @media screen and (max-width: 900px) and (orientation: landscape) {
+      margin-top: 2%;
+      width: 75%;
+    }
   }
 
   &__column {
     display: inline-block;
     width: 33.33%;
     vertical-align: top;
+    @media screen and (max-width: 900px) {
+      width: 100%;
+    }
+
+    &_user {
+      @media screen and (max-width: 900px) {
+        display: none;
+      }
+    }
   }
 
   &__title {
