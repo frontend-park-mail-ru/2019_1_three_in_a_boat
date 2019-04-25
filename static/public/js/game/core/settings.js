@@ -9,6 +9,7 @@ export const HEXAGON = {
   width: 10,
   speed: 0.2,
   rotatingSpeed: Math.PI / 5000,
+  lineWidth: 5,
 };
 
 export const MASKS = {

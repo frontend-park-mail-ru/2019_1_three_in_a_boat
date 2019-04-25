@@ -3678,6 +3678,62 @@ var bemhtml;
           };
         }
       });
+      block('profile-data').elem('item')({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'item-name',
+            content: ctx.name
+          }, {
+            elem: 'item-value',
+            content: ctx.value
+          }];
+        }
+      });
+      block('profile-popup').elem('profile-icon')({
+        tag: 'img'
+      });
+      block('profile-data').match(function (node, ctx) {
+        return !ctx.content && ctx.userInfo;
+      })({
+        content: function content(node, ctx) {
+          return ctx.userInfo.map(function (elt) {
+            return {
+              elem: 'item',
+              name: elt[0],
+              value: elt[1] || '-'
+            };
+          });
+        }
+      });
+      block('profile-data').match(function (node, ctx) {
+        return !ctx.content && ctx.fields;
+      })({
+        content: function content(node, ctx) {
+          return ctx.fields.map(function (elt) {
+            return {
+              elem: 'item',
+              name: elt.name,
+              value: {
+                block: 'form-group',
+                mods: {
+                  size: 'inline'
+                },
+                content: elt.content ? elt.content : [elt.value || {
+                  block: 'input',
+                  fieldName: elt.fieldName,
+                  fieldAttrs: elt.fieldAttrs
+                }, elt.novalidate ? {} : {
+                  elem: 'help-text',
+                  elemMods: {
+                    hidden: true
+                  },
+                  "for": elt.fieldName || elt.value.fieldName
+                }]
+              }
+            };
+          });
+        }
+      });
       block('profile-info').elem('item')({
         content: function content(node, ctx) {
           return [{
@@ -6203,6 +6259,62 @@ var bemtree;
             elem: 'link',
             elemMods: mods
           };
+        }
+      });
+      block('profile-data').elem('item')({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'item-name',
+            content: ctx.name
+          }, {
+            elem: 'item-value',
+            content: ctx.value
+          }];
+        }
+      });
+      block('profile-popup').elem('profile-icon')({
+        tag: 'img'
+      });
+      block('profile-data').match(function (node, ctx) {
+        return !ctx.content && ctx.userInfo;
+      })({
+        content: function content(node, ctx) {
+          return ctx.userInfo.map(function (elt) {
+            return {
+              elem: 'item',
+              name: elt[0],
+              value: elt[1] || '-'
+            };
+          });
+        }
+      });
+      block('profile-data').match(function (node, ctx) {
+        return !ctx.content && ctx.fields;
+      })({
+        content: function content(node, ctx) {
+          return ctx.fields.map(function (elt) {
+            return {
+              elem: 'item',
+              name: elt.name,
+              value: {
+                block: 'form-group',
+                mods: {
+                  size: 'inline'
+                },
+                content: elt.content ? elt.content : [elt.value || {
+                  block: 'input',
+                  fieldName: elt.fieldName,
+                  fieldAttrs: elt.fieldAttrs
+                }, elt.novalidate ? {} : {
+                  elem: 'help-text',
+                  elemMods: {
+                    hidden: true
+                  },
+                  "for": elt.fieldName || elt.value.fieldName
+                }]
+              }
+            };
+          });
         }
       });
       block('profile-info').elem('item')({
@@ -8973,6 +9085,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+
 var sqrt3 = 1.7320508075688772;
 /**
  * @class Geometry
@@ -9002,6 +9115,13 @@ function () {
       lines.forEach(function (line) {
         if (line) {
           line = _this.rotateLine(line.first, line.second, hexagon.angle);
+
+          try {
+            line = Geometry.shortened(line, _settings_js__WEBPACK_IMPORTED_MODULE_0__["HEXAGON"].lineWidth);
+          } catch (e) {
+            console.log(e.toString());
+            return;
+          }
 
           if (_this._lineAndCursorCollision(line.first, line.second, cursor)) {
             isCollide = true;
@@ -9112,6 +9232,50 @@ function () {
       }
 
       return lines;
+    }
+    /**
+     * Doesn't touch original line l, returns a line, same as L, but shorter by
+     * shortenBy from BOTH sides. If shortenBy > 1/2 length of the line,
+     *  returns the line itself to avoid stupid bullshit
+     * @param {{first: {x: number, y: number}, second: {x: number, y: number}}} line
+     * @param {number} shortenBy
+     * @return {{first: {x: number, y: number}, second: {x: number, y: number}}|*}
+     * @constructor
+     */
+
+  }, {
+    key: "shortened",
+    value: function shortened(line, shortenBy) {
+      if (shortenBy < 0) {
+        throw Error('shortenBy has to be non-negative');
+      }
+
+      var height = Math.abs(line.first.y - line.second.y);
+      var width = Math.abs(line.first.x - line.second.x);
+      var length = Math.sqrt(width * width + height * height);
+
+      if (shortenBy * 2 >= length) {
+        return line;
+      }
+
+      var sin = height / length;
+      var cos = width / length;
+      var newLine = {
+        first: {
+          x: 0,
+          y: 0
+        },
+        second: {
+          x: 0,
+          y: 0
+        }
+      }; // move in the direction of the opposite second - hence the Copysign
+
+      newLine.first.x = line.first.x + shortenBy * Math.abs(cos) * Math.sign(line.second.x - line.first.x);
+      newLine.first.y = line.first.y + shortenBy * Math.abs(sin) * Math.sign(line.second.x - line.first.x);
+      newLine.second.x = line.second.x - shortenBy * Math.abs(cos) * Math.sign(line.second.x - line.first.x);
+      newLine.second.y = line.second.y - shortenBy * Math.abs(sin) * Math.sign(line.second.x - line.first.x);
+      return newLine;
     }
     /**
      * Check collision of cursor and line
@@ -9745,7 +9909,8 @@ var HEXAGON = {
   minSize: 40,
   width: 10,
   speed: 0.2,
-  rotatingSpeed: Math.PI / 5000
+  rotatingSpeed: Math.PI / 5000,
+  lineWidth: 5
 };
 var MASKS = {
   top: 1,
