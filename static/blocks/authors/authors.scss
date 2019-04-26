@@ -29,7 +29,12 @@
   }
 
   &__item {
-    width: 400px;
+    @media screen and (max-width: 900px) and (orientation: portrait) {
+      width: 240px;
+    }
+    @media screen and (max-width: 900px) and (orientation: landscape) {
+      width: 400px;
+    }
     margin: 0 40px 40px;
     display: flex;
     flex-direction: column;
