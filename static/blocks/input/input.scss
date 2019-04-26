@@ -62,6 +62,7 @@ $input-border-radius: 3px;
 
     height: $input-height;
     min-width: 0;
+    max-width: 150px;
     flex-grow: 1;
     margin: 0; // kinda !important but i feel bad putting it there
     padding: $input-padding-top $input-padding-sides / 2 $input-padding-bottom $input-padding-sides / 2;
