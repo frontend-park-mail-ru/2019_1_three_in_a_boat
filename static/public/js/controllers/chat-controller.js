@@ -96,6 +96,7 @@ export default class ChatController extends Controller {
       } else {
         data.forEach((msg) => {
           data.sort((a, b) => a.mid - b.mid);
+          this.minId = data[0].mid;
           this.view.addMessage(0, 'Анон', msg.text);
         });
       }
@@ -133,7 +134,7 @@ export default class ChatController extends Controller {
               ajax.doGet({path: settings.url + '/users/chat?' + args}).then((result) => {
                 result.json().then((msgsData) => {
                   msgsData = msgsData.data.users;
-                  data.sort((a, b) => a.mid - b.mid);
+                  data.sort((a, b) => -a.mid + b.mid);
                   this.minId = data[0].mid;
                   data.forEach((msg) => {
                     const username = 'uid' in msg ? msgsData.find((item) => {
@@ -144,8 +145,9 @@ export default class ChatController extends Controller {
                 });
               });
             } else {
+              this.minId = data[0].mid;
               data.forEach((msg) => {
-                data.sort((a, b) => a.mid - b.mid);
+                data.sort((a, b) => -a.mid + b.mid);
                 this.view.addMessageToEnd(0, 'Анон', msg.text);
               });
             }

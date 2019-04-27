@@ -6890,6 +6890,7 @@ function (_Controller) {
             data.sort(function (a, b) {
               return a.mid - b.mid;
             });
+            _this3.minId = data[0].mid;
 
             _this3.view.addMessage(0, 'Анон', msg.text);
           });
@@ -6943,7 +6944,7 @@ function (_Controller) {
                   result.json().then(function (msgsData) {
                     msgsData = msgsData.data.users;
                     data.sort(function (a, b) {
-                      return a.mid - b.mid;
+                      return -a.mid + b.mid;
                     });
                     _this4.minId = data[0].mid;
                     data.forEach(function (msg) {
@@ -6956,9 +6957,10 @@ function (_Controller) {
                   });
                 });
               } else {
+                _this4.minId = data[0].mid;
                 data.forEach(function (msg) {
                   data.sort(function (a, b) {
-                    return a.mid - b.mid;
+                    return -a.mid + b.mid;
                   });
 
                   _this4.view.addMessageToEnd(0, 'Анон', msg.text);
