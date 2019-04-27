@@ -4,6 +4,7 @@ import {settings} from '../settings/config.js';
 import Controller from '../core/controller.js';
 import ChatView from '../views/chat-view.js';
 import WebSocketController from '../controllers/notification-controller.js';
+import makeNotify from '../views/components/notifier.js';
 
 /**
  * @class ChatController
@@ -61,6 +62,7 @@ export default class ChatController extends Controller {
     } else {
       // TODO get username
       this.view.addMessage(data.uid, 'UserName', data.text);
+      makeNotify(`User ${data.uid} send message:\n ${data.text.substring(0, 120)}`);
     }
   }
 
