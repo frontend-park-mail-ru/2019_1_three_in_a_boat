@@ -17,10 +17,12 @@ export default class NotificationController {
    * @param {string} path
    * @param {function} onMsg
    * @param {function} onClose
+   * @param {string} url websocket url
    */
-  constructor(path, onMsg, onClose= () => {}) {
+  constructor(path, onMsg, onClose= () => {}, url=SERVER_ADDRESS) {
     const Socket = 'MozWebSocket' in window ? MozWebSocket : WebSocket;
-    this.ws = new Socket(SERVER_ADDRESS + path);
+    console.log(url);
+    this.ws = new Socket(url + path);
 
     this.ws.onerror = (event) => {
       console.log('WebSocket ERROR: ' + JSON.stringify(event, null, 4));
