@@ -117,11 +117,12 @@ var ___CSS_LOADER_URL___16___ = urlEscape(__webpack_require__(/*! ../icons/user_
 var ___CSS_LOADER_URL___17___ = urlEscape(__webpack_require__(/*! ../icons/delete.svg */ "./static/public/icons/delete.svg"));
 var ___CSS_LOADER_URL___18___ = urlEscape(__webpack_require__(/*! ../icons/crown.svg */ "./static/public/icons/crown.svg"));
 var ___CSS_LOADER_URL___19___ = urlEscape(__webpack_require__(/*! ../icons/arrow_previous.svg */ "./static/public/icons/arrow_previous.svg"));
-var ___CSS_LOADER_URL___20___ = urlEscape(__webpack_require__(/*! ../icons/ru.png */ "./static/public/icons/ru.png"));
-var ___CSS_LOADER_URL___21___ = urlEscape(__webpack_require__(/*! ../icons/done.svg */ "./static/public/icons/done.svg"));
+var ___CSS_LOADER_URL___20___ = urlEscape(__webpack_require__(/*! ../icons/mail.svg */ "./static/public/icons/mail.svg"));
+var ___CSS_LOADER_URL___21___ = urlEscape(__webpack_require__(/*! ../icons/ru.png */ "./static/public/icons/ru.png"));
+var ___CSS_LOADER_URL___22___ = urlEscape(__webpack_require__(/*! ../icons/done.svg */ "./static/public/icons/done.svg"));
 
 // Module
-exports.push([module.i, "@font-face {\n  font-family: Anurati;\n  src: url(" + ___CSS_LOADER_URL___0___ + ") format(\"ttf\"), url(" + ___CSS_LOADER_URL___1___ + ") format(\"otf\");\n  font-style: normal;\n  font-stretch: normal; }\nhtml, body, #application, #main {\n  margin: 0;\n  height: 100%;\n  width: 100%;\n  font-family: Helvetica, Arial, sans-serif; }\n\nbody {\n  background: #424242 url(" + ___CSS_LOADER_URL___2___ + ");\n  background-size: 100%;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none; }\n\n#application, #main {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\na {\n  color: #005BD1;\n  text-decoration: none;\n  cursor: pointer; }\n  a:hover {\n    text-decoration: underline; }\n  a:focus {\n    outline: none; }\n\nlabel {\n  cursor: pointer; }\n\n.title, .profile-popup__title {\n  display: block;\n  text-align: center;\n  font-size: 24px;\n  font-weight: bold; }\n  .title_size_large {\n    font-size: 28px; }\n\n.hr {\n  display: block;\n  height: 0;\n  padding: 0;\n  border: 0;\n  border-top: 1px solid #E0E0E0; }\n  .hr_inline {\n    margin: 0; }\n\n.login-popup, .profile-popup, .signup-popup, .update-profile-popup {\n  position: relative;\n  z-index: 100;\n  width: 50%;\n  background-color: white;\n  border-radius: 5px; }\n  @media screen and (orientation: landscape) {\n    .login-popup, .profile-popup, .signup-popup, .update-profile-popup {\n      min-width: fit-content;\n      min-width: -moz-max-content; } }\n  .login-popup__close-popup, .update-profile-popup__close-popup {\n    position: absolute;\n    top: 11px;\n    right: 8px; }\n  .login-popup__content, .profile-popup__content, .signup-popup__content, .game-over__content {\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 18px 15px 15px 15px;\n    border: 1px #E0E0E0 solid;\n    border-top: 0;\n    border-bottom-left-radius: 3px;\n    border-bottom-right-radius: 3px; }\n  .login-popup__title, .profile-popup__title, .signup-popup__title {\n    padding: 10px;\n    border-top-right-radius: 3px;\n    border-top-left-radius: 3px;\n    background-color: #fb6a06;\n    color: white; }\n\n.icon, .checkbox:checked::before, .select::after, .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n  display: inline-block;\n  -webkit-mask-size: contain;\n  mask-size: contain;\n  -webkit-mask-repeat: no-repeat;\n  mask-repeat: no-repeat;\n  height: 14px;\n  width: 14px; }\n  .icon_size_small, .checkbox_size_small::before, .sm-icons-list__icon {\n    height: 12px;\n    width: 12px; }\n  .icon_size_large, .checkbox_size_large::before {\n    height: 20px;\n    width: 20px; }\n  .icon_size_xlarge {\n    height: 24px;\n    width: 24px; }\n  .icon_size_xxlarge {\n    height: 32px;\n    width: 32px; }\n  .icon_size_xxxlarge {\n    height: 40px;\n    width: 40px; }\n  .icon_size_fit {\n    height: 60%;\n    width: 60%; }\n  .icon_size_header-fit {\n    height: 2.5em;\n    width: 2.5em; }\n  .icon_color_green {\n    background-color: #2e7d32; }\n  .icon_color_orange {\n    background-color: #FD9E0B; }\n  .icon_color_white, .checkbox:checked::before, .sm-icons-list__icon {\n    background-color: white; }\n  .icon_color_black, .select::after {\n    background-color: black; }\n  .icon_color_muted {\n    background-color: #A9A9A9; }\n  .icon_color_muted-light {\n    background-color: #F7F7F7; }\n  .icon_type_cross {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___3___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___3___ + "); }\n  .icon_type_eye {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___4___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___4___ + "); }\n  .icon_type_vk {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___5___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___5___ + "); }\n  .icon_type_fb {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___6___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___6___ + "); }\n  .icon_type_ok {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___7___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___7___ + "); }\n  .icon_type_hexagon {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___8___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___8___ + "); }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .icon_type_hexagon {\n        height: 1.5em;\n        width: 1.5em; } }\n  .icon_type_users {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___9___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___9___ + "); }\n  .icon_type_user {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___10___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___10___ + "); }\n  .icon_type_key {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___11___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___11___ + "); }\n  .icon_type_gamepad {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___12___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___12___ + "); }\n  .icon_type_signin {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___13___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___13___ + "); }\n  .icon_type_signout {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___14___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___14___ + "); }\n  .icon_type_dropdown, .select::after {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___15___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___15___ + "); }\n  .icon_type_useredit {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___16___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___16___ + "); }\n  .icon_type_delete {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___17___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___17___ + "); }\n  .icon_type_crown, .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___18___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___18___ + "); }\n  .icon_type_back {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___19___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___19___ + "); }\n  .icon_type_ru {\n    background-image: url(" + ___CSS_LOADER_URL___20___ + ");\n    background-repeat: no-repeat;\n    background-size: 100%;\n    background-position: 0 25%; }\n  .icon_btn {\n    cursor: pointer; }\n\n.icon-bg {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  width: 20px;\n  border-radius: 4px;\n  border: 1px solid #E0E0E0; }\n  .icon-bg_shape_round {\n    border-radius: 100%; }\n  .icon-bg_color_green {\n    background-color: #2e7d32; }\n  .icon-bg_color_white {\n    background-color: white; }\n  .icon-bg_color_black {\n    background-color: black; }\n  .icon-bg_color_muted {\n    background-color: #A9A9A9; }\n  .icon-bg_color_dark-gray {\n    background-color: #393939; }\n  .icon-bg_color_muted-light {\n    background-color: #F7F7F7; }\n  .icon-bg_color_vk {\n    background-color: #4A76A8; }\n  .icon-bg_color_fb {\n    background-color: #3B5998; }\n  .icon-bg_color_ok {\n    background-color: #EE8208; }\n  .icon-bg_size_large {\n    height: 24px;\n    width: 24px; }\n  .icon-bg_size_xlarge {\n    height: 28px;\n    width: 28px; }\n  .icon-bg_size_xxlarge {\n    height: 36px;\n    width: 36px; }\n  .icon-bg_size_xxxlarge {\n    height: 50px;\n    width: 50px; }\n  .icon-bg_size_tall, .sm-icons-list__icon-bg {\n    height: 30px;\n    width: 24px; }\n  .icon-bg_size_full {\n    height: 100%;\n    width: 100%; }\n  .icon-bg_btn, .sm-icons-list__icon-bg {\n    cursor: pointer;\n    transition: box-shadow 0.2s ease 0s; }\n    .icon-bg_btn:hover, .sm-icons-list__icon-bg:hover {\n      -webkit-box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue;\n      -moz-box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue;\n      box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue; }\n  .icon-bg_borderless {\n    border: none; }\n\n.btn, .file-input__label, .result-redirect__btn {\n  height: 32px;\n  padding: 0 15px;\n  font-size: 16px;\n  line-height: 16px;\n  border: 1px solid #a74604;\n  border-radius: 3px;\n  -webkit-box-shadow: 0 2px #F5F5F5;\n  -moz-box-shadow: 0 2px #F5F5F5;\n  box-shadow: 0 2px #F5F5F5;\n  transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n  background-color: #fb6a06;\n  color: white;\n  cursor: pointer;\n  font-weight: bold; }\n  .btn .btn__icon, .file-input__label .btn__icon, .result-redirect__btn .btn__icon {\n    transition: background-color 0.5s ease 0s;\n    background-color: white; }\n  .btn:hover:not(.btn_disabled), .file-input__label:hover:not(.btn_disabled), .result-redirect__btn:hover:not(.btn_disabled) {\n    transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n    background-color: #a74604;\n    color: white; }\n    .btn:hover:not(.btn_disabled) .btn__icon, .file-input__label:hover:not(.btn_disabled) .btn__icon, .result-redirect__btn:hover:not(.btn_disabled) .btn__icon {\n      transition: background-color 0.5s ease 0s;\n      background-color: white; }\n  .btn:active:not(.btn_disabled), .file-input__label:active:not(.btn_disabled), .result-redirect__btn:active:not(.btn_disabled) {\n    transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n    background-color: #7f3503;\n    color: white; }\n    .btn:active:not(.btn_disabled) .btn__icon, .file-input__label:active:not(.btn_disabled) .btn__icon, .result-redirect__btn:active:not(.btn_disabled) .btn__icon {\n      transition: background-color 0.2s ease 0s;\n      background-color: white; }\n  .btn::-moz-focus-inner, .file-input__label::-moz-focus-inner, .result-redirect__btn::-moz-focus-inner {\n    border: 0; }\n  .btn:focus, .file-input__label:focus, .result-redirect__btn:focus {\n    outline: none; }\n  .btn_size_large {\n    height: 40px; }\n    .btn_size_large .btn__text {\n      line-height: 20px; }\n  .btn_color_muted {\n    border-color: #E0E0E0;\n    transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n    background-color: #F7F7F7;\n    color: #A9A9A9; }\n    .btn_color_muted .btn__icon {\n      transition: background-color 0.5s ease 0s;\n      background-color: #A9A9A9; }\n    .btn_color_muted:hover:not(.btn_disabled) {\n      transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n      background-color: #c4c4c4;\n      color: #767676; }\n      .btn_color_muted:hover:not(.btn_disabled) .btn__icon {\n        transition: background-color 0.5s ease 0s;\n        background-color: #767676; }\n    .btn_color_muted:active:not(.btn_disabled) {\n      transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n      background-color: #b0b0b0;\n      color: #434343; }\n      .btn_color_muted:active:not(.btn_disabled) .btn__icon {\n        transition: background-color 0.2s ease 0s;\n        background-color: #434343; }\n  .btn_disabled {\n    opacity: 0.6;\n    cursor: not-allowed; }\n  .btn__inner {\n    display: flex;\n    flex-direction: row;\n    align-content: center;\n    justify-content: center; }\n  .btn__text {\n    margin: auto 0;\n    font-size: 16px;\n    line-height: 16px;\n    padding-top: 1px; }\n@-moz-document url-prefix() {\n  .btn__text {\n    padding-top: 0; } }\n    .btn__text_normal {\n      color: black;\n      font-weight: normal; }\n  .btn__icon {\n    margin: auto 8px auto 0; }\n\n.checkbox {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  position: relative;\n  top: -3px;\n  vertical-align: bottom;\n  z-index: 200;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  height: 14px;\n  width: 14px;\n  margin: 0;\n  border-radius: 3px;\n  cursor: pointer;\n  background-color: #fb6a06; }\n  .checkbox:checked::before {\n    content: \"\";\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___21___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___21___ + "); }\n  .checkbox:focus {\n    outline: none; }\n  .checkbox_size_small {\n    width: 12px;\n    height: 12px; }\n    .checkbox_size_small::before {\n      margin-bottom: 0; }\n  .checkbox_size_large {\n    width: 16px;\n    height: 16px; }\n\n.form-group {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  padding: 3px 0; }\n  .form-group:last-of-type {\n    padding-bottom: 0; }\n  .form-group_align_space-between {\n    flex-direction: row;\n    justify-content: space-between; }\n  .form-group_align_center {\n    flex-direction: row;\n    justify-content: center; }\n  .form-group_align_stretch {\n    flex-direction: row;\n    justify-content: stretch; }\n    .form-group_align_stretch .form-group__field {\n      flex-grow: 1; }\n  .form-group_size_inline {\n    padding: 0; }\n  .form-group_size_large {\n    padding-bottom: 10px; }\n  .form-group__help-text {\n    font-size: 12px;\n    margin-top: 4px; }\n    .form-group__help-text_type_error {\n      color: #FF1100; }\n    .form-group__help-text_hidden {\n      display: none;\n      margin-top: 0; }\n  .form-group__title {\n    display: block;\n    font-size: 14px;\n    font-weight: bold;\n    text-align: center; }\n    .form-group__title_align_left {\n      text-align: left; }\n\n.file-input {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  height: 28px;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px; }\n  .file-input__label {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    flex-grow: 0;\n    height: 30px;\n    width: 100%;\n    margin: -1px;\n    border: none;\n    border-top-left-radius: inherit;\n    border-bottom-left-radius: inherit;\n    box-shadow: none; }\n  .file-input__field {\n    width: 0.1px;\n    height: 0.1px;\n    opacity: 0;\n    overflow: hidden;\n    position: absolute;\n    z-index: -1; }\n  .file-input__info {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    min-width: 130px;\n    overflow: hidden;\n    flex-grow: 1;\n    white-space: nowrap;\n    padding: 0 15px;\n    font-size: 12px; }\n\n.input {\n  position: relative;\n  z-index: 200;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  min-width: fit-content;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px;\n  transition: box-shadow 0.2s ease 0s;\n  border-width: 1px; }\n  .input:focus-within {\n    z-index: 300;\n    border-color: lightblue;\n    -webkit-box-shadow: 0 0 50px -12px lightblue;\n    -moz-box-shadow: 0 0 50px -12px lightblue;\n    box-shadow: 0 0 50px -12px lightblue; }\n  .input_status_error {\n    border-color: #FF1100; }\n  .input__icon {\n    margin-left: 5px;\n    margin-right: 5px; }\n    .input__icon:last-child {\n      margin-left: 0;\n      margin-right: 10px; }\n    .input__icon:first-child {\n      margin-left: 10px;\n      margin-right: 0; }\n  .input__field {\n    display: inline-block;\n    height: 18px;\n    min-width: 0;\n    max-width: 150px;\n    flex-grow: 1;\n    margin: 0;\n    padding: 6px 5px 4px 5px;\n    line-height: 12px;\n    border-radius: 3px;\n    border-width: 0;\n    background-color: white;\n    color: black;\n    font-size: 12px;\n    outline: none; }\n@-moz-document url-prefix() {\n  .input__field {\n    height: 15px;\n    padding-bottom: 7px; } }\n    .input__field:first-child {\n      padding-left: 10px; }\n    .input__field:last-child {\n      padding-right: 10px; }\n  .input__field-appendix {\n    display: inline-block;\n    margin: 0;\n    height: 18px;\n    padding: 8px 2px 3px 2px;\n    border-radius: 3px;\n    font-size: 12px;\n    pointer-events: none; }\n@-moz-document url-prefix() {\n  .input__field-appendix {\n    line-height: 12px; } }\n  .input__inner {\n    display: flex;\n    flex-direction: row; }\n  .input__tooltip {\n    position: absolute;\n    left: calc(100% + 8px);\n    z-index: 400;\n    display: table;\n    min-width: 180px;\n    padding: 10px;\n    border-radius: 3px;\n    background-color: white;\n    -webkit-box-shadow: 0 0 50px -5px #676767;\n    -moz-box-shadow: 0 0 50px -5px #676767;\n    box-shadow: 0 0 50px -5px #676767;\n    pointer-events: none; }\n    .input__tooltip::before {\n      position: absolute;\n      top: calc(50% - 4px);\n      left: -6px;\n      content: \"\";\n      border-style: solid;\n      border-width: 4px 6px 4px 0;\n      border-color: transparent white transparent transparent; }\n  .input__tooltip-title {\n    display: table-row;\n    max-width: 30px;\n    font-size: 12px;\n    color: black; }\n  .input__tooltip-help {\n    display: table-row;\n    font-size: 9px;\n    color: #A9A9A9; }\n\n.select {\n  transition: box-shadow 0.2s ease 0s;\n  position: relative;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  height: 28px;\n  min-width: fit-content;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px; }\n  .select:focus-within {\n    z-index: 300;\n    border-color: lightblue;\n    -webkit-box-shadow: 0 0 50px -12px lightblue;\n    -moz-box-shadow: 0 0 50px -12px lightblue;\n    box-shadow: 0 0 50px -12px lightblue; }\n  .select :-moz-focusring {\n    color: transparent;\n    text-shadow: 0 0 0 #000; }\n  .select::after {\n    position: absolute;\n    top: 8px;\n    right: 3px;\n    z-index: 201;\n    pointer-events: none;\n    content: \"\"; }\n  .select_stretched {\n    width: 100%; }\n  .select_status_error {\n    border-color: #FF1100; }\n    .select_status_error:focus-within {\n      border-color: #FF1100; }\n  .select__field {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    display: inline-block;\n    flex-grow: 1;\n    height: 28px;\n    line-height: 28px;\n    padding: 1px 22px 0 10px;\n    font-size: 12px;\n    background-color: white;\n    color: black;\n    border-radius: 3px;\n    border-width: 0; }\n@-moz-document url-prefix() {\n  .select__field {\n    padding-top: 0; } }\n    .select__field:focus {\n      outline: none;\n      border: none; }\n  .select__chosen-icon {\n    margin-left: 10px; }\n\n.field-group {\n  transition: box-shadow 0.2s ease 0s;\n  display: flex;\n  flex-direction: row;\n  align-content: stretch;\n  justify-content: stretch;\n  height: 30px; }\n  .field-group:focus-within {\n    box-shadow: 0 0 50px -12px lightblue; }\n    .field-group:focus-within .field-group__field:not([class*=\"status_error\"]) {\n      border-color: lightblue; }\n  .field-group__field {\n    flex-grow: 1;\n    height: 28px;\n    margin: 0;\n    border-radius: 0;\n    border-right-width: 0;\n    border-left-width: 1px; }\n    .field-group__field:focus-within {\n      box-shadow: none; }\n    .field-group__field:first-child {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px; }\n    .field-group__field:last-child {\n      border-right-width: 1px;\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px; }\n    .field-group__field_stretched_1 {\n      flex-grow: 1; }\n    .field-group__field_stretched_2 {\n      flex-grow: 2; }\n    .field-group__field_stretched_3 {\n      flex-grow: 3; }\n    .field-group__field_stretched_4 {\n      flex-grow: 4; }\n    .field-group__field_stretched_5 {\n      flex-grow: 5; }\n    .field-group__field_stretched_6 {\n      flex-grow: 6; }\n    .field-group__field_stretched_7 {\n      flex-grow: 7; }\n    .field-group__field_stretched_8 {\n      flex-grow: 8; }\n    .field-group__field_stretched_9 {\n      flex-grow: 9; }\n    .field-group__field_stretched_10 {\n      flex-grow: 10; }\n    .field-group__field_stretched_11 {\n      flex-grow: 11; }\n    .field-group__field_stretched_12 {\n      flex-grow: 12; }\n\n.sm-icons-list {\n  display: flex;\n  flex-direction: row;\n  justify-content: center; }\n  .sm-icons-list__icon-bg {\n    -webkit-box-shadow: 0 2px 0 0 #F5F5F5;\n    -moz-box-shadow: 0 2px 0 0 #F5F5F5;\n    box-shadow: 0 2px 0 0 #F5F5F5;\n    margin: 0 2px; }\n\n.pagination {\n  margin: 20px auto;\n  text-align: center; }\n  @media screen and (orientation: landscape) {\n    .pagination {\n      width: 50%; } }\n  @media screen and (orientation: portrait) {\n    .pagination {\n      width: 85%; } }\n  .pagination__link {\n    padding: 3px 10px;\n    height: 30px;\n    border: #a74604 solid 1px;\n    border-right: none;\n    background-color: white;\n    color: #1b0c29;\n    cursor: pointer;\n    font-weight: bold; }\n    .pagination__link:focus {\n      outline: none; }\n    .pagination__link:not(.pagination__link_current) {\n      background-color: #fb6a06;\n      color: white;\n      transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n      background-color: #fb6a06;\n      color: white; }\n      .pagination__link:not(.pagination__link_current) .pagination__icon {\n        transition: background-color 0.5s ease 0s;\n        background-color: white; }\n      .pagination__link:not(.pagination__link_current):hover:not(.pagination_disabled) {\n        transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n        background-color: #994002;\n        color: white; }\n        .pagination__link:not(.pagination__link_current):hover:not(.pagination_disabled) .pagination__icon {\n          transition: background-color 0.5s ease 0s;\n          background-color: white; }\n      .pagination__link:not(.pagination__link_current):active:not(.pagination_disabled) {\n        transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n        background-color: #702f02;\n        color: white; }\n        .pagination__link:not(.pagination__link_current):active:not(.pagination_disabled) .pagination__icon {\n          transition: background-color 0.2s ease 0s;\n          background-color: white; }\n    .pagination__link:hover:not(.pagination__link_current) {\n      color: #6614b0;\n      cursor: pointer; }\n    .pagination__link_first {\n      border-bottom-left-radius: 3px;\n      border-top-left-radius: 3px; }\n    .pagination__link_last {\n      border-bottom-right-radius: 3px;\n      border-top-right-radius: 3px;\n      border-right: #a74604 solid 1px; }\n    .pagination__link_current {\n      background-color: white;\n      color: #fb6a06;\n      cursor: auto; }\n\n.authors {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  margin-top: 4%;\n  margin-bottom: 4%;\n  padding: 5%;\n  border-radius: 8px;\n  background-color: rgba(255, 255, 255, 0.5); }\n  .authors__description {\n    text-align: center;\n    font-size: 20px; }\n  .authors__header {\n    font-size: 40px;\n    font-weight: bold; }\n  .authors__img {\n    height: 300px;\n    width: 300px;\n    border: 1px solid #E0E0E0;\n    border-radius: 100%; }\n  .authors__item {\n    margin: 0 40px 40px;\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n    @media screen and (max-width: 900px) and (orientation: portrait) {\n      .authors__item {\n        width: 240px; } }\n    @media screen and (max-width: 900px) and (orientation: landscape) {\n      .authors__item {\n        width: 400px; } }\n  .authors__items {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: center;\n    align-items: center;\n    margin-top: 80px; }\n  .authors__title {\n    text-align: center;\n    font-size: 30px;\n    margin: 10px 0 0; }\n  .authors__subtitle {\n    text-align: center;\n    font-size: 16px;\n    margin: 0 0 10px;\n    color: #FFFFFF; }\n  .authors__close-popup {\n    position: absolute;\n    top: 10px;\n    right: 10px; }\n\n.header {\n  display: flex;\n  align-self: stretch;\n  justify-self: flex-start;\n  align-items: center;\n  height: 4em;\n  min-height: 4em;\n  padding-left: 5%;\n  background-color: #fb6a06; }\n  @media screen and (orientation: landscape) and (max-width: 700px) {\n    .header {\n      height: 2em;\n      min-height: 2em; } }\n  .header_main {\n    margin: 0 8px 24px; }\n  .header__title {\n    margin: 0 0 0 4px;\n    padding: 0;\n    font-size: 3em;\n    font-weight: bolder;\n    color: white; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .header__title {\n        font-size: 1.5em; } }\n    .header__title:hover {\n      text-decoration: none; }\n  .header__link {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: center; }\n    .header__link:hover {\n      text-decoration: none; }\n\n.login-form__remember-me-label, .login-form__forgot-password-link {\n  font-size: 12px; }\n.login-form__remember-me-label {\n  margin-left: 4px; }\n.login-form__double-btn {\n  margin-top: 10px; }\n.login-form__sumbit-btn {\n  margin-right: 4px;\n  flex-grow: 1; }\n.login-form__cancel-btn {\n  flex-grow: 0; }\n\n.login-popup {\n  padding: 0;\n  margin: auto 0;\n  max-width: 300px; }\n  @media screen and (orientation: portrait) {\n    .login-popup {\n      margin-top: 30%;\n      width: 70%; } }\n  .login-popup__hr {\n    margin: 16px -16px; }\n  .login-popup__continue-with-text {\n    margin: 8px 0;\n    font-size: 9px;\n    text-align: center;\n    font-weight: bold;\n    color: #A9A9A9; }\n  .login-popup__signup-link {\n    font-size: 12px;\n    text-align: center;\n    font-weight: bold; }\n\n.menu {\n  width: 60%;\n  height: 90%;\n  min-width: fit-content;\n  max-width: 600px;\n  border: 0;\n  border-radius: 3px; }\n  @media screen and (orientation: landscape) {\n    .menu {\n      margin: 4% auto 0 auto;\n      width: 60%; } }\n  @media screen and (orientation: portrait) {\n    .menu {\n      margin: 8% auto 0 auto;\n      width: 80%; } }\n  @media screen and (orientation: portrait) and (max-width: 500px) {\n    .menu {\n      margin: 8% auto 0 auto;\n      width: 90%; } }\n  .menu__link {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n    height: 100%; }\n    .menu__link:hover {\n      text-decoration: none; }\n  .menu__item {\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin-bottom: 4%;\n    height: 4.5rem;\n    background-color: #fb6a06;\n    color: white;\n    border-radius: 5px;\n    box-shadow: 0 0 20px rgba(0, 0, 0, 0.71); }\n    @media screen and (orientation: portrait) {\n      .menu__item {\n        height: 4rem; } }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .menu__item {\n        height: 2.5rem; } }\n  .menu__dropdown-btn {\n    position: absolute;\n    top: 20px;\n    right: 10px; }\n  .menu__text {\n    width: 85%;\n    text-align: center;\n    font-size: 2rem;\n    font-weight: bold;\n    color: white; }\n  .menu__icon-bg {\n    width: 15%;\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0; }\n    @media screen and (orientation: portrait) {\n      .menu__icon-bg {\n        width: 24%; } }\n\n.profile-info {\n  display: table;\n  border-collapse: collapse;\n  border-spacing: 10px;\n  padding: 20px; }\n  .profile-info__item {\n    display: table-row;\n    height: 40px;\n    white-space: nowrap;\n    border-bottom: 1px solid #E0E0E0; }\n  .profile-info .profile-info__item-name, .profile-info .profile-info__item-value {\n    display: table-cell;\n    vertical-align: middle; }\n  .profile-info__item-name {\n    font-weight: bold; }\n  .profile-info__item-value {\n    padding-left: 8px; }\n\n.profile-popup {\n  align-items: center;\n  max-width: 400px; }\n  @media screen and (orientation: portrait) {\n    .profile-popup {\n      width: 97%; } }\n  .profile-popup_main {\n    margin-top: 4%; }\n  .profile-popup__profile-info {\n    max-width: fit-content;\n    margin: 20px auto 10px; }\n  .profile-popup__profile-icon {\n    display: flex;\n    justify-content: center;\n    width: 140px;\n    height: 140px;\n    margin: 0 auto;\n    overflow: hidden;\n    object-fit: cover;\n    border-radius: 100%; }\n  .profile-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    margin: 0 auto; }\n    @media screen and (orientation: landscape) {\n      .profile-popup__double-btn {\n        padding: 0 40px; } }\n    .profile-popup__double-btn_center {\n      flex-direction: row;\n      justify-content: center; }\n  .profile-popup__btn {\n    width: 140px;\n    margin: 0 4px; }\n    .profile-popup__btn:first-child {\n      margin-left: 0; }\n    .profile-popup__btn:last-child {\n      margin-right: 0; }\n\n.scoreboard {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  min-height: fit-content;\n  margin-top: 4%;\n  border-radius: 7px;\n  background-color: white; }\n  @media screen and (orientation: landscape) {\n    .scoreboard {\n      align-items: center;\n      padding: 2%; } }\n  @media screen and (orientation: portrait) {\n    .scoreboard {\n      width: 90%;\n      padding: 4%; } }\n  @media screen and (orientation: landscape) {\n    .scoreboard__items {\n      max-width: 600px;\n      min-width: 450px; } }\n  .scoreboard__item {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    height: 60px;\n    border-bottom: 1px solid #fb6a06; }\n    .scoreboard__item_place_first, .scoreboard__item_place_second, .scoreboard__item_place_third {\n      font-size: 20px;\n      font-weight: bold; }\n      .scoreboard__item_place_first .scoreboard__link, .scoreboard__item_place_second .scoreboard__link, .scoreboard__item_place_third .scoreboard__link {\n        position: relative; }\n        .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n          position: absolute;\n          top: -25px;\n          width: 40px;\n          height: 40px;\n          content: \"\"; }\n    .scoreboard__item_place_first .scoreboard__link::before {\n      background-color: #FFD700; }\n    .scoreboard__item_place_second .scoreboard__link::before {\n      background-color: #C0C0C0; }\n    .scoreboard__item_place_third .scoreboard__link::before {\n      background-color: #CD7F32; }\n  .scoreboard__user-data {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: flex-start; }\n  .scoreboard__link {\n    display: flex;\n    flex-direction: row;\n    align-items: center; }\n    .scoreboard__link:hover {\n      text-decoration: black; }\n  .scoreboard__avatar {\n    display: inline-block;\n    height: 40px;\n    width: 40px;\n    margin-right: 10px;\n    border-radius: 100%;\n    vertical-align: middle;\n    line-height: 40px; }\n  .scoreboard__place {\n    display: inline-block;\n    margin-right: 10px;\n    width: 20px; }\n  .scoreboard__data-field {\n    display: flex;\n    align-items: center; }\n  .scoreboard__username {\n    padding-left: 10px;\n    color: black; }\n\n.signup-popup {\n  -webkit-align-self: center;\n  align-self: center;\n  padding: 0;\n  max-width: 450px; }\n  @media screen and (orientation: portrait) {\n    .signup-popup {\n      width: 90%; } }\n  .signup-popup_main {\n    margin: 4% 0 0 0; }\n  .signup-popup__hr {\n    margin: 12px -16px 12px -16px; }\n  .signup-popup__explanation-text {\n    margin: 8px 0;\n    font-size: 12px;\n    color: #A9A9A9; }\n  .signup-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    align-content: flex-start; }\n  .signup-popup__signup-btn {\n    margin-right: 4px; }\n  .signup-popup__cancel-btn {\n    margin-left: 4px; }\n\n.signup-form__date-select:last-child {\n  margin-right: 0; }\n.signup-form__form-group {\n  margin: 8px 0; }\n\n.update-profile-popup {\n  max-width: 250px;\n  border: 1px #a74604 solid; }\n  .update-profile-popup__hr {\n    margin: 16px -15px 16px -15px; }\n  .update-profile-popup__title {\n    margin: 0 0 16px 0; }\n  .update-profile-popup__continue-with-text {\n    margin: 8px 0;\n    font-size: 9px;\n    text-align: center;\n    color: #A9A9A9;\n    font-weight: bold; }\n  .update-profile-popup__signup-link {\n    font-size: 12px;\n    text-align: center;\n    font-weight: bold; }\n  .update-profile-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    align-content: flex-start; }\n  .update-profile-popup__update-btn {\n    margin-right: 4px; }\n  .update-profile-popup__cancel-btn {\n    margin-left: 4px; }\n\n.not-found-page {\n  width: 55%;\n  margin: auto auto;\n  border-radius: 8px;\n  background-color: rgba(255, 255, 255, 0.28);\n  padding: 20px; }\n  .not-found-page__link {\n    font-size: 1.5rem;\n    font-weight: bold;\n    text-decoration: underline;\n    color: black; }\n  .not-found-page__text {\n    font-weight: bold; }\n    .not-found-page__text_main {\n      font-size: 4rem;\n      color: black; }\n    .not-found-page__text_additional {\n      margin-bottom: 4%;\n      font-size: 1.5rem;\n      color: #1c1c1c; }\n\n.game-over {\n  position: relative;\n  align-items: center;\n  margin: auto 0;\n  background-color: rgba(226, 216, 216, 0.6);\n  border-radius: 5px;\n  max-width: 56rem; }\n  @media screen and (orientation: landscape) {\n    .game-over {\n      width: 42rem; } }\n  @media screen and (orientation: portrait) {\n    .game-over {\n      width: 90%; } }\n  @media screen and (orientation: landscape) and (max-width: 700px) {\n    .game-over {\n      width: 60%;\n      font-size: 25px;\n      margin-top: 2%; } }\n  .game-over_multi {\n    width: 56rem; }\n    @media screen and (max-width: 900px) and (orientation: portrait) {\n      .game-over_multi {\n        margin-top: 2%;\n        width: 95%; } }\n    @media screen and (max-width: 900px) and (orientation: landscape) {\n      .game-over_multi {\n        margin-top: 2%;\n        width: 75%; } }\n  .game-over__column {\n    display: inline-block;\n    width: 33.33%;\n    vertical-align: top; }\n    @media screen and (max-width: 900px) {\n      .game-over__column {\n        width: 100%; } }\n    @media screen and (max-width: 900px) {\n      .game-over__column_user {\n        display: none; } }\n  .game-over__title {\n    display: block;\n    text-align: center;\n    font-size: 45px;\n    margin-top: 4%;\n    font-weight: bold; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-over__title {\n        font-size: 30px;\n        margin-top: 2%; } }\n  .game-over_main {\n    margin-top: 4%; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-over_main {\n        margin-top: 2%; } }\n  .game-over__profile-info {\n    max-width: fit-content;\n    margin: 20px auto 10px; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-over__profile-info {\n        margin: 10px auto 5px; } }\n  .game-over__profile-icon {\n    display: flex;\n    justify-content: center;\n    width: 140px;\n    height: 140px;\n    margin: 0 auto;\n    overflow: hidden;\n    object-fit: cover;\n    border-radius: 100%; }\n  .game-over__btn {\n    width: 140px;\n    margin: 0 4px; }\n    .game-over__btn:first-child {\n      margin-left: 0; }\n    .game-over__btn:last-child {\n      margin-right: 0; }\n\n.result-time {\n  margin-left: auto;\n  margin-right: auto;\n  width: 12rem;\n  border: 4px solid #0e100f;\n  border-radius: 10px;\n  margin-top: 1rem; }\n  @media screen and (max-width: 900px) and (orientation: landscape) {\n    .result-time {\n      margin-top: 0.5rem; } }\n  .result-time__title {\n    text-align: center;\n    font-size: 24px;\n    font-weight: lighter;\n    color: black; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-time__title {\n        font-size: 20px; } }\n  .result-time__seconds {\n    font-weight: bold;\n    text-align: center;\n    font-size: 50px; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-time__seconds {\n        font-size: 28px; } }\n\n.game-info {\n  align-items: center;\n  margin: auto 0; }\n  .game-info_single {\n    padding-top: 3rem; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-info_single {\n        padding-top: 10px; } }\n  .game-info__line {\n    margin-top: 2px;\n    margin-bottom: 2px; }\n  .game-info_main {\n    display: block;\n    padding-top: 9rem; }\n    @media screen and (max-width: 900px) {\n      .game-info_main {\n        padding-top: 0.5rem; } }\n    .game-info_main_title {\n      margin-bottom: 2rem; }\n      @media screen and (max-width: 900px) {\n        .game-info_main_title {\n          margin-bottom: 0.5rem; } }\n  .game-info__one-btn {\n    position: absolute;\n    bottom: 0;\n    top: 38%;\n    left: 50%;\n    transform: translate(-50%, 70%); }\n  .game-info__avatar {\n    border-radius: 8rem;\n    width: 185px;\n    margin-left: auto;\n    margin-right: auto;\n    display: block; }\n  .game-info__nickname {\n    text-align: center;\n    font-weight: bold;\n    font-family: sans-serif;\n    font-size: 45px; }\n  .game-info__item {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 1rem 1rem 0 1rem;\n    font-family: Helvetica, sans-serif;\n    font-weight: normal; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-info__item {\n        padding: 5px 1rem 0 1rem; } }\n    .game-info__item-name {\n      font-size: 25px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      padding-right: 10px; }\n      @media screen and (orientation: landscape) and (max-width: 700px) {\n        .game-info__item-name {\n          font-size: 20px; } }\n    .game-info__item-value {\n      font-size: 35px;\n      font-weight: bold;\n      padding-left: 10px; }\n      @media screen and (orientation: landscape) and (max-width: 700px) {\n        .game-info__item-value {\n          font-size: 25px; } }\n\n.result-redirect {\n  padding: 1rem;\n  font-family: Helvetica, sans-serif;\n  font-weight: normal;\n  position: relative;\n  bottom: 0;\n  margin-left: auto;\n  margin-right: auto; }\n  @media screen and (orientation: portrait) {\n    .result-redirect {\n      width: 33rem; } }\n  @media screen and (orientation: portrait) {\n    .result-redirect {\n      width: 90%; } }\n  @media screen and (orientation: landscape) and (max-width: 700px) {\n    .result-redirect {\n      padding-top: 0.5rem;\n      padding-bottom: 0.5rem;\n      width: 60%; } }\n  .result-redirect__item_center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 1rem;\n    font-family: Helvetica, sans-serif;\n    font-weight: normal; }\n  .result-redirect__btn {\n    display: block;\n    position: relative;\n    height: 55px;\n    width: -moz-available;\n    width: -webkit-fill-available;\n    left: 50%;\n    transform: translate(-50%, 0%);\n    border: 1px solid #a3653bde;\n    -webkit-box-shadow: 0 2px #977575a6;\n    -moz-box-shadow: 0 2px #977575a6;\n    box-shadow: 0 2px #977575a6; }\n    @media screen and (orientation: landscape) {\n      .result-redirect__btn {\n        width: 33rem;\n        margin-right: -50%;\n        top: 50%; } }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-redirect__btn {\n        width: 120%;\n        height: 35px;\n        margin-right: auto;\n        top: auto; } }\n  .result-redirect__center {\n    margin-left: auto;\n    margin-right: auto;\n    text-align: center;\n    width: 18rem;\n    padding-top: 1rem; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-redirect__center {\n        padding-top: 2px;\n        width: 100%; } }\n  .result-redirect__link {\n    text-align: center;\n    color: #282222cc;\n    font-weight: bold;\n    font-size: 25px;\n    text-decoration: underline; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-redirect__link {\n        font-size: 20px; } }\n  .result-redirect__one-btn {\n    position: absolute;\n    bottom: 0;\n    top: 38%;\n    left: 50%;\n    transform: translate(-50%, 70%); }\n  .result-redirect__text {\n    font-size: 25px; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-redirect__text {\n        font-size: 20px; } }\n\n.game-msg {\n  padding-top: 1rem;\n  font-size: 45px;\n  font-weight: bold; }\n  @media screen and (max-width: 800px) {\n    .game-msg {\n      font-size: 34px; } }\n  @media screen and (max-width: 900px) and (orientation: landscape) {\n    .game-msg {\n      font-size: 25px; } }\n  .game-msg_center {\n    text-align: center; }\n\n.offline-msg {\n  background: rgba(102, 102, 102, 0.5);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0; }\n  .offline-msg__window {\n    width: 300px;\n    height: 70px;\n    text-align: center;\n    padding: 15px;\n    border: 3px solid black;\n    border-radius: 10px;\n    color: #fb6a06;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    margin: auto;\n    background: #fff; }\n  .offline-msg__btn {\n    display: inline-block;\n    border: 1px solid #fb6a06;\n    color: #fb6a06;\n    padding: 0 12px;\n    margin: 10px;\n    border-radius: 5px;\n    text-decoration: none;\n    background: #f2f2f2;\n    font-size: 14pt;\n    cursor: pointer; }\n    .offline-msg__btn:hover {\n      background: #e6e6ff; }\n\n.hexagons {\n  width: 100%;\n  height: 100%;\n  align-items: center;\n  justify-content: center;\n  overflow: auto; }\n  .hexagons_main {\n    display: flex; }\n  .hexagons__game {\n    margin-top: 4%;\n    width: 95%;\n    border-radius: 15px; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .hexagons__game {\n        margin-top: 1%;\n        width: 58%; } }\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: Anurati;\n  src: url(" + ___CSS_LOADER_URL___0___ + ") format(\"ttf\"), url(" + ___CSS_LOADER_URL___1___ + ") format(\"otf\");\n  font-style: normal;\n  font-stretch: normal; }\nhtml, body, #application, #main {\n  margin: 0;\n  height: 100%;\n  width: 100%;\n  font-family: Helvetica, Arial, sans-serif; }\n\nbody {\n  background: #424242 url(" + ___CSS_LOADER_URL___2___ + ");\n  background-size: 100%;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none; }\n\n#application, #main {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\na {\n  color: #005BD1;\n  text-decoration: none;\n  cursor: pointer; }\n  a:hover {\n    text-decoration: underline; }\n  a:focus {\n    outline: none; }\n\nlabel {\n  cursor: pointer; }\n\n.title, .profile-popup__title {\n  display: block;\n  text-align: center;\n  font-size: 24px;\n  font-weight: bold; }\n  .title_size_large {\n    font-size: 28px; }\n\n.hr {\n  display: block;\n  height: 0;\n  padding: 0;\n  border: 0;\n  border-top: 1px solid #E0E0E0; }\n  .hr_inline {\n    margin: 0; }\n\n.login-popup, .profile-popup, .signup-popup, .update-profile-popup {\n  position: relative;\n  z-index: 100;\n  width: 50%;\n  background-color: white;\n  border-radius: 5px; }\n  @media screen and (orientation: landscape) {\n    .login-popup, .profile-popup, .signup-popup, .update-profile-popup {\n      min-width: fit-content;\n      min-width: -moz-max-content; } }\n  .login-popup__close-popup, .update-profile-popup__close-popup {\n    position: absolute;\n    top: 11px;\n    right: 8px; }\n  .login-popup__content, .profile-popup__content, .signup-popup__content, .game-over__content {\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 18px 15px 15px 15px;\n    border: 1px #E0E0E0 solid;\n    border-top: 0;\n    border-bottom-left-radius: 3px;\n    border-bottom-right-radius: 3px; }\n  .login-popup__title, .profile-popup__title, .signup-popup__title {\n    padding: 10px;\n    border-top-right-radius: 3px;\n    border-top-left-radius: 3px;\n    background-color: #fb6a06;\n    color: white; }\n\n.icon, .checkbox:checked::before, .select::after, .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n  display: inline-block;\n  -webkit-mask-size: contain;\n  mask-size: contain;\n  -webkit-mask-repeat: no-repeat;\n  mask-repeat: no-repeat;\n  height: 14px;\n  width: 14px; }\n  .icon_size_small, .checkbox_size_small::before, .sm-icons-list__icon {\n    height: 12px;\n    width: 12px; }\n  .icon_size_large, .checkbox_size_large::before {\n    height: 20px;\n    width: 20px; }\n  .icon_size_xlarge {\n    height: 24px;\n    width: 24px; }\n  .icon_size_xxlarge {\n    height: 32px;\n    width: 32px; }\n  .icon_size_xxxlarge {\n    height: 40px;\n    width: 40px; }\n  .icon_size_fit {\n    height: 60%;\n    width: 60%; }\n  .icon_size_header-fit {\n    height: 2.5em;\n    width: 2.5em; }\n  .icon_color_green {\n    background-color: #2e7d32; }\n  .icon_color_orange {\n    background-color: #FD9E0B; }\n  .icon_color_white, .checkbox:checked::before, .sm-icons-list__icon {\n    background-color: white; }\n  .icon_color_black, .select::after {\n    background-color: black; }\n  .icon_color_muted {\n    background-color: #A9A9A9; }\n  .icon_color_muted-light {\n    background-color: #F7F7F7; }\n  .icon_type_cross {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___3___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___3___ + "); }\n  .icon_type_eye {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___4___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___4___ + "); }\n  .icon_type_vk {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___5___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___5___ + "); }\n  .icon_type_fb {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___6___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___6___ + "); }\n  .icon_type_ok {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___7___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___7___ + "); }\n  .icon_type_hexagon {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___8___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___8___ + "); }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .icon_type_hexagon {\n        height: 1.5em;\n        width: 1.5em; } }\n  .icon_type_users {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___9___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___9___ + "); }\n  .icon_type_user {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___10___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___10___ + "); }\n  .icon_type_key {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___11___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___11___ + "); }\n  .icon_type_gamepad {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___12___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___12___ + "); }\n  .icon_type_signin {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___13___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___13___ + "); }\n  .icon_type_signout {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___14___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___14___ + "); }\n  .icon_type_dropdown, .select::after {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___15___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___15___ + "); }\n  .icon_type_useredit {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___16___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___16___ + "); }\n  .icon_type_delete {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___17___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___17___ + "); }\n  .icon_type_crown, .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___18___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___18___ + "); }\n  .icon_type_back {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___19___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___19___ + "); }\n  .icon_type_mail {\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___20___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___20___ + "); }\n  .icon_type_ru {\n    background-image: url(" + ___CSS_LOADER_URL___21___ + ");\n    background-repeat: no-repeat;\n    background-size: 100%;\n    background-position: 0 25%; }\n  .icon_btn {\n    cursor: pointer; }\n\n.icon-bg {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  width: 20px;\n  border-radius: 4px;\n  border: 1px solid #E0E0E0; }\n  .icon-bg_shape_round {\n    border-radius: 100%; }\n  .icon-bg_color_green {\n    background-color: #2e7d32; }\n  .icon-bg_color_white {\n    background-color: white; }\n  .icon-bg_color_black {\n    background-color: black; }\n  .icon-bg_color_muted {\n    background-color: #A9A9A9; }\n  .icon-bg_color_dark-gray {\n    background-color: #393939; }\n  .icon-bg_color_muted-light {\n    background-color: #F7F7F7; }\n  .icon-bg_color_vk {\n    background-color: #4A76A8; }\n  .icon-bg_color_fb {\n    background-color: #3B5998; }\n  .icon-bg_color_ok {\n    background-color: #EE8208; }\n  .icon-bg_size_large {\n    height: 24px;\n    width: 24px; }\n  .icon-bg_size_xlarge {\n    height: 28px;\n    width: 28px; }\n  .icon-bg_size_xxlarge {\n    height: 36px;\n    width: 36px; }\n  .icon-bg_size_xxxlarge {\n    height: 50px;\n    width: 50px; }\n  .icon-bg_size_tall, .sm-icons-list__icon-bg {\n    height: 30px;\n    width: 24px; }\n  .icon-bg_size_full {\n    height: 100%;\n    width: 100%; }\n  .icon-bg_btn, .sm-icons-list__icon-bg {\n    cursor: pointer;\n    transition: box-shadow 0.2s ease 0s; }\n    .icon-bg_btn:hover, .sm-icons-list__icon-bg:hover {\n      -webkit-box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue;\n      -moz-box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue;\n      box-shadow: 0 2px 0 0 #F5F5F5, 0 0 12px -1px lightblue; }\n  .icon-bg_borderless {\n    border: none; }\n\n.btn, .file-input__label, .result-redirect__btn {\n  height: 32px;\n  padding: 0 15px;\n  font-size: 16px;\n  line-height: 16px;\n  border: 1px solid #a74604;\n  border-radius: 3px;\n  -webkit-box-shadow: 0 2px #F5F5F5;\n  -moz-box-shadow: 0 2px #F5F5F5;\n  box-shadow: 0 2px #F5F5F5;\n  transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n  background-color: #fb6a06;\n  color: white;\n  cursor: pointer;\n  font-weight: bold; }\n  .btn .btn__icon, .file-input__label .btn__icon, .result-redirect__btn .btn__icon {\n    transition: background-color 0.5s ease 0s;\n    background-color: white; }\n  .btn:hover:not(.btn_disabled), .file-input__label:hover:not(.btn_disabled), .result-redirect__btn:hover:not(.btn_disabled) {\n    transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n    background-color: #a74604;\n    color: white; }\n    .btn:hover:not(.btn_disabled) .btn__icon, .file-input__label:hover:not(.btn_disabled) .btn__icon, .result-redirect__btn:hover:not(.btn_disabled) .btn__icon {\n      transition: background-color 0.5s ease 0s;\n      background-color: white; }\n  .btn:active:not(.btn_disabled), .file-input__label:active:not(.btn_disabled), .result-redirect__btn:active:not(.btn_disabled) {\n    transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n    background-color: #7f3503;\n    color: white; }\n    .btn:active:not(.btn_disabled) .btn__icon, .file-input__label:active:not(.btn_disabled) .btn__icon, .result-redirect__btn:active:not(.btn_disabled) .btn__icon {\n      transition: background-color 0.2s ease 0s;\n      background-color: white; }\n  .btn::-moz-focus-inner, .file-input__label::-moz-focus-inner, .result-redirect__btn::-moz-focus-inner {\n    border: 0; }\n  .btn:focus, .file-input__label:focus, .result-redirect__btn:focus {\n    outline: none; }\n  .btn_size_large {\n    height: 40px; }\n    .btn_size_large .btn__text {\n      line-height: 20px; }\n  .btn_color_muted {\n    border-color: #E0E0E0;\n    transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n    background-color: #F7F7F7;\n    color: #A9A9A9; }\n    .btn_color_muted .btn__icon {\n      transition: background-color 0.5s ease 0s;\n      background-color: #A9A9A9; }\n    .btn_color_muted:hover:not(.btn_disabled) {\n      transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n      background-color: #c4c4c4;\n      color: #767676; }\n      .btn_color_muted:hover:not(.btn_disabled) .btn__icon {\n        transition: background-color 0.5s ease 0s;\n        background-color: #767676; }\n    .btn_color_muted:active:not(.btn_disabled) {\n      transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n      background-color: #b0b0b0;\n      color: #434343; }\n      .btn_color_muted:active:not(.btn_disabled) .btn__icon {\n        transition: background-color 0.2s ease 0s;\n        background-color: #434343; }\n  .btn_disabled {\n    opacity: 0.6;\n    cursor: not-allowed; }\n  .btn__inner {\n    display: flex;\n    flex-direction: row;\n    align-content: center;\n    justify-content: center; }\n  .btn__text {\n    margin: auto 0;\n    font-size: 16px;\n    line-height: 16px;\n    padding-top: 1px; }\n@-moz-document url-prefix() {\n  .btn__text {\n    padding-top: 0; } }\n    .btn__text_normal {\n      color: black;\n      font-weight: normal; }\n  .btn__icon {\n    margin: auto 8px auto 0; }\n\n.checkbox {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  position: relative;\n  top: -3px;\n  vertical-align: bottom;\n  z-index: 200;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  height: 14px;\n  width: 14px;\n  margin: 0;\n  border-radius: 3px;\n  cursor: pointer;\n  background-color: #fb6a06; }\n  .checkbox:checked::before {\n    content: \"\";\n    -webkit-mask-image: url(" + ___CSS_LOADER_URL___22___ + ");\n    mask-image: url(" + ___CSS_LOADER_URL___22___ + "); }\n  .checkbox:focus {\n    outline: none; }\n  .checkbox_size_small {\n    width: 12px;\n    height: 12px; }\n    .checkbox_size_small::before {\n      margin-bottom: 0; }\n  .checkbox_size_large {\n    width: 16px;\n    height: 16px; }\n\n.form-group {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  padding: 3px 0; }\n  .form-group:last-of-type {\n    padding-bottom: 0; }\n  .form-group_align_space-between {\n    flex-direction: row;\n    justify-content: space-between; }\n  .form-group_align_center {\n    flex-direction: row;\n    justify-content: center; }\n  .form-group_align_stretch {\n    flex-direction: row;\n    justify-content: stretch; }\n    .form-group_align_stretch .form-group__field {\n      flex-grow: 1; }\n  .form-group_size_inline {\n    padding: 0; }\n  .form-group_size_large {\n    padding-bottom: 10px; }\n  .form-group__help-text {\n    font-size: 12px;\n    margin-top: 4px; }\n    .form-group__help-text_type_error {\n      color: #FF1100; }\n    .form-group__help-text_hidden {\n      display: none;\n      margin-top: 0; }\n  .form-group__title {\n    display: block;\n    font-size: 14px;\n    font-weight: bold;\n    text-align: center; }\n    .form-group__title_align_left {\n      text-align: left; }\n\n.file-input {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  height: 28px;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px; }\n  .file-input__label {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    flex-grow: 0;\n    height: 30px;\n    width: 100%;\n    margin: -1px;\n    border: none;\n    border-top-left-radius: inherit;\n    border-bottom-left-radius: inherit;\n    box-shadow: none; }\n  .file-input__field {\n    width: 0.1px;\n    height: 0.1px;\n    opacity: 0;\n    overflow: hidden;\n    position: absolute;\n    z-index: -1; }\n  .file-input__info {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    min-width: 130px;\n    overflow: hidden;\n    flex-grow: 1;\n    white-space: nowrap;\n    padding: 0 15px;\n    font-size: 12px; }\n\n.input {\n  position: relative;\n  z-index: 200;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  min-width: fit-content;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px;\n  transition: box-shadow 0.2s ease 0s;\n  border-width: 1px; }\n  .input:focus-within {\n    z-index: 300;\n    border-color: lightblue;\n    -webkit-box-shadow: 0 0 50px -12px lightblue;\n    -moz-box-shadow: 0 0 50px -12px lightblue;\n    box-shadow: 0 0 50px -12px lightblue; }\n  .input_status_error {\n    border-color: #FF1100; }\n  .input__icon {\n    margin-left: 5px;\n    margin-right: 5px; }\n    .input__icon:last-child {\n      margin-left: 0;\n      margin-right: 10px; }\n    .input__icon:first-child {\n      margin-left: 10px;\n      margin-right: 0; }\n  .input__field {\n    display: inline-block;\n    height: 18px;\n    min-width: 0;\n    max-width: 150px;\n    flex-grow: 1;\n    margin: 0;\n    padding: 6px 5px 4px 5px;\n    line-height: 12px;\n    border-radius: 3px;\n    border-width: 0;\n    background-color: white;\n    color: black;\n    font-size: 12px;\n    outline: none; }\n@-moz-document url-prefix() {\n  .input__field {\n    height: 15px;\n    padding-bottom: 7px; } }\n    .input__field:first-child {\n      padding-left: 10px; }\n    .input__field:last-child {\n      padding-right: 10px; }\n  .input__field-appendix {\n    display: inline-block;\n    margin: 0;\n    height: 18px;\n    padding: 8px 2px 3px 2px;\n    border-radius: 3px;\n    font-size: 12px;\n    pointer-events: none; }\n@-moz-document url-prefix() {\n  .input__field-appendix {\n    line-height: 12px; } }\n  .input__inner {\n    display: flex;\n    flex-direction: row; }\n  .input__tooltip {\n    position: absolute;\n    left: calc(100% + 8px);\n    z-index: 400;\n    display: table;\n    min-width: 180px;\n    padding: 10px;\n    border-radius: 3px;\n    background-color: white;\n    -webkit-box-shadow: 0 0 50px -5px #676767;\n    -moz-box-shadow: 0 0 50px -5px #676767;\n    box-shadow: 0 0 50px -5px #676767;\n    pointer-events: none; }\n    .input__tooltip::before {\n      position: absolute;\n      top: calc(50% - 4px);\n      left: -6px;\n      content: \"\";\n      border-style: solid;\n      border-width: 4px 6px 4px 0;\n      border-color: transparent white transparent transparent; }\n  .input__tooltip-title {\n    display: table-row;\n    max-width: 30px;\n    font-size: 12px;\n    color: black; }\n  .input__tooltip-help {\n    display: table-row;\n    font-size: 9px;\n    color: #A9A9A9; }\n\n.select {\n  transition: box-shadow 0.2s ease 0s;\n  position: relative;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  height: 28px;\n  min-width: fit-content;\n  padding: 0;\n  border: 1px solid #E0E0E0;\n  border-radius: 3px; }\n  .select:focus-within {\n    z-index: 300;\n    border-color: lightblue;\n    -webkit-box-shadow: 0 0 50px -12px lightblue;\n    -moz-box-shadow: 0 0 50px -12px lightblue;\n    box-shadow: 0 0 50px -12px lightblue; }\n  .select :-moz-focusring {\n    color: transparent;\n    text-shadow: 0 0 0 #000; }\n  .select::after {\n    position: absolute;\n    top: 8px;\n    right: 3px;\n    z-index: 201;\n    pointer-events: none;\n    content: \"\"; }\n  .select_stretched {\n    width: 100%; }\n  .select_status_error {\n    border-color: #FF1100; }\n    .select_status_error:focus-within {\n      border-color: #FF1100; }\n  .select__field {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    display: inline-block;\n    flex-grow: 1;\n    height: 28px;\n    line-height: 28px;\n    padding: 1px 22px 0 10px;\n    font-size: 12px;\n    background-color: white;\n    color: black;\n    border-radius: 3px;\n    border-width: 0; }\n@-moz-document url-prefix() {\n  .select__field {\n    padding-top: 0; } }\n    .select__field:focus {\n      outline: none;\n      border: none; }\n  .select__chosen-icon {\n    margin-left: 10px; }\n\n.field-group {\n  transition: box-shadow 0.2s ease 0s;\n  display: flex;\n  flex-direction: row;\n  align-content: stretch;\n  justify-content: stretch;\n  height: 30px; }\n  .field-group:focus-within {\n    box-shadow: 0 0 50px -12px lightblue; }\n    .field-group:focus-within .field-group__field:not([class*=\"status_error\"]) {\n      border-color: lightblue; }\n  .field-group__field {\n    flex-grow: 1;\n    height: 28px;\n    margin: 0;\n    border-radius: 0;\n    border-right-width: 0;\n    border-left-width: 1px; }\n    .field-group__field:focus-within {\n      box-shadow: none; }\n    .field-group__field:first-child {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px; }\n    .field-group__field:last-child {\n      border-right-width: 1px;\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px; }\n    .field-group__field_stretched_1 {\n      flex-grow: 1; }\n    .field-group__field_stretched_2 {\n      flex-grow: 2; }\n    .field-group__field_stretched_3 {\n      flex-grow: 3; }\n    .field-group__field_stretched_4 {\n      flex-grow: 4; }\n    .field-group__field_stretched_5 {\n      flex-grow: 5; }\n    .field-group__field_stretched_6 {\n      flex-grow: 6; }\n    .field-group__field_stretched_7 {\n      flex-grow: 7; }\n    .field-group__field_stretched_8 {\n      flex-grow: 8; }\n    .field-group__field_stretched_9 {\n      flex-grow: 9; }\n    .field-group__field_stretched_10 {\n      flex-grow: 10; }\n    .field-group__field_stretched_11 {\n      flex-grow: 11; }\n    .field-group__field_stretched_12 {\n      flex-grow: 12; }\n\n.sm-icons-list {\n  display: flex;\n  flex-direction: row;\n  justify-content: center; }\n  .sm-icons-list__icon-bg {\n    -webkit-box-shadow: 0 2px 0 0 #F5F5F5;\n    -moz-box-shadow: 0 2px 0 0 #F5F5F5;\n    box-shadow: 0 2px 0 0 #F5F5F5;\n    margin: 0 2px; }\n\n.pagination {\n  margin: 20px auto;\n  text-align: center; }\n  @media screen and (orientation: landscape) {\n    .pagination {\n      width: 50%; } }\n  @media screen and (orientation: portrait) {\n    .pagination {\n      width: 85%; } }\n  .pagination__link {\n    padding: 3px 10px;\n    height: 30px;\n    border: #a74604 solid 1px;\n    border-right: none;\n    background-color: white;\n    color: #1b0c29;\n    cursor: pointer;\n    font-weight: bold; }\n    .pagination__link:focus {\n      outline: none; }\n    .pagination__link:not(.pagination__link_current) {\n      background-color: #fb6a06;\n      color: white;\n      transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n      background-color: #fb6a06;\n      color: white; }\n      .pagination__link:not(.pagination__link_current) .pagination__icon {\n        transition: background-color 0.5s ease 0s;\n        background-color: white; }\n      .pagination__link:not(.pagination__link_current):hover:not(.pagination_disabled) {\n        transition: background-color 0.5s ease 0s, color 0.5s ease 0s;\n        background-color: #994002;\n        color: white; }\n        .pagination__link:not(.pagination__link_current):hover:not(.pagination_disabled) .pagination__icon {\n          transition: background-color 0.5s ease 0s;\n          background-color: white; }\n      .pagination__link:not(.pagination__link_current):active:not(.pagination_disabled) {\n        transition: background-color 0.2s ease 0s, color 0.2s ease 0s;\n        background-color: #702f02;\n        color: white; }\n        .pagination__link:not(.pagination__link_current):active:not(.pagination_disabled) .pagination__icon {\n          transition: background-color 0.2s ease 0s;\n          background-color: white; }\n    .pagination__link:hover:not(.pagination__link_current) {\n      color: #6614b0;\n      cursor: pointer; }\n    .pagination__link_first {\n      border-bottom-left-radius: 3px;\n      border-top-left-radius: 3px; }\n    .pagination__link_last {\n      border-bottom-right-radius: 3px;\n      border-top-right-radius: 3px;\n      border-right: #a74604 solid 1px; }\n    .pagination__link_current {\n      background-color: white;\n      color: #fb6a06;\n      cursor: auto; }\n\n.authors {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  margin-top: 4%;\n  margin-bottom: 4%;\n  padding: 5%;\n  border-radius: 8px;\n  background-color: rgba(255, 255, 255, 0.5); }\n  .authors__description {\n    text-align: center;\n    font-size: 20px; }\n  .authors__header {\n    font-size: 40px;\n    font-weight: bold; }\n  .authors__img {\n    height: 300px;\n    width: 300px;\n    border: 1px solid #E0E0E0;\n    border-radius: 100%; }\n  .authors__item {\n    margin: 0 40px 40px;\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n    @media screen and (max-width: 900px) and (orientation: portrait) {\n      .authors__item {\n        width: 240px; } }\n    @media screen and (max-width: 900px) and (orientation: landscape) {\n      .authors__item {\n        width: 400px; } }\n  .authors__items {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: center;\n    align-items: center;\n    margin-top: 80px; }\n  .authors__title {\n    text-align: center;\n    font-size: 30px;\n    margin: 10px 0 0; }\n  .authors__subtitle {\n    text-align: center;\n    font-size: 16px;\n    margin: 0 0 10px;\n    color: #FFFFFF; }\n  .authors__close-popup {\n    position: absolute;\n    top: 10px;\n    right: 10px; }\n\n.header {\n  display: flex;\n  align-self: stretch;\n  justify-self: flex-start;\n  align-items: center;\n  height: 4em;\n  min-height: 4em;\n  padding-left: 5%;\n  background-color: #fb6a06; }\n  @media screen and (orientation: landscape) and (max-width: 700px) {\n    .header {\n      height: 2em;\n      min-height: 2em; } }\n  .header_main {\n    margin: 0 8px 24px; }\n  .header__title {\n    margin: 0 0 0 4px;\n    padding: 0;\n    font-size: 3em;\n    font-weight: bolder;\n    color: white; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .header__title {\n        font-size: 1.5em; } }\n    .header__title:hover {\n      text-decoration: none; }\n  .header__link {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: center; }\n    .header__link:hover {\n      text-decoration: none; }\n\n.login-form__remember-me-label, .login-form__forgot-password-link {\n  font-size: 12px; }\n.login-form__remember-me-label {\n  margin-left: 4px; }\n.login-form__double-btn {\n  margin-top: 10px; }\n.login-form__sumbit-btn {\n  margin-right: 4px;\n  flex-grow: 1; }\n.login-form__cancel-btn {\n  flex-grow: 0; }\n\n.login-popup {\n  padding: 0;\n  margin: auto 0;\n  max-width: 300px; }\n  @media screen and (orientation: portrait) {\n    .login-popup {\n      margin-top: 30%;\n      width: 70%; } }\n  .login-popup__hr {\n    margin: 16px -16px; }\n  .login-popup__continue-with-text {\n    margin: 8px 0;\n    font-size: 9px;\n    text-align: center;\n    font-weight: bold;\n    color: #A9A9A9; }\n  .login-popup__signup-link {\n    font-size: 12px;\n    text-align: center;\n    font-weight: bold; }\n\n.menu {\n  width: 60%;\n  height: 90%;\n  min-width: fit-content;\n  max-width: 600px;\n  border: 0;\n  border-radius: 3px; }\n  @media screen and (orientation: landscape) {\n    .menu {\n      margin: 4% auto 0 auto;\n      width: 60%; } }\n  @media screen and (orientation: portrait) {\n    .menu {\n      margin: 8% auto 0 auto;\n      width: 80%; } }\n  @media screen and (orientation: portrait) and (max-width: 500px) {\n    .menu {\n      margin: 8% auto 0 auto;\n      width: 90%; } }\n  .menu__link {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n    height: 100%; }\n    .menu__link:hover {\n      text-decoration: none; }\n  .menu__item {\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin-bottom: 4%;\n    height: 4.5rem;\n    background-color: #fb6a06;\n    color: white;\n    border-radius: 5px;\n    box-shadow: 0 0 20px rgba(0, 0, 0, 0.71); }\n    @media screen and (orientation: portrait) {\n      .menu__item {\n        height: 4rem; } }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .menu__item {\n        height: 2.5rem; } }\n  .menu__dropdown-btn {\n    position: absolute;\n    top: 20px;\n    right: 10px; }\n  .menu__text {\n    width: 85%;\n    text-align: center;\n    font-size: 2rem;\n    font-weight: bold;\n    color: white; }\n  .menu__icon-bg {\n    width: 15%;\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0; }\n    @media screen and (orientation: portrait) {\n      .menu__icon-bg {\n        width: 24%; } }\n\n.profile-info {\n  display: table;\n  border-collapse: collapse;\n  border-spacing: 10px;\n  padding: 20px; }\n  .profile-info__item {\n    display: table-row;\n    height: 40px;\n    white-space: nowrap;\n    border-bottom: 1px solid #E0E0E0; }\n  .profile-info .profile-info__item-name, .profile-info .profile-info__item-value {\n    display: table-cell;\n    vertical-align: middle; }\n  .profile-info__item-name {\n    font-weight: bold; }\n  .profile-info__item-value {\n    padding-left: 8px; }\n\n.profile-popup {\n  align-items: center;\n  max-width: 400px; }\n  @media screen and (orientation: portrait) {\n    .profile-popup {\n      width: 97%; } }\n  .profile-popup_main {\n    margin-top: 4%; }\n  .profile-popup__profile-info {\n    max-width: fit-content;\n    margin: 20px auto 10px; }\n  .profile-popup__profile-icon {\n    display: flex;\n    justify-content: center;\n    width: 140px;\n    height: 140px;\n    margin: 0 auto;\n    overflow: hidden;\n    object-fit: cover;\n    border-radius: 100%; }\n  .profile-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    margin: 0 auto; }\n    @media screen and (orientation: landscape) {\n      .profile-popup__double-btn {\n        padding: 0 40px; } }\n    .profile-popup__double-btn_center {\n      flex-direction: row;\n      justify-content: center; }\n  .profile-popup__btn {\n    width: 140px;\n    margin: 0 4px; }\n    .profile-popup__btn:first-child {\n      margin-left: 0; }\n    .profile-popup__btn:last-child {\n      margin-right: 0; }\n\n.scoreboard {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  min-height: fit-content;\n  margin-top: 4%;\n  border-radius: 7px;\n  background-color: white; }\n  @media screen and (orientation: landscape) {\n    .scoreboard {\n      align-items: center;\n      padding: 2%; } }\n  @media screen and (orientation: portrait) {\n    .scoreboard {\n      width: 90%;\n      padding: 4%; } }\n  @media screen and (orientation: landscape) {\n    .scoreboard__items {\n      max-width: 600px;\n      min-width: 450px; } }\n  .scoreboard__item {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    height: 60px;\n    border-bottom: 1px solid #fb6a06; }\n    .scoreboard__item_place_first, .scoreboard__item_place_second, .scoreboard__item_place_third {\n      font-size: 20px;\n      font-weight: bold; }\n      .scoreboard__item_place_first .scoreboard__link, .scoreboard__item_place_second .scoreboard__link, .scoreboard__item_place_third .scoreboard__link {\n        position: relative; }\n        .scoreboard__item_place_first .scoreboard__link::before, .scoreboard__item_place_second .scoreboard__link::before, .scoreboard__item_place_third .scoreboard__link::before {\n          position: absolute;\n          top: -25px;\n          width: 40px;\n          height: 40px;\n          content: \"\"; }\n    .scoreboard__item_place_first .scoreboard__link::before {\n      background-color: #FFD700; }\n    .scoreboard__item_place_second .scoreboard__link::before {\n      background-color: #C0C0C0; }\n    .scoreboard__item_place_third .scoreboard__link::before {\n      background-color: #CD7F32; }\n  .scoreboard__user-data {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: flex-start; }\n  .scoreboard__link {\n    display: flex;\n    flex-direction: row;\n    align-items: center; }\n    .scoreboard__link:hover {\n      text-decoration: black; }\n  .scoreboard__avatar {\n    display: inline-block;\n    height: 40px;\n    width: 40px;\n    margin-right: 10px;\n    border-radius: 100%;\n    vertical-align: middle;\n    line-height: 40px; }\n  .scoreboard__place {\n    display: inline-block;\n    margin-right: 10px;\n    width: 20px; }\n  .scoreboard__data-field {\n    display: flex;\n    align-items: center; }\n  .scoreboard__username {\n    padding-left: 10px;\n    color: black; }\n\n.signup-popup {\n  -webkit-align-self: center;\n  align-self: center;\n  padding: 0;\n  max-width: 450px; }\n  @media screen and (orientation: portrait) {\n    .signup-popup {\n      width: 90%; } }\n  .signup-popup_main {\n    margin: 4% 0 0 0; }\n  .signup-popup__hr {\n    margin: 12px -16px 12px -16px; }\n  .signup-popup__explanation-text {\n    margin: 8px 0;\n    font-size: 12px;\n    color: #A9A9A9; }\n  .signup-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    align-content: flex-start; }\n  .signup-popup__signup-btn {\n    margin-right: 4px; }\n  .signup-popup__cancel-btn {\n    margin-left: 4px; }\n\n.signup-form__date-select:last-child {\n  margin-right: 0; }\n.signup-form__form-group {\n  margin: 8px 0; }\n\n.update-profile-popup {\n  max-width: 250px;\n  border: 1px #a74604 solid; }\n  .update-profile-popup__hr {\n    margin: 16px -15px 16px -15px; }\n  .update-profile-popup__title {\n    margin: 0 0 16px 0; }\n  .update-profile-popup__continue-with-text {\n    margin: 8px 0;\n    font-size: 9px;\n    text-align: center;\n    color: #A9A9A9;\n    font-weight: bold; }\n  .update-profile-popup__signup-link {\n    font-size: 12px;\n    text-align: center;\n    font-weight: bold; }\n  .update-profile-popup__double-btn {\n    display: flex;\n    flex-direction: row;\n    align-content: flex-start; }\n  .update-profile-popup__update-btn {\n    margin-right: 4px; }\n  .update-profile-popup__cancel-btn {\n    margin-left: 4px; }\n\n.not-found-page {\n  width: 55%;\n  margin: auto auto;\n  border-radius: 8px;\n  background-color: rgba(255, 255, 255, 0.28);\n  padding: 20px; }\n  .not-found-page__link {\n    font-size: 1.5rem;\n    font-weight: bold;\n    text-decoration: underline;\n    color: black; }\n  .not-found-page__text {\n    font-weight: bold; }\n    .not-found-page__text_main {\n      font-size: 4rem;\n      color: black; }\n    .not-found-page__text_additional {\n      margin-bottom: 4%;\n      font-size: 1.5rem;\n      color: #1c1c1c; }\n\n.game-over {\n  position: relative;\n  align-items: center;\n  margin: auto 0;\n  background-color: rgba(226, 216, 216, 0.6);\n  border-radius: 5px;\n  max-width: 56rem; }\n  @media screen and (orientation: landscape) {\n    .game-over {\n      width: 42rem; } }\n  @media screen and (orientation: portrait) {\n    .game-over {\n      width: 90%; } }\n  @media screen and (orientation: landscape) and (max-width: 700px) {\n    .game-over {\n      width: 60%;\n      font-size: 25px;\n      margin-top: 2%; } }\n  .game-over_multi {\n    width: 56rem; }\n    @media screen and (max-width: 900px) and (orientation: portrait) {\n      .game-over_multi {\n        margin-top: 2%;\n        width: 95%; } }\n    @media screen and (max-width: 900px) and (orientation: landscape) {\n      .game-over_multi {\n        margin-top: 2%;\n        width: 75%; } }\n  .game-over__column {\n    display: inline-block;\n    width: 33.33%;\n    vertical-align: top; }\n    @media screen and (max-width: 900px) {\n      .game-over__column {\n        width: 100%; } }\n    @media screen and (max-width: 900px) {\n      .game-over__column_user {\n        display: none; } }\n  .game-over__title {\n    display: block;\n    text-align: center;\n    font-size: 45px;\n    margin-top: 4%;\n    font-weight: bold; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-over__title {\n        font-size: 30px;\n        margin-top: 2%; } }\n  .game-over_main {\n    margin-top: 4%; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-over_main {\n        margin-top: 2%; } }\n  .game-over__profile-info {\n    max-width: fit-content;\n    margin: 20px auto 10px; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-over__profile-info {\n        margin: 10px auto 5px; } }\n  .game-over__profile-icon {\n    display: flex;\n    justify-content: center;\n    width: 140px;\n    height: 140px;\n    margin: 0 auto;\n    overflow: hidden;\n    object-fit: cover;\n    border-radius: 100%; }\n  .game-over__btn {\n    width: 140px;\n    margin: 0 4px; }\n    .game-over__btn:first-child {\n      margin-left: 0; }\n    .game-over__btn:last-child {\n      margin-right: 0; }\n\n.result-time {\n  margin-left: auto;\n  margin-right: auto;\n  width: 12rem;\n  border: 4px solid #0e100f;\n  border-radius: 10px;\n  margin-top: 1rem; }\n  @media screen and (max-width: 900px) and (orientation: landscape) {\n    .result-time {\n      margin-top: 0.5rem; } }\n  .result-time__title {\n    text-align: center;\n    font-size: 24px;\n    font-weight: lighter;\n    color: black; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-time__title {\n        font-size: 20px; } }\n  .result-time__seconds {\n    font-weight: bold;\n    text-align: center;\n    font-size: 50px; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-time__seconds {\n        font-size: 28px; } }\n\n.game-info {\n  align-items: center;\n  margin: auto 0; }\n  .game-info_single {\n    padding-top: 3rem; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-info_single {\n        padding-top: 10px; } }\n  .game-info__line {\n    margin-top: 2px;\n    margin-bottom: 2px; }\n  .game-info_main {\n    display: block;\n    padding-top: 9rem; }\n    @media screen and (max-width: 900px) {\n      .game-info_main {\n        padding-top: 0.5rem; } }\n    .game-info_main_title {\n      margin-bottom: 2rem; }\n      @media screen and (max-width: 900px) {\n        .game-info_main_title {\n          margin-bottom: 0.5rem; } }\n  .game-info__one-btn {\n    position: absolute;\n    bottom: 0;\n    top: 38%;\n    left: 50%;\n    transform: translate(-50%, 70%); }\n  .game-info__avatar {\n    border-radius: 8rem;\n    width: 185px;\n    margin-left: auto;\n    margin-right: auto;\n    display: block; }\n  .game-info__nickname {\n    text-align: center;\n    font-weight: bold;\n    font-family: sans-serif;\n    font-size: 45px; }\n  .game-info__item {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 1rem 1rem 0 1rem;\n    font-family: Helvetica, sans-serif;\n    font-weight: normal; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .game-info__item {\n        padding: 5px 1rem 0 1rem; } }\n    .game-info__item-name {\n      font-size: 25px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      padding-right: 10px; }\n      @media screen and (orientation: landscape) and (max-width: 700px) {\n        .game-info__item-name {\n          font-size: 20px; } }\n    .game-info__item-value {\n      font-size: 35px;\n      font-weight: bold;\n      padding-left: 10px; }\n      @media screen and (orientation: landscape) and (max-width: 700px) {\n        .game-info__item-value {\n          font-size: 25px; } }\n\n.result-redirect {\n  padding: 1rem;\n  font-family: Helvetica, sans-serif;\n  font-weight: normal;\n  position: relative;\n  bottom: 0;\n  margin-left: auto;\n  margin-right: auto; }\n  @media screen and (orientation: portrait) {\n    .result-redirect {\n      width: 33rem; } }\n  @media screen and (orientation: portrait) {\n    .result-redirect {\n      width: 90%; } }\n  @media screen and (orientation: landscape) and (max-width: 700px) {\n    .result-redirect {\n      padding-top: 0.5rem;\n      padding-bottom: 0.5rem;\n      width: 60%; } }\n  .result-redirect__item_center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 1rem;\n    font-family: Helvetica, sans-serif;\n    font-weight: normal; }\n  .result-redirect__btn {\n    display: block;\n    position: relative;\n    height: 55px;\n    width: -moz-available;\n    width: -webkit-fill-available;\n    left: 50%;\n    transform: translate(-50%, 0%);\n    border: 1px solid #a3653bde;\n    -webkit-box-shadow: 0 2px #977575a6;\n    -moz-box-shadow: 0 2px #977575a6;\n    box-shadow: 0 2px #977575a6; }\n    @media screen and (orientation: landscape) {\n      .result-redirect__btn {\n        width: 33rem;\n        margin-right: -50%;\n        top: 50%; } }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-redirect__btn {\n        width: 120%;\n        height: 35px;\n        margin-right: auto;\n        top: auto; } }\n  .result-redirect__center {\n    margin-left: auto;\n    margin-right: auto;\n    text-align: center;\n    width: 18rem;\n    padding-top: 1rem; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-redirect__center {\n        padding-top: 2px;\n        width: 100%; } }\n  .result-redirect__link {\n    text-align: center;\n    color: #282222cc;\n    font-weight: bold;\n    font-size: 25px;\n    text-decoration: underline; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-redirect__link {\n        font-size: 20px; } }\n  .result-redirect__one-btn {\n    position: absolute;\n    bottom: 0;\n    top: 38%;\n    left: 50%;\n    transform: translate(-50%, 70%); }\n  .result-redirect__text {\n    font-size: 25px; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .result-redirect__text {\n        font-size: 20px; } }\n\n.game-msg {\n  padding-top: 1rem;\n  font-size: 45px;\n  font-weight: bold; }\n  @media screen and (max-width: 800px) {\n    .game-msg {\n      font-size: 34px; } }\n  @media screen and (max-width: 900px) and (orientation: landscape) {\n    .game-msg {\n      font-size: 25px; } }\n  .game-msg_center {\n    text-align: center; }\n\n.offline-msg {\n  background: rgba(102, 102, 102, 0.5);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0; }\n  .offline-msg__window {\n    width: 300px;\n    height: 70px;\n    text-align: center;\n    padding: 15px;\n    border: 3px solid black;\n    border-radius: 10px;\n    color: #fb6a06;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    margin: auto;\n    background: #fff; }\n  .offline-msg__btn {\n    display: inline-block;\n    border: 1px solid #fb6a06;\n    color: #fb6a06;\n    padding: 0 12px;\n    margin: 10px;\n    border-radius: 5px;\n    text-decoration: none;\n    background: #f2f2f2;\n    font-size: 14pt;\n    cursor: pointer; }\n    .offline-msg__btn:hover {\n      background: #e6e6ff; }\n\n.hexagons {\n  width: 100%;\n  height: 100%;\n  align-items: center;\n  justify-content: center;\n  overflow: auto; }\n  .hexagons_main {\n    display: flex; }\n  .hexagons__game {\n    margin-top: 4%;\n    width: 95%;\n    border-radius: 15px; }\n    @media screen and (orientation: landscape) and (max-width: 700px) {\n      .hexagons__game {\n        margin-top: 1%;\n        width: 58%; } }\n\n.small-chat {\n  position: absolute;\n  right: 30px;\n  bottom: 30px; }\n  .small-chat_open {\n    width: 500px;\n    height: 500px;\n    background-color: white;\n    border-radius: 5px;\n    padding: 20px; }\n  .small-chat__btn {\n    position: fixed;\n    display: flex;\n    align-items: center;\n    background-color: #03b432;\n    color: white;\n    width: 80px;\n    height: 80px;\n    border-radius: 40px;\n    bottom: 30px;\n    right: 30px;\n    cursor: pointer;\n    box-shadow: 0 0 20px rgba(0, 0, 0, 0.71); }\n  .small-chat_notify {\n    position: relative;\n    font-family: Helvetica, sans-serif;\n    font-size: 10px; }\n  .small-chat__icon-bg {\n    width: 80px;\n    height: 80px;\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0; }\n\n.chat {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  background-color: white;\n  height: 100%; }\n  .chat_main {\n    position: relative;\n    border-radius: 7px;\n    margin-top: 2%;\n    height: 90%;\n    width: 60%;\n    max-width: 600px; }\n    @media screen and (orientation: landscape) {\n      .chat_main {\n        align-items: center;\n        padding: 2%; } }\n    @media screen and (orientation: portrait) {\n      .chat_main {\n        width: 90%;\n        padding: 4%; } }\n  .chat__header {\n    text-align: center;\n    font-weight: bold;\n    font-size: 30px;\n    margin: 10px 0 0; }\n  .chat__items {\n    width: 100%;\n    height: 100%;\n    margin-top: 2%;\n    border-radius: 6px;\n    border: black 1px solid;\n    overflow-y: auto;\n    overflow-x: visible; }\n  .chat__item {\n    background-color: #e6e6e6;\n    border-radius: 3px;\n    margin: 2%;\n    padding: 5px;\n    display: flex;\n    flex-direction: column;\n    align-items: start;\n    justify-content: left;\n    min-height: 1.5rem; }\n  .chat__msg-data {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: flex-start; }\n  .chat__form {\n    margin-top: 2%;\n    height: 100px;\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    align-items: start;\n    justify-content: flex-start; }\n  .chat__input {\n    width: 80%;\n    height: 90%;\n    border-radius: 3px;\n    border: black 1px solid;\n    display: flex;\n    align-items: start;\n    padding: 0.5rem; }\n  .chat__btn {\n    width: 17%;\n    height: 35px;\n    margin-left: 3%; }\n  .chat__link {\n    display: flex;\n    flex-direction: row;\n    align-items: center; }\n    .chat__link:hover {\n      text-decoration: black; }\n  .chat__text {\n    width: 100%;\n    display: inline-block;\n    margin-top: 4px;\n    white-space: pre-wrap;\n    white-space: -moz-pre-wrap;\n    white-space: -o-pre-wrap;\n    word-wrap: break-word; }\n  .chat__data-field {\n    display: flex;\n    align-items: center; }\n  .chat__username {\n    font-weight: bold;\n    color: #fb6a06; }\n  .chat__close-popup {\n    position: absolute;\n    top: 10px;\n    right: 10px; }\n", ""]);
 
 
 
@@ -964,6 +965,17 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5v
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE3NCIgaGVpZ2h0PSIyMDAiIHZpZXdib3g9IjAgMCAxNzMuMjA1MDgwNzU2ODg3NzIgMjAwIiA+CiAgICA8cGF0aCBmaWxsPSIjZmZmIiBkPSJNODYuNjAyNTQwMzc4NDQzODYgMEwxNzMuMjA1MDgwNzU2ODg3NzIgNTBMMTczLjIwNTA4MDc1Njg4NzcyIDE1MEw4Ni42MDI1NDAzNzg0NDM4NiAyMDBMMCAxNTBMMCA1MFoiPjwvcGF0aD4KPC9zdmc+"
+
+/***/ }),
+
+/***/ "./static/public/icons/mail.svg":
+/*!**************************************!*\
+  !*** ./static/public/icons/mail.svg ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMy4yIDJjLjk5MyAwIDEuOC44MDcgMS44IDEuOHY4LjRjMCAuOTkzLS44MDcgMS44LTEuOCAxLjhIMi44Yy0uOTkzIDAtMS44LS44MDctMS44LTEuOFYzLjhDMSAyLjgwNyAxLjgwNyAyIDIuOCAyaDEwLjR6TTUuMDQ5IDguMDk0TDMuMDM2IDYuMDgxYS43NTYuNzU2IDAgMSAxIDEuMDctMS4wN2wzLjg4NiAzLjg4NiAzLjg5MS0zLjg5MWEuNzU3Ljc1NyAwIDEgMSAxLjA3MSAxLjA3bC0yLjAxIDIuMDA5IDEuODcgMS44N2EuNzIzLjcyMyAwIDAgMS0xLjAyMiAxLjAyMmwtMS44Ny0xLjg3LTEuMzEgMS4zMWEuNzQ1Ljc0NSAwIDAgMS0uNjIuMzEzLjc1Ni43NTYgMCAwIDEtLjYyLS4zMTNsLTEuMzAxLTEuMy0xLjg1OSAxLjg1OUEuNzIzLjcyMyAwIDAgMSAzLjE5IDkuOTUzbDEuODU5LTEuODU5eiIvPgo8L3N2Zz4K"
 
 /***/ }),
 
@@ -3391,6 +3403,40 @@ var bemhtml;
           }];
         }
       });
+      block('chat').elem('items').match(function (node, ctx) {
+        return ctx.messages !== undefined;
+      })({
+        appendContent: function appendContent(node, ctx) {
+          return ctx.messages.map(function (elt, index) {
+            return {
+              elem: 'item',
+              content: [{
+                elem: 'msg-data',
+                content: [{
+                  elem: 'link',
+                  tag: 'a',
+                  fieldName: 'userName',
+                  value: elt.userId,
+                  attrs: {
+                    value: elt.userId
+                  },
+                  // to be changed once api's here
+                  content: [{
+                    elem: 'data-field',
+                    content: [{
+                      elem: 'username',
+                      content: elt.username + ':'
+                    }]
+                  }]
+                }]
+              }, {
+                elem: 'text',
+                content: elt.text
+              }]
+            };
+          });
+        }
+      });
       block('checkbox')({
         tag: 'input',
         addAttrs: {
@@ -3934,6 +3980,31 @@ var bemhtml;
         addAttrs: function addAttrs(node, ctx) {
           return {
             href: ctx.href
+          };
+        }
+      });
+      block('small-chat').elem('btn')({
+        appendContent: function appendContent(node, ctx) {
+          return {
+            elem: 'item',
+            content: [{
+              tag: 'span',
+              block: 'icon-bg',
+              mods: {
+                borderless: true,
+                size: 'full'
+              },
+              content: {
+                block: 'icon',
+                mods: {
+                  color: 'white',
+                  type: ctx.type,
+                  size: 'fit'
+                }
+              },
+              wrappedInside: 'small-chat',
+              wrappedAs: 'icon-bg'
+            }]
           };
         }
       });
@@ -5914,6 +5985,40 @@ var bemtree;
           }];
         }
       });
+      block('chat').elem('items').match(function (node, ctx) {
+        return ctx.messages !== undefined;
+      })({
+        appendContent: function appendContent(node, ctx) {
+          return ctx.messages.map(function (elt, index) {
+            return {
+              elem: 'item',
+              content: [{
+                elem: 'msg-data',
+                content: [{
+                  elem: 'link',
+                  tag: 'a',
+                  fieldName: 'userName',
+                  value: elt.userId,
+                  attrs: {
+                    value: elt.userId
+                  },
+                  // to be changed once api's here
+                  content: [{
+                    elem: 'data-field',
+                    content: [{
+                      elem: 'username',
+                      content: elt.username + ':'
+                    }]
+                  }]
+                }]
+              }, {
+                elem: 'text',
+                content: elt.text
+              }]
+            };
+          });
+        }
+      });
       block('checkbox')({
         tag: 'input',
         addAttrs: {
@@ -6460,6 +6565,31 @@ var bemtree;
           };
         }
       });
+      block('small-chat').elem('btn')({
+        appendContent: function appendContent(node, ctx) {
+          return {
+            elem: 'item',
+            content: [{
+              tag: 'span',
+              block: 'icon-bg',
+              mods: {
+                borderless: true,
+                size: 'full'
+              },
+              content: {
+                block: 'icon',
+                mods: {
+                  color: 'white',
+                  type: ctx.type,
+                  size: 'fit'
+                }
+              },
+              wrappedInside: 'small-chat',
+              wrappedAs: 'icon-bg'
+            }]
+          };
+        }
+      });
       ;
       ;
       oninit(function (exports, context) {
@@ -6588,6 +6718,277 @@ function (_Controller) {
 
 /***/ }),
 
+/***/ "./static/public/js/controllers/chat-controller.js":
+/*!*********************************************************!*\
+  !*** ./static/public/js/controllers/chat-controller.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ChatController; });
+/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
+/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
+/* harmony import */ var _views_chat_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/chat-view.js */ "./static/public/js/views/chat-view.js");
+/* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
+/* harmony import */ var _views_components_notifier_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../views/components/notifier.js */ "./static/public/js/views/components/notifier.js");
+/* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ajax.js */ "./static/public/js/ajax.js");
+
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+/**
+ * @class ChatController
+ */
+
+var ChatController =
+/*#__PURE__*/
+function (_Controller) {
+  _inherits(ChatController, _Controller);
+
+  /**
+   * Construct obj ChatController
+   * @param {HTMLElement} parent
+   */
+  function ChatController(parent) {
+    var _this;
+
+    _classCallCheck(this, ChatController);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ChatController).call(this, parent, true));
+    _this.view = new _views_chat_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
+    _this.minId = undefined;
+    return _this;
+  }
+  /**
+   * Create action
+   */
+
+
+  _createClass(ChatController, [{
+    key: "action",
+    value: function action() {
+      this.view.render();
+
+      this._initWebSocket();
+
+      this._initEvents();
+
+      this._initScroll();
+    }
+    /**
+     * Init events
+     * @private
+     */
+
+  }, {
+    key: "_initEvents",
+    value: function _initEvents() {
+      var _this2 = this;
+
+      var btn = this.parent.getElementsByClassName('chat__btn')[0];
+      var input = this.parent.getElementsByClassName('chat__input')[0];
+
+      btn.onclick = function () {
+        var data = {
+          text: input.value
+        };
+
+        _this2.ws.sendData(JSON.stringify(data));
+
+        input.value = '';
+      };
+    }
+    /**
+     * Get url args
+     * @param {Array} msgs
+     * @return {string}
+     * @private
+     */
+
+  }, {
+    key: "_getUrlArgsForIds",
+    value: function _getUrlArgsForIds(msgs) {
+      var args = '';
+      msgs.forEach(function (msg, pos) {
+        if ('uid' in msg) {
+          if (args.length > 0) {
+            args += '&';
+          }
+
+          args += 'ids=' + msg.uid;
+        }
+      });
+      return args;
+    }
+    /**
+     * Get new messages
+     * @param {object} message
+     * @private
+     */
+
+  }, {
+    key: "_getMessages",
+    value: function _getMessages(message) {
+      var _this3 = this;
+
+      var data;
+
+      try {
+        data = JSON.parse(message.data);
+      } catch (e) {
+        return;
+      }
+
+      if (Array.isArray(data)) {
+        var args = this._getUrlArgsForIds(data);
+
+        if (args.length > 0) {
+          _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
+            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?' + args
+          }).then(function (result) {
+            result.json().then(function (msgsData) {
+              msgsData = msgsData.data.users;
+              data.sort(function (a, b) {
+                return a.mid - b.mid;
+              });
+              _this3.minId = data[0].mid;
+              data.forEach(function (msg) {
+                var username = 'uid' in msg ? msgsData.find(function (item) {
+                  return item.uid === msg.uid;
+                }).username : 'Анон';
+
+                _this3.view.addMessage(msg.uid, username, msg.text);
+              });
+            });
+          });
+        } else {
+          data.forEach(function (msg) {
+            data.sort(function (a, b) {
+              return a.mid - b.mid;
+            });
+
+            _this3.view.addMessage(0, 'Анон', msg.text);
+          });
+        }
+      } else if ('text' in data) {
+        if ('uid' in data) {
+          _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
+            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?ids=' + data.uid
+          }).then(function (result) {
+            result.json().then(function (msgsData) {
+              msgsData = msgsData.data.users[0];
+
+              _this3.ws.makeNotify("".concat(msgsData.username, ": \n ").concat(data.text.substring(0, 120)));
+
+              _this3.view.addMessage(data.uid, msgsData.username, data.text);
+            });
+          });
+        } else {
+          this.ws.makeNotify("\u0410\u043D\u043E\u043D\u0438\u043C: ".concat(data.text.substring(0, 120)));
+          this.view.addMessage(data.uid, 'Анон', data.text);
+        }
+      }
+    }
+    /**
+     * Init scroll events
+     * @private
+     */
+
+  }, {
+    key: "_initScroll",
+    value: function _initScroll() {
+      var _this4 = this;
+
+      var items = this.parent.getElementsByClassName('chat__items')[0];
+
+      items.onscroll = function () {
+        if (items.scrollTop <= 0) {
+          // chat/paginate?msgId=1
+          _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
+            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].chatUrl + '/chat/paginate?msgId=' + _this4.minId
+          }).then(function (result) {
+            result.json().then(function (data) {
+              data = data.data;
+
+              var args = _this4._getUrlArgsForIds(data);
+
+              if (args.length > 0) {
+                _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
+                  path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?' + args
+                }).then(function (result) {
+                  result.json().then(function (msgsData) {
+                    msgsData = msgsData.data.users;
+                    data.sort(function (a, b) {
+                      return a.mid - b.mid;
+                    });
+                    _this4.minId = data[0].mid;
+                    data.forEach(function (msg) {
+                      var username = 'uid' in msg ? msgsData.find(function (item) {
+                        return item.uid === msg.uid;
+                      }).username : 'Анон';
+
+                      _this4.view.addMessageToEnd(msg.uid, username, msg.text);
+                    });
+                  });
+                });
+              } else {
+                data.forEach(function (msg) {
+                  data.sort(function (a, b) {
+                    return a.mid - b.mid;
+                  });
+
+                  _this4.view.addMessageToEnd(0, 'Анон', msg.text);
+                });
+              }
+            });
+          });
+        }
+      };
+    }
+    /**
+     * Init websocket connection
+     * @private
+     */
+
+  }, {
+    key: "_initWebSocket",
+    value: function _initWebSocket() {
+      this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"]('/chat', this._getMessages.bind(this), function () {}, _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].wsUrl + _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].chatPort);
+    }
+  }]);
+
+  return ChatController;
+}(_core_controller_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+
+;
+
+/***/ }),
+
 /***/ "./static/public/js/controllers/game-controller.js":
 /*!*********************************************************!*\
   !*** ./static/public/js/controllers/game-controller.js ***!
@@ -6686,7 +7087,9 @@ function (_Controller) {
 
       var mode = '';
 
-      if (false) {} else {
+      if (navigator.onLine) {
+        mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].ONLINE;
+      } else {
         mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
       }
 
@@ -7182,6 +7585,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
 /* harmony import */ var _views_menu_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/menu-view.js */ "./static/public/js/views/menu-view.js");
 /* harmony import */ var _models_user_service_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../models/user-service.js */ "./static/public/js/models/user-service.js");
+/* harmony import */ var _views_components_chat_button_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/components/chat-button.js */ "./static/public/js/views/components/chat-button.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7201,6 +7605,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -7242,6 +7647,8 @@ function (_Controller) {
         _this2.user = user;
 
         _this2.view.render(_this2.user);
+
+        Object(_views_components_chat_button_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_this2.parent);
       }, function (error) {
         console.log(error);
       });
@@ -7343,10 +7750,7 @@ function (_Controller) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NotificationController; });
-/* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
-/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
-/* harmony import */ var _views_components_disconnect_messagebox_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/components/disconnect-messagebox.js */ "./static/public/js/views/components/disconnect-messagebox.js");
-/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
+/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7356,10 +7760,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-
-
-
-var SERVER_ADDRESS = _settings_config_js__WEBPACK_IMPORTED_MODULE_3__["settings"].wsUrl; // 'ws://localhost:3000/ws';
+var SERVER_ADDRESS = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].wsUrl; // 'ws://localhost:3000/ws';
 
 /**
  * The singleton class for sending and receiving messages from server
@@ -7374,16 +7775,18 @@ function () {
    * @param {string} path
    * @param {function} onMsg
    * @param {function} onClose
+   * @param {string} url websocket url
    */
   function NotificationController(path, onMsg) {
     var _this = this;
 
     var onClose = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+    var url = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : SERVER_ADDRESS;
 
     _classCallCheck(this, NotificationController);
 
     var Socket = 'MozWebSocket' in window ? MozWebSocket : WebSocket;
-    this.ws = new Socket(SERVER_ADDRESS + path);
+    this.ws = new Socket(url + path);
 
     this.ws.onerror = function (event) {
       console.log('WebSocket ERROR: ' + JSON.stringify(event, null, 4));
@@ -7420,12 +7823,11 @@ function () {
     /**
      * Says the client information about connection
      * @param {string} data
-     * @private
      */
 
   }, {
-    key: "_makeNotify",
-    value: function _makeNotify() {
+    key: "makeNotify",
+    value: function makeNotify() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'error';
 
       if (!'Notification' in window) {
@@ -8325,6 +8727,7 @@ function () {
       var newController = this.routes[url];
 
       if (!newController) {
+        console.log(this.routes);
         newController = new _controllers_not_found_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
       } // comment this to work offline
 
@@ -10275,8 +10678,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./controllers/game-menu-controller.js */ "./static/public/js/controllers/game-menu-controller.js");
 /* harmony import */ var _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./controllers/game-over-mlt-controller.js */ "./static/public/js/controllers/game-over-mlt-controller.js");
 /* harmony import */ var _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./controllers/game-controller.js */ "./static/public/js/controllers/game-controller.js");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../css/style.css */ "./static/public/css/style.css");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _controllers_chat_controller_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./controllers/chat-controller.js */ "./static/public/js/controllers/chat-controller.js");
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../css/style.css */ "./static/public/css/style.css");
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_15__);
 
 
 __webpack_require__(/*! ./bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js");
@@ -10284,6 +10688,7 @@ __webpack_require__(/*! ./bundle.bemhtml.js */ "./static/public/js/bundle.bemhtm
 __webpack_require__(/*! ./bundle.bemtree.js */ "./static/public/js/bundle.bemtree.js");
 
 __webpack_require__(/*! ../icons/favicon.ico */ "./static/public/icons/favicon.ico");
+
 
 
 
@@ -10309,7 +10714,7 @@ if ('serviceWorker' in navigator) {
 
 application.insertAdjacentHTML('beforeend', '<div id="main"></div>');
 var main = document.getElementById('main');
-var router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)).addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_12__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
+var router = new _core_router_js__WEBPACK_IMPORTED_MODULE_2__["default"](_settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].home, application).addRoute('/', new _controllers_menu_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('leaders', new _controllers_scoreboard_controller_js__WEBPACK_IMPORTED_MODULE_5__["default"](main)).addRoute('profile', new _controllers_profile_controller_js__WEBPACK_IMPORTED_MODULE_6__["default"](main)).addRoute('signup', new _controllers_signup_controller_js__WEBPACK_IMPORTED_MODULE_7__["default"](main)).addRoute('signin', new _controllers_login_controller_js__WEBPACK_IMPORTED_MODULE_8__["default"](main)).addRoute('exit', new _controllers_logout_controller_js__WEBPACK_IMPORTED_MODULE_9__["default"](main)).addRoute('authors', new _controllers_authors_controller_js__WEBPACK_IMPORTED_MODULE_4__["default"](main)).addRoute('profile/update', new _controllers_update_controller_js__WEBPACK_IMPORTED_MODULE_10__["default"](main)).addRoute('single', new _controllers_game_controller_js__WEBPACK_IMPORTED_MODULE_13__["default"](main)).addRoute('multi', new _controllers_game_over_mlt_controller_js__WEBPACK_IMPORTED_MODULE_12__["default"](main)).addRoute('chat', new _controllers_chat_controller_js__WEBPACK_IMPORTED_MODULE_14__["default"](main)).addRoute('play', new _controllers_game_menu_controller_js__WEBPACK_IMPORTED_MODULE_11__["default"](main));
 router.start();
 
 /***/ }),
@@ -10742,8 +11147,10 @@ __webpack_require__.r(__webpack_exports__);
 var settings = {
   home: 'http://127.0.0.1:8080',
   url: 'http://127.0.0.1:3000',
+  chatUrl: 'http://127.0.0.1:3003',
   imgPath: 'https://hexagon-game.s3.eu-north-1.amazonaws.com/img/',
-  wsUrl: 'ws://127.0.0.1:3000'
+  wsUrl: 'ws://127.0.0.1',
+  chatPort: ':3003'
 };
 
 /***/ }),
@@ -11218,6 +11625,268 @@ function (_View) {
 
 /***/ }),
 
+/***/ "./static/public/js/views/chat-view.js":
+/*!*********************************************!*\
+  !*** ./static/public/js/views/chat-view.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ChatView; });
+/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
+/* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var bemhtml = __webpack_require__(/*! ../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+/**
+ * @class ChatView
+ */
+
+
+var ChatView =
+/*#__PURE__*/
+function (_View) {
+  _inherits(ChatView, _View);
+
+  /**
+   * @param {HTMLElement} parent
+   */
+  function ChatView(parent) {
+    _classCallCheck(this, ChatView);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ChatView).call(this, parent));
+  }
+  /**
+   * Scroll messages to the last message
+   * @private
+   */
+
+
+  _createClass(ChatView, [{
+    key: "_scrollDown",
+    value: function _scrollDown() {
+      var items = document.getElementsByClassName('chat__items')[0];
+      items.scrollTop = items.scrollHeight;
+    }
+    /**
+     * Add new message
+     * @param {number} id
+     * @param {string} nickname
+     * @param {string} msg
+     */
+
+  }, {
+    key: "addMessage",
+    value: function addMessage(id, nickname, msg) {
+      var items = document.getElementsByClassName('chat__items')[0];
+      var template = [{
+        block: 'chat',
+        elem: 'item',
+        content: [{
+          elem: 'msg-data',
+          content: [{
+            elem: 'link',
+            tag: 'a',
+            fieldName: 'userName',
+            value: id,
+            attrs: {
+              value: id
+            },
+            // to be changed once api's here
+            content: [{
+              elem: 'data-field',
+              content: [{
+                elem: 'username',
+                content: nickname + ':'
+              }]
+            }]
+          }]
+        }, {
+          elem: 'text',
+          content: msg
+        }]
+      }];
+      items.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+
+      this._scrollDown();
+    }
+  }, {
+    key: "addMessageToEnd",
+    value: function addMessageToEnd(id, nickname, msg) {
+      var items = document.getElementsByClassName('chat__items')[0];
+      var template = [{
+        block: 'chat',
+        elem: 'item',
+        content: [{
+          elem: 'msg-data',
+          content: [{
+            elem: 'link',
+            tag: 'a',
+            fieldName: 'userName',
+            value: id,
+            attrs: {
+              value: id
+            },
+            // to be changed once api's here
+            content: [{
+              elem: 'data-field',
+              content: [{
+                elem: 'username',
+                content: nickname + ':'
+              }]
+            }]
+          }]
+        }, {
+          elem: 'text',
+          content: msg
+        }]
+      }];
+      items.insertAdjacentHTML('afterBegin', bemhtml.apply(template));
+    }
+    /**
+     * create Page with Authors
+     */
+
+  }, {
+    key: "render",
+    value: function render() {
+      var draw = [{
+        block: 'chat',
+        mods: {
+          main: true
+        },
+        content: [{
+          elem: 'header',
+          content: 'Чат'
+        }, {
+          // TODO close_icon
+          block: 'icon',
+          tag: 'a',
+          wrappedInside: 'chat',
+          wrappedAs: 'close-popup',
+          mods: {
+            size: 'large',
+            color: 'black',
+            btn: true,
+            type: 'cross'
+          },
+          attrs: {
+            'data-link-type': '/'
+          }
+        }, {
+          elem: 'items',
+          messages: []
+        }, {
+          elem: 'form',
+          content: [{
+            tag: 'textarea',
+            elem: 'input',
+            attrs: {
+              placeholder: 'Введите сообщение',
+              type: 'text'
+            }
+          }, {
+            attrs: {
+              type: 'submit'
+            },
+            block: 'btn',
+            wrappedInside: 'chat',
+            wrappedAs: 'btn',
+            content: [{
+              block: 'btn',
+              elem: 'inner',
+              content: [{
+                block: 'btn',
+                elem: 'text',
+                elemMods: {
+                  'normal': true
+                },
+                content: 'Отправить'
+              }]
+            }]
+          }]
+        }]
+      }];
+      this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
+
+      this._scrollDown();
+    }
+  }]);
+
+  return ChatView;
+}(_core_view_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./static/public/js/views/components/chat-button.js":
+/*!**********************************************************!*\
+  !*** ./static/public/js/views/components/chat-button.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return showChatButton; });
+/* harmony import */ var _small_chat_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./small-chat.js */ "./static/public/js/views/components/small-chat.js");
+
+
+
+
+var bemhtml = __webpack_require__(/*! ../../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+/**
+ * Render message button
+ * @param {HTMLElement} parent
+ */
+
+
+function showChatButton(parent) {
+  var template = [{
+    block: 'small-chat',
+    content: [{
+      elem: 'btn',
+      type: 'mail' // content: [{
+      //   elem: 'notify',
+      //   content: 1,
+      // }],
+
+    }]
+  }];
+  parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  var button = parent.getElementsByClassName('small-chat');
+  var renderBtn = button[0];
+
+  renderBtn.onclick = function () {
+    parent.removeChild(button[0]);
+    Object(_small_chat_js__WEBPACK_IMPORTED_MODULE_0__["default"])(parent);
+  };
+}
+
+/***/ }),
+
 /***/ "./static/public/js/views/components/disconnect-messagebox.js":
 /*!********************************************************************!*\
   !*** ./static/public/js/views/components/disconnect-messagebox.js ***!
@@ -11335,6 +12004,47 @@ function createHeader() {
   application.insertAdjacentHTML('beforeend', '<div class="header"></div>');
   var headerDiv = document.getElementsByClassName('header')[0];
   headerDiv.insertAdjacentHTML('beforeend', bemhtml.apply(header));
+}
+
+/***/ }),
+
+/***/ "./static/public/js/views/components/notifier.js":
+/*!*******************************************************!*\
+  !*** ./static/public/js/views/components/notifier.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return makeNotify; });
+
+/**
+ * //
+ * @param {string} data
+ */
+
+function makeNotify() {
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+  if (!'Notification' in window) {
+    console.error('not not sup');
+    return;
+  }
+
+  if (Notification.permission === 'granted') {
+    new Notification(data);
+    return;
+  }
+
+  if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then(function (permission) {
+      if (permission === 'granted') {
+        new Notification(data);
+        return;
+      }
+    });
+  }
 }
 
 /***/ }),
@@ -11578,6 +12288,102 @@ function () {
 }();
 
 
+
+/***/ }),
+
+/***/ "./static/public/js/views/components/small-chat.js":
+/*!*********************************************************!*\
+  !*** ./static/public/js/views/components/small-chat.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return showSmallChat; });
+/* harmony import */ var _chat_button_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chat-button.js */ "./static/public/js/views/components/chat-button.js");
+
+
+
+
+var bemhtml = __webpack_require__(/*! ../../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+/**
+ * Render small chat
+ * @param {HTMLElement} parent
+ */
+
+
+function showSmallChat(parent) {
+  var template = [{
+    block: 'small-chat',
+    mods: {
+      open: true
+    },
+    content: [{
+      block: 'chat',
+      content: [{
+        elem: 'header',
+        content: 'Чат'
+      }, {
+        // TODO close_icon
+        block: 'icon',
+        tag: 'a',
+        wrappedInside: 'chat',
+        wrappedAs: 'close-popup',
+        mods: {
+          size: 'large',
+          color: 'black',
+          btn: true,
+          type: 'cross'
+        },
+        attrs: {
+          'data-link-type': '/'
+        }
+      }, {
+        elem: 'items',
+        messages: ['']
+      }, {
+        elem: 'form',
+        content: [{
+          tag: 'textarea',
+          elem: 'input',
+          attrs: {
+            placeholder: 'Введите сообщение',
+            type: 'text'
+          }
+        }, {
+          attrs: {
+            type: 'submit'
+          },
+          block: 'btn',
+          wrappedInside: 'chat',
+          wrappedAs: 'btn',
+          content: [{
+            block: 'btn',
+            elem: 'inner',
+            content: [{
+              block: 'btn',
+              elem: 'text',
+              elemMods: {
+                'normal': true
+              },
+              content: 'Отправить'
+            }]
+          }]
+        }]
+      }]
+    }]
+  }];
+  parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+  var button = parent.getElementsByClassName('icon_type_cross');
+  var closeBtn = button[0];
+  var chatBlock = parent.getElementsByClassName('chat')[0];
+
+  closeBtn.onclick = function () {
+    parent.removeChild(chatBlock);
+    Object(_chat_button_js__WEBPACK_IMPORTED_MODULE_0__["default"])(parent);
+  };
+}
 
 /***/ }),
 
@@ -12363,6 +13169,10 @@ var authedTemplate = [{
   href: 'exit',
   text: 'Выйти',
   type: 'signout'
+}, {
+  href: 'chat',
+  text: 'Чат',
+  type: 'mail'
 }];
 var unauthedTemplate = [{
   href: 'single',
@@ -12384,6 +13194,10 @@ var unauthedTemplate = [{
   href: 'authors',
   text: 'Авторы',
   type: 'users'
+}, {
+  href: 'chat',
+  text: 'Чат',
+  type: 'mail'
 }];
 /**
  * @class MenuView

@@ -1,0 +1,43 @@
+.small-chat {
+  $block: &;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+
+  &_open {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  &__btn {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: #03b432;
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    bottom: 30px;
+    right: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.71);
+  }
+
+  &_notify {
+    position: relative;
+
+    font-family: Helvetica, sans-serif;
+    font-size: 10px;
+  }
+
+  &__icon-bg {
+    width: 80px;
+    height: 80px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}

@@ -29,6 +29,11 @@ const authedTemplate = [
     text: 'Выйти',
     type: 'signout',
   },
+  {
+    href: 'chat',
+    text: 'Чат',
+    type: 'mail',
+  },
 ];
 
 const unauthedTemplate = [
@@ -56,6 +61,11 @@ const unauthedTemplate = [
     href: 'authors',
     text: 'Авторы',
     type: 'users',
+  },
+  {
+    href: 'chat',
+    text: 'Чат',
+    type: 'mail',
   },
 ];
 
@@ -96,7 +106,8 @@ export default class MenuView extends View {
             points: data,
           },
         ],
-      }];
+      },
+    ];
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
   }
 }
