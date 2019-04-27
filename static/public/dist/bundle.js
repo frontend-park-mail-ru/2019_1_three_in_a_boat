@@ -6847,6 +6847,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_chat_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/chat-view.js */ "./static/public/js/views/chat-view.js");
 /* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
 /* harmony import */ var _views_components_notifier_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../views/components/notifier.js */ "./static/public/js/views/components/notifier.js");
+/* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ajax.js */ "./static/public/js/ajax.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6866,6 +6867,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -6930,6 +6932,28 @@ function (_Controller) {
       };
     }
     /**
+     * Get url args
+     * @param {Array} msgs
+     * @return {string}
+     * @private
+     */
+
+  }, {
+    key: "_getUrlArgsForIds",
+    value: function _getUrlArgsForIds(msgs) {
+      var args = '';
+      msgs.forEach(function (msg, pos) {
+        if ('uid' in msg) {
+          if (args.length > 0) {
+            args += '&';
+          }
+
+          args += 'ids=' + msg.uid;
+        }
+      });
+      return args;
+    }
+    /**
      * Get new messages
      * @param {object} message
      * @private
@@ -6949,17 +6973,57 @@ function (_Controller) {
       }
 
       if (Array.isArray(data)) {
-        // TODO get usernames
-        data.sort(function (a, b) {
-          return a.mid - b.mid;
-        });
-        data.forEach(function (msg) {
-          _this3.view.addMessage(msg.uid, 'UserName', msg.text);
-        });
-      } else {
-        // TODO get username
-        this.view.addMessage(data.uid, 'UserName', data.text);
-        Object(_views_components_notifier_js__WEBPACK_IMPORTED_MODULE_4__["default"])("User ".concat(data.uid, " send message:\n ").concat(data.text.substring(0, 120)));
+        var args = this._getUrlArgsForIds(data);
+
+        if (args.length > 0) {
+          _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
+            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?' + args
+          }).then(function (result) {
+            result.json().then(function (msgsData) {
+              msgsData = msgsData.data.users;
+              data.sort(function (a, b) {
+                return a.mid - b.mid;
+              });
+              data.forEach(function (msg) {
+                var username = 'uid' in msg ? msgsData.find(function (item) {
+                  return item.uid === msg.uid;
+                }).username : 'Анон';
+
+                _this3.view.addMessage(msg.uid, username, msg.text);
+
+                _this3.ws.makeNotify("".concat(username, ": \n ").concat(data.text.substring(0, 120))); // makeNotify(`User ${data.uid} send message:\n ${data.text.substring(0, 120)}`);
+
+              });
+            });
+          });
+        } else {
+          data.forEach(function (msg) {
+            data.sort(function (a, b) {
+              return a.mid - b.mid;
+            });
+
+            _this3.view.addMessage(0, 'Анон', msg.text);
+
+            _this3.ws.makeNotify("\u0410\u043D\u043E\u043D\u0438\u043C:\n ".concat(data.text.substring(0, 120)));
+          });
+        }
+      } else if ('text' in data) {
+        if ('uid' in data) {
+          _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
+            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?ids=' + data.uid
+          }).then(function (result) {
+            result.json().then(function (msgsData) {
+              msgsData = msgsData.data.users[0];
+
+              _this3.ws.makeNotify("".concat(msgsData.username, ": \n ").concat(data.text.substring(0, 120)));
+
+              _this3.view.addMessage(data.uid, msgsData.username, data.text);
+            });
+          });
+        } else {
+          this.ws.makeNotify("\u0410\u043D\u043E\u043D\u0438\u043C: ".concat(data.text.substring(0, 120)));
+          this.view.addMessage(data.uid, 'Анон', data.text);
+        }
       }
     }
     /**
@@ -7741,10 +7805,7 @@ function (_Controller) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NotificationController; });
-/* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
-/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../event-bus.js */ "./static/public/js/event-bus.js");
-/* harmony import */ var _views_components_disconnect_messagebox_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/components/disconnect-messagebox.js */ "./static/public/js/views/components/disconnect-messagebox.js");
-/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
+/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7754,10 +7815,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-
-
-
-var SERVER_ADDRESS = _settings_config_js__WEBPACK_IMPORTED_MODULE_3__["settings"].wsUrl; // 'ws://localhost:3000/ws';
+var SERVER_ADDRESS = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].wsUrl; // 'ws://localhost:3000/ws';
 
 /**
  * The singleton class for sending and receiving messages from server
@@ -7783,7 +7841,6 @@ function () {
     _classCallCheck(this, NotificationController);
 
     var Socket = 'MozWebSocket' in window ? MozWebSocket : WebSocket;
-    console.log(url);
     this.ws = new Socket(url + path);
 
     this.ws.onerror = function (event) {
@@ -7821,12 +7878,11 @@ function () {
     /**
      * Says the client information about connection
      * @param {string} data
-     * @private
      */
 
   }, {
-    key: "_makeNotify",
-    value: function _makeNotify() {
+    key: "makeNotify",
+    value: function makeNotify() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'error';
 
       if (!'Notification' in window) {
@@ -11746,17 +11802,6 @@ function (_View) {
   }, {
     key: "render",
     value: function render() {
-      // const data = JSON.parse(JSON.stringify(authors));
-      // const bemAuthors = [];
-      var msgs = [{
-        uid: 1,
-        username: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-        text: 'AAAAAAAAAAAAA'
-      }, {
-        uid: 1,
-        username: 'aaaa',
-        text: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-      }];
       var draw = [{
         block: 'chat',
         mods: {
@@ -11782,7 +11827,7 @@ function (_View) {
           }
         }, {
           elem: 'items',
-          messages: msgs
+          messages: []
         }, {
           elem: 'form',
           content: [{
@@ -11817,10 +11862,6 @@ function (_View) {
       this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
 
       this._scrollDown();
-
-      for (var i = 0; i < 3; i++) {
-        this.addMessage(1, 'name', 'msg');
-      }
     }
   }]);
 
@@ -12293,11 +12334,11 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SmallChat; });
-/* harmony import */ var _chat_button_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chat-button.js */ "./static/public/js/views/components/chat-button.js");
-/* harmony import */ var _small_chat_vew_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../small-chat-vew.js */ "./static/public/js/views/small-chat-vew.js");
-/* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
-/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../settings/config.js */ "./static/public/js/settings/config.js");
-
+/* harmony import */ var _small_chat_vew_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../small-chat-vew.js */ "./static/public/js/views/small-chat-vew.js");
+/* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
+/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../settings/config.js */ "./static/public/js/settings/config.js");
+/* harmony import */ var _msg_btn_view_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../msg-btn-view.js */ "./static/public/js/views/msg-btn-view.js");
+ // import showChatButton from './chat-button.js';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -12328,8 +12369,8 @@ function () {
     _classCallCheck(this, SmallChat);
 
     this.parent = parent;
-    this.view = new _small_chat_vew_js__WEBPACK_IMPORTED_MODULE_1__["default"](parent);
-    this.button = Object(_chat_button_js__WEBPACK_IMPORTED_MODULE_0__["default"])(parent);
+    this.view = new _small_chat_vew_js__WEBPACK_IMPORTED_MODULE_0__["default"](parent);
+    this.button = new _msg_btn_view_js__WEBPACK_IMPORTED_MODULE_3__["default"](parent);
     this.button.hidden = true;
   }
   /**
@@ -12371,14 +12412,16 @@ function () {
       var chatBlock = this.parent.getElementsByClassName('chat')[0];
 
       closeBtn.onclick = function () {
+        console.log('hello');
         chatBlock.style.display = 'none';
-        _this.button.hidden = false; // this.parent.removeChild(chatBlock);
+
+        _this.button.render(); // this.parent.removeChild(chatBlock);
+
       };
 
       this.button.onclick = function () {
-        _this.parent.removeChild(_this.button);
+        _this.button.hidden(); // this.button = undefined;
 
-        _this.button = undefined;
 
         _this.view.render(); // parent.removeChild(button[0]);
 
@@ -12446,7 +12489,7 @@ function () {
   }, {
     key: "_initWebSocket",
     value: function _initWebSocket() {
-      this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_2__["default"]('/chat', this._getMessages.bind(this), function () {}, _settings_config_js__WEBPACK_IMPORTED_MODULE_3__["settings"].wsUrl + _settings_config_js__WEBPACK_IMPORTED_MODULE_3__["settings"].chatPort);
+      this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_1__["default"]('/chat', this._getMessages.bind(this), function () {}, _settings_config_js__WEBPACK_IMPORTED_MODULE_2__["settings"].wsUrl + _settings_config_js__WEBPACK_IMPORTED_MODULE_2__["settings"].chatPort);
     }
   }]);
 
@@ -13322,6 +13365,95 @@ function (_View) {
   }]);
 
   return MenuView;
+}(_core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./static/public/js/views/msg-btn-view.js":
+/*!************************************************!*\
+  !*** ./static/public/js/views/msg-btn-view.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MsgButtonView; });
+/* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var bemhtml = __webpack_require__(/*! ../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+/**
+ * @class ChatView
+ */
+
+
+var MsgButtonView =
+/*#__PURE__*/
+function (_View) {
+  _inherits(MsgButtonView, _View);
+
+  /**
+   * @param {HTMLElement} parent
+   */
+  function MsgButtonView(parent) {
+    _classCallCheck(this, MsgButtonView);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(MsgButtonView).call(this, parent));
+  }
+  /**
+   * create Page with Authors
+   */
+
+
+  _createClass(MsgButtonView, [{
+    key: "render",
+    value: function render() {
+      var draw = [{
+        block: 'small-chat',
+        content: [{
+          elem: 'btn',
+          type: 'mail' // content: [{
+          //   elem: 'notify',
+          //   content: 1,
+          // }],
+
+        }]
+      }];
+      this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
+    }
+    /**
+     * remove element
+     */
+
+  }, {
+    key: "hidden",
+    value: function hidden() {
+      this.parent.removeChild('small-chat');
+    }
+  }]);
+
+  return MsgButtonView;
 }(_core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 

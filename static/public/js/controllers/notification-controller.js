@@ -1,8 +1,4 @@
 'use strict';
-
-import events from '../game/core/events.js';
-import bus from '../event-bus.js';
-import showDiscMessage from '../views/components/disconnect-messagebox.js';
 import {settings} from '../settings/config.js';
 
 const SERVER_ADDRESS = settings.wsUrl; // 'ws://localhost:3000/ws';
@@ -21,7 +17,6 @@ export default class NotificationController {
    */
   constructor(path, onMsg, onClose= () => {}, url=SERVER_ADDRESS) {
     const Socket = 'MozWebSocket' in window ? MozWebSocket : WebSocket;
-    console.log(url);
     this.ws = new Socket(url + path);
 
     this.ws.onerror = (event) => {
@@ -55,9 +50,8 @@ export default class NotificationController {
   /**
    * Says the client information about connection
    * @param {string} data
-   * @private
    */
-  _makeNotify(data = 'error') {
+  makeNotify(data = 'error') {
     if (!'Notification' in window) {
       console.error('haven`t Notification in window');
       return;
