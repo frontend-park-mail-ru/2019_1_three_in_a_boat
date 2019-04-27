@@ -6670,6 +6670,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
 /* harmony import */ var _views_chat_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/chat-view.js */ "./static/public/js/views/chat-view.js");
 /* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
+/* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ajax.js */ "./static/public/js/ajax.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6689,6 +6690,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -6752,6 +6754,28 @@ function (_Controller) {
       };
     }
     /**
+     * Get url args
+     * @param {Array} msgs
+     * @return {string}
+     * @private
+     */
+
+  }, {
+    key: "_getUrlArgsForIds",
+    value: function _getUrlArgsForIds(msgs) {
+      var args = '';
+      msgs.forEach(function (msg, pos) {
+        if ('uid' in msg) {
+          if (args.length > 0) {
+            args += '&';
+          }
+
+          args += 'ids=' + msg.uid;
+        }
+      });
+      return args;
+    }
+    /**
      * Get new messages
      * @param {object} message
      * @private
@@ -6771,16 +6795,49 @@ function (_Controller) {
       }
 
       if (Array.isArray(data)) {
-        // TODO get usernames
-        data.sort(function (a, b) {
-          return a.mid - b.mid;
-        });
-        data.forEach(function (msg) {
-          _this3.view.addMessage(msg.uid, 'UserName', msg.text);
-        });
-      } else {
-        // TODO get username
-        this.view.addMessage(data.uid, 'UserName', data.text);
+        var args = this._getUrlArgsForIds(data);
+
+        if (args.length > 0) {
+          _ajax_js__WEBPACK_IMPORTED_MODULE_4__["default"].doGet({
+            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?' + args
+          }).then(function (result) {
+            result.json().then(function (msgsData) {
+              msgsData = msgsData.data.users;
+              data.sort(function (a, b) {
+                return a.mid - b.mid;
+              });
+              data.forEach(function (msg) {
+                var username = 'uid' in msg ? msgsData.find(function (item) {
+                  return item.uid === msg.uid;
+                }).username : 'Анон';
+
+                _this3.view.addMessage(msg.uid, username, msg.text);
+              });
+            });
+          });
+        } else {
+          data.forEach(function (msg) {
+            data.sort(function (a, b) {
+              return a.mid - b.mid;
+            });
+
+            _this3.view.addMessage(0, 'Анон', msg.text);
+          });
+        }
+      } else if ('text' in data) {
+        if ('uid' in data) {
+          _ajax_js__WEBPACK_IMPORTED_MODULE_4__["default"].doGet({
+            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?ids=' + data.uid
+          }).then(function (result) {
+            result.json().then(function (msgsData) {
+              msgsData = msgsData.data.users[0];
+
+              _this3.view.addMessage(data.uid, msgsData.username, data.text);
+            });
+          });
+        } else {
+          this.view.addMessage(data.uid, 'Анон', data.text);
+        }
       }
     }
     /**
@@ -11554,17 +11611,6 @@ function (_View) {
   }, {
     key: "render",
     value: function render() {
-      // const data = JSON.parse(JSON.stringify(authors));
-      // const bemAuthors = [];
-      var msgs = [{
-        uid: 1,
-        username: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-        text: 'AAAAAAAAAAAAA'
-      }, {
-        uid: 1,
-        username: 'aaaa',
-        text: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-      }];
       var draw = [{
         block: 'chat',
         mods: {
@@ -11590,7 +11636,7 @@ function (_View) {
           }
         }, {
           elem: 'items',
-          messages: msgs
+          messages: []
         }, {
           elem: 'form',
           content: [{
@@ -11625,10 +11671,6 @@ function (_View) {
       this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
 
       this._scrollDown();
-
-      for (var i = 0; i < 3; i++) {
-        this.addMessage(1, 'name', 'msg');
-      }
     }
   }]);
 

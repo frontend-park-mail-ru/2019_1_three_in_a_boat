@@ -72,21 +72,6 @@ export default class ChatView extends View {
    * create Page with Authors
    */
   render() {
-    // const data = JSON.parse(JSON.stringify(authors));
-    // const bemAuthors = [];
-    const msgs = [
-      {
-        uid: 1,
-        username: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-        text: 'AAAAAAAAAAAAA',
-      },
-      {
-        uid: 1,
-        username: 'aaaa',
-        text: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-      },
-    ];
-
     const draw = [
       {
         block: 'chat',
@@ -113,7 +98,7 @@ export default class ChatView extends View {
           },
           {
             elem: 'items',
-            messages: msgs,
+            messages: [],
           },
           {
             elem: 'form',
@@ -147,9 +132,5 @@ export default class ChatView extends View {
 
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
     this._scrollDown();
-
-    for (let i = 0; i < 3; i++) {
-      this.addMessage(1, 'name', 'msg');
-    }
   }
 }

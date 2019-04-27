@@ -4,6 +4,7 @@ import {settings} from '../settings/config.js';
 import Controller from '../core/controller.js';
 import ChatView from '../views/chat-view.js';
 import WebSocketController from '../controllers/notification-controller.js';
+import ajax from '../ajax.js';
 
 /**
  * @class ChatController
@@ -40,6 +41,26 @@ export default class ChatController extends Controller {
   }
 
   /**
+   * Get url args
+   * @param {Array} msgs
+   * @return {string}
+   * @private
+   */
+  _getUrlArgsForIds(msgs) {
+    let args = '';
+    msgs.forEach((msg, pos) => {
+      if ('uid' in msg) {
+        if (args.length > 0) {
+          args += '&';
+        }
+        args += 'ids=' + msg.uid;
+      }
+    });
+
+    return args;
+  }
+
+  /**
    * Get new messages
    * @param {object} message
    * @private
@@ -53,14 +74,37 @@ export default class ChatController extends Controller {
     }
 
     if (Array.isArray(data)) {
-      // TODO get usernames
-      data.sort((a, b) => a.mid - b.mid);
-      data.forEach((msg) => {
-        this.view.addMessage(msg.uid, 'UserName', msg.text);
-      });
-    } else {
-      // TODO get username
-      this.view.addMessage(data.uid, 'UserName', data.text);
+      const args = this._getUrlArgsForIds(data);
+      if (args.length > 0) {
+        ajax.doGet({path: settings.url + '/users/chat?' + args}).then((result) => {
+          result.json().then((msgsData) => {
+            msgsData = msgsData.data.users;
+            data.sort((a, b) => a.mid - b.mid);
+            data.forEach((msg) => {
+              const username = 'uid' in msg ? msgsData.find((item) => {
+                return item.uid === msg.uid;
+              }).username : 'Анон';
+              this.view.addMessage(msg.uid, username, msg.text);
+            });
+          });
+        });
+      } else {
+        data.forEach((msg) => {
+          data.sort((a, b) => a.mid - b.mid);
+          this.view.addMessage(0, 'Анон', msg.text);
+        });
+      }
+    } else if ('text' in data) {
+      if ('uid' in data) {
+        ajax.doGet({path: settings.url + '/users/chat?ids=' + data.uid}).then((result) => {
+          result.json().then((msgsData) => {
+            msgsData = msgsData.data.users[0];
+            this.view.addMessage(data.uid, msgsData.username, data.text);
+          });
+        });
+      } else {
+        this.view.addMessage(data.uid, 'Анон', data.text);
+      }
     }
   }
 
