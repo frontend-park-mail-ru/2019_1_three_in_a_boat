@@ -6842,8 +6842,10 @@ function (_Controller) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ChatController; });
-/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
-/* harmony import */ var _views_chat_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/chat-view.js */ "./static/public/js/views/chat-view.js");
+/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
+/* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
+/* harmony import */ var _views_chat_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/chat-view.js */ "./static/public/js/views/chat-view.js");
+/* harmony import */ var _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controllers/notification-controller.js */ "./static/public/js/controllers/notification-controller.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6866,6 +6868,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 /**
  * @class ChatController
  */
@@ -6885,7 +6889,7 @@ function (_Controller) {
     _classCallCheck(this, ChatController);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ChatController).call(this, parent, true));
-    _this.view = new _views_chat_view_js__WEBPACK_IMPORTED_MODULE_1__["default"](parent);
+    _this.view = new _views_chat_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
     return _this;
   }
   /**
@@ -6897,11 +6901,78 @@ function (_Controller) {
     key: "action",
     value: function action() {
       this.view.render();
+
+      this._initWebSocket();
+
+      this._initEvents();
+    }
+    /**
+     * Init events
+     * @private
+     */
+
+  }, {
+    key: "_initEvents",
+    value: function _initEvents() {
+      var _this2 = this;
+
+      var btn = this.parent.getElementsByClassName('chat__btn')[0];
+      var input = this.parent.getElementsByClassName('chat__input')[0];
+
+      btn.onclick = function () {
+        var data = {
+          text: input.value
+        };
+
+        _this2.ws.sendData(JSON.stringify(data));
+      };
+    }
+    /**
+     * Get new messages
+     * @param {object} message
+     * @private
+     */
+
+  }, {
+    key: "_getMessages",
+    value: function _getMessages(message) {
+      var _this3 = this;
+
+      var data;
+
+      try {
+        data = JSON.parse(message.data);
+      } catch (e) {
+        return;
+      }
+
+      if (Array.isArray(data)) {
+        // TODO get usernames
+        data.sort(function (a, b) {
+          return a.mid - b.mid;
+        });
+        data.forEach(function (msg) {
+          _this3.view.addMessage(msg.uid, 'UserName', msg.text);
+        });
+      } else {
+        // TODO get username
+        this.view.addMessage(data.uid, 'UserName', data.text);
+      }
+    }
+    /**
+     * Init websocket connection
+     * @private
+     */
+
+  }, {
+    key: "_initWebSocket",
+    value: function _initWebSocket() {
+      this.ws = new _controllers_notification_controller_js__WEBPACK_IMPORTED_MODULE_3__["default"]('/chat', this._getMessages.bind(this), function () {}, _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].wsUrl + _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].chatPort);
     }
   }]);
 
   return ChatController;
-}(_core_controller_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+}(_core_controller_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
 ;
@@ -7700,16 +7771,19 @@ function () {
    * @param {string} path
    * @param {function} onMsg
    * @param {function} onClose
+   * @param {string} url websocket url
    */
   function NotificationController(path, onMsg) {
     var _this = this;
 
     var onClose = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+    var url = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : SERVER_ADDRESS;
 
     _classCallCheck(this, NotificationController);
 
     var Socket = 'MozWebSocket' in window ? MozWebSocket : WebSocket;
-    this.ws = new Socket(SERVER_ADDRESS + path);
+    console.log(url);
+    this.ws = new Socket(url + path);
 
     this.ws.onerror = function (event) {
       console.log('WebSocket ERROR: ' + JSON.stringify(event, null, 4));
@@ -11071,7 +11145,8 @@ var settings = {
   home: 'http://127.0.0.1:8080',
   url: 'http://127.0.0.1:3000',
   imgPath: 'https://hexagon-game.s3.eu-north-1.amazonaws.com/img/',
-  wsUrl: 'ws://127.0.0.1:3000'
+  wsUrl: 'ws://127.0.0.1',
+  chatPort: ':3003'
 };
 
 /***/ }),
