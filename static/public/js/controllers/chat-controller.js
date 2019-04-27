@@ -40,6 +40,7 @@ export default class ChatController extends Controller {
     btn.onclick = () => {
       const data = {text: input.value};
       this.ws.sendData(JSON.stringify(data));
+      input.value = '';
     };
   }
 
@@ -89,8 +90,6 @@ export default class ChatController extends Controller {
                 return item.uid === msg.uid;
               }).username : 'Анон';
               this.view.addMessage(msg.uid, username, msg.text);
-              this.ws.makeNotify(`${username}: \n ${data.text.substring(0, 120)}`);
-              // makeNotify(`User ${data.uid} send message:\n ${data.text.substring(0, 120)}`);
             });
           });
         });
@@ -98,7 +97,6 @@ export default class ChatController extends Controller {
         data.forEach((msg) => {
           data.sort((a, b) => a.mid - b.mid);
           this.view.addMessage(0, 'Анон', msg.text);
-          this.ws.makeNotify(`Аноним:\n ${data.text.substring(0, 120)}`);
         });
       }
     } else if ('text' in data) {
