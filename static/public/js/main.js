@@ -1,7 +1,5 @@
 'use strict';
 
-import ChatController from "./controllers/chat-controller";
-
 require('./bundle.bemhtml.js');
 require('./bundle.bemtree.js');
 require('../icons/favicon.ico');
@@ -19,6 +17,7 @@ import UpdateController from './controllers/update-controller.js';
 import GameMenuController from './controllers/game-menu-controller.js';
 import GameOverMltController from './controllers/game-over-mlt-controller.js';
 import GameController from './controllers/game-controller.js';
+import ChatController from './controllers/chat-controller.js';
 import '../css/style.css';
 
 const application = document.getElementById('application');
