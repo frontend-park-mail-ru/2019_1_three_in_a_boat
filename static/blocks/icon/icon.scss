@@ -22,6 +22,7 @@ $user-icon: $icons-path + "/user.svg";
 $vk-icon: $icons-path + "/vk.svg";
 $crown-icon: $icons-path + "/crown.svg";
 $back_icon: $icons-path + "/arrow_previous.svg";
+$mail-icon: $icons-path + "/mail.svg";
 
 $icon-size: 14px, 14px;
 $icon-sizes: (small: (12px, 12px),
@@ -140,6 +141,9 @@ $icon-sizes: (small: (12px, 12px),
         }
         &_back{
             @include mask-image($back_icon);
+        }
+        &_mail{
+            @include mask-image($mail-icon);
         }
         &_ru {
             background-image: url($ru-png);

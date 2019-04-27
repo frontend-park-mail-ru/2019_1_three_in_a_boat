@@ -96,7 +96,21 @@ export default class MenuView extends View {
             points: data,
           },
         ],
-      }];
+      },
+      {
+        block: 'small-chat',
+        content: [
+          {
+            elem: 'btn',
+            type: 'mail',
+            // content: [{
+            //   elem: 'notify',
+            //   content: 1,
+            // }],
+          },
+        ],
+      },
+    ];
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
   }
 }
