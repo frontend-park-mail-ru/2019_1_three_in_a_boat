@@ -68,6 +68,45 @@ export default class ChatView extends View {
     this._scrollDown();
   }
 
+  addMessageToEnd(id, nickname, msg) {
+    const items = document.getElementsByClassName('chat__items')[0];
+    const template = [{
+      block: 'chat',
+      elem: 'item',
+      content: [
+        {
+          elem: 'msg-data',
+          content: [
+            {
+              elem: 'link',
+              tag: 'a',
+              fieldName: 'userName',
+              value: id,
+              attrs: {value: id}, // to be changed once api's here
+              content: [
+                {
+                  elem: 'data-field',
+                  content: [
+                    {
+                      elem: 'username',
+                      content: nickname + ':',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          elem: 'text',
+          content: msg,
+        },
+      ],
+    }];
+
+    items.insertAdjacentHTML('afterBegin', bemhtml.apply(template));
+  }
+
   /**
    * create Page with Authors
    */

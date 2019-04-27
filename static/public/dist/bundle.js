@@ -6778,6 +6778,7 @@ function (_Controller) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ChatController).call(this, parent, true));
     _this.view = new _views_chat_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
+    _this.minId = undefined;
     return _this;
   }
   /**
@@ -6793,6 +6794,8 @@ function (_Controller) {
       this._initWebSocket();
 
       this._initEvents();
+
+      this._initScroll();
     }
     /**
      * Init events
@@ -6868,6 +6871,7 @@ function (_Controller) {
               data.sort(function (a, b) {
                 return a.mid - b.mid;
               });
+              _this3.minId = data[0].mid;
               data.forEach(function (msg) {
                 var username = 'uid' in msg ? msgsData.find(function (item) {
                   return item.uid === msg.uid;
@@ -6901,6 +6905,62 @@ function (_Controller) {
           this.view.addMessage(data.uid, 'Анон', data.text);
         }
       }
+    }
+    /**
+     * Init scroll events
+     * @private
+     */
+
+  }, {
+    key: "_initScroll",
+    value: function _initScroll() {
+      var _this4 = this;
+
+      var items = this.parent.getElementsByClassName('chat__items')[0];
+
+      items.onscroll = function () {
+        if (items.scrollTop <= 0) {
+          // chat/paginate?msgId=1
+          _ajax_js__WEBPACK_IMPORTED_MODULE_4__["default"].doGet({
+            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].chatUrl + '/chat/paginate?msgId=' + _this4.minId
+          }).then(function (result) {
+            result.json().then(function (data) {
+              data = data.data;
+
+              var args = _this4._getUrlArgsForIds(data);
+
+              if (args.length > 0) {
+                _ajax_js__WEBPACK_IMPORTED_MODULE_4__["default"].doGet({
+                  path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?' + args
+                }).then(function (result) {
+                  result.json().then(function (msgsData) {
+                    msgsData = msgsData.data.users;
+                    data.sort(function (a, b) {
+                      return a.mid - b.mid;
+                    });
+                    _this4.minId = data[0].mid;
+                    data.forEach(function (msg) {
+                      var username = 'uid' in msg ? msgsData.find(function (item) {
+                        return item.uid === msg.uid;
+                      }).username : 'Анон';
+
+                      _this4.view.addMessageToEnd(msg.uid, username, msg.text);
+                    });
+                  });
+                });
+              } else {
+                data.forEach(function (msg) {
+                  data.sort(function (a, b) {
+                    return a.mid - b.mid;
+                  });
+
+                  _this4.view.addMessageToEnd(0, 'Анон', msg.text);
+                });
+              }
+            });
+          });
+        }
+      };
     }
     /**
      * Init websocket connection
@@ -7020,7 +7080,9 @@ function (_Controller) {
 
       var mode = '';
 
-      if (false) {} else {
+      if (navigator.onLine) {
+        mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].ONLINE;
+      } else {
         mode = _game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].OFFLINE;
       }
 
@@ -11086,6 +11148,7 @@ __webpack_require__.r(__webpack_exports__);
 var settings = {
   home: 'http://127.0.0.1:8080',
   url: 'http://127.0.0.1:3000',
+  chatUrl: 'http://127.0.0.1:3003',
   imgPath: 'https://hexagon-game.s3.eu-north-1.amazonaws.com/img/',
   wsUrl: 'ws://127.0.0.1',
   chatPort: ':3003'
@@ -11668,6 +11731,39 @@ function (_View) {
       items.insertAdjacentHTML('beforeend', bemhtml.apply(template));
 
       this._scrollDown();
+    }
+  }, {
+    key: "addMessageToEnd",
+    value: function addMessageToEnd(id, nickname, msg) {
+      var items = document.getElementsByClassName('chat__items')[0];
+      var template = [{
+        block: 'chat',
+        elem: 'item',
+        content: [{
+          elem: 'msg-data',
+          content: [{
+            elem: 'link',
+            tag: 'a',
+            fieldName: 'userName',
+            value: id,
+            attrs: {
+              value: id
+            },
+            // to be changed once api's here
+            content: [{
+              elem: 'data-field',
+              content: [{
+                elem: 'username',
+                content: nickname + ':'
+              }]
+            }]
+          }]
+        }, {
+          elem: 'text',
+          content: msg
+        }]
+      }];
+      items.insertAdjacentHTML('afterBegin', bemhtml.apply(template));
     }
     /**
      * create Page with Authors

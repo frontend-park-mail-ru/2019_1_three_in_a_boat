@@ -17,6 +17,7 @@ export default class ChatController extends Controller {
   constructor(parent) {
     super(parent, true);
     this.view = new ChatView(parent);
+    this.minId = undefined;
   }
   /**
    * Create action
@@ -25,6 +26,7 @@ export default class ChatController extends Controller {
     this.view.render();
     this._initWebSocket();
     this._initEvents();
+    this._initScroll();
   }
 
   /**
@@ -80,6 +82,7 @@ export default class ChatController extends Controller {
           result.json().then((msgsData) => {
             msgsData = msgsData.data.users;
             data.sort((a, b) => a.mid - b.mid);
+            this.minId = data[0].mid;
             data.forEach((msg) => {
               const username = 'uid' in msg ? msgsData.find((item) => {
                 return item.uid === msg.uid;
@@ -106,6 +109,45 @@ export default class ChatController extends Controller {
         this.view.addMessage(data.uid, 'Анон', data.text);
       }
     }
+  }
+
+  /**
+   * Init scroll events
+   * @private
+   */
+  _initScroll() {
+    const items = this.parent.getElementsByClassName('chat__items')[0];
+    items.onscroll = () => {
+      if (items.scrollTop <= 0) {
+        // chat/paginate?msgId=1
+        ajax.doGet({path: settings.chatUrl + '/chat/paginate?msgId=' + this.minId}).then((result) => {
+          result.json().then((data) => {
+            data = data.data;
+            const args = this._getUrlArgsForIds(data);
+            if (args.length > 0) {
+              ajax.doGet({path: settings.url + '/users/chat?' + args}).then((result) => {
+                result.json().then((msgsData) => {
+                  msgsData = msgsData.data.users;
+                  data.sort((a, b) => a.mid - b.mid);
+                  this.minId = data[0].mid;
+                  data.forEach((msg) => {
+                    const username = 'uid' in msg ? msgsData.find((item) => {
+                      return item.uid === msg.uid;
+                    }).username : 'Анон';
+                    this.view.addMessageToEnd(msg.uid, username, msg.text);
+                  });
+                });
+              });
+            } else {
+              data.forEach((msg) => {
+                data.sort((a, b) => a.mid - b.mid);
+                this.view.addMessageToEnd(0, 'Анон', msg.text);
+              });
+            }
+          });
+        });
+      }
+    };
   }
 
   /**
