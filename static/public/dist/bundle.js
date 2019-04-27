@@ -6946,7 +6946,7 @@ function (_Controller) {
                     data.sort(function (a, b) {
                       return -a.mid + b.mid;
                     });
-                    _this4.minId = data[0].mid;
+                    _this4.minId = data[data.length].mid;
                     data.forEach(function (msg) {
                       var username = 'uid' in msg ? msgsData.find(function (item) {
                         return item.uid === msg.uid;
@@ -6957,12 +6957,11 @@ function (_Controller) {
                   });
                 });
               } else {
-                _this4.minId = data[0].mid;
+                data.sort(function (a, b) {
+                  return -a.mid + b.mid;
+                });
+                _this4.minId = data[data.length].mid;
                 data.forEach(function (msg) {
-                  data.sort(function (a, b) {
-                    return -a.mid + b.mid;
-                  });
-
                   _this4.view.addMessageToEnd(0, 'Анон', msg.text);
                 });
               }
