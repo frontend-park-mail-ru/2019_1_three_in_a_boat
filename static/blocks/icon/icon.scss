@@ -56,7 +56,7 @@ $icon-sizes: (small: (12px, 12px),
     height: get-icon-span-height(nil);
     width: get-icon-span-width(nil);
 
-    &_size{
+    &_size {
         @each $size, $x in $icon-sizes {
            &_#{$size} {
                 height: get-icon-span-height($size);
@@ -103,6 +103,10 @@ $icon-sizes: (small: (12px, 12px),
         }
         &_hexagon {
             @include mask-image($hexagon-icon);
+            @media screen and (orientation: landscape) and (max-width: 700px){
+                height: 1.5em;
+                width: 1.5em;
+            }
         }
         &_users {
             @include mask-image($users-icon);

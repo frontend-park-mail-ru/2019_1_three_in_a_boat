@@ -65,8 +65,8 @@ export default class OfflineGame extends GameCore {
     this.lastFrame = now;
     ++this.tick;
     let difficultyIncrement = 1 + 1e-2 * 0.02 * this.tick;
-    if (difficultyIncrement > 2.3) {
-      difficultyIncrement = 2.3;
+    if (difficultyIncrement > 2) {
+      difficultyIncrement = 2;
     }
 
     const ticksSinceRotation = this.tick % Math.round(15 * 25);
@@ -84,9 +84,9 @@ export default class OfflineGame extends GameCore {
       rotationDirection = -1;
     }
     let angleIncrement = rotationAmplitude * rotationDirection;
-    angleIncrement *= Math.PI / 3 * 0.015 * difficultyIncrement;
+    angleIncrement *= Math.PI / 3 * 0.025 * difficultyIncrement;
     this.state.cursorCircleAngle += angleIncrement;
-    this.hexagonsSpeed += 0.00005 * difficultyIncrement;
+    this.hexagonsSpeed += 0.0001 * difficultyIncrement;
     this.state.hexagons = this.state.hexagons
         .map((hexagon) => {
           hexagon.side -= this.hexagonsSpeed * delay;

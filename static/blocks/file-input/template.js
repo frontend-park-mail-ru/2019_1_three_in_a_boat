@@ -23,10 +23,6 @@ block('file-input').match((node, ctx) => !ctx.content)({
       content: [ctx.labelText || 'Выберите файл'],
     },
     {
-      elem: 'info',
-      content: [ctx.emptyText || '(файл не выбран)']
-    },
-    {
       elem: 'field',
     },
   ],

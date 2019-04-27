@@ -7,6 +7,9 @@
   align-self: center;
   padding: 0;
   max-width: 450px;
+  @media screen and (orientation: portrait) {
+    width: 90%;
+  }
 
   &_main {
     margin: 4% 0 0 0;

@@ -31,6 +31,7 @@ export default class GameOverMultiClass extends View {
           },
           {
             elem: 'column',
+            elemMods: {user: true},
             content: [
               {
                 block: 'game-info',
@@ -96,6 +97,7 @@ export default class GameOverMultiClass extends View {
           },
           {
             elem: 'column',
+            elemMods: {user: true},
             content: [
               {
                 block: 'game-info',

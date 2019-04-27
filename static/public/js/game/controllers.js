@@ -47,7 +47,7 @@ export default class GameControllers {
       bus.emit(events.CONTROLS_UNPRESSED, event.key);
     } else if (event.type.toLowerCase() === 'touchstart') {
       const touch = event.changedTouches[0];
-      if (touch.pageX < this.view.canvas.width / 2) {
+      if (touch.pageX < document.body.clientWidth / 2) {
         bus.emit(events.CONTROLS_PRESSED, 'ArrowLeft');
       } else {
         bus.emit(events.CONTROLS_PRESSED, 'ArrowRight');
