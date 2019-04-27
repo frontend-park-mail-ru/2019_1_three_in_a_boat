@@ -1,5 +1,7 @@
 'use strict';
 
+import ChatController from "./controllers/chat-controller";
+
 require('./bundle.bemhtml.js');
 require('./bundle.bemtree.js');
 require('../icons/favicon.ico');
@@ -41,6 +43,7 @@ const router = new Router(settings.home, application)
     .addRoute('profile/update', new UpdateController(main))
     .addRoute('single', new GameController(main))
     .addRoute('multi', new GameOverMltController(main))
+    .addRoute('chat', new ChatController(main))
     .addRoute('play', new GameMenuController(main));
 
 router.start();
