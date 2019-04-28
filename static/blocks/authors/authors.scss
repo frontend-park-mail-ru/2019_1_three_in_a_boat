@@ -10,6 +10,9 @@
   padding: 5%;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.5);
+  @media screen and (max-width: 900px) and (orientation: portrait) {
+    width: 85%;
+  }
 
   &__description {
     text-align: center;
@@ -31,11 +34,9 @@
 
   &__item {
     @media screen and (max-width: 900px) and (orientation: portrait) {
-      width: 240px;
+      width: 250px;
     }
-    @media screen and (max-width: 900px) and (orientation: landscape) {
-      width: 400px;
-    }
+    max-width: 300px;
     margin: 0 40px 40px;
     display: flex;
     flex-direction: column;
@@ -47,7 +48,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
 
     margin-top: 80px;
   }
