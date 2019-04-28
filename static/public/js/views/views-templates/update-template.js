@@ -64,6 +64,7 @@ export default function template(user) {
                       checkType: 'email',
                       required: true,
                       value: user.email,
+                      isUpd: true,
                       type: 'email',
                       placeholder: 'your.name@site.com',
                     },
@@ -74,6 +75,7 @@ export default function template(user) {
                     fieldAttrs: {
                       required: true,
                       checkable: true,
+                      isUpd: true,
                       value: user.username || user.nickname,
                       placeholder: 'username',
                       checkType: 'userName',
@@ -90,6 +92,7 @@ export default function template(user) {
                     fieldAttrs: {
                       type: 'password',
                       placeholder: 'Пароль',
+                      isUpd: true,
                       checkable: true,
                       checkType: 'password',
                     },
