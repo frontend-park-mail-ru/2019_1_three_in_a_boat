@@ -1,4 +1,3 @@
-import {settings} from '../settings/config.js';
 import View from '../core/view.js';
 const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
@@ -27,8 +26,9 @@ export default class ChatView extends View {
    * @param {number} id
    * @param {string} nickname
    * @param {string} msg
+   * @param {boolean} isNew
    */
-  addMessage(id, nickname, msg) {
+  addMessage(id, nickname, msg, isNew) {
     const items = document.getElementsByClassName('chat__items')[0];
     const template = [{
       block: 'chat',
@@ -64,51 +64,15 @@ export default class ChatView extends View {
       ],
     }];
 
-    items.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-    this._scrollDown();
-  }
-
-  addMessageToEnd(id, nickname, msg) {
-    const items = document.getElementsByClassName('chat__items')[0];
-    const template = [{
-      block: 'chat',
-      elem: 'item',
-      content: [
-        {
-          elem: 'msg-data',
-          content: [
-            {
-              elem: 'link',
-              tag: 'a',
-              fieldName: 'userName',
-              value: id,
-              attrs: {value: id}, // to be changed once api's here
-              content: [
-                {
-                  elem: 'data-field',
-                  content: [
-                    {
-                      elem: 'username',
-                      content: nickname + ':',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          elem: 'text',
-          content: msg,
-        },
-      ],
-    }];
-
-    items.insertAdjacentHTML('afterBegin', bemhtml.apply(template));
+    const place = isNew ? 'beforeend': 'afterbegin';
+    items.insertAdjacentHTML(place, bemhtml.apply(template));
+    if (isNew) {
+      this._scrollDown();
+    }
   }
 
   /**
-   * create Page with Authors
+   * Create Page with chat
    */
   render() {
     const draw = [
@@ -120,7 +84,7 @@ export default class ChatView extends View {
             elem: 'header',
             content: 'Чат',
           },
-          { // TODO close_icon
+          {
             block: 'icon',
             tag: 'a',
             wrappedInside: 'chat',

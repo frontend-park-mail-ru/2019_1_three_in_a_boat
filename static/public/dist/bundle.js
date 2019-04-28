@@ -6882,6 +6882,10 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
@@ -6918,11 +6922,23 @@ function (_Controller) {
     return _this;
   }
   /**
-   * Create action
+   * Destructor
    */
 
 
   _createClass(ChatController, [{
+    key: "destructor",
+    value: function destructor() {
+      _get(_getPrototypeOf(ChatController.prototype), "destructor", this).call(this);
+
+      this.ws.close();
+      this.minId = undefined;
+    }
+    /**
+     * Create action
+     */
+
+  }, {
     key: "action",
     value: function action() {
       this.view.render();
@@ -6952,20 +6968,22 @@ function (_Controller) {
         };
 
         _this2.ws.sendData(JSON.stringify(data));
+
+        input.value = '';
       };
     }
     /**
      * Get url args
-     * @param {Array} msgs
+     * @param {Array} messages
      * @return {string}
      * @private
      */
 
   }, {
     key: "_getUrlArgsForIds",
-    value: function _getUrlArgsForIds(msgs) {
+    value: function _getUrlArgsForIds(messages) {
       var args = '';
-      msgs.forEach(function (msg, pos) {
+      messages.forEach(function (msg) {
         if ('uid' in msg) {
           if (args.length > 0) {
             args += '&';
@@ -6999,24 +7017,22 @@ function (_Controller) {
         var args = this._getUrlArgsForIds(data);
 
         if (args.length > 0) {
+          var path = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?' + args;
           _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
-            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?' + args
+            path: path
           }).then(function (result) {
-            result.json().then(function (msgsData) {
-              msgsData = msgsData.data.users;
+            result.json().then(function (messagesData) {
+              messagesData = messagesData.data.users;
               data.sort(function (a, b) {
                 return a.mid - b.mid;
               });
               _this3.minId = data[0].mid;
               data.forEach(function (msg) {
-                var username = 'uid' in msg ? msgsData.find(function (item) {
+                var username = 'uid' in msg ? messagesData.find(function (item) {
                   return item.uid === msg.uid;
                 }).username : 'Анон';
 
-                _this3.view.addMessage(msg.uid, username, msg.text);
-
-                _this3.ws.makeNotify("".concat(username, ": \n ").concat(data.text.substring(0, 120))); // makeNotify(`User ${data.uid} send message:\n ${data.text.substring(0, 120)}`);
-
+                _this3.view.addMessage(msg.uid, username, msg.text, true);
               });
             });
           });
@@ -7025,28 +7041,30 @@ function (_Controller) {
             data.sort(function (a, b) {
               return a.mid - b.mid;
             });
+            _this3.minId = data[0].mid;
 
-            _this3.view.addMessage(0, 'Анон', msg.text);
-
-            _this3.ws.makeNotify("\u0410\u043D\u043E\u043D\u0438\u043C:\n ".concat(data.text.substring(0, 120)));
+            _this3.view.addMessage(0, 'Анон', msg.text, true);
           });
         }
       } else if ('text' in data) {
         if ('uid' in data) {
+          var _path = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?ids=' + data.uid;
+
           _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
-            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?ids=' + data.uid
+            path: _path
           }).then(function (result) {
             result.json().then(function (msgsData) {
               msgsData = msgsData.data.users[0];
+              var notification = msgsData.username + '\n' + data.text.substring(0, 120);
 
-              _this3.ws.makeNotify("".concat(msgsData.username, ": \n ").concat(data.text.substring(0, 120)));
+              _this3.ws.makeNotify(notification);
 
-              _this3.view.addMessage(data.uid, msgsData.username, data.text);
+              _this3.view.addMessage(data.uid, msgsData.username, data.text, true);
             });
           });
         } else {
           this.ws.makeNotify("\u0410\u043D\u043E\u043D\u0438\u043C: ".concat(data.text.substring(0, 120)));
-          this.view.addMessage(data.uid, 'Анон', data.text);
+          this.view.addMessage(data.uid, 'Анон', data.text, true);
         }
       }
     }
@@ -7064,9 +7082,9 @@ function (_Controller) {
 
       items.onscroll = function () {
         if (items.scrollTop <= 0) {
-          // chat/paginate?msgId=1
+          var path = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].chatUrl + '/chat/paginate?msgId=' + _this4.minId;
           _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
-            path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].chatUrl + '/chat/paginate?msgId=' + _this4.minId
+            path: path
           }).then(function (result) {
             result.json().then(function (data) {
               data = data.data;
@@ -7074,31 +7092,33 @@ function (_Controller) {
               var args = _this4._getUrlArgsForIds(data);
 
               if (args.length > 0) {
+                var _path2 = _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?' + args;
+
                 _ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"].doGet({
-                  path: _settings_config_js__WEBPACK_IMPORTED_MODULE_0__["settings"].url + '/users/chat?' + args
+                  path: _path2
                 }).then(function (result) {
-                  result.json().then(function (msgsData) {
-                    msgsData = msgsData.data.users;
+                  result.json().then(function (messagesData) {
+                    messagesData = messagesData.data.users;
                     data.sort(function (a, b) {
-                      return a.mid - b.mid;
+                      return -a.mid + b.mid;
                     });
-                    _this4.minId = data[0].mid;
+                    _this4.minId = data[data.length - 1].mid;
                     data.forEach(function (msg) {
-                      var username = 'uid' in msg ? msgsData.find(function (item) {
+                      var username = 'uid' in msg ? messagesData.find(function (item) {
                         return item.uid === msg.uid;
                       }).username : 'Анон';
 
-                      _this4.view.addMessageToEnd(msg.uid, username, msg.text);
+                      _this4.view.addMessage(msg.uid, username, msg.text, false);
                     });
                   });
                 });
               } else {
+                data.sort(function (a, b) {
+                  return -a.mid + b.mid;
+                });
+                _this4.minId = data[data.length - 1].mid;
                 data.forEach(function (msg) {
-                  data.sort(function (a, b) {
-                    return a.mid - b.mid;
-                  });
-
-                  _this4.view.addMessageToEnd(0, 'Анон', msg.text);
+                  _this4.view.addMessage(0, 'Анон', msg.text, false);
                 });
               }
             });
@@ -11779,8 +11799,7 @@ function (_View) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ChatView; });
-/* harmony import */ var _settings_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/config.js */ "./static/public/js/settings/config.js");
-/* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+/* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11798,7 +11817,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -11838,11 +11856,12 @@ function (_View) {
      * @param {number} id
      * @param {string} nickname
      * @param {string} msg
+     * @param {boolean} isNew
      */
 
   }, {
     key: "addMessage",
-    value: function addMessage(id, nickname, msg) {
+    value: function addMessage(id, nickname, msg, isNew) {
       var items = document.getElementsByClassName('chat__items')[0];
       var template = [{
         block: 'chat',
@@ -11871,45 +11890,15 @@ function (_View) {
           content: msg
         }]
       }];
-      items.insertAdjacentHTML('beforeend', bemhtml.apply(template));
+      var place = isNew ? 'beforeend' : 'afterbegin';
+      items.insertAdjacentHTML(place, bemhtml.apply(template));
 
-      this._scrollDown();
-    }
-  }, {
-    key: "addMessageToEnd",
-    value: function addMessageToEnd(id, nickname, msg) {
-      var items = document.getElementsByClassName('chat__items')[0];
-      var template = [{
-        block: 'chat',
-        elem: 'item',
-        content: [{
-          elem: 'msg-data',
-          content: [{
-            elem: 'link',
-            tag: 'a',
-            fieldName: 'userName',
-            value: id,
-            attrs: {
-              value: id
-            },
-            // to be changed once api's here
-            content: [{
-              elem: 'data-field',
-              content: [{
-                elem: 'username',
-                content: nickname + ':'
-              }]
-            }]
-          }]
-        }, {
-          elem: 'text',
-          content: msg
-        }]
-      }];
-      items.insertAdjacentHTML('afterBegin', bemhtml.apply(template));
+      if (isNew) {
+        this._scrollDown();
+      }
     }
     /**
-     * create Page with Authors
+     * Create Page with chat
      */
 
   }, {
@@ -11924,7 +11913,6 @@ function (_View) {
           elem: 'header',
           content: 'Чат'
         }, {
-          // TODO close_icon
           block: 'icon',
           tag: 'a',
           wrappedInside: 'chat',
@@ -11979,7 +11967,7 @@ function (_View) {
   }]);
 
   return ChatView;
-}(_core_view_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+}(_core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 
