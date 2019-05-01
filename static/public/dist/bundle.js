@@ -6829,8 +6829,14 @@ function (_Controller) {
       var input = this.parent.getElementsByClassName('chat__input')[0];
 
       btn.onclick = function () {
+        var text = input.value.trim();
+
+        if (text === '') {
+          return;
+        }
+
         var data = {
-          text: input.value
+          text: text
         };
 
         _this2.ws.sendData(JSON.stringify(data));
@@ -7608,7 +7614,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
 /* harmony import */ var _views_menu_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/menu-view.js */ "./static/public/js/views/menu-view.js");
 /* harmony import */ var _models_user_service_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../models/user-service.js */ "./static/public/js/models/user-service.js");
-/* harmony import */ var _views_components_chat_button_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/components/chat-button.js */ "./static/public/js/views/components/chat-button.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7628,7 +7633,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -7670,8 +7674,6 @@ function (_Controller) {
         _this2.user = user;
 
         _this2.view.render(_this2.user);
-
-        Object(_views_components_chat_button_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_this2.parent);
       }, function (error) {
         console.log(error);
       });
@@ -11831,52 +11833,6 @@ function (_View) {
 
 /***/ }),
 
-/***/ "./static/public/js/views/components/chat-button.js":
-/*!**********************************************************!*\
-  !*** ./static/public/js/views/components/chat-button.js ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return showChatButton; });
-/* harmony import */ var _small_chat_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./small-chat.js */ "./static/public/js/views/components/small-chat.js");
-
-
-
-
-var bemhtml = __webpack_require__(/*! ../../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
-/**
- * Render message button
- * @param {HTMLElement} parent
- */
-
-
-function showChatButton(parent) {
-  var template = [{
-    block: 'small-chat',
-    content: [{
-      elem: 'btn',
-      type: 'mail' // content: [{
-      //   elem: 'notify',
-      //   content: 1,
-      // }],
-
-    }]
-  }];
-  parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-  var button = parent.getElementsByClassName('small-chat');
-  var renderBtn = button[0];
-
-  renderBtn.onclick = function () {
-    parent.removeChild(button[0]);
-    Object(_small_chat_js__WEBPACK_IMPORTED_MODULE_0__["default"])(parent);
-  };
-}
-
-/***/ }),
-
 /***/ "./static/public/js/views/components/disconnect-messagebox.js":
 /*!********************************************************************!*\
   !*** ./static/public/js/views/components/disconnect-messagebox.js ***!
@@ -12278,102 +12234,6 @@ function () {
 }();
 
 
-
-/***/ }),
-
-/***/ "./static/public/js/views/components/small-chat.js":
-/*!*********************************************************!*\
-  !*** ./static/public/js/views/components/small-chat.js ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return showSmallChat; });
-/* harmony import */ var _chat_button_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chat-button.js */ "./static/public/js/views/components/chat-button.js");
-
-
-
-
-var bemhtml = __webpack_require__(/*! ../../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
-/**
- * Render small chat
- * @param {HTMLElement} parent
- */
-
-
-function showSmallChat(parent) {
-  var template = [{
-    block: 'small-chat',
-    mods: {
-      open: true
-    },
-    content: [{
-      block: 'chat',
-      content: [{
-        elem: 'header',
-        content: 'Чат'
-      }, {
-        // TODO close_icon
-        block: 'icon',
-        tag: 'a',
-        wrappedInside: 'chat',
-        wrappedAs: 'close-popup',
-        mods: {
-          size: 'large',
-          color: 'black',
-          btn: true,
-          type: 'cross'
-        },
-        attrs: {
-          'data-link-type': '/'
-        }
-      }, {
-        elem: 'items',
-        messages: ['']
-      }, {
-        elem: 'form',
-        content: [{
-          tag: 'textarea',
-          elem: 'input',
-          attrs: {
-            placeholder: 'Введите сообщение',
-            type: 'text'
-          }
-        }, {
-          attrs: {
-            type: 'submit'
-          },
-          block: 'btn',
-          wrappedInside: 'chat',
-          wrappedAs: 'btn',
-          content: [{
-            block: 'btn',
-            elem: 'inner',
-            content: [{
-              block: 'btn',
-              elem: 'text',
-              elemMods: {
-                'normal': true
-              },
-              content: 'Отправить'
-            }]
-          }]
-        }]
-      }]
-    }]
-  }];
-  parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
-  var button = parent.getElementsByClassName('icon_type_cross');
-  var closeBtn = button[0];
-  var chatBlock = parent.getElementsByClassName('chat')[0];
-
-  closeBtn.onclick = function () {
-    parent.removeChild(chatBlock);
-    Object(_chat_button_js__WEBPACK_IMPORTED_MODULE_0__["default"])(parent);
-  };
-}
 
 /***/ }),
 

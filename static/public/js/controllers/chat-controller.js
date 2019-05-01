@@ -48,7 +48,11 @@ export default class ChatController extends Controller {
     const btn = this.parent.getElementsByClassName('chat__btn')[0];
     const input = this.parent.getElementsByClassName('chat__input')[0];
     btn.onclick = () => {
-      const data = {text: input.value};
+      const text = input.value.trim();
+      if (text === '') {
+        return;
+      }
+      const data = {text};
       this.ws.sendData(JSON.stringify(data));
       input.value = '';
     };
