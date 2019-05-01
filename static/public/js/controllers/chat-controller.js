@@ -20,6 +20,16 @@ export default class ChatController extends Controller {
     this.view = new ChatView(parent);
     this.minId = undefined;
   }
+
+  /**
+   * Destructor
+   */
+  destructor() {
+    super.destructor();
+    this.ws.close();
+    this.minId = undefined;
+  }
+
   /**
    * Create action
    */
@@ -38,7 +48,11 @@ export default class ChatController extends Controller {
     const btn = this.parent.getElementsByClassName('chat__btn')[0];
     const input = this.parent.getElementsByClassName('chat__input')[0];
     btn.onclick = () => {
-      const data = {text: input.value};
+      const text = input.value.trim();
+      if (text === '') {
+        return;
+      }
+      const data = {text};
       this.ws.sendData(JSON.stringify(data));
       input.value = '';
     };
@@ -46,13 +60,13 @@ export default class ChatController extends Controller {
 
   /**
    * Get url args
-   * @param {Array} msgs
+   * @param {Array} messages
    * @return {string}
    * @private
    */
-  _getUrlArgsForIds(msgs) {
+  _getUrlArgsForIds(messages) {
     let args = '';
-    msgs.forEach((msg, pos) => {
+    messages.forEach((msg) => {
       if ('uid' in msg) {
         if (args.length > 0) {
           args += '&';
@@ -80,38 +94,42 @@ export default class ChatController extends Controller {
     if (Array.isArray(data)) {
       const args = this._getUrlArgsForIds(data);
       if (args.length > 0) {
-        ajax.doGet({path: settings.url + '/users/chat?' + args}).then((result) => {
-          result.json().then((msgsData) => {
-            msgsData = msgsData.data.users;
+        const path = settings.url + '/users/chat?' + args;
+        ajax.doGet({path}).then((result) => {
+          result.json().then((messagesData) => {
+            messagesData = messagesData.data.users;
             data.sort((a, b) => a.mid - b.mid);
             this.minId = data[0].mid;
             data.forEach((msg) => {
-              const username = 'uid' in msg ? msgsData.find((item) => {
+              const username = 'uid' in msg ? messagesData.find((item) => {
                 return item.uid === msg.uid;
               }).username : 'Анон';
-              this.view.addMessage(msg.uid, username, msg.text);
+              this.view.addMessage(msg.uid, username, msg.text, true);
             });
           });
         });
       } else {
         data.forEach((msg) => {
           data.sort((a, b) => a.mid - b.mid);
-          this.view.addMessage(0, 'Анон', msg.text);
+          this.minId = data[0].mid;
+          this.view.addMessage(0, 'Анон', msg.text, true);
         });
       }
     } else if ('text' in data) {
       if ('uid' in data) {
-        ajax.doGet({path: settings.url + '/users/chat?ids=' + data.uid}).then((result) => {
+        const path = settings.url + '/users/chat?ids=' + data.uid;
+        ajax.doGet({path}).then((result) => {
           result.json().then((msgsData) => {
             msgsData = msgsData.data.users[0];
-            this.ws.makeNotify(`${msgsData.username}: \n ${data.text.substring(0, 120)}`);
-            this.view.addMessage(data.uid, msgsData.username, data.text);
+            const notification = msgsData.username + '\n'
+              + data.text.substring(0, 120);
+            this.ws.makeNotify(notification);
+            this.view.addMessage(data.uid, msgsData.username, data.text, true);
           });
         });
       } else {
         this.ws.makeNotify(`Аноним: ${data.text.substring(0, 120)}`);
-        this.view.addMessage(data.uid, 'Анон', data.text);
-
+        this.view.addMessage(data.uid, 'Анон', data.text, true);
       }
     }
   }
@@ -124,29 +142,35 @@ export default class ChatController extends Controller {
     const items = this.parent.getElementsByClassName('chat__items')[0];
     items.onscroll = () => {
       if (items.scrollTop <= 0) {
-        // chat/paginate?msgId=1
-        ajax.doGet({path: settings.chatUrl + '/chat/paginate?msgId=' + this.minId}).then((result) => {
+        const path = settings.chatUrl + '/chat/paginate?msgId=' + this.minId;
+        ajax.doGet({path}).then((result) => {
           result.json().then((data) => {
             data = data.data;
             const args = this._getUrlArgsForIds(data);
+
             if (args.length > 0) {
-              ajax.doGet({path: settings.url + '/users/chat?' + args}).then((result) => {
-                result.json().then((msgsData) => {
-                  msgsData = msgsData.data.users;
-                  data.sort((a, b) => a.mid - b.mid);
-                  this.minId = data[0].mid;
+              const path = settings.url + '/users/chat?' + args;
+              ajax.doGet({path}).then((result) => {
+                result.json().then((messagesData) => {
+                  messagesData = messagesData.data.users;
+                  data.sort((a, b) => -a.mid + b.mid);
+                  this.minId = data[data.length - 1].mid;
+
                   data.forEach((msg) => {
-                    const username = 'uid' in msg ? msgsData.find((item) => {
-                      return item.uid === msg.uid;
-                    }).username : 'Анон';
-                    this.view.addMessageToEnd(msg.uid, username, msg.text);
+                    const username = 'uid' in msg ? messagesData.find(
+                        (item) => {
+                          return item.uid === msg.uid;
+                        }).username : 'Анон';
+                    this.view.addMessage(msg.uid, username, msg.text, false);
                   });
                 });
               });
             } else {
+              data.sort((a, b) => -a.mid + b.mid);
+              this.minId = data[data.length - 1].mid;
+
               data.forEach((msg) => {
-                data.sort((a, b) => a.mid - b.mid);
-                this.view.addMessageToEnd(0, 'Анон', msg.text);
+                this.view.addMessage(0, 'Анон', msg.text, false);
               });
             }
           });
