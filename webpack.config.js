@@ -1,5 +1,6 @@
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -17,6 +18,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './static/public/index.html',
     }),
+    new CopyPlugin([{
+      from: './static/public/manifest.webmanifest',
+      to: '.',
+    }]),
   ],
   module: {
     rules: [
@@ -55,6 +60,17 @@ module.exports = {
       {
         test: /\.(ttf|otf|svg)$/,
         loader: 'url-loader?limit=80000&name=img/[name].[ext]',
+      },
+      {
+        test: /(manifest|webmanifest|browserconfig\.xml)$/,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+          {
+            loader: 'app-manifest-loader',
+          },
+        ],
       },
     ],
   },
