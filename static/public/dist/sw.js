@@ -2,7 +2,14 @@ var serviceWorkerOption = {
   "assets": [
     "/favicon.ico",
     "/0d31ef75adef220e73f0cb93a84a7422.png",
+    "/bfba25aacbfb133c67f5e4a4dae0bea2.png",
+    "/f012c34574b1156ffa6be4f3cdb05721.png",
+    "/2c75c822460e9aa6e824874d29eaf2e1.png",
+    "/deac4d0555672bb3973cfe7c26dfd2e0.png",
+    "/91ddc53ed7f3f938fca8f2efb4f238d1.png",
+    "/8a83dfee56ca2157228897a2a23e26b3.png",
     "/b1a81f232c0cec19ed63b2c7f24e56e9.jpg",
+    "/6287daff9662d34a056f418c9a2b0d30.webmanifest",
     "/bundle.js"
   ]
 };
