@@ -3324,7 +3324,7 @@ var bemhtml;
     var api = new bemhtml({
       "exportName": "bemhtml",
       "escapeContent": true,
-      "to": "/home/astronaut/gitHub/rowbot/three_in_a_boat_front"
+      "to": "/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat"
     });
     api.compile(function (match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
       /* BEM-XJST User code here: */
@@ -3341,7 +3341,7 @@ var bemhtml;
               content: [{
                 elem: 'img',
                 attrs: {
-                  src: '/img' + elt.img,
+                  src: elt.img,
                   alt: elt.name
                 }
               }, {
@@ -3358,6 +3358,343 @@ var bemhtml;
           });
         }
       });
+      block('btn')({
+        'tag': 'button'
+      });
+      block('btn').elem('text')({
+        'tag': 'span'
+      });
+      block('btn').elem('inner')({
+        'tag': 'span'
+      }); // if inner isn't explicitly wrapping the content - do that implicitly
+
+      block('btn').match(function (node, ctx) {
+        return ctx.content && ctx.content.find(function (elt) {
+          return elt['elem'] === 'inner';
+        }) === undefined;
+      })({
+        content: function content() {
+          return [{
+            elem: 'inner',
+            content: applyNext()
+          }];
+        }
+      });
+      block('btn').match(function (node, ctx) {
+        return !ctx.content && ctx.icon && ctx.btnText;
+      })({
+        addMods: {
+          'with-icon': true
+        },
+        content: function content(node, ctx) {
+          return [{
+            elem: 'inner',
+            content: [{
+              block: 'icon',
+              wrappedInside: 'btn',
+              mods: {
+                type: ctx.icon,
+                size: ctx.mods.size
+              }
+            }, {
+              elem: 'text',
+              content: ctx.btnText
+            }]
+          }];
+        }
+      });
+      block('chat').elem('items').match(function (node, ctx) {
+        return ctx.messages !== undefined;
+      })({
+        appendContent: function appendContent(node, ctx) {
+          return ctx.messages.map(function (elt, index) {
+            return {
+              elem: 'item',
+              content: [{
+                elem: 'msg-data',
+                content: [{
+                  elem: 'link',
+                  tag: 'a',
+                  fieldName: 'userName',
+                  value: elt.userId,
+                  attrs: {
+                    value: elt.userId
+                  },
+                  // to be changed once api's here
+                  content: [{
+                    elem: 'data-field',
+                    content: [{
+                      elem: 'username',
+                      content: elt.username + ':'
+                    }]
+                  }]
+                }]
+              }, {
+                elem: 'text',
+                content: elt.text
+              }]
+            };
+          });
+        }
+      });
+      block('checkbox')({
+        tag: 'input',
+        addAttrs: {
+          type: 'checkbox'
+        }
+      });
+      block('checkbox')({
+        tag: 'input',
+        addAttrs: function addAttrs(node, ctx) {
+          return {
+            'id': node.formId + '_' + ctx.fieldName,
+            'name': ctx.fieldName
+          };
+        }
+      });
+      block('field-group')({
+        extend: function extend(node) {
+          return {
+            _fieldParents: (node._fieldParents || []).concat(['field-group'])
+          };
+        }
+      });
+      block('field-group').match(function (node) {
+        return Array.isArray(node._fieldParents) && (node._fieldParents.length > 0 && node._fieldParents[node._fieldParents.length - 1] !== 'field-group' || node._fieldParents.length > 1);
+      })({
+        addMix: function addMix(node) {
+          return {
+            block: node._fieldParents[node._fieldParents.length - 1] === 'field-group' ? node._fieldParents[node._fieldParents.length - 2] : node._fieldParents[node._fieldParents.length - 1],
+            elem: 'field'
+          };
+        }
+      });
+      block('file-input').elem('field')({
+        tag: 'input',
+        addAttrs: function addAttrs(node) {
+          return {
+            id: node.formId + '_' + node.fieldName,
+            name: node.fieldName,
+            type: 'file'
+          };
+        }
+      });
+      block('file-input').elem('label')({
+        tag: 'label',
+        addAttrs: function addAttrs(node) {
+          return {
+            'for': node.formId + '_' + node.fieldName
+          };
+        }
+      });
+      block('file-input').elem('info')({
+        tag: 'span'
+      });
+      block('file-input').match(function (node, ctx) {
+        return !ctx.content;
+      })({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'label',
+            content: [ctx.labelText || 'Выберите файл']
+          }, {
+            elem: 'field'
+          }];
+        }
+      });
+      block('file-input')({
+        extend: function extend(node, ctx) {
+          return {
+            fieldName: ctx.fieldName || node.generateId()
+          };
+        }
+      });
+      block('form')({
+        tag: 'form'
+      });
+      block('form')({
+        extend: function extend(node, ctx) {
+          return {
+            formId: ctx.name
+          };
+        }
+      });
+      block('form-group')({
+        extend: function extend(node) {
+          return {
+            _fieldParents: (node._fieldParents || []).concat(['form-group'])
+          };
+        }
+      });
+      block('form-group').elem('help-text')({
+        addAttrs: function addAttrs(node, ctx) {
+          return {
+            'id': "help_".concat(ctx['for'])
+          };
+        }
+      });
+      block('game-info').elem('item')({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'item-name',
+            content: ctx.name
+          }, {
+            elem: 'item-value',
+            content: ctx.value
+          }];
+        }
+      });
+      block('game-info').elem('avatar')({
+        tag: 'img'
+      });
+      block('game-info').elem('line')({
+        tag: 'hr'
+      });
+      block('game-info').match(function (node, ctx) {
+        return !ctx.content && ctx.userInfo;
+      })({
+        content: function content(node, ctx) {
+          return ctx.userInfo.map(function (elt) {
+            return {
+              elem: 'item',
+              name: elt[0],
+              value: elt[1] || '-'
+            };
+          });
+        }
+      });
+      block('*').match(function (node, ctx) {
+        return ctx.wrappedInside;
+      })({
+        addMix: function addMix(node, ctx) {
+          return {
+            block: ctx.wrappedInside,
+            elem: ctx.wrappedAs || ctx.block,
+            elemMods: ctx.elemMods
+          };
+        }
+      }); // not needed
+
+      block('hexagons').elem('game')({
+        tag: 'canvas'
+      });
+      block('icon')({
+        tag: function tag(node, ctx) {
+          return ctx.tag || 'i';
+        }
+      }); // not needed
+
+      block('input').elem('field')({
+        tag: 'input',
+        addAttrs: function addAttrs(node) {
+          return {
+            'id': node.formId + '_' + node.fieldName,
+            'name': node.fieldName
+          };
+        }
+      });
+      block('input').elem('field').match(function (node, ctx) {
+        return !ctx.attrs || !ctx.attrs.type;
+      })({
+        addAttrs: {
+          type: 'text'
+        }
+      });
+      block('input').match(function (node, ctx) {
+        return !ctx.content;
+      })({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'field',
+            elemMods: ctx.fieldAttrs.isUpd ? {
+              upd: true
+            } : '',
+            attrs: ctx.fieldAttrs
+          }];
+        }
+      });
+      block('input')({
+        extend: function extend(node, ctx) {
+          return {
+            fieldName: ctx.fieldName || node.generateId()
+          };
+        }
+      });
+      block('input').elem('tooltip')({
+        addAttrs: function addAttrs(node, ctx) {
+          return {
+            'data-for': node.formId + (ctx['data-for'] || node.fieldName)
+          };
+        }
+      }); // (form/field)-group related stuff
+
+      block('input').match(function (node) {
+        return Array.isArray(node._fieldParents) && node._fieldParents.length;
+      })({
+        addMix: function addMix(node) {
+          return {
+            block: node._fieldParents[node._fieldParents.length - 1],
+            elem: 'field'
+          };
+        }
+      }); // emptied out in favor of form
+
+      block('menu').elem('link')({
+        tag: 'a'
+      });
+      block('menu').elem('avatar')({
+        tag: 'img'
+      });
+      block('menu').elem('title')({
+        block: 'title',
+        mods: {
+          large: true
+        }
+      });
+      block('menu').elem('items').match(function (node, ctx) {
+        return ctx.points !== undefined;
+      })({
+        appendContent: function appendContent(node, ctx) {
+          return ctx.points.map(function (elt) {
+            return {
+              elem: 'item',
+              content: [{
+                elem: 'link',
+                attrs: {
+                  'href': '#',
+                  'data-link-type': elt.href
+                },
+                content: [{
+                  tag: 'span',
+                  block: 'icon-bg',
+                  mods: {
+                    borderless: true,
+                    size: 'full',
+                    color: 'dark-gray'
+                  },
+                  content: {
+                    block: 'icon',
+                    mods: {
+                      color: 'white',
+                      type: elt.type,
+                      size: 'fit'
+                    }
+                  },
+                  wrappedInside: 'menu',
+                  wrappedAs: 'icon-bg'
+                }, {
+                  elem: 'text',
+                  content: elt.text
+                }]
+              }]
+            };
+          });
+        }
+      });
+      block('not-found-page').elem('link')({
+        tag: 'a'
+      }); // not needed
+
       block('pagination').elem('link')({
         tag: 'button'
       });
@@ -3413,6 +3750,121 @@ var bemhtml;
           });
         }
       });
+      block('profile-info').match(function (node, ctx) {
+        return !ctx.content && ctx.fields;
+      })({
+        content: function content(node, ctx) {
+          return ctx.fields.map(function (elt) {
+            return {
+              elem: 'item',
+              name: elt.name,
+              value: {
+                block: 'form-group',
+                mods: {
+                  size: 'inline'
+                },
+                content: elt.content ? elt.content : [elt.value || {
+                  block: 'input',
+                  fieldName: elt.fieldName,
+                  fieldAttrs: elt.fieldAttrs
+                }, elt.novalidate ? {} : {
+                  elem: 'help-text',
+                  elemMods: {
+                    hidden: true
+                  },
+                  "for": elt.fieldName || elt.value.fieldName
+                }]
+              }
+            };
+          });
+        }
+      });
+      block('profile-popup').match(function (node, ctx) {
+        return !ctx.content && ctx.title && (ctx.info || ctx.fields) && ctx.img && ctx.allowEdit !== undefined;
+      })({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'title',
+            content: [ctx.title]
+          }, {
+            elem: 'content',
+            content: [{
+              elem: 'profile-icon',
+              attrs: {
+                src: ctx.img
+              }
+            }, {
+              block: 'profile-info',
+              mix: {
+                block: 'profile-popup',
+                elem: 'profile-info'
+              },
+              userInfo: ctx.info,
+              userFields: ctx.fields
+            }, {
+              elem: 'double-btn',
+              content: ctx.allowEdit ? [{
+                block: 'btn',
+                mods: {
+                  'size': 'large',
+                  'with-icon': true,
+                  'cancel': true
+                },
+                wrappedInside: 'profile-popup',
+                icon: 'useredit',
+                btnText: 'Изменить'
+              }, {
+                block: 'btn',
+                attrs: {
+                  'data-type': 'menu'
+                },
+                mods: {
+                  'size': 'large',
+                  'with-icon': true,
+                  'cancel': false,
+                  'color': 'muted'
+                },
+                wrappedInside: 'profile-popup',
+                icon: 'back',
+                btnText: 'В меню'
+              }] : [{
+                block: 'btn',
+                attrs: {
+                  'data-type': 'back'
+                },
+                mods: {
+                  'size': 'large',
+                  'with-icon': true,
+                  'cancel': false,
+                  'color': 'muted'
+                },
+                wrappedInside: 'profile-popup',
+                icon: 'back',
+                btnText: 'Назад'
+              }]
+            }]
+          }];
+        }
+      });
+      block('result-redirect').elem('btn')({
+        tag: 'button'
+      });
+      block('result-redirect').elem('link')({
+        tag: 'a  '
+      });
+      block('result-redirect').elem('btn').match(function (node, ctx) {
+        return !ctx.content && ctx.btnText;
+      })({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'inner',
+            content: [{
+              elem: 'text',
+              content: ctx.btnText
+            }]
+          }];
+        }
+      });
       block('scoreboard').elem('username')({
         tag: 'span'
       });
@@ -3430,30 +3882,35 @@ var bemhtml;
                 elem: 'user-data',
                 content: [{
                   elem: 'place',
-                  content: '#' + (index + 1)
+                  content: '#' + (ctx.page * 10 + (index + 1))
                 }, {
                   elem: 'link',
                   tag: 'a',
+                  fieldName: 'userName',
+                  value: elt.userId,
                   attrs: {
-                    'href': '/profile?u=' + elt.userId
+                    value: elt.userId
                   },
                   // to be changed once api's here
                   content: [{
-                    elem: 'avatar',
-                    attrs: {
-                      src: '/img' + elt.img,
-                      alt: elt.name
-                    }
-                  }, {
-                    elem: 'username',
-                    content: elt.username
+                    elem: 'data-field',
+                    content: [{
+                      elem: 'avatar',
+                      attrs: {
+                        src: elt.img,
+                        alt: elt.name
+                      }
+                    }, {
+                      elem: 'username',
+                      content: elt.username
+                    }]
                   }]
                 }]
               }, {
                 elem: 'score',
                 content: elt.score
               }],
-              elemMods: index < 3 ? {
+              elemMods: index < 3 && ctx.page === 0 ? {
                 place: ['first', 'second', 'third'][index]
               } : {}
             };
@@ -3504,6 +3961,53 @@ var bemhtml;
           return {
             block: node._fieldParents[node._fieldParents.length - 1],
             elem: 'field'
+          };
+        }
+      }); // block('signup-popup')({tag: 'form'});
+
+      block('signup-popup').elem('hr')({
+        tag: 'hr'
+      });
+      block('signup-popup').elem('explanation-text')({
+        tag: 'span'
+      });
+      block('sm-icons-list').elem('icon-bg')({
+        'tag': 'a'
+      });
+      block('sm-icons-list').elem('icon')({
+        'tag': 'i'
+      });
+      block('sm-icons-list').elem('icon-bg').match(function (node, ctx) {
+        return ctx.href;
+      })({
+        addAttrs: function addAttrs(node, ctx) {
+          return {
+            href: ctx.href
+          };
+        }
+      });
+      block('small-chat').elem('btn')({
+        appendContent: function appendContent(node, ctx) {
+          return {
+            elem: 'item',
+            content: [{
+              tag: 'span',
+              block: 'icon-bg',
+              mods: {
+                borderless: true,
+                size: 'full'
+              },
+              content: {
+                block: 'icon',
+                mods: {
+                  color: 'white',
+                  type: ctx.type,
+                  size: 'fit'
+                }
+              },
+              wrappedInside: 'small-chat',
+              wrappedAs: 'icon-bg'
+            }]
           };
         }
       });
@@ -5405,7 +5909,7 @@ var bemtree;
     var api = new bemtree({
       "exportName": "bemtree",
       "runtimeLinting": true,
-      "to": "/home/astronaut/gitHub/rowbot/three_in_a_boat_front"
+      "to": "/home/astronaut/gitHub/rowbot/2019_1_three_in_a_boat"
     });
     api.compile(function (match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
       /* BEM-XJST User code here: */
@@ -5422,7 +5926,7 @@ var bemtree;
               content: [{
                 elem: 'img',
                 attrs: {
-                  src: '/img' + elt.img,
+                  src: elt.img,
                   alt: elt.name
                 }
               }, {
@@ -5439,6 +5943,343 @@ var bemtree;
           });
         }
       });
+      block('btn')({
+        'tag': 'button'
+      });
+      block('btn').elem('text')({
+        'tag': 'span'
+      });
+      block('btn').elem('inner')({
+        'tag': 'span'
+      }); // if inner isn't explicitly wrapping the content - do that implicitly
+
+      block('btn').match(function (node, ctx) {
+        return ctx.content && ctx.content.find(function (elt) {
+          return elt['elem'] === 'inner';
+        }) === undefined;
+      })({
+        content: function content() {
+          return [{
+            elem: 'inner',
+            content: applyNext()
+          }];
+        }
+      });
+      block('btn').match(function (node, ctx) {
+        return !ctx.content && ctx.icon && ctx.btnText;
+      })({
+        addMods: {
+          'with-icon': true
+        },
+        content: function content(node, ctx) {
+          return [{
+            elem: 'inner',
+            content: [{
+              block: 'icon',
+              wrappedInside: 'btn',
+              mods: {
+                type: ctx.icon,
+                size: ctx.mods.size
+              }
+            }, {
+              elem: 'text',
+              content: ctx.btnText
+            }]
+          }];
+        }
+      });
+      block('chat').elem('items').match(function (node, ctx) {
+        return ctx.messages !== undefined;
+      })({
+        appendContent: function appendContent(node, ctx) {
+          return ctx.messages.map(function (elt, index) {
+            return {
+              elem: 'item',
+              content: [{
+                elem: 'msg-data',
+                content: [{
+                  elem: 'link',
+                  tag: 'a',
+                  fieldName: 'userName',
+                  value: elt.userId,
+                  attrs: {
+                    value: elt.userId
+                  },
+                  // to be changed once api's here
+                  content: [{
+                    elem: 'data-field',
+                    content: [{
+                      elem: 'username',
+                      content: elt.username + ':'
+                    }]
+                  }]
+                }]
+              }, {
+                elem: 'text',
+                content: elt.text
+              }]
+            };
+          });
+        }
+      });
+      block('checkbox')({
+        tag: 'input',
+        addAttrs: {
+          type: 'checkbox'
+        }
+      });
+      block('checkbox')({
+        tag: 'input',
+        addAttrs: function addAttrs(node, ctx) {
+          return {
+            'id': node.formId + '_' + ctx.fieldName,
+            'name': ctx.fieldName
+          };
+        }
+      });
+      block('field-group')({
+        extend: function extend(node) {
+          return {
+            _fieldParents: (node._fieldParents || []).concat(['field-group'])
+          };
+        }
+      });
+      block('field-group').match(function (node) {
+        return Array.isArray(node._fieldParents) && (node._fieldParents.length > 0 && node._fieldParents[node._fieldParents.length - 1] !== 'field-group' || node._fieldParents.length > 1);
+      })({
+        addMix: function addMix(node) {
+          return {
+            block: node._fieldParents[node._fieldParents.length - 1] === 'field-group' ? node._fieldParents[node._fieldParents.length - 2] : node._fieldParents[node._fieldParents.length - 1],
+            elem: 'field'
+          };
+        }
+      });
+      block('file-input').elem('field')({
+        tag: 'input',
+        addAttrs: function addAttrs(node) {
+          return {
+            id: node.formId + '_' + node.fieldName,
+            name: node.fieldName,
+            type: 'file'
+          };
+        }
+      });
+      block('file-input').elem('label')({
+        tag: 'label',
+        addAttrs: function addAttrs(node) {
+          return {
+            'for': node.formId + '_' + node.fieldName
+          };
+        }
+      });
+      block('file-input').elem('info')({
+        tag: 'span'
+      });
+      block('file-input').match(function (node, ctx) {
+        return !ctx.content;
+      })({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'label',
+            content: [ctx.labelText || 'Выберите файл']
+          }, {
+            elem: 'field'
+          }];
+        }
+      });
+      block('file-input')({
+        extend: function extend(node, ctx) {
+          return {
+            fieldName: ctx.fieldName || node.generateId()
+          };
+        }
+      });
+      block('form')({
+        tag: 'form'
+      });
+      block('form')({
+        extend: function extend(node, ctx) {
+          return {
+            formId: ctx.name
+          };
+        }
+      });
+      block('form-group')({
+        extend: function extend(node) {
+          return {
+            _fieldParents: (node._fieldParents || []).concat(['form-group'])
+          };
+        }
+      });
+      block('form-group').elem('help-text')({
+        addAttrs: function addAttrs(node, ctx) {
+          return {
+            'id': "help_".concat(ctx['for'])
+          };
+        }
+      });
+      block('game-info').elem('item')({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'item-name',
+            content: ctx.name
+          }, {
+            elem: 'item-value',
+            content: ctx.value
+          }];
+        }
+      });
+      block('game-info').elem('avatar')({
+        tag: 'img'
+      });
+      block('game-info').elem('line')({
+        tag: 'hr'
+      });
+      block('game-info').match(function (node, ctx) {
+        return !ctx.content && ctx.userInfo;
+      })({
+        content: function content(node, ctx) {
+          return ctx.userInfo.map(function (elt) {
+            return {
+              elem: 'item',
+              name: elt[0],
+              value: elt[1] || '-'
+            };
+          });
+        }
+      });
+      block('*').match(function (node, ctx) {
+        return ctx.wrappedInside;
+      })({
+        addMix: function addMix(node, ctx) {
+          return {
+            block: ctx.wrappedInside,
+            elem: ctx.wrappedAs || ctx.block,
+            elemMods: ctx.elemMods
+          };
+        }
+      }); // not needed
+
+      block('hexagons').elem('game')({
+        tag: 'canvas'
+      });
+      block('icon')({
+        tag: function tag(node, ctx) {
+          return ctx.tag || 'i';
+        }
+      }); // not needed
+
+      block('input').elem('field')({
+        tag: 'input',
+        addAttrs: function addAttrs(node) {
+          return {
+            'id': node.formId + '_' + node.fieldName,
+            'name': node.fieldName
+          };
+        }
+      });
+      block('input').elem('field').match(function (node, ctx) {
+        return !ctx.attrs || !ctx.attrs.type;
+      })({
+        addAttrs: {
+          type: 'text'
+        }
+      });
+      block('input').match(function (node, ctx) {
+        return !ctx.content;
+      })({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'field',
+            elemMods: ctx.fieldAttrs.isUpd ? {
+              upd: true
+            } : '',
+            attrs: ctx.fieldAttrs
+          }];
+        }
+      });
+      block('input')({
+        extend: function extend(node, ctx) {
+          return {
+            fieldName: ctx.fieldName || node.generateId()
+          };
+        }
+      });
+      block('input').elem('tooltip')({
+        addAttrs: function addAttrs(node, ctx) {
+          return {
+            'data-for': node.formId + (ctx['data-for'] || node.fieldName)
+          };
+        }
+      }); // (form/field)-group related stuff
+
+      block('input').match(function (node) {
+        return Array.isArray(node._fieldParents) && node._fieldParents.length;
+      })({
+        addMix: function addMix(node) {
+          return {
+            block: node._fieldParents[node._fieldParents.length - 1],
+            elem: 'field'
+          };
+        }
+      }); // emptied out in favor of form
+
+      block('menu').elem('link')({
+        tag: 'a'
+      });
+      block('menu').elem('avatar')({
+        tag: 'img'
+      });
+      block('menu').elem('title')({
+        block: 'title',
+        mods: {
+          large: true
+        }
+      });
+      block('menu').elem('items').match(function (node, ctx) {
+        return ctx.points !== undefined;
+      })({
+        appendContent: function appendContent(node, ctx) {
+          return ctx.points.map(function (elt) {
+            return {
+              elem: 'item',
+              content: [{
+                elem: 'link',
+                attrs: {
+                  'href': '#',
+                  'data-link-type': elt.href
+                },
+                content: [{
+                  tag: 'span',
+                  block: 'icon-bg',
+                  mods: {
+                    borderless: true,
+                    size: 'full',
+                    color: 'dark-gray'
+                  },
+                  content: {
+                    block: 'icon',
+                    mods: {
+                      color: 'white',
+                      type: elt.type,
+                      size: 'fit'
+                    }
+                  },
+                  wrappedInside: 'menu',
+                  wrappedAs: 'icon-bg'
+                }, {
+                  elem: 'text',
+                  content: elt.text
+                }]
+              }]
+            };
+          });
+        }
+      });
+      block('not-found-page').elem('link')({
+        tag: 'a'
+      }); // not needed
+
       block('pagination').elem('link')({
         tag: 'button'
       });
@@ -5494,6 +6335,121 @@ var bemtree;
           });
         }
       });
+      block('profile-info').match(function (node, ctx) {
+        return !ctx.content && ctx.fields;
+      })({
+        content: function content(node, ctx) {
+          return ctx.fields.map(function (elt) {
+            return {
+              elem: 'item',
+              name: elt.name,
+              value: {
+                block: 'form-group',
+                mods: {
+                  size: 'inline'
+                },
+                content: elt.content ? elt.content : [elt.value || {
+                  block: 'input',
+                  fieldName: elt.fieldName,
+                  fieldAttrs: elt.fieldAttrs
+                }, elt.novalidate ? {} : {
+                  elem: 'help-text',
+                  elemMods: {
+                    hidden: true
+                  },
+                  "for": elt.fieldName || elt.value.fieldName
+                }]
+              }
+            };
+          });
+        }
+      });
+      block('profile-popup').match(function (node, ctx) {
+        return !ctx.content && ctx.title && (ctx.info || ctx.fields) && ctx.img && ctx.allowEdit !== undefined;
+      })({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'title',
+            content: [ctx.title]
+          }, {
+            elem: 'content',
+            content: [{
+              elem: 'profile-icon',
+              attrs: {
+                src: ctx.img
+              }
+            }, {
+              block: 'profile-info',
+              mix: {
+                block: 'profile-popup',
+                elem: 'profile-info'
+              },
+              userInfo: ctx.info,
+              userFields: ctx.fields
+            }, {
+              elem: 'double-btn',
+              content: ctx.allowEdit ? [{
+                block: 'btn',
+                mods: {
+                  'size': 'large',
+                  'with-icon': true,
+                  'cancel': true
+                },
+                wrappedInside: 'profile-popup',
+                icon: 'useredit',
+                btnText: 'Изменить'
+              }, {
+                block: 'btn',
+                attrs: {
+                  'data-type': 'menu'
+                },
+                mods: {
+                  'size': 'large',
+                  'with-icon': true,
+                  'cancel': false,
+                  'color': 'muted'
+                },
+                wrappedInside: 'profile-popup',
+                icon: 'back',
+                btnText: 'В меню'
+              }] : [{
+                block: 'btn',
+                attrs: {
+                  'data-type': 'back'
+                },
+                mods: {
+                  'size': 'large',
+                  'with-icon': true,
+                  'cancel': false,
+                  'color': 'muted'
+                },
+                wrappedInside: 'profile-popup',
+                icon: 'back',
+                btnText: 'Назад'
+              }]
+            }]
+          }];
+        }
+      });
+      block('result-redirect').elem('btn')({
+        tag: 'button'
+      });
+      block('result-redirect').elem('link')({
+        tag: 'a  '
+      });
+      block('result-redirect').elem('btn').match(function (node, ctx) {
+        return !ctx.content && ctx.btnText;
+      })({
+        content: function content(node, ctx) {
+          return [{
+            elem: 'inner',
+            content: [{
+              elem: 'text',
+              content: ctx.btnText
+            }]
+          }];
+        }
+      });
       block('scoreboard').elem('username')({
         tag: 'span'
       });
@@ -5511,30 +6467,35 @@ var bemtree;
                 elem: 'user-data',
                 content: [{
                   elem: 'place',
-                  content: '#' + (index + 1)
+                  content: '#' + (ctx.page * 10 + (index + 1))
                 }, {
                   elem: 'link',
                   tag: 'a',
+                  fieldName: 'userName',
+                  value: elt.userId,
                   attrs: {
-                    'href': '/profile?u=' + elt.userId
+                    value: elt.userId
                   },
                   // to be changed once api's here
                   content: [{
-                    elem: 'avatar',
-                    attrs: {
-                      src: '/img' + elt.img,
-                      alt: elt.name
-                    }
-                  }, {
-                    elem: 'username',
-                    content: elt.username
+                    elem: 'data-field',
+                    content: [{
+                      elem: 'avatar',
+                      attrs: {
+                        src: elt.img,
+                        alt: elt.name
+                      }
+                    }, {
+                      elem: 'username',
+                      content: elt.username
+                    }]
                   }]
                 }]
               }, {
                 elem: 'score',
                 content: elt.score
               }],
-              elemMods: index < 3 ? {
+              elemMods: index < 3 && ctx.page === 0 ? {
                 place: ['first', 'second', 'third'][index]
               } : {}
             };
@@ -5585,6 +6546,53 @@ var bemtree;
           return {
             block: node._fieldParents[node._fieldParents.length - 1],
             elem: 'field'
+          };
+        }
+      }); // block('signup-popup')({tag: 'form'});
+
+      block('signup-popup').elem('hr')({
+        tag: 'hr'
+      });
+      block('signup-popup').elem('explanation-text')({
+        tag: 'span'
+      });
+      block('sm-icons-list').elem('icon-bg')({
+        'tag': 'a'
+      });
+      block('sm-icons-list').elem('icon')({
+        'tag': 'i'
+      });
+      block('sm-icons-list').elem('icon-bg').match(function (node, ctx) {
+        return ctx.href;
+      })({
+        addAttrs: function addAttrs(node, ctx) {
+          return {
+            href: ctx.href
+          };
+        }
+      });
+      block('small-chat').elem('btn')({
+        appendContent: function appendContent(node, ctx) {
+          return {
+            elem: 'item',
+            content: [{
+              tag: 'span',
+              block: 'icon-bg',
+              mods: {
+                borderless: true,
+                size: 'full'
+              },
+              content: {
+                block: 'icon',
+                mods: {
+                  color: 'white',
+                  type: ctx.type,
+                  size: 'fit'
+                }
+              },
+              wrappedInside: 'small-chat',
+              wrappedAs: 'icon-bg'
+            }]
           };
         }
       });
@@ -9715,8 +10723,6 @@ __webpack_require__(/*! ./bundle.bemtree.js */ "./static/public/js/bundle.bemtre
 
 __webpack_require__(/*! ../icons/favicon.ico */ "./static/public/icons/favicon.ico");
 
-__webpack_require__(/*! ../manifest.webmanifest */ "./static/public/manifest.webmanifest");
-
 
 
 
@@ -9914,10 +10920,10 @@ function (_Model) {
         }
 
         return response.json().then(function (data) {
-          data.user.highScore = data.user.score;
           _this2.user = data.user;
 
           if (_this2.user !== null) {
+            data.user.highScore = data.user.score;
             _this2.user.isCurrent = true;
           }
 
@@ -13227,17 +14233,6 @@ function setSelectedGender(user, gender) {
     });
   }
 }
-
-/***/ }),
-
-/***/ "./static/public/manifest.webmanifest":
-/*!********************************************!*\
-  !*** ./static/public/manifest.webmanifest ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "6287daff9662d34a056f418c9a2b0d30.webmanifest";
 
 /***/ })
 
