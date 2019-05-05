@@ -3,6 +3,7 @@
 require('./bundle.bemhtml.js');
 require('./bundle.bemtree.js');
 require('../icons/favicon.ico');
+
 import {settings} from './settings/config.js';
 import createHeader from './views/components/header.js';
 import Router from './core/router.js';

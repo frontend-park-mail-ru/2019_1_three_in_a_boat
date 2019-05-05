@@ -1,0 +1,48 @@
+{
+  "icons": [
+    {
+      "src": "icon_1024x1024.247fb3c4df826c58ba7c123d0fc3beec.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_512x512.d23a8f277d58605bf940d14fbff14f6c.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_384x384.19cad423d2868c7e75c817a075847aa9.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_256x256.00c6ab5ec317e2fd1744e4880d2f2084.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_192x192.5622eb8ac3742dac5846e4da446f219d.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_128x128.663ff2df61090012d054a57cd7be3b99.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_96x96.102521aede1e32c75aad4c035f984419.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "HEXAGON",
+  "short_name": "HEXAGON",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "lang": "ru",
+  "background_color": "#424242",
+  "theme_color": "#fb6a06",
+  "description": "\"Game Hexagon\" - semester project by team \"Three in the boat\""
+}

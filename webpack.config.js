@@ -1,5 +1,6 @@
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 module.exports = {
   mode: 'development',
@@ -16,6 +17,28 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './static/public/index.html',
+    }),
+    new WebpackPwaManifest({
+      filename: 'manifest.json',
+      name: 'HEXAGON',
+      lang: 'ru',
+      short_name: 'HEXAGON',
+      start_url: '.',
+      display: 'standalone',
+      background_color: '#424242',
+      theme_color: '#fb6a06',
+      description: '\"Game Hexagon\" - ' +
+          'semester project by team \"Three in the boat\"',
+      icons: [
+        {
+          src: 'static/public/icons/touch/android-icon-192x192.png',
+          sizes: [96, 128, 192, 256, 384, 512],
+        },
+        {
+          src: 'static/public/icons/touch/ms-icon-310x310.png',
+          size: '1024x1024',
+        },
+      ],
     }),
   ],
   module: {
