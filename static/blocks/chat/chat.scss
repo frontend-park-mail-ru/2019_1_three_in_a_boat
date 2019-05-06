@@ -87,9 +87,10 @@
   }
 
   &__btn {
-    width: 17%;
     height: 35px;
     margin-left: 3%;
+    margin-bottom: auto;
+    margin-top: auto;
   }
 
   &__link {
@@ -120,6 +121,8 @@
     font-weight: bold;
     color: $primary-color;
   }
+
+
 
   &__close-popup {
     position: absolute;

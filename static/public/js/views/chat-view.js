@@ -119,12 +119,20 @@ export default class ChatView extends View {
                 content: [{
                   block: 'btn',
                   elem: 'inner',
-                  content: [{
-                    block: 'btn',
-                    elem: 'text',
-                    elemMods: {'normal': true},
-                    content: 'Отправить',
-                  }],
+                  content: [
+                    {
+                      block: 'icon',
+                      tag: 'a',
+                      wrappedInside: 'chat',
+                      wrappedAs: 'btn',
+                      mods: {
+                        size: 'xxxlarge',
+                        color: 'black',
+                        btn: true,
+                        type: 'airplane',
+                      },
+                    },
+                  ],
                 }],
               },
             ],
