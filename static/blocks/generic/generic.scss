@@ -8,6 +8,10 @@ html, body, #application, #main {
 body {
   background: #424242 url("../../public/images/hexagon.jpg");
   background-size: 100%;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 #application, #main {

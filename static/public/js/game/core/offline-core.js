@@ -2,10 +2,10 @@ import GameCore from './core.js';
 import Geometry from './geometry.js';
 import bus from '../../event-bus.js';
 import events from './events.js';
-import {HEXAGON, CURSOR} from './settings.js';
+import {CURSOR, HEXAGON} from './settings.js';
 
-const mask2 = 1;
-const mask5 = 31;
+const mask2 = 4;
+const mask5 = 22;
 
 /**
  * Offline game core class
@@ -20,7 +20,7 @@ export default class OfflineGame extends GameCore {
     super(controller, scene);
     this.scene = scene;
     this.state = {};
-    this.gameloop = this.gameloop.bind(this);
+    this.gameLoop = this.gameLoop.bind(this);
     this.gameloopRequestId = null;
     this.lastFrame = 0;
   }
@@ -33,11 +33,17 @@ export default class OfflineGame extends GameCore {
     this.state = {
       hexagons: [],
       cursorAngle: Math.PI / 2,
+      score: 0,
+      time: 0,
+      cursorCircleAngle: 0,
+      clockWise: true,
     };
+    this.tick = 0;
+    this.hexagonsSpeed = HEXAGON.speed;
 
     this.state.hexagons = Array.from(new Array(3), function(_, position) {
       return {
-        side: 700 + 250 * position,
+        side: 400 + 300 * position,
         sides: Math.floor(Math.random() * 2) === 1? mask2: mask5,
         angle: Math.floor(Math.random() * 2 * Math.PI),
       };
@@ -52,30 +58,57 @@ export default class OfflineGame extends GameCore {
    * GameController loop action
    * @param {number} now
    */
-  gameloop(now) {
+  gameLoop(now) {
     const delay = now - this.lastFrame;
+    this.state.time += delay / 1000;
+
     this.lastFrame = now;
+    ++this.tick;
+    let difficultyIncrement = 1 + 1e-2 * 0.02 * this.tick;
+    if (difficultyIncrement > 2) {
+      difficultyIncrement = 2;
+    }
+
+    const ticksSinceRotation = this.tick % Math.round(15 * 25);
+    if (ticksSinceRotation === 0) {
+      this.state.clockWise = !this.state.clockWise;
+    }
+
+    const ticksToRotation = Math.min(ticksSinceRotation,
+        Math.abs(ticksSinceRotation - 15 * 0.02));
+    const rotationAmplitude = Math.min(1,
+        Math.max(0.5, 3 * ticksToRotation / 15 * 0.02));
+
+    let rotationDirection = 1.0;
+    if (!this.state.clockWise) {
+      rotationDirection = -1;
+    }
+    let angleIncrement = rotationAmplitude * rotationDirection;
+    angleIncrement *= Math.PI / 3 * 0.025 * difficultyIncrement;
+    this.state.cursorCircleAngle += angleIncrement;
+    this.hexagonsSpeed += 0.0001 * difficultyIncrement;
     this.state.hexagons = this.state.hexagons
-        .map(function(hexagon) {
-          hexagon.side -= HEXAGON.speed * delay;
-          hexagon.angle += HEXAGON.rotatingSpeed * delay;
+        .map((hexagon) => {
+          hexagon.side -= this.hexagonsSpeed * delay;
+          hexagon.angle += angleIncrement;
           return hexagon;
         });
 
     for (let i = 0; i < this.state.hexagons.length; i++) {
       if (this.state.hexagons[i].side < HEXAGON.minSize) {
-        const newHexagon = {
-          side: 1000,
+        this.state.hexagons[i] = {
+          side: 900,
           sides: Math.floor(Math.random() * 2) === 1 ? mask2 : mask5,
           angle: Math.floor(Math.random() * 2 * Math.PI),
         };
-        this.state.hexagons[i] = newHexagon;
+        this.state.score += 10;
       }
     }
 
     bus.emit(events.GAME_STATE_CHANGED, this.state);
 
-    const cursor = Geometry.cursorAngleToDot(this.state.cursorAngle);
+    const cursor = Geometry.cursorAngleToDot(
+        this.state.cursorAngle - this.state.cursorCircleAngle);
 
     for (let i = 0; i < this.state.hexagons.length; i++) {
       const condition = Geometry.checkHexagonCollision(
@@ -83,30 +116,38 @@ export default class OfflineGame extends GameCore {
       );
 
       if (condition) {
-        console.log(this.state.hexagons[i], cursor);
-        setTimeout(function() {
-          alert('finish'); // for debug
-          bus.emit(events.FINISH_GAME);
-        });
-        // return;
+        bus.emit(events.FINISH_GAME, this.state);
+        return;
       }
     }
 
-    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+    this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
   }
 
   /**
    * Control pressed event
    * @param {object} evt
    */
-  onControllsPressed(evt) {
-    evt.forEach((btn) => {
-      if (this._pressed('LEFT', btn)) {
-        this.state.cursorAngle += CURSOR.rotatingSpeed;
-      } else if (this._pressed('RIGHT', btn)) {
-        this.state.cursorAngle -= CURSOR.rotatingSpeed;
-      }
-    });
+  onControlsPressed(evt) {
+    if (!this.controllersLoopIntervalId) {
+      this.controllersLoopIntervalId = setInterval(() => {
+        const speed = CURSOR.rotatingSpeed;
+        if (this._pressed('LEFT', evt)) {
+          this.state.cursorAngle += speed;
+        } else if (this._pressed('RIGHT', evt)) {
+          this.state.cursorAngle -= speed;
+        }
+      }, 50);
+    }
+  }
+
+  /**
+   * Control unpressed event
+   * @param {object} evt
+   */
+  onControlsUnpressed(evt) {
+    clearInterval(this.controllersLoopIntervalId);
+    this.controllersLoopIntervalId = undefined;
   }
 
   /**
@@ -119,7 +160,7 @@ export default class OfflineGame extends GameCore {
     this.scene.start();
 
     this.lastFrame = performance.now();
-    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+    this.gameloopRequestId = requestAnimationFrame(this.gameLoop);
   }
 
   /**
@@ -127,7 +168,18 @@ export default class OfflineGame extends GameCore {
    * @param {object} evt
    */
   onGameFinished(evt) {
+    this.destroy();
+  }
+
+  /**
+   * Destructor
+   */
+  destroy() {
+    super.destroy();
     cancelAnimationFrame(this.gameloopRequestId);
+    if (this.controllersLoopIntervalId) {
+      clearInterval(this.controllersLoopIntervalId);
+    }
     this.scene.stop();
   }
 

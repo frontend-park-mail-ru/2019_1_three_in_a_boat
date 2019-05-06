@@ -1,4 +1,5 @@
 import {CURSOR, MASKS} from './settings.js';
+import {HEXAGON} from "./settings";
 
 const sqrt3 = 1.7320508075688772;
 
@@ -15,12 +16,18 @@ export default class Geometry {
   static checkHexagonCollision(hexagon, cursor) {
     const lines = this.convertHexagonToLines(hexagon);
     let isCollide = false;
-    console.log(hexagon, lines);
     lines.forEach((line) => {
-      line = this.rotateLine(line.first, line.second, hexagon.angle);
-      console.log(cursor, line.first, line.second);
-      if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
-        isCollide = true;
+      if (line) {
+        line = this.rotateLine(line.first, line.second, hexagon.angle);
+        try {
+          line = Geometry.shortened(line, HEXAGON.lineWidth);
+        } catch (e) {
+          console.log(e.toString());
+          return;
+        }
+        if (this._lineAndCursorCollision(line.first, line.second, cursor)) {
+          isCollide = true;
+        }
       }
     });
 
@@ -46,6 +53,8 @@ export default class Geometry {
           y: hexagon.side * sqrt3 / 2,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.topRight)) {
@@ -59,6 +68,8 @@ export default class Geometry {
           y: 0,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.bottomRight)) {
@@ -72,6 +83,8 @@ export default class Geometry {
           y: -hexagon.side * sqrt3 / 2,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.bottom)) {
@@ -85,6 +98,8 @@ export default class Geometry {
           y: -hexagon.side * sqrt3 / 2,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.bottomLeft)) {
@@ -98,6 +113,8 @@ export default class Geometry {
           y: 0,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     if (!(hexagon.sides & MASKS.topLeft)) {
@@ -111,11 +128,52 @@ export default class Geometry {
           y: hexagon.side * sqrt3 / 2,
         },
       });
+    } else {
+      lines.push(undefined);
     }
 
     return lines;
   }
 
+  /**
+   * Doesn't touch original line l, returns a line, same as L, but shorter by
+   * shortenBy from BOTH sides. If shortenBy > 1/2 length of the line,
+   *  returns the line itself to avoid stupid bullshit
+   * @param {{first: {x: number, y: number}, second: {x: number, y: number}}} line
+   * @param {number} shortenBy
+   * @return {{first: {x: number, y: number}, second: {x: number, y: number}}|*}
+   * @constructor
+   */
+  static shortened(line, shortenBy) {
+    if (shortenBy < 0) {
+      throw Error('shortenBy has to be non-negative');
+    }
+    const height = Math.abs(line.first.y - line.second.y);
+    const width = Math.abs(line.first.x - line.second.x);
+    const length = Math.sqrt(width * width + height * height);
+
+    if (shortenBy * 2 >= length) {
+      return line;
+    }
+
+    const sin = height / length;
+    const cos = width / length;
+    const newLine = {
+      first: {x: 0, y: 0},
+      second: {x: 0, y: 0},
+    };
+    // move in the direction of the opposite second - hence the Copysign
+    newLine.first.x = line.first.x +
+        shortenBy * Math.abs(cos) * Math.sign(line.second.x - line.first.x);
+    newLine.first.y = line.first.y +
+        shortenBy * Math.abs(sin) * Math.sign(line.second.x - line.first.x);
+    newLine.second.x = line.second.x -
+        shortenBy * Math.abs(cos) * Math.sign(line.second.x - line.first.x);
+    newLine.second.y = line.second.y -
+        shortenBy * Math.abs(sin) * Math.sign(line.second.x - line.first.x);
+
+    return newLine;
+  }
   /**
    * Check collision of cursor and line
    * @param {{x: number, y: number}} dot0
@@ -135,11 +193,14 @@ export default class Geometry {
       y: dot1.y - dot0.y,
     };
 
+    const r = 10;
+
     const a = d1.x * d1.x + d1.y * d1.y;
     const k = d0.x * d1.x + d0.y * d1.y;
-    const c = d0.x * d0.x + d0.y * d0.y - 225; // CURSOR.height * CURSOR.height;
+    const c = d0.x * d0.x + d0.y * d0.y - r * r; // CURSOR.height * CURSOR.height;
     const disc = k * k - a * c;
 
+    // return disc >= eps;
     if (disc < 0) {
       return false;
     } else if (Math.abs(disc) < eps) {
@@ -154,7 +215,7 @@ export default class Geometry {
         t2 = t;
       }
 
-      return !(t1 >= 0 - eps && t2 <= 1 + eps) && (t2 > eps && t1 < 1 - eps);
+      return !(t2 < eps || t1 > 1 - eps);
     }
   }
 
@@ -194,8 +255,8 @@ export default class Geometry {
    */
   static cursorAngleToDot(cursorAngle) {
     return {
-      x: CURSOR.radius * Math.cos(cursorAngle),
-      y: CURSOR.radius * Math.sin(cursorAngle),
+      x: (CURSOR.radius - 30) * Math.cos(-cursorAngle),
+      y: (CURSOR.radius - 30) * Math.sin(-cursorAngle),
     };
   }
 }

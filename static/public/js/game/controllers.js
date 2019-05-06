@@ -1,76 +1,59 @@
+import bus from '../event-bus.js';
+import events from './core/events.js';
+
 /**
  * @class GameControllers
  */
 export default class GameControllers {
   /**
    * Constructor
+   * @param {object} view
    */
-  constructor() {
-    this.previous = {};
+  constructor(view) {
     this.keys = [];
 
-    this._onPress = this._keyHandler.bind(this, 'press');
-    this._onUp = this._keyHandler.bind(this, 'up');
+    this.view = view;
+    this.keyHandler = this._keyHandler.bind(this);
   }
 
   /**
    * Начинаем слушать события клавиатуры
    */
   start() {
-    document.addEventListener('keydown', this._onPress);
-    document.addEventListener('keyup', this._onUp);
+    document.addEventListener('keydown', this.keyHandler);
+    document.addEventListener('keyup', this.keyHandler);
+    document.addEventListener('touchstart', this.keyHandler, false);
+    document.addEventListener('touchend', this.keyHandler, false);
   }
 
   /**
    * Прекращаем слушать события клавиатуры
    */
   destroy() {
-    document.removeEventListener('keydown', this._onPress);
-    document.removeEventListener('keyup', this._onUp);
-  }
-
-  /**
-   * Нажата ли клавиша?
-   * @param  {string}  key
-   * @return {boolean}
-   */
-  is(key) {
-    return this.keys[key];
+    document.removeEventListener('keydown', this.keyHandler);
+    document.removeEventListener('keyup', this.keyHandler);
+    document.removeEventListener('touchstart', this.keyHandler, false);
+    document.removeEventListener('touchend', this.keyHandler, false);
   }
 
   /**
    * Обработчик события
-   * @param  {string} type
-   * @param  {MouseEvent} event
+   * @param  {Event} event
    */
-  _keyHandler(type, event) {
+  _keyHandler(event) {
     if (event.type.toLowerCase() === 'keydown') {
-      this.keys.push(event.key);
+      bus.emit(events.CONTROLS_PRESSED, event.key);
+    } else if (event.type.toLowerCase() === 'keyup') {
+      bus.emit(events.CONTROLS_UNPRESSED, event.key);
+    } else if (event.type.toLowerCase() === 'touchstart') {
+      const touch = event.changedTouches[0];
+      if (touch.pageX < document.body.clientWidth / 2) {
+        bus.emit(events.CONTROLS_PRESSED, 'ArrowLeft');
+      } else {
+        bus.emit(events.CONTROLS_PRESSED, 'ArrowRight');
+      }
+    } else if (event.type.toLowerCase() === 'touchend') {
+      bus.emit(events.CONTROLS_UNPRESSED, {});
     }
-  }
-
-  /**
-   * Получить клавиши, нажатые с момента прошлого запроса
-   * @return {*}
-   */
-  diff() {
-    // let allkeys = [];
-    // allkeys.push.apply(allkeys, Object.keys(this.previous));
-    // allkeys.push.apply(allkeys, Object.keys(this.keys));
-    // allkeys = allkeys.map((k) => k.toLowerCase());
-    // // allkeys = allkeys.filter((key, pos, all) => {
-    // //   return all.indexOf(key, pos + 1) === -1;
-    // // });
-    // console.log(allkeys)
-    //
-    // const clicked = allkeys.reduce((res, key) => {
-    //   res[key] = !this.previous[key] && this.keys[key];
-    //   return res;
-    // }, {});
-    //
-    // this.previous = Object.assign({}, this.keys);
-    const newKeys = this.keys;
-    this.keys = [];
-    return newKeys;
   }
 }

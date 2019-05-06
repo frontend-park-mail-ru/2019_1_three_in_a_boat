@@ -12,6 +12,7 @@ block('input').elem('field').match((node, ctx) => !ctx.attrs || !ctx.attrs.type)
 block('input').match((node, ctx) => !ctx.content)({
   content: (node, ctx) => [{
     elem: 'field',
+    elemMods: ctx.fieldAttrs.isUpd ? {upd: true} : '',
     attrs: ctx.fieldAttrs,
   }],
 });

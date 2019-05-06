@@ -3,7 +3,7 @@
 import Controller from '../core/controller.js';
 import UserService from '../models/user-service.js';
 import ScoreboardView from '../views/scoreboard-view.js';
-import Paginator from '../views/pagination.js';
+import Paginator from '../views/components/pagination.js';
 
 /**
  * @class ScoreboardController

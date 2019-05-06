@@ -1,6 +1,7 @@
 'use strict';
 
 import View from '../core/view.js';
+const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 /**
  * @class GameOverMultiClass
@@ -30,6 +31,7 @@ export default class GameOverMultiClass extends View {
           },
           {
             elem: 'column',
+            elemMods: {user: true},
             content: [
               {
                 block: 'game-info',
@@ -95,6 +97,7 @@ export default class GameOverMultiClass extends View {
           },
           {
             elem: 'column',
+            elemMods: {user: true},
             content: [
               {
                 block: 'game-info',

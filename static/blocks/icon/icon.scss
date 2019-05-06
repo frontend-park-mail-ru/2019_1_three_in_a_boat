@@ -22,6 +22,7 @@ $user-icon: $icons-path + "/user.svg";
 $vk-icon: $icons-path + "/vk.svg";
 $crown-icon: $icons-path + "/crown.svg";
 $back_icon: $icons-path + "/arrow_previous.svg";
+$mail-icon: $icons-path + "/mail.svg";
 
 $icon-size: 14px, 14px;
 $icon-sizes: (small: (12px, 12px),
@@ -56,7 +57,7 @@ $icon-sizes: (small: (12px, 12px),
     height: get-icon-span-height(nil);
     width: get-icon-span-width(nil);
 
-    &_size{
+    &_size {
         @each $size, $x in $icon-sizes {
            &_#{$size} {
                 height: get-icon-span-height($size);
@@ -103,6 +104,10 @@ $icon-sizes: (small: (12px, 12px),
         }
         &_hexagon {
             @include mask-image($hexagon-icon);
+            @media screen and (orientation: landscape) and (max-width: 700px){
+                height: 1.5em;
+                width: 1.5em;
+            }
         }
         &_users {
             @include mask-image($users-icon);
@@ -136,6 +141,9 @@ $icon-sizes: (small: (12px, 12px),
         }
         &_back{
             @include mask-image($back_icon);
+        }
+        &_mail{
+            @include mask-image($mail-icon);
         }
         &_ru {
             background-image: url($ru-png);

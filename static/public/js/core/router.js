@@ -1,7 +1,7 @@
 'use strict';
 
 import NotFoundController from '../controllers/not-found-controller.js';
-import showMessage from '../views/offline-messagebox.js';
+import showMessage from '../views/components/offline-messagebox.js';
 
 /**
  * @class Router

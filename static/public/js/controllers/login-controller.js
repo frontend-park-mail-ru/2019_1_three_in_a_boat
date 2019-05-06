@@ -15,7 +15,6 @@ export default class LoginController extends Controller {
   constructor(parent) {
     super(parent, true);
     this.view = new LoginView(parent);
-    this.events = [];
   }
 
   /**

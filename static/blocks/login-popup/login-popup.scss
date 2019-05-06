@@ -4,6 +4,11 @@
   margin: auto 0;
   max-width: 300px;
 
+  @media screen and (orientation: portrait) {
+    margin-top: 30%;
+    width: 70%;
+  }
+
   &__close-popup {
     @extend %popup__close-popup
   }

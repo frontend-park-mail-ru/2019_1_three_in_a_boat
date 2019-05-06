@@ -35,6 +35,7 @@ export default class UserService extends Model {
       return response.json().then((data) => {
         this.user = data.user;
         if (this.user !== null) {
+          data.user.highScore = data.user.score;
           this.user.isCurrent = true;
         }
         return data.user;
@@ -188,6 +189,16 @@ export default class UserService extends Model {
           throw new Error(error);
         });
       });
+    }
+  }
+
+  /**
+   * Update user score in local data
+   * @param {number} score
+   */
+  static updateScore(score) {
+    if (this.user && this.user.highScore < score) {
+      this.user.highScore = score;
     }
   }
 };

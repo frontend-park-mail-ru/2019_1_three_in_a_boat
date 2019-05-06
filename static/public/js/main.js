@@ -2,8 +2,10 @@
 
 require('./bundle.bemhtml.js');
 require('./bundle.bemtree.js');
+require('../icons/favicon.ico');
+
 import {settings} from './settings/config.js';
-import createHeader from './views/header.js';
+import createHeader from './views/components/header.js';
 import Router from './core/router.js';
 import MenuController from './controllers/menu-controller.js';
 import AuthorsController from './controllers/authors-controller.js';
@@ -14,9 +16,9 @@ import LoginController from './controllers/login-controller.js';
 import LogoutController from './controllers/logout-controller.js';
 import UpdateController from './controllers/update-controller.js';
 import GameMenuController from './controllers/game-menu-controller.js';
-import GameOverController from './controllers/game-over-controller.js';
 import GameOverMltController from './controllers/game-over-mlt-controller.js';
 import GameController from './controllers/game-controller.js';
+import ChatController from './controllers/chat-controller.js';
 import '../css/style.css';
 
 const application = document.getElementById('application');
@@ -41,6 +43,7 @@ const router = new Router(settings.home, application)
     .addRoute('profile/update', new UpdateController(main))
     .addRoute('single', new GameController(main))
     .addRoute('multi', new GameOverMltController(main))
+    .addRoute('chat', new ChatController(main))
     .addRoute('play', new GameMenuController(main));
 
 router.start();
