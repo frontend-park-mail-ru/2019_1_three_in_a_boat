@@ -1,5 +1,6 @@
 import OfflineGame from './core/offline-core.js';
 import OnlineSingleGame from './core/online-single-core.js';
+import MultiPlayerGame from './core/multi-player-core.js';
 import GameControllers from './controllers.js';
 import GAME_MODES from './mods.js';
 
@@ -21,6 +22,10 @@ export default class Game {
       }
       case GAME_MODES.OFFLINE: {
         GameConstructor = OfflineGame;
+        break;
+      }
+      case GAME_MODES.MULTIPLAYER: {
+        GameConstructor = MultiPlayerGame;
         break;
       }
       default:

@@ -16,8 +16,8 @@ import LoginController from './controllers/login-controller.js';
 import LogoutController from './controllers/logout-controller.js';
 import UpdateController from './controllers/update-controller.js';
 import GameMenuController from './controllers/game-menu-controller.js';
-import GameOverMltController from './controllers/game-over-mlt-controller.js';
 import GameController from './controllers/game-controller.js';
+import MultiPlayerController from './controllers/multiplayer-controller.js';
 import ChatController from './controllers/chat-controller.js';
 import '../css/style.css';
 
@@ -42,7 +42,7 @@ const router = new Router(settings.home, application)
     .addRoute('authors', new AuthorsController(main))
     .addRoute('profile/update', new UpdateController(main))
     .addRoute('single', new GameController(main))
-    .addRoute('multi', new GameOverMltController(main))
+    .addRoute('multi', new MultiPlayerController(main))
     .addRoute('chat', new ChatController(main))
     .addRoute('play', new GameMenuController(main));
 
