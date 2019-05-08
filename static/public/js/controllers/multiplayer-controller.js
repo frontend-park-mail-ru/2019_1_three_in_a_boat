@@ -8,6 +8,7 @@ import Controller from '../core/controller.js';
 import events from '../game/core/events.js';
 import bus from '../event-bus.js';
 import UserService from '../models/user-service.js';
+import WaitView from '../views/wait-view.js';
 
 /**
  * @class MultiPlayerController
@@ -21,6 +22,7 @@ export default class MultiPlayerController extends Controller {
     super(parent, false);
     this.view = new GameView(parent);
     this.resultView = new ResultView(parent);
+    this.waitView = new WaitView(parent);
     this.game = null;
     this.bus = bus;
   }
@@ -41,26 +43,35 @@ export default class MultiPlayerController extends Controller {
 
     this.bus.on(events.FINISH_GAME, (state) => {
       this.destructor();
-      UserService.getData().then(
-          (user) => {
-            state.highScore = user.highScore === null || !user.highScore? 0:
-              user.highScore;
+      const enemyId = 27; // должен с сервера приходить
+      UserService.getUser(enemyId).then(
+          (enemy) => {
+            UserService.getData().then(
+                (user) => {
+                  console.log(user);
+                  state.highScore = user.highScore === null || !user.highScore ?
+                    0 : user.highScore;
 
-            if (state.highScore < state.score) {
-              UserService.updateScore(state.score);
-            }
+                  if (state.highScore < state.score) {
+                    UserService.updateScore(state.score);
+                  }
 
-            this.destructor();
-            this.resultView.render(state);
-            this._initResultView();
-          },
-          (error) => {
-            console.log(error);
-          }
-      );
+                  this.destructor();
+                  this.resultView.render(state, user, enemy);
+                  this._initResultView();
+                },
+                (error) => {
+                  console.log(error);
+                }
+            );
+          });
     });
 
     this.game = new Game(GAME_MODES.MULTIPLAYER, this.view);
+    // ожидание получения игрока
+    this.waitView.render();
+    // получили игрока
+    // this.waitView.hide();
     this.game.start();
   }
 

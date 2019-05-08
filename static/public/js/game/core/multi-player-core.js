@@ -46,7 +46,7 @@ export default class MultiPlayerCore extends OfflineGame {
       this.state.cursorCircleAngle = data.cursorCircleAngle;
       this.state.enemyCursorAngle = data.otherAngle;
       this.state.score = this.number === 1? data.score1 : data.score2;
-      this.state.enemyScpre = this.number === 1? data.score2 : data.score1;
+      this.state.enemyScore = this.number === 1? data.score2 : data.score1;
       this.state.hexagons = data.hexes;
       this.state.hexagons.forEach((_, position) => {
         this.state.hexagons[position].sides =

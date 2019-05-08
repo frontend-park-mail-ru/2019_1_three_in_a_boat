@@ -1,6 +1,7 @@
 'use strict';
 
 import View from '../core/view.js';
+import {settings} from '../settings/config';
 const bemhtml = require('../bundle.bemhtml.js').bemhtml;
 
 /**
@@ -17,8 +18,11 @@ export default class GameOverMultiClass extends View {
 
   /**
    * render page
+   * @param {Object} state
+   * @param {Object} user
+   * @param {Object} enemy
    */
-  render() {
+  render(state, user, enemy) {
     const template = [
       {
         block: 'game-over',
@@ -38,22 +42,22 @@ export default class GameOverMultiClass extends View {
                 content: [
                   {
                     elem: 'avatar',
-                    attrs: {src: '/images/user.png'},
+                    attrs: {src: settings.imgPath + user.img},
                   },
                   {
                     elem: 'nickname',
-                    content: ['USER1'],
+                    content: [user.nickname || user.username],
                   },
                   {
                     elem: 'item',
-                    value: '10:50',
+                    value: user.highScore,
                   },
                   {
                     elem: 'line',
                   },
                   {
                     elem: 'item',
-                    value: '6,72',
+                    value: state.score,
                   },
                   {
                     elem: 'line',
@@ -71,7 +75,7 @@ export default class GameOverMultiClass extends View {
               content: [
                 {
                   elem: 'seconds',
-                  content: ['64:45'],
+                  content: state.time.toFixed(2),
                 },
                 {
                   elem: 'title',
@@ -104,22 +108,22 @@ export default class GameOverMultiClass extends View {
                 content: [
                   {
                     elem: 'avatar',
-                    attrs: {src: '/images/user.png'},
+                    attrs: {src: settings.imgPath + enemy.img},
                   },
                   {
                     elem: 'nickname',
-                    content: ['USER2'],
+                    content: enemy.nickname || enemy.username,
                   },
                   {
                     elem: 'item',
-                    value: '11:50',
+                    value: enemy.highScore,
                   },
                   {
                     elem: 'line',
                   },
                   {
                     elem: 'item',
-                    value: '6,72',
+                    value: state.score,
                   },
                   {
                     elem: 'line',
@@ -131,7 +135,8 @@ export default class GameOverMultiClass extends View {
           {
             block: 'game-msg',
             mods: {'center': true},
-            content: ['ВЫ ПРОИГРАЛИ'],
+            content: user.score > enemy.score
+              ? 'ВЫ ВЫИГРАЛИ' : 'ВЫ ПРОИГРАЛИ',
           },
           {
             block: 'result-redirect',
