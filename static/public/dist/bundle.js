@@ -3324,7 +3324,7 @@ var bemhtml;
     var api = new bemhtml({
       "exportName": "bemhtml",
       "escapeContent": true,
-      "to": "/home/astronaut/gitHub/rowbot/tests/2019_1_three_in_a_boat"
+      "to": "/home/astronaut/gitHub/rowbot/tests/three_in_a_boat"
     });
     api.compile(function (match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
       /* BEM-XJST User code here: */
@@ -5930,7 +5930,7 @@ var bemtree;
     var api = new bemtree({
       "exportName": "bemtree",
       "runtimeLinting": true,
-      "to": "/home/astronaut/gitHub/rowbot/tests/2019_1_three_in_a_boat"
+      "to": "/home/astronaut/gitHub/rowbot/tests/three_in_a_boat"
     });
     api.compile(function (match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
       /* BEM-XJST User code here: */
@@ -7676,7 +7676,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MultiPlayerController; });
 /* harmony import */ var _game_mods_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../game/mods.js */ "./static/public/js/game/mods.js");
 /* harmony import */ var _game_game_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game/game.js */ "./static/public/js/game/game.js");
-/* harmony import */ var _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/game-view.js */ "./static/public/js/views/game-view.js");
+/* harmony import */ var _views_mult_game_view_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/mult-game-view.js */ "./static/public/js/views/mult-game-view.js");
 /* harmony import */ var _views_game_over_mlt_view_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/game-over-mlt-view.js */ "./static/public/js/views/game-over-mlt-view.js");
 /* harmony import */ var _core_controller_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../core/controller.js */ "./static/public/js/core/controller.js");
 /* harmony import */ var _game_core_events_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../game/core/events.js */ "./static/public/js/game/core/events.js");
@@ -7708,6 +7708,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+ // import GameView from '../views/game-view.js';
 
 
 
@@ -7735,7 +7736,7 @@ function (_Controller) {
     _classCallCheck(this, MultiPlayerController);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MultiPlayerController).call(this, parent, false));
-    _this.view = new _views_game_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
+    _this.view = new _views_mult_game_view_js__WEBPACK_IMPORTED_MODULE_2__["default"](parent);
     _this.resultView = new _views_game_over_mlt_view_js__WEBPACK_IMPORTED_MODULE_3__["default"](parent);
     _this.waitView = new _views_wait_view_js__WEBPACK_IMPORTED_MODULE_8__["default"](parent);
     _this.game = null;
@@ -7789,8 +7790,8 @@ function (_Controller) {
         });
       });
       this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](_game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].MULTIPLAYER, this.view); // ожидание получения игрока
-
-      this.waitView.render(); // получили игрока
+      // this.waitView.render();
+      // получили игрока
       // this.waitView.hide();
 
       this.game.start();
@@ -13536,6 +13537,225 @@ function (_View) {
   }]);
 
   return MenuView;
+}(_core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./static/public/js/views/mult-game-view.js":
+/*!**************************************************!*\
+  !*** ./static/public/js/views/mult-game-view.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MultGameView; });
+/* harmony import */ var _core_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/view.js */ "./static/public/js/core/view.js");
+/* harmony import */ var _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../graphics/hexagon.js */ "./static/public/js/graphics/hexagon.js");
+/* harmony import */ var _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../graphics/arrow.js */ "./static/public/js/graphics/arrow.js");
+/* harmony import */ var _graphics_text_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../graphics/text.js */ "./static/public/js/graphics/text.js");
+/* harmony import */ var _game_core_settings_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../game/core/settings.js */ "./static/public/js/game/core/settings.js");
+
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var bemhtml = __webpack_require__(/*! ../bundle.bemhtml.js */ "./static/public/js/bundle.bemhtml.js").bemhtml;
+
+var MIN_SIZE = 100;
+var color = '#ff4d00';
+/**
+ * @class GameView
+ */
+
+var MultGameView =
+/*#__PURE__*/
+function (_View) {
+  _inherits(MultGameView, _View);
+
+  /**
+   * @param {HTMLElement}parent
+   */
+  function MultGameView(parent) {
+    var _this;
+
+    _classCallCheck(this, MultGameView);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MultGameView).call(this, parent));
+    _this.currentScore = 0;
+    _this.currentTime = 0;
+    _this.lastFrameTime = 0;
+    _this.cursorCircleAngle = 0;
+    return _this;
+  }
+  /**
+   * Render GameController
+   * @param {Object} state with info about hexagons
+   */
+
+
+  _createClass(MultGameView, [{
+    key: "render",
+    value: function render(state) {
+      var _this2 = this;
+
+      var draw = [{
+        block: 'game',
+        mods: {
+          main: true
+        },
+        content: [{
+          block: 'hexagons',
+          mods: {
+            main: true
+          },
+          content: [{
+            elem: 'game',
+            attrs: {
+              id: 'game-canvas',
+              width: 950,
+              height: 800
+            }
+          }]
+        }]
+      }];
+      this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(draw));
+      this.canvas = document.getElementById('game-canvas');
+      this.ctx = this.canvas.getContext('2d');
+      this.hexagons = [];
+      state.hexagons.forEach(function (hexagon) {
+        _this2.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](_this2.ctx, hexagon.side, 10, hexagon.sides, color, hexagon.angle));
+      });
+      this.arrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 25, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].height, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].radius, '#fff');
+      this.enemyArrow = new _graphics_arrow_js__WEBPACK_IMPORTED_MODULE_2__["default"](this.ctx, 25, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].height, _game_core_settings_js__WEBPACK_IMPORTED_MODULE_4__["CURSOR"].radius, '#FF0020');
+      this.baseHex = new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](this.ctx, 40, 10, 0, color, 0);
+      this.scoreTitle = new _graphics_text_js__WEBPACK_IMPORTED_MODULE_3__["default"](this.ctx, 35, '#FFF', '#000', 'YOUR SCORE', -1);
+      this.enemyScoreTitle = new _graphics_text_js__WEBPACK_IMPORTED_MODULE_3__["default"](this.ctx, 35, '#FFF', '#000', 'RIVAL SCORE', 1);
+      this.scoreOut = new _graphics_text_js__WEBPACK_IMPORTED_MODULE_3__["default"](this.ctx, 70, '#FFF', '#000', state.score, -1);
+      this.enemyScoreOut = new _graphics_text_js__WEBPACK_IMPORTED_MODULE_3__["default"](this.ctx, 70, '#FFF', '#000', state.score, 1);
+      this.timeOut = new _graphics_text_js__WEBPACK_IMPORTED_MODULE_3__["default"](this.ctx, 70, '#FFF', '#000', '00:00', 0);
+    }
+    /**
+     * Render new scene
+     * @param {number} now
+     */
+
+  }, {
+    key: "renderScene",
+    value: function renderScene(now) {
+      this.lastFrameTime = now;
+      this.ctx.fillStyle = '#000';
+      this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+      this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+      this.enemyArrow.draw(this.cursorAngle - this.enemyCursorAngle);
+      this.arrow.draw(this.cursorAngle - this.cursorCircleAngle);
+      this.hexagons.forEach(function (hexagon) {
+        hexagon.draw();
+      });
+      this.baseHex.draw();
+      this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+      this.timeOut.setParameters(this.currentTime);
+      this.timeOut.draw();
+      this.scoreTitle.draw();
+      this.enemyScoreTitle.draw();
+      this.scoreOut.setParameters(this.currentScore);
+      this.enemyScoreOut.setParameters(this.currentScore);
+      this.scoreOut.draw();
+      this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
+    }
+    /**
+     * Update state
+     * @param {Object} state
+     */
+
+  }, {
+    key: "update",
+    value: function update(state) {
+      var _this3 = this;
+
+      this.hexagons = [];
+      state.hexagons.forEach(function (hexagon) {
+        _this3.hexagons.push(new _graphics_hexagon_js__WEBPACK_IMPORTED_MODULE_1__["default"](_this3.ctx, hexagon.side, 10, hexagon.sides, color, hexagon.angle));
+      });
+      this.cursorAngle = state.cursorAngle;
+      this.cursorCircleAngle = state.cursorCircleAngle;
+      this.enemyCursorAngle = state.enemyCursorAngle;
+      this.currentScore = state.score;
+      this.currentTime = state.time;
+    }
+    /**
+     * Rotate all canvas
+     * @param {Number} direction, value: 1 or -1
+     * @private
+     */
+
+  }, {
+    key: "_rotate",
+    value: function _rotate(direction) {
+      // TODO: can be more properly cleaned. added to the to-do list
+      ctx.clearRect(-100, -100, this.canvas.width * 1.5, this.canvas.height * 2);
+      ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+      this.baseHex.draw();
+      this.arrow.draw(0);
+
+      if (this.hexagon.currentSide >= MIN_SIZE) {
+        this.hexagon.draw();
+      } else {
+        this.hexagon.setNewParameters(0, '#ff4d00');
+      }
+
+      ctx.rotate(Math.PI / 180 * 2);
+      ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+    }
+    /**
+     *
+     */
+
+  }, {
+    key: "start",
+    value: function start() {
+      this.lastFrameTime = performance.now();
+      this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
+    }
+    /**
+     *
+     */
+
+  }, {
+    key: "stop",
+    value: function stop() {
+      if (this.requestFrameId) {
+        window.cancelAnimationFrame(this.requestFrameId);
+        this.requestFrameId = null;
+      }
+    }
+  }]);
+
+  return MultGameView;
 }(_core_view_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 

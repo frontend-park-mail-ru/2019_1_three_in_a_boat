@@ -2,7 +2,8 @@
 
 import GAME_MODES from '../game/mods.js';
 import Game from '../game/game.js';
-import GameView from '../views/game-view.js';
+// import GameView from '../views/game-view.js';
+import MultGameView from '../views/mult-game-view.js';
 import ResultView from '../views/game-over-mlt-view.js';
 import Controller from '../core/controller.js';
 import events from '../game/core/events.js';
@@ -20,7 +21,7 @@ export default class MultiPlayerController extends Controller {
    */
   constructor(parent) {
     super(parent, false);
-    this.view = new GameView(parent);
+    this.view = new MultGameView(parent);
     this.resultView = new ResultView(parent);
     this.waitView = new WaitView(parent);
     this.game = null;
@@ -69,7 +70,7 @@ export default class MultiPlayerController extends Controller {
 
     this.game = new Game(GAME_MODES.MULTIPLAYER, this.view);
     // ожидание получения игрока
-    this.waitView.render();
+    // this.waitView.render();
     // получили игрока
     // this.waitView.hide();
     this.game.start();
