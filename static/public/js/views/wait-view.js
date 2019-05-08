@@ -52,7 +52,12 @@ export default class WaitView extends View {
     ];
     this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
   }
+
+  /**
+   * Hide wait message
+   */
   hide() {
+    console.log(document.getElementsByClassName('offline-msg')[0]);
     document.getElementsByClassName('offline-msg')[0].remove();
   }
 }

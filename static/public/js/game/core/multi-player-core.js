@@ -33,11 +33,12 @@ export default class MultiPlayerCore extends OfflineGame {
   gameLoop(message) {
     let data;
     try { // TODO get game id here
-      console.log(message.data);
+      // console.log(message.data);
       data = JSON.parse(message.data);
     } catch (e) {
-      console.log(message);
+      // console.log(message);
       this.number = Number(message.data.split()[1]);
+      bus.emit(events.ROOM_FULL, {});
       return;
     }
     this.state.time = (performance.now() - this.time) / 1000;
