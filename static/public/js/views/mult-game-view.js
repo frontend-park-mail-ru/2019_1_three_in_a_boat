@@ -98,7 +98,7 @@ export default class MultGameView extends View {
     this.ctx.fillStyle = '#000';
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-    this.enemyArrow.draw(this.enemyCursorAngle - this.cursorCircleAngle);
+    this.enemyArrow.draw(-this.enemyCursorAngle - this.cursorCircleAngle);
     this.arrow.draw(this.cursorAngle - this.cursorCircleAngle);
 
     this.hexagons.forEach((hexagon) => {

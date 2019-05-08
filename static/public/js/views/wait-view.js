@@ -57,7 +57,6 @@ export default class WaitView extends View {
    * Hide wait message
    */
   hide() {
-    console.log(document.getElementsByClassName('offline-msg')[0]);
     document.getElementsByClassName('offline-msg')[0].remove();
   }
 }

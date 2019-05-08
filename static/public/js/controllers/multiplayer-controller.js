@@ -2,7 +2,6 @@
 
 import GAME_MODES from '../game/mods.js';
 import Game from '../game/game.js';
-// import GameView from '../views/game-view.js';
 import MultGameView from '../views/mult-game-view.js';
 import ResultView from '../views/game-over-mlt-view.js';
 import Controller from '../core/controller.js';
@@ -49,7 +48,6 @@ export default class MultiPlayerController extends Controller {
           (enemy) => {
             UserService.getData().then(
                 (user) => {
-                  console.log(user);
                   state.highScore = user.highScore === null || !user.highScore ?
                     0 : user.highScore;
 
