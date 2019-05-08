@@ -45,7 +45,6 @@ export default class GameController extends Controller {
     }
 
     this.bus.on(events.FINISH_GAME, (state) => {
-      this.destructor();
       UserService.getData().then(
           (user) => {
             if (user) {
@@ -57,6 +56,7 @@ export default class GameController extends Controller {
               }
             }
             this.destructor();
+            this.view.destructor();
             this.resultView.render(state, mode);
             this._initResultView();
           },
