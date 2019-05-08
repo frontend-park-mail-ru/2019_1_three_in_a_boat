@@ -44,7 +44,7 @@ export default class MultiPlayerController extends Controller {
 
     this.bus.on(events.FINISH_GAME, (state) => {
       this.destructor();
-      const enemyId = 27; // должен с сервера приходить
+      const enemyId = 2; // должен с сервера приходить
       UserService.getUser(enemyId).then(
           (enemy) => {
             UserService.getData().then(
@@ -67,12 +67,11 @@ export default class MultiPlayerController extends Controller {
             );
           });
     });
-
+    bus.on(events.ROOM_FULL, () => {
+      this.waitView.hide();
+    });
     this.game = new Game(GAME_MODES.MULTIPLAYER, this.view);
-    // ожидание получения игрока
-    // this.waitView.render();
-    // получили игрока
-    // this.waitView.hide();
+    this.waitView.render();
     this.game.start();
   }
 

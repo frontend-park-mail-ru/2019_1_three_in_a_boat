@@ -7768,7 +7768,7 @@ function (_Controller) {
       this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_5__["default"].FINISH_GAME, function (state) {
         _this2.destructor();
 
-        var enemyId = 27; // должен с сервера приходить
+        var enemyId = 2; // должен с сервера приходить
 
         _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].getUser(enemyId).then(function (enemy) {
           _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].getData().then(function (user) {
@@ -7789,11 +7789,11 @@ function (_Controller) {
           });
         });
       });
-      this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](_game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].MULTIPLAYER, this.view); // ожидание получения игрока
-      // this.waitView.render();
-      // получили игрока
-      // this.waitView.hide();
-
+      _event_bus_js__WEBPACK_IMPORTED_MODULE_6__["default"].on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_5__["default"].ROOM_FULL, function () {
+        _this2.waitView.hide();
+      });
+      this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](_game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].MULTIPLAYER, this.view);
+      this.waitView.render();
       this.game.start();
     }
     /**
@@ -9507,6 +9507,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 var EVENTS = {
   START_GAME: 'START_GAME',
+  ROOM_FULL: 'ROOM_FULL',
   FINISH_GAME: 'FINISH_GAME',
   CONTROLS_PRESSED: 'CONTROLS_PRESSED',
   CONTROLS_UNPRESSED: 'CONTROLS_UNPRESSED',
@@ -9915,11 +9916,12 @@ function (_OfflineGame) {
 
       try {
         // TODO get game id here
-        console.log(message.data);
+        // console.log(message.data);
         data = JSON.parse(message.data);
       } catch (e) {
-        console.log(message);
+        // console.log(message);
         this.number = Number(message.data.split()[1]);
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].ROOM_FULL, {});
         return;
       }
 
@@ -13671,7 +13673,7 @@ function (_View) {
       this.ctx.fillStyle = '#000';
       this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-      this.enemyArrow.draw(this.cursorAngle - this.enemyCursorAngle);
+      this.enemyArrow.draw(this.enemyCursorAngle - this.cursorCircleAngle);
       this.arrow.draw(this.cursorAngle - this.cursorCircleAngle);
       this.hexagons.forEach(function (hexagon) {
         hexagon.draw();
@@ -14826,9 +14828,14 @@ function (_View) {
       }];
       this.parent.insertAdjacentHTML('beforeend', bemhtml.apply(template));
     }
+    /**
+     * Hide wait message
+     */
+
   }, {
     key: "hide",
     value: function hide() {
+      console.log(document.getElementsByClassName('offline-msg')[0]);
       document.getElementsByClassName('offline-msg')[0].remove();
     }
   }]);
