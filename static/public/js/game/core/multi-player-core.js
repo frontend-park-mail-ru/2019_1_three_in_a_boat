@@ -33,11 +33,12 @@ export default class MultiPlayerCore extends OfflineGame {
   gameLoop(message) {
     let data;
     try { // TODO get game id here
-      // console.log(message.data);
       data = JSON.parse(message.data);
     } catch (e) {
-      // console.log(message);
-      this.number = Number(message.data.split()[1]);
+      const ids = message.data.split();
+      this.state.gameId = ids[0];
+      this.state.number = Number(ids[1]);
+      this.state.enemyId = 2; // Number(ids[2]); it will be used in future
       bus.emit(events.ROOM_FULL, {});
       return;
     }
@@ -46,8 +47,13 @@ export default class MultiPlayerCore extends OfflineGame {
     if (data.hexes) {
       this.state.cursorCircleAngle = data.cursorCircleAngle;
       this.state.enemyCursorAngle = data.otherAngle;
-      this.state.score = this.number === 1? data.score1 : data.score2;
-      this.state.enemyScore = this.number === 1? data.score2 : data.score1;
+      if (this.state.number === 1) {
+        this.state.score = data.score1;
+        this.state.enemyScore = data.score2;
+      } else {
+        this.state.score = data.score2;
+        this.state.enemyScore = data.score1;
+      }
       this.state.hexagons = data.hexes;
       this.state.hexagons.forEach((_, position) => {
         this.state.hexagons[position].sides =

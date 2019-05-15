@@ -135,6 +135,7 @@ export default class MultGameView extends View {
     this.cursorCircleAngle = state.cursorCircleAngle;
     this.enemyCursorAngle = state.enemyCursorAngle;
     this.currentScore = state.score;
+    this.enemyScore = state.enemyScore;
     this.currentTime = state.time;
   }
 

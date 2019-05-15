@@ -43,8 +43,7 @@ export default class MultiPlayerController extends Controller {
 
     this.bus.on(events.FINISH_GAME, (state) => {
       this.destructor();
-      const enemyId = 2; // должен с сервера приходить
-      UserService.getUser(enemyId).then(
+      UserService.getUser(state.enemyId).then(
           (enemy) => {
             UserService.getData().then(
                 (user) => {

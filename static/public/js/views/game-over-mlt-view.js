@@ -88,11 +88,6 @@ export default class GameOverMultiClass extends View {
               mods: {main: true},
               content: [
                 {
-                  mix: {'block': 'game-info_main_title'},
-                  elem: 'item',
-                  name: 'Лучшее время',
-                },
-                {
                   elem: 'item',
                   name: 'Начисленные очки',
                 },
