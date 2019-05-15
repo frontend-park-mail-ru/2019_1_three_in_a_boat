@@ -23,7 +23,7 @@ export default class MultiPlayerCore extends OfflineGame {
    */
   start() {
     super.start();
-    this.state.enemyCursorAngle = Math.PI / 2;
+    this.state.enemyCursorAngle = -Math.PI / 2;
   }
 
   /**
@@ -35,15 +35,19 @@ export default class MultiPlayerCore extends OfflineGame {
     try { // TODO get game id here
       data = JSON.parse(message.data);
     } catch (e) {
-      const ids = message.data.split();
+      const ids = message.data.split(' ');
       this.state.gameId = ids[0];
       this.state.number = Number(ids[1]);
+      if (this.state.number === 2) {
+        this.state.cursorAngle = -Math.PI / 2;
+        this.state.enemyCursorAngle = Math.PI / 2;
+      }
       this.state.enemyId = 2; // Number(ids[2]); it will be used in future
       bus.emit(events.ROOM_FULL, {});
+      bus.emit(events.GAME_STATE_CHANGED, this.state);
       return;
     }
     this.state.time = (performance.now() - this.time) / 1000;
-
     if (data.hexes) {
       this.state.cursorCircleAngle = data.cursorCircleAngle;
       this.state.enemyCursorAngle = data.otherAngle;
