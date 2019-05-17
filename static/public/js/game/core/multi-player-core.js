@@ -42,7 +42,7 @@ export default class MultiPlayerCore extends OfflineGame {
         this.state.cursorAngle = -Math.PI / 2;
         this.state.enemyCursorAngle = Math.PI / 2;
       }
-      this.state.enemyId = 2; // Number(ids[2]); it will be used in future
+      this.state.enemyId = Number(ids[2]);
       bus.emit(events.ROOM_FULL, {});
       bus.emit(events.GAME_STATE_CHANGED, this.state);
       return;

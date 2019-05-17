@@ -23,6 +23,8 @@ export default class GameOverMultiClass extends View {
    * @param {Object} enemy
    */
   render(state, user, enemy) {
+    const isWinner = state.over1 && state.number !== 1
+      || state.over2 && state.number !== 2;
     const template = [
       {
         block: 'game-over',
@@ -82,16 +84,6 @@ export default class GameOverMultiClass extends View {
                   content: ['Время'],
                 },
               ],
-            },
-            {
-              block: 'game-info',
-              mods: {main: true},
-              content: [
-                {
-                  elem: 'item',
-                  name: 'Начисленные очки',
-                },
-              ],
             }],
           },
           {
@@ -130,8 +122,7 @@ export default class GameOverMultiClass extends View {
           {
             block: 'game-msg',
             mods: {'center': true},
-            content: user.score > enemy.score
-              ? 'ВЫ ВЫИГРАЛИ' : 'ВЫ ПРОИГРАЛИ',
+            content: isWinner ? 'ВЫ ВЫИГРАЛИ' : 'ВЫ ПРОИГРАЛИ',
           },
           {
             block: 'result-redirect',
