@@ -43,6 +43,7 @@ export default class WaitView extends View {
             {
               elem: 'btn',
               attrs: {'href': '#'},
+              elemMods: {wait: true},
               tag: 'a',
               content: 'Назад',
             },

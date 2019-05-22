@@ -1268,37 +1268,39 @@ var bemhtml;
         } else { var g; }
       })(function () {
         var define, module, exports;
-        return function e(t, n, r) {
-          function s(o, u) {
-            if (!n[o]) {
-              if (!t[o]) {
-                var a = typeof require == "function" && require;
-                if (!u && a) return require(o, !0);
-                if (i) return i(o, !0);
-                var f = new Error("Cannot find module '" + o + "'");
-                throw f.code = "MODULE_NOT_FOUND", f;
+        return function () {
+          function r(e, n, t) {
+            function o(i, f) {
+              if (!n[i]) {
+                if (!e[i]) {
+                  var c = "function" == typeof require && require;
+                  if (!f && c) return require(i, !0);
+                  if (u) return u(i, !0);
+                  var a = new Error("Cannot find module '" + i + "'");
+                  throw a.code = "MODULE_NOT_FOUND", a;
+                }
+
+                var p = n[i] = {
+                  exports: {}
+                };
+                e[i][0].call(p.exports, function (r) {
+                  var n = e[i][1][r];
+                  return o(n || r);
+                }, p, p.exports, r, e, n, t);
               }
 
-              var l = n[o] = {
-                exports: {}
-              };
-              t[o][0].call(l.exports, function (e) {
-                var n = t[o][1][e];
-                return s(n ? n : e);
-              }, l, l.exports, e, t, n, r);
+              return n[i].exports;
             }
 
-            return n[o].exports;
+            for (var u = "function" == typeof require && require, i = 0; i < t.length; i++) {
+              o(t[i]);
+            }
+
+            return o;
           }
 
-          var i = typeof require == "function" && require;
-
-          for (var o = 0; o < r.length; o++) {
-            s(r[o]);
-          }
-
-          return s;
-        }({
+          return r;
+        }()({
           1: [function (require, module, exports) {
             var inherits = require('inherits');
 
@@ -1521,12 +1523,28 @@ var bemhtml;
               return this._unquotedAttrs && utils.isUnquotedAttr(attrVal) ? attrVal : '"' + utils.attrEscape(attrVal) + '"';
             };
 
+            var BEMHTMLSet = typeof Set !== 'undefined' ? Set : function () {
+              var MiniSet = function MiniSet() {
+                this._storage = {};
+              };
+
+              MiniSet.prototype.add = function (item) {
+                this._storage[item] = true;
+              };
+
+              MiniSet.prototype.has = function (item) {
+                return this._storage[item] || false;
+              };
+
+              return MiniSet;
+            }();
+
             BEMHTML.prototype.renderMix = function (entity, mix, jsParams, addJSInitClass) {
-              var visited = {};
+              var visited = new BEMHTMLSet();
               var context = this.context;
               var js = jsParams;
               var addInit = addJSInitClass;
-              visited[entity.jsClass] = true; // Transform mix to the single-item array if it's not array
+              visited.add(entity.jsClass); // Transform mix to the single-item array if it's not array
 
               if (!Array.isArray(mix)) mix = [mix];
               var classBuilder = this.classBuilder;
@@ -1558,7 +1576,7 @@ var bemhtml;
                   if (!js) js = {};
                   js[classBuilder.build(block, item.elem)] = item.js === true ? {} : item.js;
                   if (!addInit) addInit = this._elemJsInstances ? item.elem || block : block && !item.elem;
-                } // Process nexted mixes from BEMJON
+                } // Process nested mixes from BEMJSON
 
 
                 if (item.mix) {
@@ -1569,8 +1587,8 @@ var bemhtml;
                 } // Process nested mixes from templates
 
 
-                if (!hasItem || visited[key]) continue;
-                visited[key] = true;
+                if (!hasItem || visited.has(key)) continue;
+                visited.add(key);
                 var nestedEntity = this.entities[key];
                 if (!nestedEntity) continue;
                 var oldBlock = context.block;
@@ -1584,7 +1602,7 @@ var bemhtml;
                   var nestedItem = nestedMix[j];
                   if (!nestedItem) continue;
 
-                  if (!nestedItem.block && !nestedItem.elem || !visited[classBuilder.build(nestedItem.block, nestedItem.elem)]) {
+                  if (!nestedItem.block && !nestedItem.elem || !visited.has(classBuilder.build(nestedItem.block, nestedItem.elem))) {
                     if (nestedItem.block) continue;
                     nestedItem._block = block;
                     nestedItem._elem = elem;
@@ -3324,7 +3342,7 @@ var bemhtml;
     var api = new bemhtml({
       "exportName": "bemhtml",
       "escapeContent": true,
-      "to": "/home/astronaut/gitHub/rowbot/tests/three_in_a_boat"
+      "to": "/home/astronaut/gitHub/rowbot/tests/2019_1_three_in_a_boat"
     });
     api.compile(function (match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
       /* BEM-XJST User code here: */
@@ -4103,37 +4121,39 @@ var bemtree;
         } else { var g; }
       })(function () {
         var define, module, exports;
-        return function e(t, n, r) {
-          function s(o, u) {
-            if (!n[o]) {
-              if (!t[o]) {
-                var a = typeof require == "function" && require;
-                if (!u && a) return require(o, !0);
-                if (i) return i(o, !0);
-                var f = new Error("Cannot find module '" + o + "'");
-                throw f.code = "MODULE_NOT_FOUND", f;
+        return function () {
+          function r(e, n, t) {
+            function o(i, f) {
+              if (!n[i]) {
+                if (!e[i]) {
+                  var c = "function" == typeof require && require;
+                  if (!f && c) return require(i, !0);
+                  if (u) return u(i, !0);
+                  var a = new Error("Cannot find module '" + i + "'");
+                  throw a.code = "MODULE_NOT_FOUND", a;
+                }
+
+                var p = n[i] = {
+                  exports: {}
+                };
+                e[i][0].call(p.exports, function (r) {
+                  var n = e[i][1][r];
+                  return o(n || r);
+                }, p, p.exports, r, e, n, t);
               }
 
-              var l = n[o] = {
-                exports: {}
-              };
-              t[o][0].call(l.exports, function (e) {
-                var n = t[o][1][e];
-                return s(n ? n : e);
-              }, l, l.exports, e, t, n, r);
+              return n[i].exports;
             }
 
-            return n[o].exports;
+            for (var u = "function" == typeof require && require, i = 0; i < t.length; i++) {
+              o(t[i]);
+            }
+
+            return o;
           }
 
-          var i = typeof require == "function" && require;
-
-          for (var o = 0; o < r.length; o++) {
-            s(r[o]);
-          }
-
-          return s;
-        }({
+          return r;
+        }()({
           1: [function (require, module, exports) {
             var inherits = require('inherits');
 
@@ -5930,7 +5950,7 @@ var bemtree;
     var api = new bemtree({
       "exportName": "bemtree",
       "runtimeLinting": true,
-      "to": "/home/astronaut/gitHub/rowbot/tests/three_in_a_boat"
+      "to": "/home/astronaut/gitHub/rowbot/tests/2019_1_three_in_a_boat"
     });
     api.compile(function (match, block, elem, mod, elemMod, oninit, xjstOptions, wrap, replace, extend, mode, def, content, appendContent, prependContent, attrs, addAttrs, js, addJs, mix, addMix, mods, addMods, addElemMods, elemMods, tag, cls, bem, local, applyCtx, applyNext, apply) {
       /* BEM-XJST User code here: */
@@ -7708,7 +7728,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
- // import GameView from '../views/game-view.js';
 
 
 
@@ -7768,11 +7787,8 @@ function (_Controller) {
       this.bus.on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_5__["default"].FINISH_GAME, function (state) {
         _this2.destructor();
 
-        var enemyId = 2; // должен с сервера приходить
-
-        _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].getUser(enemyId).then(function (enemy) {
+        _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].getUser(state.enemyId).then(function (enemy) {
           _models_user_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].getData().then(function (user) {
-            console.log(user);
             state.highScore = user.highScore === null || !user.highScore ? 0 : user.highScore;
 
             if (state.highScore < state.score) {
@@ -7790,10 +7806,16 @@ function (_Controller) {
         });
       });
       _event_bus_js__WEBPACK_IMPORTED_MODULE_6__["default"].on(_game_core_events_js__WEBPACK_IMPORTED_MODULE_5__["default"].ROOM_FULL, function () {
+        var btn = document.getElementsByClassName('result-redirect__btn')[0];
+        btn.removeEventListener('click', _this2.events['handler']);
+
         _this2.waitView.hide();
       });
       this.game = new _game_game_js__WEBPACK_IMPORTED_MODULE_1__["default"](_game_mods_js__WEBPACK_IMPORTED_MODULE_0__["default"].MULTIPLAYER, this.view);
       this.waitView.render();
+
+      this._initWaitView();
+
       this.game.start();
     }
     /**
@@ -7813,6 +7835,33 @@ function (_Controller) {
         _this3.resultView.parent.innerHTML = '';
         window.history.pushState({}, '', '/multi');
         window.history.pushState({}, '', '/multi');
+        window.history.back();
+      };
+
+      btn.addEventListener('click', handler);
+      this.events.push({
+        item: btn,
+        type: 'click',
+        handler: handler
+      });
+    }
+    /**
+     * Init wait view handlers
+     * Add event listeners
+     * @private
+     */
+
+  }, {
+    key: "_initWaitView",
+    value: function _initWaitView() {
+      var _this4 = this;
+
+      var btn = document.getElementsByClassName('offline-msg__btn_wait')[0];
+
+      var handler = function handler() {
+        _this4.resultView.parent.innerHTML = '';
+        window.history.pushState({}, '', '/play');
+        window.history.pushState({}, '', '/play');
         window.history.back();
       };
 
@@ -9900,7 +9949,7 @@ function (_OfflineGame) {
     value: function start() {
       _get(_getPrototypeOf(MultiPlayerCore.prototype), "start", this).call(this);
 
-      this.state.enemyCursorAngle = Math.PI / 2;
+      this.state.enemyCursorAngle = -Math.PI / 2;
     }
     /**
      * GameController loop action
@@ -9916,12 +9965,20 @@ function (_OfflineGame) {
 
       try {
         // TODO get game id here
-        // console.log(message.data);
         data = JSON.parse(message.data);
       } catch (e) {
-        // console.log(message);
-        this.number = Number(message.data.split()[1]);
+        var ids = message.data.split(' ');
+        this.state.gameId = ids[0];
+        this.state.number = Number(ids[1]);
+
+        if (this.state.number === 2) {
+          this.state.cursorAngle = -Math.PI / 2;
+          this.state.enemyCursorAngle = Math.PI / 2;
+        }
+
+        this.state.enemyId = Number(ids[2]);
         _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].ROOM_FULL, {});
+        _event_bus_js__WEBPACK_IMPORTED_MODULE_2__["default"].emit(_events_js__WEBPACK_IMPORTED_MODULE_3__["default"].GAME_STATE_CHANGED, this.state);
         return;
       }
 
@@ -9930,8 +9987,15 @@ function (_OfflineGame) {
       if (data.hexes) {
         this.state.cursorCircleAngle = data.cursorCircleAngle;
         this.state.enemyCursorAngle = data.otherAngle;
-        this.state.score = this.number === 1 ? data.score1 : data.score2;
-        this.state.enemyScore = this.number === 1 ? data.score2 : data.score1;
+
+        if (this.state.number === 1) {
+          this.state.score = data.score1;
+          this.state.enemyScore = data.score2;
+        } else {
+          this.state.score = data.score2;
+          this.state.enemyScore = data.score1;
+        }
+
         this.state.hexagons = data.hexes;
         this.state.hexagons.forEach(function (_, position) {
           _this.state.hexagons[position].sides = _this.state.hexagons[position].sidesMask;
@@ -11459,11 +11523,11 @@ function parseUser(user) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
 var settings = {
-  home: 'http://127.0.0.1:8080',
-  url: 'http://127.0.0.1:3000',
-  chatUrl: 'http://127.0.0.1:3003',
+  home: 'https://hexagon.alfaix.dev',
+  url: 'https://hexagon.alfaix.dev:3000',
+  chatUrl: 'https://hexagon.alfaix.dev:3000',
   imgPath: 'https://hexagon-game.s3.eu-north-1.amazonaws.com/img/',
-  wsUrl: 'ws://127.0.0.1:3002',
+  wsUrl: 'wss://hexagon.alfaix.dev:3000',
   chatPort: ':3003'
 };
 
@@ -12826,6 +12890,7 @@ function (_View) {
   _createClass(GameOverMultiClass, [{
     key: "render",
     value: function render(state, user, enemy) {
+      var isWinner = state.over1 && state.number !== 1 || state.over2 && state.number !== 2;
       var template = [{
         block: 'game-over',
         mods: {
@@ -12877,21 +12942,6 @@ function (_View) {
               elem: 'title',
               content: ['Время']
             }]
-          }, {
-            block: 'game-info',
-            mods: {
-              main: true
-            },
-            content: [{
-              mix: {
-                'block': 'game-info_main_title'
-              },
-              elem: 'item',
-              name: 'Лучшее время'
-            }, {
-              elem: 'item',
-              name: 'Начисленные очки'
-            }]
           }]
         }, {
           elem: 'column',
@@ -12925,7 +12975,7 @@ function (_View) {
           mods: {
             'center': true
           },
-          content: user.score > enemy.score ? 'ВЫ ВЫИГРАЛИ' : 'ВЫ ПРОИГРАЛИ'
+          content: isWinner ? 'ВЫ ВЫИГРАЛИ' : 'ВЫ ПРОИГРАЛИ'
         }, {
           block: 'result-redirect',
           content: [{
@@ -13673,7 +13723,7 @@ function (_View) {
       this.ctx.fillStyle = '#000';
       this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-      this.enemyArrow.draw(this.enemyCursorAngle - this.cursorCircleAngle);
+      this.enemyArrow.draw(-this.enemyCursorAngle - this.cursorCircleAngle);
       this.arrow.draw(this.cursorAngle - this.cursorCircleAngle);
       this.hexagons.forEach(function (hexagon) {
         hexagon.draw();
@@ -13707,6 +13757,7 @@ function (_View) {
       this.cursorCircleAngle = state.cursorCircleAngle;
       this.enemyCursorAngle = state.enemyCursorAngle;
       this.currentScore = state.score;
+      this.enemyScore = state.enemyScore;
       this.currentTime = state.time;
     }
     /**
@@ -14821,6 +14872,9 @@ function (_View) {
             attrs: {
               'href': '#'
             },
+            elemMods: {
+              wait: true
+            },
             tag: 'a',
             content: 'Назад'
           }]
@@ -14835,7 +14889,6 @@ function (_View) {
   }, {
     key: "hide",
     value: function hide() {
-      console.log(document.getElementsByClassName('offline-msg')[0]);
       document.getElementsByClassName('offline-msg')[0].remove();
     }
   }]);

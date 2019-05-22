@@ -65,10 +65,13 @@ export default class MultiPlayerController extends Controller {
           });
     });
     bus.on(events.ROOM_FULL, () => {
+      const btn = document.getElementsByClassName('result-redirect__btn')[0];
+      btn.removeEventListener('click', this.events['handler']);
       this.waitView.hide();
     });
     this.game = new Game(GAME_MODES.MULTIPLAYER, this.view);
     this.waitView.render();
+    this._initWaitView();
     this.game.start();
   }
 
@@ -83,6 +86,24 @@ export default class MultiPlayerController extends Controller {
       this.resultView.parent.innerHTML = '';
       window.history.pushState({}, '', '/multi');
       window.history.pushState({}, '', '/multi');
+      window.history.back();
+    };
+
+    btn.addEventListener('click', handler);
+    this.events.push({item: btn, type: 'click', handler: handler});
+  }
+
+  /**
+   * Init wait view handlers
+   * Add event listeners
+   * @private
+   */
+  _initWaitView() {
+    const btn = document.getElementsByClassName('offline-msg__btn_wait')[0];
+    const handler = () => {
+      this.resultView.parent.innerHTML = '';
+      window.history.pushState({}, '', '/play');
+      window.history.pushState({}, '', '/play');
       window.history.back();
     };
 
