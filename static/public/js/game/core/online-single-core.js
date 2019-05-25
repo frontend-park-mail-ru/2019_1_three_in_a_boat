@@ -124,6 +124,7 @@ export default class OfflineGame extends GameCore {
     if (this.controllersLoopIntervalId) {
       clearInterval(this.controllersLoopIntervalId);
     }
+    this.finished = true;
     this.ws.close();
     this.scene.stop();
   }
