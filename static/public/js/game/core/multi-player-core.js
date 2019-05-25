@@ -4,6 +4,7 @@ import OfflineGame from './online-single-core.js';
 import WebSocketController from '../../controllers/notification-controller.js';
 import bus from '../../event-bus.js';
 import events from './events.js';
+import {settings} from '../../settings/config.js';
 
 /**
  * @class MultiPlayerCore
@@ -79,6 +80,7 @@ export default class MultiPlayerCore extends OfflineGame {
    */
   _initWebSocket() {
     this.ws = new WebSocketController('/play/multi', this.gameLoop.bind(this),
-        this._webSocketDisconnectHandler.bind(this));
+        this._webSocketDisconnectHandler.bind(this),
+        settings.wsUrl + settings.gamePort);
   }
 }
