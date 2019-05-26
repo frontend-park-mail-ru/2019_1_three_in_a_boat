@@ -38,6 +38,7 @@
     "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^2.1.1",
     "image-webpack-loader": "^4.6.0",
+    "sass": "^1.20.1",
     "style-loader": "^0.23.1",
     "stylelint": "^10.0.0",
     "stylelint-config-recommended": "^2.2.0",
