@@ -1,0 +1,33 @@
+.timer {
+  background: rgba(102,102,102,.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &__window {
+    width: 300px;
+    height: 70px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+  }
+
+  &__title {
+    font-family: $font-stack;
+    font-size: 18px;
+    color: white;
+  }
+
+  &__counter {
+    font-family: 'Russo One';
+    font-size: 184px;
+    font-weight: bold;
+    color: white;
+  }
+}
