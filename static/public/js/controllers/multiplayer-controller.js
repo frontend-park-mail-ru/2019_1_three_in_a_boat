@@ -9,6 +9,7 @@ import events from '../game/core/events.js';
 import bus from '../event-bus.js';
 import UserService from '../models/user-service.js';
 import WaitView from '../views/wait-view.js';
+import timer from '../views/components/timer.js';
 
 /**
  * @class MultiPlayerController
@@ -65,13 +66,14 @@ export default class MultiPlayerController extends Controller {
           });
     });
     bus.on(events.ROOM_FULL, () => {
-      const btn = document.getElementsByClassName('result-redirect__btn')[0];
+      const btn = document.getElementsByClassName('offline-msg__btn_wait')[0];
       btn.removeEventListener('click', this.events['handler']);
       this.waitView.hide();
+      timer(this.parent, 3);
     });
-    this.game = new Game(GAME_MODES.MULTIPLAYER, this.view);
     this.waitView.render();
     this._initWaitView();
+    this.game = new Game(GAME_MODES.MULTIPLAYER, this.view);
     this.game.start();
   }
 
