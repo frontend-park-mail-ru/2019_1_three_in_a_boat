@@ -3,7 +3,7 @@ node_js:
 - 10
 script:
   - eval "$(ssh-agent -s)"
-  - ssh-keyscan -H 195.124.186.19 >> ~/.ssh/known_hosts
+  - ssh-keyscan -H 193.124.186.19 >> ~/.ssh/known_hosts
   - chmod 600 deploy_rsa
   - ssh-add deploy_rsa
   - npm run build-all
