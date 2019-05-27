@@ -4,3 +4,5 @@ package-lock.json
 bundle.*.js
 static/public/css/*.css
 static/public/css/*.css.map
+static/public/js/settings/config.js
+static/public/dist/*

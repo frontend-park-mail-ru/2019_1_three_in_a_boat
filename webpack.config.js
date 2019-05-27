@@ -1,6 +1,8 @@
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const imageminMozjpeg = require('imagemin-mozjpeg');
 
 module.exports = {
   mode: 'development',
@@ -10,6 +12,10 @@ module.exports = {
   output: {
     path: __dirname + '/static/public/dist',
     filename: 'bundle.js',
+  },
+  optimization: {
+    minimize: true,
+    removeAvailableModules: true,
   },
   plugins: [
     new ServiceWorkerWebpackPlugin({
@@ -38,6 +44,21 @@ module.exports = {
           src: 'static/public/icons/touch/ms-icon-310x310.png',
           size: '1024x1024',
         },
+      ],
+    }),
+    new ImageminPlugin({
+      test: /\.(png)$/,
+      optipng: {
+        optimizationLevel: 5,
+      },
+    }),
+    new ImageminPlugin({
+      test: /\.(jpeg|jpg)$/,
+      plugins: [
+        imageminMozjpeg({
+          quality: 70,
+          progressive: true,
+        }),
       ],
     }),
   ],
@@ -70,10 +91,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'clean-css-loader'],
       },
       {
         test: /\.(ttf|otf|svg)$/,

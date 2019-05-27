@@ -35,7 +35,7 @@ export default class UserService extends Model {
       return response.json().then((data) => {
         this.user = data.user;
         if (this.user !== null) {
-          data.user.highScore = data.user.score;
+          this.user.highScore = this.user.score;
           this.user.isCurrent = true;
         }
         return data.user;

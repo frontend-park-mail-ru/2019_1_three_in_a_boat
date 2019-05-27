@@ -1,0 +1,29 @@
+@keyframes loader-anim {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.wait {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  &__loader {
+    width: 205px;
+  }
+  &__point {
+    margin: 1em;
+    display:inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius:50%;
+    border:4px solid grey;
+    animation: loader-anim .7s linear infinite;
+    border-bottom-color:transparent;
+    border-left-color:transparent;
+  }
+}
+

@@ -4,6 +4,7 @@ import bus from '../../event-bus.js';
 import showMessage from '../../views/components/disconnect-messagebox.js';
 import events from './events.js';
 import {CURSOR} from './settings.js';
+import {settings} from '../../settings/config.js';
 
 /**
  * Offline game core class
@@ -124,6 +125,7 @@ export default class OfflineGame extends GameCore {
     if (this.controllersLoopIntervalId) {
       clearInterval(this.controllersLoopIntervalId);
     }
+    this.finished = true;
     this.ws.close();
     this.scene.stop();
   }
@@ -152,6 +154,7 @@ export default class OfflineGame extends GameCore {
    */
   _initWebSocket() {
     this.ws = new WebSocketController('/play', this.gameLoop.bind(this),
-        this._webSocketDisconnectHandler.bind(this));
+        this._webSocketDisconnectHandler.bind(this),
+        settings.wsUrl + settings.gamePort);
   }
 }

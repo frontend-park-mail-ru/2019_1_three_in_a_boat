@@ -71,6 +71,7 @@ export default class ChatController extends Controller {
         if (args.length > 0) {
           args += '&';
         }
+        msg.uid = msg.uid === null? 0: msg.uid;
         args += 'ids=' + msg.uid;
       }
     });
@@ -101,7 +102,7 @@ export default class ChatController extends Controller {
             data.sort((a, b) => a.mid - b.mid);
             this.minId = data[0].mid;
             data.forEach((msg) => {
-              const username = 'uid' in msg ? messagesData.find((item) => {
+              const username = msg.uid !== 0 ? messagesData.find((item) => {
                 return item.uid === msg.uid;
               }).username : 'Анон';
               this.view.addMessage(msg.uid, username, msg.text, true);

@@ -76,7 +76,7 @@ export default class ProfileController extends Controller {
   }
 
   /**
-     * Get id from url
+   * Get id from url
    * @return {undefined}
    * @private
    */
